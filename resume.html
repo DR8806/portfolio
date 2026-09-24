@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Resume — Davis Rattanavijai</title>
+  <meta name="description" content="Resume of Davis Rattanavijai." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;500&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/css/style.css" />
+</head>
+<body class="viewer-page">
+  <header class="topbar">
+    <div class="wrap">
+      <a class="brand" href="index.html">Davis Rattanavijai</a>
+      <nav class="nav">
+        <a href="index.html#work">Work</a>
+        <div class="nav-item contact">
+          <button type="button" class="contact-toggle" aria-expanded="false" aria-controls="contact-panel">Contact</button>
+          <div class="contact-panel" id="contact-panel">
+            <div class="contact-card">
+              <span class="mono">Email</span>
+              <button type="button" class="copy-email" data-copy="dr653@cornell.edu">
+                <span class="email">dr653@cornell.edu</span>
+                <span class="copy-label mono" data-default="Click to copy">Click to copy</span>
+              </button>
+            </div>
+          </div>
+        </div>
+        <button type="button" data-resume-toggle aria-expanded="false" aria-controls="resume-panel">Resume<span class="caret" aria-hidden="true">&#9662;</span></button>
+      </nav>
+      <div class="resume-panel" id="resume-panel">
+        <div class="resume-head mono"><span>Resume</span><span>Sep 2026</span></div>
+        <div class="resume-doc" data-src="DavisRattanavijai_Resume.pdf#toolbar=0&amp;navpanes=0&amp;view=FitH"></div>
+        <div class="resume-actions">
+          <a class="primary" href="DavisRattanavijai_Resume.pdf" download>Download PDF</a>
+          <a href="resume.html">Open &rarr;</a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="viewer">
+    <div class="viewer-bar">
+      <div class="wrap">
+        <div class="crumbs mono"><a href="index.html">Index</a><span class="sep">/</span><span>Resume</span></div>
+        <a class="btn primary" href="DavisRattanavijai_Resume.pdf" download>Download PDF</a>
+      </div>
+    </div>
+    <iframe class="viewer-frame" src="DavisRattanavijai_Resume.pdf#view=FitH&amp;navpanes=0" title="Davis Rattanavijai resume"></iframe>
+    <p class="viewer-fallback mono">Can't see the resume? <a href="DavisRattanavijai_Resume.pdf">Open the PDF directly</a>.</p>
+  </main>
+  <script src="assets/js/main.js"></script>
+</body>
+</html>
