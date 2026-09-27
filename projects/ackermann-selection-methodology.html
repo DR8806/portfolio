@@ -8,7 +8,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;500&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="../assets/css/style.css" />
+  <link rel="stylesheet" href="../assets/css/style.css?v=d6e4da95" />
 </head>
 <body>
   <header class="topbar">
@@ -93,11 +93,11 @@
           <h2><span class="a-num">2</span>Pure Ackermann (No Slip)</h2>
           <p>We still assume steady-state cornering, now with zero slip angle at every tire. Purely geometrically, the inner and outer tires travel on different radii, so to have no slip they must be steered to different angles. These angles can be calculated from the geometry as follows, where L is the wheelbase, T is the track width, and R is the cornering radius.</p>
 
-          <p class="eq-label mono">Inner wheel steering angle</p>
-          <div class="eq">δ<sub>in</sub> = tan<sup>−1</sup><span class="paren">(</span><span class="frac"><span>L</span><span>R − T/2</span></span><span class="paren">)</span></div>
+          <p>Inner wheel steering angle:</p>
+          <p class="eq">δ<sub>in</sub> = tan<sup>−1</sup>( L / (R − T/2) )</p>
 
-          <p class="eq-label mono">Outer wheel steering angle</p>
-          <div class="eq">δ<sub>out</sub> = tan<sup>−1</sup><span class="paren">(</span><span class="frac"><span>L</span><span>R + T/2</span></span><span class="paren">)</span></div>
+          <p>Outer wheel steering angle:</p>
+          <p class="eq">δ<sub>out</sub> = tan<sup>−1</sup>( L / (R + T/2) )</p>
 
           <p>Since L and T are fixed by the vehicle architecture, the only variable that affects the steering angles is the cornering radius R.</p>
           <figure class="a-fig a-fig--chart">
@@ -107,8 +107,8 @@
 
           <p>Both steering angles decrease as the cornering radius increases. This makes intuitive sense, since a wider turn needs less steering. Because we are interested in Ackermann, the difference between the inner and outer steering angles, we take the difference:</p>
 
-          <p class="eq-label mono">Ackermann steering angle difference</p>
-          <div class="eq">Δδ = δ<sub>in</sub> − δ<sub>out</sub></div>
+          <p>Ackermann steering angle difference:</p>
+          <p class="eq">Δδ = δ<sub>in</sub> − δ<sub>out</sub></p>
 
           <figure class="a-fig a-fig--chart">
             <img src="../assets/img/ackermann/05-angle-difference.png" alt="Ideal Ackermann steering angle difference versus cornering radius" width="785" height="699" loading="lazy" />
@@ -130,7 +130,7 @@
           <p>Section 2 determined the required steering angles assuming all four tires have zero slip angle. This condition is useful for establishing the geometric Ackermann baseline, but it does not accurately represent a race car at significant lateral acceleration. To generate lateral force, a tire generally operates at a nonzero slip angle.</p>
           <p>We now introduce α<sub>in</sub> and α<sub>out</sub> to represent the slip angles of the inside and outside tires.</p>
 
-          <div class="eq">Δδ<sub>desired</sub> = Δδ<sub>geo</sub> + (α<sub>in</sub> − α<sub>out</sub>)</div>
+          <p class="eq">Δδ<sub>desired</sub> = Δδ<sub>geo</sub> + (α<sub>in</sub> − α<sub>out</sub>)</p>
 
           <figure class="a-fig a-fig--chart">
             <img src="../assets/img/ackermann/07-tire-fy-vs-sa.png" alt="Lateral force versus slip angle at four normal loads, with a line through the peaks" width="942" height="872" loading="lazy" />
@@ -169,8 +169,8 @@
           <h2><span class="a-num">4</span>Ackermann Kinematics</h2>
 
           <h3><span class="a-num">4.1</span>Defining % Ackermann</h3>
-          <div class="eq">%Ack = 100 × <span class="frac"><span>(δ<sub>in</sub> − δ<sub>out</sub>)<sub>actual</sub></span><span>(δ<sub>in</sub> − δ<sub>out</sub>)<sub>100%</sub></span></span></div>
-          <p class="eq-note mono">Evaluated at the same average steer angle</p>
+          <p class="eq">%Ack = 100 × (δ<sub>in</sub> − δ<sub>out</sub>)<sub>actual</sub> / (δ<sub>in</sub> − δ<sub>out</sub>)<sub>100%</sub></p>
+          <p>Both differences are evaluated at the same average steer angle.</p>
           <ul>
             <li>100% = pure Ackermann (Section 2)</li>
             <li>0% = parallel</li>
@@ -224,6 +224,6 @@
       <a href="mailto:dr653@cornell.edu">dr653@cornell.edu</a>
     </div>
   </footer>
-  <script src="../assets/js/main.js"></script>
+  <script src="../assets/js/main.js?v=d6e4da95"></script>
 </body>
 </html>
