@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Ackermann Selection Methodology — Davis Rattanavijai</title>
+  <meta name="description" content="The methodology used on ARG27 to determine what Ackermann geometry to design the car to." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;500&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../assets/css/style.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="wrap">
+      <a class="brand" href="../index.html">Davis Rattanavijai</a>
+      <nav class="nav">
+        <a href="../index.html#work">Work</a>
+        <div class="nav-item contact">
+          <button type="button" class="contact-toggle" aria-expanded="false" aria-controls="contact-panel">Contact</button>
+          <div class="contact-panel" id="contact-panel">
+            <div class="contact-card">
+              <span class="mono">Email</span>
+              <button type="button" class="copy-email" data-copy="dr653@cornell.edu">
+                <span class="email">dr653@cornell.edu</span>
+                <span class="copy-label mono" data-default="Click to copy">Click to copy</span>
+              </button>
+            </div>
+          </div>
+        </div>
+        <button type="button" data-resume-toggle aria-expanded="false" aria-controls="resume-panel">Resume<span class="caret" aria-hidden="true">&#9662;</span></button>
+      </nav>
+      <div class="resume-panel" id="resume-panel">
+        <div class="resume-head mono"><span>Resume</span><span>Sep 2026</span></div>
+        <div class="resume-doc" data-src="../DavisRattanavijai_Resume.pdf#toolbar=0&amp;navpanes=0&amp;view=FitH"></div>
+        <div class="resume-actions">
+          <a class="primary" href="../DavisRattanavijai_Resume.pdf" download>Download PDF</a>
+          <a href="../resume.html">Open &rarr;</a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="p-hero">
+      <div class="wrap">
+        <div class="crumbs mono"><a href="../index.html#work">Index</a><span class="sep">/</span><span>Cornell Racing</span><span class="sep">/</span><span>Suspension Lead</span></div>
+        <h1 class="display p-title">Ackermann Selection Methodology</h1>
+        <!-- EDIT: description -->
+        <p class="p-desc">The methodology used on ARG27 to determine what Ackermann geometry to design the car to.</p>
+      </div>
+    </section>
+
+    <article class="article">
+      <div class="wrap">
+
+        <section class="a-section">
+          <h2><span class="a-num">0</span>Introduction</h2>
+          <p>The goal is to determine what Ackermann geometry we should design our car to. This document outlines the methodology used on ARG27 to determine an Ackermann percentage.</p>
+        </section>
+
+        <section class="a-section">
+          <h2><span class="a-num">1</span>Background</h2>
+
+          <h3><span class="a-num">1.1</span>What is Ackermann?</h3>
+          <p>Ackermann steering describes the relationship between the steering angles of the inside and outside front tires during a turn.</p>
+          <figure class="a-fig">
+            <img src="../assets/img/ackermann/01-ackermann-types.png" alt="Ackermann, parallel and reverse Ackermann steering geometries" width="1274" height="644" loading="lazy" />
+            <figcaption><span class="mono">Figure 1</span> Ackermann, parallel, and reverse Ackermann steering. Milliken, page 129.</figcaption>
+          </figure>
+
+          <h3><span class="a-num">1.2</span>Defining Our Model and Variables</h3>
+          <p>The analysis models the car in steady-state cornering at a cornering radius R.</p>
+          <dl class="a-defs">
+            <dt>Steering angle, <span class="sym">δ</span></dt>
+            <dd>The angle between the vehicle's x-axis and the wheel plane.</dd>
+            <dt>Attitude (sideslip) angle, <span class="sym">β</span></dt>
+            <dd>The angle between the vehicle's x-axis and the velocity vector at a specified point. In a bicycle model, we introduce the front and rear attitude angles β<sub>F</sub> and β<sub>R</sub> (see Figure 2). In a full-car model, we introduce four attitude angles, β<sub>FL</sub>, β<sub>FR</sub>, β<sub>RL</sub>, β<sub>RR</sub>, one for each corner (see Figure 3).</dd>
+            <dt>Slip angle, <span class="sym">α</span></dt>
+            <dd>The angle between the wheel plane and the wheel's velocity vector. In a bicycle model, we introduce the front and rear slip angles α<sub>F</sub> and α<sub>R</sub> (see Figure 2). In a full-car model, we introduce four slip angles, α<sub>FL</sub>, α<sub>FR</sub>, α<sub>RL</sub>, α<sub>RR</sub>, one for each corner (see Figure 3).</dd>
+          </dl>
+          <figure class="a-fig">
+            <img src="../assets/img/ackermann/02-bicycle-model.png" alt="Two-wheel (bicycle) model showing slip, steering and attitude angles" width="1282" height="888" loading="lazy" />
+            <figcaption><span class="mono">Figure 2</span> Bicycle model. From Endo's report, page 13.</figcaption>
+          </figure>
+          <figure class="a-fig">
+            <img src="../assets/img/ackermann/03-four-wheel-model.png" alt="Four-wheel model showing slip, steering and attitude angles at each corner" width="834" height="612" loading="lazy" />
+            <figcaption><span class="mono">Figure 3</span> Four-wheel model.</figcaption>
+          </figure>
+        </section>
+
+        <section class="a-section">
+          <h2><span class="a-num">2</span>Pure Ackermann (No Slip)</h2>
+          <p>We still assume steady-state cornering, now with zero slip angle at every tire. Purely geometrically, the inner and outer tires travel on different radii, so to have no slip they must be steered to different angles. These angles can be calculated from the geometry as follows, where L is the wheelbase, T is the track width, and R is the cornering radius.</p>
+
+          <p class="eq-label mono">Inner wheel steering angle</p>
+          <div class="eq">δ<sub>in</sub> = tan<sup>−1</sup><span class="paren">(</span><span class="frac"><span>L</span><span>R − T/2</span></span><span class="paren">)</span></div>
+
+          <p class="eq-label mono">Outer wheel steering angle</p>
+          <div class="eq">δ<sub>out</sub> = tan<sup>−1</sup><span class="paren">(</span><span class="frac"><span>L</span><span>R + T/2</span></span><span class="paren">)</span></div>
+
+          <p>Since L and T are fixed by the vehicle architecture, the only variable that affects the steering angles is the cornering radius R.</p>
+          <figure class="a-fig a-fig--chart">
+            <img src="../assets/img/ackermann/04-steering-angles.png" alt="Ideal Ackermann inner and outer steering angles versus cornering radius" width="780" height="699" loading="lazy" />
+            <figcaption><span class="mono">Figure 4</span> Ideal inner and outer wheel steering angles versus cornering radius.</figcaption>
+          </figure>
+
+          <p>Both steering angles decrease as the cornering radius increases. This makes intuitive sense, since a wider turn needs less steering. Because we are interested in Ackermann, the difference between the inner and outer steering angles, we take the difference:</p>
+
+          <p class="eq-label mono">Ackermann steering angle difference</p>
+          <div class="eq">Δδ = δ<sub>in</sub> − δ<sub>out</sub></div>
+
+          <figure class="a-fig a-fig--chart">
+            <img src="../assets/img/ackermann/05-angle-difference.png" alt="Ideal Ackermann steering angle difference versus cornering radius" width="785" height="699" loading="lazy" />
+            <figcaption><span class="mono">Figure 5</span> Ideal steering angle difference versus cornering radius.</figcaption>
+          </figure>
+
+          <p>The steering angle difference decreases quickly as the cornering radius increases and approaches 0. This graph may suggest that Ackermann varies a lot with cornering radius. First, though, we should specify the range of cornering radii the car typically operates in. The minimum and maximum values are taken from Endo's report.</p>
+
+          <figure class="a-fig a-fig--chart">
+            <img src="../assets/img/ackermann/06-angle-difference-ranges.png" alt="Steering angle difference with the hairpin minimum, skidpad and constant radius maximum marked" width="785" height="699" loading="lazy" />
+            <figcaption><span class="mono">Figure 6</span> Steering angle difference over the car's operating range of cornering radii, from the hairpin minimum (4.5 m) to the constant radius maximum (27 m), with the skidpad radius (7.5 m) marked.</figcaption>
+          </figure>
+
+          <p>The takeaway from this graph is that, still assuming no slip, the steering angle difference for pure Ackermann ranges from 0° to 5°.</p>
+        </section>
+
+        <section class="a-section">
+          <h2><span class="a-num">3</span>Incorporating Slip Angles</h2>
+          <p>Section 2 determined the required steering angles assuming all four tires have zero slip angle. This condition is useful for establishing the geometric Ackermann baseline, but it does not accurately represent a race car at significant lateral acceleration. To generate lateral force, a tire generally operates at a nonzero slip angle.</p>
+          <p>We now introduce α<sub>in</sub> and α<sub>out</sub> to represent the slip angles of the inside and outside tires.</p>
+
+          <div class="eq">Δδ<sub>desired</sub> = Δδ<sub>geo</sub> + (α<sub>in</sub> − α<sub>out</sub>)</div>
+
+          <figure class="a-fig a-fig--chart">
+            <img src="../assets/img/ackermann/07-tire-fy-vs-sa.png" alt="Lateral force versus slip angle at four normal loads, with a line through the peaks" width="942" height="872" loading="lazy" />
+            <figcaption><span class="mono">Figure 7</span> R20 16x7.5x10 lateral force (Fy) versus slip angle (SA), with the line of peaks estimated.</figcaption>
+          </figure>
+
+          <div class="a-table-wrap">
+            <table class="a-table">
+              <thead>
+                <tr><th>Slope Condition</th><th>Tire Behavior</th><th>Required Geometry Impact</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>Positive Slope</strong><span class="sub">Peak slip angle increases with load</span></td>
+                  <td>The heavily loaded outside tire needs a higher slip angle than the lightly loaded inside tire.</td>
+                  <td><strong>Demands Reverse (Anti-) Ackermann:</strong> You must steer the outside wheel more than the inside wheel. This is common in high-downforce racing like Formula 1.</td>
+                </tr>
+                <tr>
+                  <td><strong>Negative Slope</strong><span class="sub">Peak slip angle decreases with load</span></td>
+                  <td>The lightly loaded inside tire needs a higher slip angle than the outside tire to reach its peak grip.</td>
+                  <td><strong>Demands Positive Ackermann:</strong> You must steer the inside wheel more than the outside wheel. This matches traditional low-speed geometric Ackermann.</td>
+                </tr>
+                <tr>
+                  <td><strong>Zero Slope</strong><span class="sub">Peak slip angle is independent of load</span></td>
+                  <td>Both tires reach their maximum cornering capacity at the exact same slip angle regardless of weight transfer.</td>
+                  <td><strong>Demands Parallel Steering:</strong> Both wheels should be steered at identical angles relative to the chassis to track optimally.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <p>Peak grip here stays around the same slip angle, which influences us to go for more parallel steering.</p>
+        </section>
+
+        <section class="a-section">
+          <h2><span class="a-num">4</span>Ackermann Kinematics</h2>
+
+          <h3><span class="a-num">4.1</span>Defining % Ackermann</h3>
+          <div class="eq">%Ack = 100 × <span class="frac"><span>(δ<sub>in</sub> − δ<sub>out</sub>)<sub>actual</sub></span><span>(δ<sub>in</sub> − δ<sub>out</sub>)<sub>100%</sub></span></span></div>
+          <p class="eq-note mono">Evaluated at the same average steer angle</p>
+          <ul>
+            <li>100% = pure Ackermann (Section 2)</li>
+            <li>0% = parallel</li>
+            <li>Negative = reverse Ackermann</li>
+          </ul>
+
+          <h3><span class="a-num">4.2</span>How the Linkage Sets Ackermann</h3>
+          <p>Ackermann is set by the plan-view geometry of the steering links:</p>
+          <ul>
+            <li>the outboard steering pickup on the upright relative to the steering axis;</li>
+            <li>the steering rack's fore-aft position and height.</li>
+          </ul>
+          <p>A real linkage does not give a constant %. It changes with steer angle, so it must be checked across the full steering range in OptimumKinematics.</p>
+        </section>
+
+        <section class="a-section">
+          <h2><span class="a-num">5</span>Case Analysis</h2>
+          <p class="tbf">To be filled out.</p>
+        </section>
+
+        <section class="a-section">
+          <h2><span class="a-num">6</span>Ackermann Impact on Understeer</h2>
+          <p class="tbf">To be filled out.</p>
+        </section>
+
+        <section class="a-section">
+          <h2><span class="a-num">7</span>References</h2>
+          <ol class="a-refs">
+            <li>Racecar Engineering, "Tech Explained: Ackermann Steering Geometry." <a href="https://www.racecar-engineering.com/articles/tech-explained-ackermann-steering-geometry/" target="_blank" rel="noopener">racecar-engineering.com</a></li>
+            <li>W. F. Milliken and D. L. Milliken, Race Car Vehicle Dynamics, SAE, 1995: Ch. 5 (pp. 128–137, Figs. 5.4, 5.16), §19.2 (pp. 714–716).</li>
+            <li>M. Endo, ARG13 Suspension Technical Report, Cornell Racing, Spring 2013.</li>
+            <li>S. Munver, ARG26 Suspension System Design Technical Report, Cornell Racing, Fall 2025.</li>
+            <li>FSAE Tire Test Consortium, Round 9 data, Calspan, January 2022.</li>
+          </ol>
+        </section>
+
+      </div>
+    </article>
+
+    <nav class="p-nav">
+      <div class="wrap">
+        <a class="prev" href="suspension-bible.html"><span class="mono">&larr; Previous</span><span class="display">Suspension Bible</span></a>
+        <a class="next" href="jig-plate.html"><span class="mono">Next &rarr;</span><span class="display">Jig Plate</span></a>
+      </div>
+    </nav>
+  </main>
+
+  <footer class="footer">
+    <div class="wrap mono">
+      <span>&copy; 2026 Davis Rattanavijai</span>
+      <a href="mailto:dr653@cornell.edu">dr653@cornell.edu</a>
+    </div>
+  </footer>
+  <script src="../assets/js/main.js"></script>
+</body>
+</html>
