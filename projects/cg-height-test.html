@@ -4,11 +4,11 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>CG Height Test — Davis Rattanavijai</title>
-  <meta name="description" content="Test procedure for measuring the CG height of ARG26 with two methods: a side tilt test and a rear lift test." />
+  <meta name="description" content="Test procedure for measuring the CG height of ARG26 with two methods: a side tilt test and a front lift test." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;500&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="../assets/css/style.css?v=53854c4c" />
+  <link rel="stylesheet" href="../assets/css/style.css?v=91c6eb63" />
 </head>
 <body>
   <header class="topbar">
@@ -47,115 +47,30 @@
         <div class="crumbs mono"><a href="../index.html#work">Index</a><span class="sep">/</span><span>Cornell Racing</span><span class="sep">/</span><span>Suspension Lead</span></div>
         <h1 class="display p-title">CG Height Test</h1>
         <!-- EDIT: description -->
-        <p class="p-desc">Test procedure for measuring the CG height of ARG26 with two methods: a side tilt test and a rear lift test.</p>
+        <p class="p-desc">Test procedure for measuring the CG height of ARG26 with two methods: a side tilt test and a front lift test.</p>
       </div>
     </section>
 
     <article class="article">
       <div class="wrap">
 
-        <p class="a-meta mono">ARG26 &middot; Suspension &middot; Test Procedure &middot; Prepared by Davis Rattanavijai</p>
-
-        <section class="a-section">
+        <section class="a-section" id="purpose">
           <h2><span class="a-num">1</span>Purpose</h2>
-          <p>This protocol details how to determine the height of the center of gravity (CG) of ARG26 above the ground at static ride height. We can make reasonable estimates of the CG height through CAD, but validating those estimates is important to make sure there is good fidelity between our designs and the vehicle itself. If there is a discrepancy between the measured and designed values, weight transfer, roll, pitch and tire force capability will all differ from what the suspension was designed around.</p>
-          <p>This procedure contains two independent methods so the results can be cross-checked:</p>
-          <ul>
-            <li>Method A: Side Tilt (Balance) Test. The car is tipped onto the tires of one side until it balances. The balance angle gives the CG height directly.</li>
-            <li>Method B: Rear Lift (Axle Load) Test. The rear of the car is lifted while the front tires sit on scales. The change in front axle load gives the CG height.</li>
-          </ul>
-          <p>Both methods share the same materials, pre-test setup and baseline measurements (Sections 2 to 4).</p>
+          <p>This document outlines how we find the center of gravity (cg) height of ARG26 through a physical test. Although we can make reasonable estimates through CAD, validating the cg height is important because it influences a lot of our load transfer and handling characteristics.</p>
+          <p>There are two main independent methods to calculate the cg height:</p>
+          <ol class="a-index">
+            <li><a href="#method-a">Method A: Side Tilt (Balance) Test.</a> The car is tipped onto the tires of one side until it balances. The balance angle gives the CG height directly.</li>
+            <li><a href="#method-b">Method B: Front Lift (Axle Load) Test.</a> The front of the car is lifted while the rear tires sit on scales. The change in rear axle load gives the CG height.</li>
+          </ol>
         </section>
 
-        <section class="a-section">
-          <h2><span class="a-num">2</span>Materials</h2>
-          <div class="a-table-wrap">
-            <table class="a-table sheet">
-              <thead>
-                <tr><th>Line #</th><th>Material Item</th><th>Used In</th><th>Where Is It?</th><th>Sign-Off</th></tr>
-              </thead>
-              <tbody>
-                <tr><td>1</td><td>ARG26</td><td>A, B</td><td>Lab</td><td></td></tr>
-                <tr><td>2</td><td>Ballast equal to driver weight (sandbags), strapped into the seat</td><td>A, B</td><td>Lab</td><td></td></tr>
-                <tr><td>3</td><td>Vehicle scales (suspension scales)</td><td>A, B</td><td>Lab</td><td></td></tr>
-                <tr><td>4</td><td>Known calibration weight (33 lb)</td><td>A, B</td><td>Lab</td><td></td></tr>
-                <tr><td>5</td><td>Digital level</td><td>A, B</td><td>Lab</td><td></td></tr>
-                <tr><td>6</td><td>Crane with straps or chain</td><td>A, B</td><td>Lab</td><td></td></tr>
-                <tr><td>7</td><td>Dummy shocks and cones</td><td>A, B</td><td>Lab</td><td></td></tr>
-                <tr><td>8</td><td>Tire pump and pressure gauge</td><td>A, B</td><td>Lab</td><td></td></tr>
-                <tr><td>9</td><td>Tape measure and straight edge</td><td>A, B</td><td>Lab</td><td></td></tr>
-                <tr><td>10</td><td>Plumb bob</td><td>A</td><td>Lab</td><td></td></tr>
-                <tr><td>11</td><td>Soft blocks or padding for the raised side</td><td>A</td><td>Lab</td><td></td></tr>
-                <tr><td>12</td><td>Cinder blocks (to raise the front scales for larger angles)</td><td>B</td><td>Lab</td><td></td></tr>
-                <tr><td>13</td><td>Wheel chocks (sandbags)</td><td>A, B</td><td>Lab</td><td></td></tr>
-                <tr><td>14</td><td>Camera or phone for photos</td><td>A, B</td><td>Ithaca</td><td></td></tr>
-              </tbody>
-            </table>
-          </div>
-        </section>
+        <!-- ==================== METHOD A ==================== -->
+        <section class="a-section" id="method-a">
+          <h2><span class="a-num">2</span>Method A: Side Tilt (Balance) Test</h2>
 
-        <section class="a-section">
-          <h2><span class="a-num">3</span>Pre-Testing Procedure</h2>
-          <p>Ensure that all scales are reading properly by placing a known weight on each and recording the displayed value. There must be less than 0.5 lbf of variance among the scales per 50 lb added, and less than 0.5 lbf of error per 50 lb added compared with the known weight.</p>
-          <p>The car must also be locked at static ride height so that no suspension travel happens during the test. From Analysis Techniques for Racecar Data Acquisition [1]:</p>
-          <ul>
-            <li>Each shock absorber should be replaced by a solid link (dummy shock) set to the exact static ride height. Inaccuracy here can greatly influence the results.</li>
-            <li>The tires should be overinflated as much as possible to limit sidewall flexing.</li>
-            <li>All fluids should be at the right level.</li>
-          </ul>
-          <p>Because ARG26 will be tilted to large angles, the accumulator and all loose items must be secured, and the high voltage system must be de-energized before the car is lifted.</p>
-          <div class="a-table-wrap">
-            <table class="a-table sheet">
-              <thead>
-                <tr><th>Line #</th><th>Pre-Test Item</th><th>Sign-Off</th></tr>
-              </thead>
-              <tbody>
-                <tr><td>1</td><td>Scale calibration check with known weight (record readings)</td><td></td></tr>
-                <tr><td>2</td><td>Dummy shocks installed at exact static ride height</td><td></td></tr>
-                <tr><td>3</td><td>Tires overinflated to test pressure (record pressure)</td><td></td></tr>
-                <tr><td>4</td><td>All fluids topped off (coolant, brake fluid)</td><td></td></tr>
-                <tr><td>5</td><td>Accumulator secured and high voltage system de-energized</td><td></td></tr>
-                <tr><td>6</td><td>Ballast strapped into the seat at the driver's position</td><td></td></tr>
-                <tr><td>7</td><td>Scale pads leveled and zeroed empty</td><td></td></tr>
-                <tr><td>8</td><td>Level reference spots marked on the chassis (one transverse for Method A, one longitudinal for Method B)</td><td></td></tr>
-                <tr><td>9</td><td>Crane rigged with the chain as vertical as possible</td><td></td></tr>
-                <tr><td>10</td><td>Roles assigned: scale readers, level reader, crane operator, spotters, photographer</td><td></td></tr>
-              </tbody>
-            </table>
-          </div>
-        </section>
-
-        <section class="a-section">
-          <h2><span class="a-num">4</span>Baseline Measurements (Both Methods)</h2>
-          <p>Record these with the car level on the scales, in test configuration, before either method is run. Both methods use these values in their calculations.</p>
-          <div class="a-table-wrap">
-            <table class="a-table sheet">
-              <thead>
-                <tr><th>Symbol</th><th>Measurement</th><th>How to Measure</th><th>Value</th></tr>
-              </thead>
-              <tbody>
-                <tr><td>W<sub>FL</sub>, W<sub>FR</sub>, W<sub>RL</sub>, W<sub>RR</sub></td><td>Corner weights (lb)</td><td>Scales, car level</td><td></td></tr>
-                <tr><td>W</td><td>Total weight (lb)</td><td>Sum of the four corners</td><td></td></tr>
-                <tr><td>W<sub>F</sub>, W<sub>R</sub></td><td>Front and rear axle weights (lb)</td><td>W<sub>FL</sub> + W<sub>FR</sub>, W<sub>RL</sub> + W<sub>RR</sub></td><td></td></tr>
-                <tr><td>W<sub>left</sub>, W<sub>right</sub></td><td>Left and right side weights (lb)</td><td>W<sub>FL</sub> + W<sub>RL</sub>, W<sub>FR</sub> + W<sub>RR</sub></td><td></td></tr>
-                <tr><td>L</td><td>Wheelbase (in)</td><td>Tape, hub center to hub center</td><td></td></tr>
-                <tr><td>t<sub>f</sub>, t<sub>r</sub></td><td>Front and rear track (in)</td><td>Tape, tire center to tire center</td><td></td></tr>
-                <tr><td>d<sub>f</sub>, d<sub>r</sub></td><td>Front and rear width across the outside edges of the tires (in)</td><td>Straight edge against each tire's outer sidewall at ground level</td><td></td></tr>
-                <tr><td>r<sub>f</sub>, r<sub>r</sub></td><td>Front and rear loaded radius (in)</td><td>Ground to axle center, car level</td><td></td></tr>
-                <tr><td>p</td><td>Tire pressure (psi)</td><td>Gauge, all four tires</td><td></td></tr>
-                <tr><td>&mdash;</td><td>Ballast weight and location</td><td>Scale and note</td><td></td></tr>
-              </tbody>
-            </table>
-          </div>
-        </section>
-
-        <section class="a-section">
-          <h2><span class="a-num">5</span>Method A: Side Tilt (Balance) Test</h2>
-
-          <h3><span class="a-num">5.1</span>Theory</h3>
+          <h3><span class="a-num">2.1</span>Theory</h3>
           <p>A body balances on a pivot when its CG is directly above the pivot. In this test the car is tipped sideways onto the tires of one side, so it rests only on the outer edges of those two tires. The car is slowly rotated until it balances and can be held in place with a couple of fingers, with the crane strap slack. At that point the CG lies on the vertical line through the pivot.</p>
-          <p>In the car's own frame, the CG sits a horizontal distance s from the pivot edge and a height h above the ground plane. When the car is rotated by the balance angle &theta;, the line from the pivot to the CG is vertical, so the angle between the car's floor and the vertical satisfies tan &theta; = s / h.</p>
-
+          <p>In the car's own frame, the CG sits half the car's width, d / 2, in from the pivot edge and a height h above the ground plane. When the car is rotated by the balance angle &theta;, the line from the pivot to the CG is vertical, so tan &theta; = (d / 2) / h.</p>
           <figure class="a-fig a-diagram">
             <svg viewBox="0 0 520 345" role="img" aria-label="Front view of the car balanced on its left tires at angle theta, with the CG directly above the pivot">
               <rect x="20" y="320" width="480" height="10" class="dg-floor" />
@@ -177,7 +92,7 @@
               <circle cx="140" cy="177" r="6" class="dg-cg" />
               <text x="128" y="181" text-anchor="end">CG</text>
               <text x="174" y="178" class="dg-acc">h</text>
-              <text x="184" y="268" class="dg-acc">s</text>
+              <text x="184" y="268" class="dg-acc">d/2</text>
               <path d="M 190 320 A 50 50 0 0 0 161 274.6" class="dg-arc" />
               <text x="196" y="297" class="dg-acc">&#952;</text>
               <line x1="249" y1="84" x2="249" y2="32" class="dg-strap" />
@@ -186,186 +101,324 @@
               <text x="257" y="100">raised side</text>
               <text x="150" y="340">pivot: outer edge of the lower tires</text>
             </svg>
-            <figcaption><span class="mono">Figure 1</span><span>Front view of the car balanced on its left tires. At balance the CG is directly above the pivot, so tan &theta; = s / h.</span></figcaption>
+            <figcaption><span class="mono">Figure 1</span><span>Front view of the car balanced on its left tires. At balance the CG is directly above the pivot, so tan &theta; = (d / 2) / h.</span></figcaption>
           </figure>
+          <h3><span class="a-num">2.2</span>Materials</h3>
+          <div class="a-table-wrap">
+            <table class="a-table sheet">
+              <thead><tr><th>#</th><th>Item</th><th>Where</th></tr></thead>
+              <tbody>
+                <tr><td>1</td><td>ARG26</td><td>Lab</td></tr>
+                <tr><td>2</td><td>Driver</td><td>&mdash;</td></tr>
+                <tr><td>3</td><td>Vehicle scales (corner weights)</td><td>Lab</td></tr>
+                <tr><td>4</td><td>Digital level</td><td>Lab</td></tr>
+                <tr><td>5</td><td>Crane with strap</td><td>Lab</td></tr>
+                <tr><td>6</td><td>Dummy shocks and dummy cones</td><td>Lab</td></tr>
+                <tr><td>7</td><td>Magnesium rims</td><td>Lab</td></tr>
+                <tr><td>8</td><td>Tire pump and pressure gauge</td><td>Lab</td></tr>
+                <tr><td>9</td><td>Tape measure and straight edge</td><td>Lab</td></tr>
+                <tr><td>10</td><td>Plumb bob</td><td>Lab</td></tr>
+                <tr><td>11</td><td>Wheel chocks for the lower tires</td><td>Lab</td></tr>
+                <tr><td>12</td><td>Camera or phone</td><td>&mdash;</td></tr>
+              </tbody>
+            </table>
+          </div>
 
-          <h3><span class="a-num">5.2</span>Equations</h3>
-          <p>Because the front and rear of the car have different widths, the width is taken at the lengthwise position of the CG. The fraction of weight on the rear axle sets that position [3]:</p>
-          <p class="eq">d = d<sub>f</sub> + (d<sub>r</sub> &minus; d<sub>f</sub>) &times; W<sub>R</sub> / W</p>
-          <p class="eq">t = t<sub>f</sub> + (t<sub>r</sub> &minus; t<sub>f</sub>) &times; W<sub>R</sub> / W</p>
-          <p>The horizontal distance from the pivot edge to the CG, measured in the car's frame, uses the side-to-side weight split so the result does not assume the car is symmetric. W<sub>up</sub> is the weight on the side that gets raised (the right side when tilting onto the left tires):</p>
-          <p class="eq">s = (d &minus; t) / 2 + t &times; W<sub>up</sub> / W</p>
-          <p>For a symmetric car W<sub>up</sub> / W = 0.5 and this simplifies to s = d / 2.</p>
-          <p>CG height above the ground at static ride height:</p>
-          <p class="eq">h = s / tan &theta; = s &times; tan(90&deg; &minus; &theta;)</p>
-          <p>where &theta; is the balance angle, the change in the transverse level reading from level to balanced.</p>
-          <p>Measurement sensitivity: an error in &theta; changes h by roughly</p>
-          <p class="eq">&Delta;h &asymp; s &times; &Delta;&theta; / sin<sup>2</sup>&theta;&nbsp;&nbsp;(&Delta;&theta; in radians)</p>
-          <p>so a 0.2&deg; error in the balance angle gave roughly a 0.1 in error in h for the car measured in [3]. Measure the balance angle carefully and repeat it.</p>
-
-          <h3><span class="a-num">5.3</span>Procedure</h3>
+          <h3><span class="a-num">2.3</span>Pre-Test Procedure</h3>
           <ol>
-            <li>Complete the pre-test procedure and baseline measurements (Sections 3 and 4).</li>
-            <li>Place the digital level on the transverse reference spot and record the level reading, &theta;<sub>0</sub>.</li>
-            <li>Chock the lower-side tires so they cannot slide sideways. Place padding under the raised side in case the car drops.</li>
-            <li>Attach the crane to the raised side and lift slowly. Spotters hold the car on both sides at all times.</li>
-            <li>Keep raising until the car balances on the outer edges of the lower tires. It should stay in place when held with a couple of fingers, with the crane strap slack.</li>
-            <li>Confirm the balance point with the plumb bob, then record the level reading at the same reference spot, &theta;<sub>bal</sub>. The balance angle is &theta; = |&theta;<sub>bal</sub> &minus; &theta;<sub>0</sub>|.</li>
-            <li>Lower the car back to level. Repeat steps 4 to 6 for three trials.</li>
-            <li>If time and safety allow, repeat three trials tilting onto the other side. Averaging both sides cancels out errors in the side-to-side weight split.</li>
+            <li>Install the dummy shocks and dummy cones.</li>
+            <li>Install the accumulator and bolt it down (ask someone on high voltage).</li>
+            <li>Make sure the car is on the magnesium rims.</li>
+            <li>Overinflate the tires to 30 psi.</li>
           </ol>
+
+          <h3><span class="a-num">2.4</span>Measurements Before Tilting</h3>
+          <p>Record these with the car level on the scales, driver in the car.</p>
           <div class="a-table-wrap">
             <table class="a-table sheet">
-              <thead>
-                <tr><th>Line #</th><th>Method A Item</th><th>Sign-Off</th></tr>
-              </thead>
+              <thead><tr><th>Symbol</th><th>Measurement</th><th>Value</th></tr></thead>
               <tbody>
-                <tr><td>1</td><td>Record level reference &theta;<sub>0</sub> with car level</td><td></td></tr>
-                <tr><td>2</td><td>Chocks and padding in place, spotters ready</td><td></td></tr>
-                <tr><td>3</td><td>Tilt to balance and record &theta;<sub>bal</sub> (three trials)</td><td></td></tr>
-                <tr><td>4</td><td>Repeat on the other side (optional, three trials)</td><td></td></tr>
-                <tr><td>5</td><td>Lower car, remove crane, take photos</td><td></td></tr>
+                <tr><td>W<sub>FL</sub></td><td>Front left corner weight (lb)</td><td></td></tr>
+                <tr><td>W<sub>FR</sub></td><td>Front right corner weight (lb)</td><td></td></tr>
+                <tr><td>W<sub>RL</sub></td><td>Rear left corner weight (lb)</td><td></td></tr>
+                <tr><td>W<sub>RR</sub></td><td>Rear right corner weight (lb)</td><td></td></tr>
+                <tr><td>W</td><td>Total weight (lb)</td><td></td></tr>
+                <tr><td>L</td><td>Wheelbase (in)</td><td></td></tr>
+                <tr><td>d<sub>f</sub></td><td>Front width, outside tire edge to outside tire edge (in)</td><td></td></tr>
+                <tr><td>d<sub>r</sub></td><td>Rear width, outside tire edge to outside tire edge (in)</td><td></td></tr>
+                <tr><td>p</td><td>Tire pressure (psi)</td><td></td></tr>
+                <tr><td>&theta;<sub>0</sub></td><td>Level reading, car level (deg)</td><td></td></tr>
               </tbody>
             </table>
           </div>
 
-          <h3><span class="a-num">5.4</span>Method A Data Sheet</h3>
-          <p>Record for every trial:</p>
-          <div class="a-table-wrap">
-            <table class="a-table sheet">
-              <thead>
-                <tr><th>Trial</th><th>Pivot Side (L/R)</th><th>&theta;<sub>0</sub> (deg)</th><th>&theta;<sub>bal</sub> (deg)</th><th>&theta; (deg)</th><th>h (in)</th><th>Notes</th></tr>
-              </thead>
-              <tbody>
-                <tr><td>A1</td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
-                <tr><td>A2</td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
-                <tr><td>A3</td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
-                <tr><td>A4</td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
-                <tr><td>A5</td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
-                <tr><td>A6</td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
-              </tbody>
-            </table>
-          </div>
-        </section>
-
-        <section class="a-section">
-          <h2><span class="a-num">6</span>Method B: Rear Lift (Axle Load) Test</h2>
-
-          <h3><span class="a-num">6.1</span>Theory</h3>
-          <p>With the front tires on the scales, the rear of the car is lifted by the crane so the car pivots about the front axle. As the car rotates nose-down relative to the rear, the CG moves forward relative to the front axle. The front scales therefore read more weight the higher the CG sits above the axle line. Measuring how much the front axle load increases for a known change in angle gives the CG height [1], [2].</p>
+          <h3><span class="a-num">2.5</span>Equations</h3>
+          <p>The front and rear of the car have different widths, so the width is taken at the lengthwise position of the CG (Figure 2) [3]. The CG sits a distance a behind the front axle, set by the fraction of weight on the rear axle, W<sub>R</sub> = W<sub>RL</sub> + W<sub>RR</sub>:</p>
+          <p class="eq">a = L &times; W<sub>R</sub> / W</p>
+          <p class="eq">d = d<sub>f</sub> + (d<sub>r</sub> &minus; d<sub>f</sub>) &times; W<sub>R</sub> / W</p>
 
           <figure class="a-fig a-diagram">
-            <svg viewBox="0 0 520 290" role="img" aria-label="Side view of the car with front tires on scales and rear lifted by crane at angle alpha">
+            <svg viewBox="0 0 520 270" role="img" aria-label="Plan view of the car showing front width, rear width, wheelbase, and the width at the CG">
+              <defs>
+                <marker id="arw" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+                  <path d="M 0 0 L 10 5 L 0 10 z" class="dg-arrowhead" />
+                </marker>
+                <marker id="arw-acc" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+                  <path d="M 0 0 L 10 5 L 0 10 z" class="dg-arrowhead-acc" />
+                </marker>
+              </defs>
+              <text x="110" y="24" text-anchor="middle">rear</text>
+              <text x="430" y="24" text-anchor="middle">front</text>
+              <polygon points="110,60 430,45 430,215 110,200" class="dg-body" />
+              <line x1="60" y1="130" x2="480" y2="130" class="dg-centerline" />
+              <line x1="286" y1="32" x2="286" y2="228" class="dg-dash" />
+              <line x1="90" y1="62" x2="90" y2="198" class="dg-dimline" marker-start="url(#arw)" marker-end="url(#arw)" />
+              <text x="82" y="118" text-anchor="end">d<tspan dy="3" font-size="9">r</tspan></text>
+              <line x1="452" y1="47" x2="452" y2="213" class="dg-dimline" marker-start="url(#arw)" marker-end="url(#arw)" />
+              <text x="460" y="118">d<tspan dy="3" font-size="9">f</tspan></text>
+              <line x1="272" y1="128" x2="272" y2="55" class="dg-dim-arrow" marker-start="url(#arw-acc)" marker-end="url(#arw-acc)" />
+              <text x="262" y="96" text-anchor="end" class="dg-acc">d/2</text>
+              <line x1="288" y1="172" x2="428" y2="172" class="dg-dimline" marker-start="url(#arw)" marker-end="url(#arw)" />
+              <text x="358" y="164" text-anchor="middle">a = L &#215; W<tspan dy="3" font-size="9">R</tspan><tspan dy="-3"> / W</tspan></text>
+              <line x1="112" y1="246" x2="428" y2="246" class="dg-dimline" marker-start="url(#arw)" marker-end="url(#arw)" />
+              <text x="270" y="240" text-anchor="middle">L</text>
+              <circle cx="286" cy="130" r="7" class="dg-cg-open" />
+              <line x1="281" y1="125" x2="291" y2="135" class="dg-cg-x" />
+              <line x1="291" y1="125" x2="281" y2="135" class="dg-cg-x" />
+              <text x="298" y="122">CG</text>
+            </svg>
+            <figcaption><span class="mono">Figure 2</span><span>Plan view. The width d is taken across the outside tire edges at the lengthwise position of the CG. Adapted from [3].</span></figcaption>
+          </figure>
+
+          <p>CG height above the ground at static ride height:</p>
+          <p class="eq">h = (d / 2) / tan &theta;</p>
+          <p>where &theta; = |&theta;<sub>bal</sub> &minus; &theta;<sub>0</sub>| is the change in the level reading from level to balanced. This assumes the CG is on the car's centerline; averaging tilts onto both sides cancels out a small side-to-side offset.</p>
+          <p>An error in &theta; changes h by roughly &Delta;h &asymp; (d / 2) &times; &Delta;&theta; / sin<sup>2</sup>&theta; (&Delta;&theta; in radians). A 0.2&deg; error gave roughly a 0.1 in error in h for the car measured in [3], so measure the balance angle carefully and repeat it.</p>
+
+          <h3><span class="a-num">2.6</span>Procedure</h3>
+          <ol>
+            <li>Complete the pre-test procedure and the measurements before tilting.</li>
+            <li>Chock the lower-side tires so they cannot slide.</li>
+            <li>Attach the crane to the raised side and lift slowly. Spotters hold the car at all times.</li>
+            <li>Keep raising until the car balances on the outer edges of the lower tires, holding in place with a couple of fingers and the strap slack.</li>
+            <li>Confirm balance with the plumb bob, then record the level reading at the same spot, &theta;<sub>bal</sub>.</li>
+            <li>Lower the car back to level. Repeat for three trials.</li>
+            <li>If safe, repeat three trials tilting onto the other side.</li>
+          </ol>
+
+          <h3><span class="a-num">2.7</span>Data Sheet</h3>
+          <div class="a-table-wrap">
+            <table class="a-table sheet">
+              <thead><tr><th>Trial</th><th>Pivot Side</th><th>&theta;<sub>bal</sub> (deg)</th><th>&theta; (deg)</th><th>h (in)</th></tr></thead>
+              <tbody>
+                <tr><td>A1</td><td></td><td></td><td></td><td></td></tr>
+                <tr><td>A2</td><td></td><td></td><td></td><td></td></tr>
+                <tr><td>A3</td><td></td><td></td><td></td><td></td></tr>
+                <tr><td>A4</td><td></td><td></td><td></td><td></td></tr>
+                <tr><td>A5</td><td></td><td></td><td></td><td></td></tr>
+                <tr><td>A6</td><td></td><td></td><td></td><td></td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <h3><span class="a-num">2.8</span>ARG26 Results</h3>
+          <!-- EDIT: fill in the values once the test data is in -->
+          <div class="a-table-wrap">
+            <table class="a-table sheet">
+              <thead><tr><th>Result</th><th>Value</th></tr></thead>
+              <tbody>
+                <tr><td>CG height, average of all trials (in)</td><td></td></tr>
+                <tr><td>Lowest trial (in)</td><td></td></tr>
+                <tr><td>Highest trial (in)</td><td></td></tr>
+                <tr><td>Spread, highest minus lowest (in)</td><td></td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p class="tbf">To be filled out after testing.</p>
+
+          <h3><span class="a-num">2.9</span>Downloadable Test Plan</h3>
+          <div class="a-download">
+            <div class="doc-embed">
+              <div class="doc-head mono"><span>Method A Test Plan</span><span>4 pages &middot; PDF</span></div>
+              <iframe src="../assets/docs/ARG27_CG_Height_Test_Method_A.pdf#view=FitH&amp;navpanes=0" title="ARG26 CG Height Test Plan, Method A" loading="lazy"></iframe>
+            </div>
+            <div class="doc-actions">
+              <a class="btn primary" href="../assets/docs/ARG27_CG_Height_Test_Method_A.pdf" download>Download PDF</a>
+            </div>
+          </div>
+          <p class="a-top"><a href="#purpose">&uarr; Back to top</a></p>
+        </section>
+
+        <!-- ==================== METHOD B ==================== -->
+        <section class="a-section" id="method-b">
+          <h2><span class="a-num">3</span>Method B: Front Lift (Axle Load) Test</h2>
+          <p class="a-note"><span class="mono">In progress</span>Method B is not finished yet.</p>
+
+          <h3><span class="a-num">3.1</span>Theory</h3>
+          <p>With the rear tires on the scales, the front of the car is lifted by the crane so the car pivots about the rear axle. As the front rises, the CG moves rearward relative to the rear axle, so the rear scales read more weight. The higher the CG sits above the axle line, the larger that increase is. Measuring how much the rear axle load increases for a known change in angle gives the CG height [1], [2].</p>
+
+          <figure class="a-fig a-diagram">
+            <svg viewBox="0 0 520 300" role="img" aria-label="Side view of the car with rear tires on scales and the front lifted by crane at angle alpha, showing a, b, L, h_a and the forces">
+              <defs>
+                <marker id="arw-b" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+                  <path d="M 0 0 L 10 5 L 0 10 z" class="dg-arrowhead" />
+                </marker>
+                <marker id="arw-b-acc" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+                  <path d="M 0 0 L 10 5 L 0 10 z" class="dg-arrowhead-acc" />
+                </marker>
+              </defs>
               <rect x="20" y="260" width="480" height="10" class="dg-floor" />
               <line x1="20" y1="260" x2="500" y2="260" class="dg-ground" />
-              <rect x="66" y="250" width="68" height="10" class="dg-scale" />
-              <polygon points="130,250 146,250 130,236" class="dg-chock" />
-              <circle cx="100" cy="222" r="28" class="dg-tire" />
-              <line x1="100" y1="222" x2="210" y2="222" class="dg-ref" />
-              <g transform="translate(100 222) rotate(-20)">
+              <rect x="76" y="250" width="68" height="10" class="dg-scale" />
+              <polygon points="140,250 156,250 140,236" class="dg-chock" />
+              <circle cx="110" cy="222" r="28" class="dg-tire" />
+              <line x1="110" y1="222" x2="230" y2="222" class="dg-ref" />
+              <g transform="translate(110 222) rotate(-20)">
                 <rect x="-30" y="-72" width="360" height="44" rx="8" class="dg-body" />
                 <line x1="0" y1="0" x2="300" y2="0" class="dg-ref" />
                 <circle cx="300" cy="0" r="28" class="dg-tire" />
-                <line x1="141" y1="0" x2="141" y2="-45" class="dg-dim" />
+                <line x1="165" y1="0" x2="165" y2="-45" class="dg-dim" />
+                <line x1="0" y1="10" x2="163" y2="10" class="dg-dimline" marker-start="url(#arw-b)" marker-end="url(#arw-b)" />
+                <line x1="167" y1="10" x2="300" y2="10" class="dg-dimline" marker-start="url(#arw-b)" marker-end="url(#arw-b)" />
               </g>
-              <circle cx="100" cy="222" r="3" class="dg-cg" />
-              <circle cx="382" cy="119" r="3" class="dg-cg" />
-              <circle cx="217" cy="131.5" r="6" class="dg-cg" />
-              <text x="205" y="128" text-anchor="end">CG</text>
-              <text x="238" y="152" class="dg-acc">h<tspan dy="3" font-size="9">a</tspan></text>
-              <text x="310" y="166" class="dg-acc">L</text>
-              <path d="M 150 222 A 50 50 0 0 0 147 204.9" class="dg-arc" />
-              <text x="160" y="217" class="dg-acc">&#945;</text>
-              <line x1="376" y1="45" x2="376" y2="8" class="dg-strap" />
-              <text x="384" y="22">crane lift</text>
-              <text x="100" y="283" text-anchor="middle">front scales (W<tspan dy="3" font-size="9">FL</tspan><tspan dy="-3">, W</tspan><tspan dy="3" font-size="9">FR</tspan><tspan dy="-3">)</tspan></text>
-              <text x="66" y="229" text-anchor="end">front axle</text>
-              <text x="66" y="242" text-anchor="end">(pivot)</text>
+              <circle cx="110" cy="222" r="3" class="dg-cg" />
+              <circle cx="392" cy="119.4" r="3" class="dg-cg" />
+              <circle cx="249.7" cy="123.3" r="6" class="dg-cg" />
+              <text x="238" y="116" text-anchor="end">CG</text>
+              <text x="266" y="143" class="dg-acc">h<tspan dy="3" font-size="9">a</tspan></text>
+              <text x="196" y="214">b</text>
+              <text x="340" y="164">a</text>
+              <path d="M 160 222 A 50 50 0 0 0 157 204.9" class="dg-arc" />
+              <text x="170" y="217" class="dg-acc">&#945;</text>
+              <line x1="386" y1="45" x2="386" y2="8" class="dg-strap" marker-end="url(#arw-b)" />
+              <text x="394" y="22">F (crane, front)</text>
+              <text x="110" y="286" text-anchor="middle">rear scales (W<tspan dy="3" font-size="9">RL</tspan><tspan dy="-3">, W</tspan><tspan dy="3" font-size="9">RR</tspan><tspan dy="-3">)</tspan></text>
+              <text x="74" y="229" text-anchor="end">rear axle</text>
+              <text x="74" y="242" text-anchor="end">(pivot)</text>
             </svg>
-            <figcaption><span class="mono">Figure 2</span><span>Side view of the car pivoting about the front axle with the rear lifted. h<sub>a</sub> is the CG height above the line joining the axle centers.</span></figcaption>
+            <figcaption><span class="mono">Figure 3</span><span>Side view of the car pivoting about the rear axle with the front lifted. a and b are the distances from the CG to the front and rear axles along the axle line, and h<sub>a</sub> is the CG height above that line. Adapted from [2].</span></figcaption>
           </figure>
 
-          <h3><span class="a-num">6.2</span>Equations</h3>
-          <p>Front axle weight at each measurement n:</p>
-          <p class="eq">W<sub>Fn</sub> = W<sub>FLn</sub> + W<sub>FRn</sub></p>
-          <p>CG height above the axle centerline [1]:</p>
-          <p class="eq">h<sub>a</sub> = L &times; (W<sub>Fn</sub> &minus; W<sub>F1</sub>) / ( W &times; tan(&alpha;<sub>n</sub> &minus; &alpha;<sub>1</sub>) )</p>
-          <p>where W<sub>F1</sub> and &alpha;<sub>1</sub> are the front axle weight and level reading with the car level, and W<sub>Fn</sub> and &alpha;<sub>n</sub> are the values at the nth lifted position.</p>
+          <h3><span class="a-num">3.2</span>Materials</h3>
+          <div class="a-table-wrap">
+            <table class="a-table sheet">
+              <thead><tr><th>#</th><th>Item</th><th>Where</th></tr></thead>
+              <tbody>
+                <tr><td>1</td><td>ARG26</td><td>Lab</td></tr>
+                <tr><td>2</td><td>Driver</td><td>&mdash;</td></tr>
+                <tr><td>3</td><td>Vehicle scales</td><td>Lab</td></tr>
+                <tr><td>4</td><td>Known calibration weight (33 lb)</td><td>Lab</td></tr>
+                <tr><td>5</td><td>Digital level</td><td>Lab</td></tr>
+                <tr><td>6</td><td>Crane with chain</td><td>Lab</td></tr>
+                <tr><td>7</td><td>Dummy shocks and dummy cones</td><td>Lab</td></tr>
+                <tr><td>8</td><td>Magnesium rims</td><td>Lab</td></tr>
+                <tr><td>9</td><td>Tire pump and pressure gauge</td><td>Lab</td></tr>
+                <tr><td>10</td><td>Tape measure</td><td>Lab</td></tr>
+                <tr><td>11</td><td>Cinder blocks (raise the rear scales for larger angles)</td><td>Lab</td></tr>
+                <tr><td>12</td><td>Wheel chocks (sandbags) for the rear tires</td><td>Lab</td></tr>
+                <tr><td>13</td><td>Camera or phone</td><td>&mdash;</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <h3><span class="a-num">3.3</span>Pre-Test Procedure</h3>
+          <ol>
+            <li>Install the dummy shocks and dummy cones.</li>
+            <li>Install the accumulator and bolt it down (ask someone on high voltage).</li>
+            <li>Make sure the car is on the magnesium rims.</li>
+            <li>Overinflate the tires to 30 psi.</li>
+            <li>Check each scale with the known weight: less than 0.5 lbf of variance among the scales, and less than 0.5 lbf of error from the known weight, per 50 lb added.</li>
+            <li>Set the rear scales on the cinder blocks, then level and zero them.</li>
+            <li>Chock the rear wheels.</li>
+          </ol>
+
+          <h3><span class="a-num">3.4</span>Measurements Before Lifting</h3>
+          <p>Record these with the car level on the scales, driver in the car.</p>
+          <div class="a-table-wrap">
+            <table class="a-table sheet">
+              <thead><tr><th>Symbol</th><th>Measurement</th><th>Value</th></tr></thead>
+              <tbody>
+                <tr><td>W</td><td>Total weight, all four scales (lb)</td><td></td></tr>
+                <tr><td>W<sub>RL1</sub></td><td>Rear left weight, car level (lb)</td><td></td></tr>
+                <tr><td>W<sub>RR1</sub></td><td>Rear right weight, car level (lb)</td><td></td></tr>
+                <tr><td>&alpha;<sub>1</sub></td><td>Level reading, car level (deg)</td><td></td></tr>
+                <tr><td>L</td><td>Wheelbase (in)</td><td></td></tr>
+                <tr><td>r<sub>f</sub></td><td>Front loaded radius, ground to axle center (in)</td><td></td></tr>
+                <tr><td>r<sub>r</sub></td><td>Rear loaded radius, ground to axle center (in)</td><td></td></tr>
+                <tr><td>p</td><td>Tire pressure (psi)</td><td></td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <h3><span class="a-num">3.5</span>Derivation</h3>
+          <p>The car does not need a 50/50 weight split. Let a be the distance from the CG to the front axle and b the distance from the CG to the rear axle, measured along the axle line, so a + b = L (Figure 3). The CG sits a height h<sub>a</sub> above that line.</p>
+          <p>With the front raised by an angle &alpha;, the horizontal distance from the rear axle to the CG is:</p>
+          <p class="eq">x = b cos &alpha; &minus; h<sub>a</sub> sin &alpha;</p>
+          <p>The crane force F acts at the front axle, a horizontal distance L cos &alpha; from the rear axle. Taking moments about the rear axle:</p>
+          <p class="eq">F &times; L cos &alpha; = W &times; (b cos &alpha; &minus; h<sub>a</sub> sin &alpha;)</p>
+          <p class="eq">F = W &times; b / L &minus; W &times; (h<sub>a</sub> / L) &times; tan &alpha;</p>
+          <p>The rear scales carry the rest of the weight, W<sub>R</sub> = W &minus; F. Using a + b = L:</p>
+          <p class="eq">W<sub>R</sub> = W &times; a / L + W &times; (h<sub>a</sub> / L) &times; tan &alpha;</p>
+          <p>With the car level (&alpha; = 0) this is just the static rear weight, W<sub>R1</sub> = W &times; a / L. The weight split only sets that starting reading. Subtracting it leaves the change in rear weight, which depends only on h<sub>a</sub>:</p>
+          <p class="eq">W<sub>Rn</sub> &minus; W<sub>R1</sub> = W &times; (h<sub>a</sub> / L) &times; tan(&alpha;<sub>n</sub> &minus; &alpha;<sub>1</sub>)</p>
+
+          <h3><span class="a-num">3.6</span>Equations</h3>
+          <p>Rear axle weight at each position n:</p>
+          <p class="eq">W<sub>Rn</sub> = W<sub>RLn</sub> + W<sub>RRn</sub></p>
+          <p>CG height above the axle centerline:</p>
+          <p class="eq">h<sub>a</sub> = L &times; (W<sub>Rn</sub> &minus; W<sub>R1</sub>) / ( W &times; tan(&alpha;<sub>n</sub> &minus; &alpha;<sub>1</sub>) )</p>
           <p>CG height above the ground at static ride height, adding the average loaded radius:</p>
           <p class="eq">h = h<sub>a</sub> + (r<sub>f</sub> + r<sub>r</sub>) / 2</p>
-          <p>The change in front weight is small compared with the total weight, so scale error can become a large part of the result [3]. Use large angles (20&deg; to 40&deg; of change, raising the front scales on cinder blocks if needed) and take several measurements to average [4].</p>
-          <p>Note that the tires are not rigid and deform under load, lowering the CG slightly. Even the corrected value is not accurate at speed, mainly because of aero loads and changes in tire pressure [4]. This is part of the reason the tires are overinflated for the test.</p>
+          <p>The level corner weights also locate the CG along the car: a = L &times; W<sub>R1</sub> / W and b = L &times; W<sub>F1</sub> / W.</p>
+          <p>The change in rear weight is small compared with the total weight, so scale error can become a large part of the result [3]. Use large angles (20&deg; to 40&deg; of change) and average several measurements [4]. The tires also deform under load, lowering the CG slightly, and the value is not exact at speed because of aero loads and tire pressure changes [4].</p>
 
-          <h3><span class="a-num">6.3</span>Procedure</h3>
+          <h3><span class="a-num">3.7</span>Procedure</h3>
           <ol>
-            <li>Complete the pre-test procedure and baseline measurements (Sections 3 and 4).</li>
-            <li>With the car level, record the front corner weights W<sub>FL1</sub> and W<sub>FR1</sub>, and the level reading at the longitudinal reference spot, &alpha;<sub>1</sub>.</li>
-            <li>Chock the front wheels so they cannot roll off the scales.</li>
-            <li>Lift the rear of the car with the crane, keeping the chain as vertical as possible.</li>
-            <li>Hold the car still and record the level reading &alpha;<sub>n</sub> and the front corner weights W<sub>FLn</sub> and W<sub>FRn</sub>.</li>
-            <li>Repeat steps 4 and 5 at several angles, aiming for about 10&deg;, 20&deg;, 30&deg; and 40&deg; of change.</li>
+            <li>Complete the pre-test procedure and the measurements before lifting.</li>
+            <li>Lift the front of the car with the crane, keeping the chain vertical.</li>
+            <li>Hold the car still and record the level reading &alpha;<sub>n</sub> and the rear corner weights W<sub>RLn</sub> and W<sub>RRn</sub>.</li>
+            <li>Repeat at several angles, aiming for about 10&deg;, 20&deg;, 30&deg; and 40&deg; of change.</li>
             <li>Lower the car, re-zero the scales, and repeat the full set for a second run.</li>
           </ol>
-          <div class="a-table-wrap">
-            <table class="a-table sheet">
-              <thead>
-                <tr><th>Line #</th><th>Method B Item</th><th>Sign-Off</th></tr>
-              </thead>
-              <tbody>
-                <tr><td>1</td><td>Weigh vehicle on a level surface and record &alpha;<sub>1</sub></td><td></td></tr>
-                <tr><td>2</td><td>Front wheels chocked</td><td></td></tr>
-                <tr><td>3</td><td>Lift the rear and record &alpha;<sub>n</sub></td><td></td></tr>
-                <tr><td>4</td><td>Record front corner weights at the lifted position</td><td></td></tr>
-                <tr><td>5</td><td>Repeat steps 3 and 4 for various angles</td><td></td></tr>
-                <tr><td>6</td><td>Lower car, remove crane, take photos</td><td></td></tr>
-              </tbody>
-            </table>
-          </div>
 
-          <h3><span class="a-num">6.4</span>Method B Data Sheet</h3>
-          <p>Record for every position (n = 1 is the level car):</p>
+          <h3><span class="a-num">3.8</span>Data Sheet</h3>
           <div class="a-table-wrap">
             <table class="a-table sheet">
-              <thead>
-                <tr><th>n</th><th>&alpha;<sub>n</sub> (deg)</th><th>W<sub>FLn</sub> (lb)</th><th>W<sub>FRn</sub> (lb)</th><th>W<sub>Fn</sub> (lb)</th><th>&alpha;<sub>n</sub> &minus; &alpha;<sub>1</sub> (deg)</th><th>h<sub>a</sub> (in)</th><th>h (in)</th></tr>
-              </thead>
+              <thead><tr><th>n</th><th>&alpha;<sub>n</sub> (deg)</th><th>W<sub>RLn</sub> (lb)</th><th>W<sub>RRn</sub> (lb)</th><th>W<sub>Rn</sub> (lb)</th><th>h (in)</th></tr></thead>
               <tbody>
-                <tr><td>1</td><td></td><td></td><td></td><td></td><td>0</td><td>&mdash;</td><td>&mdash;</td></tr>
-                <tr><td>2</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
-                <tr><td>3</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
-                <tr><td>4</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
-                <tr><td>5</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
-                <tr><td>6</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+                <tr><td>2</td><td></td><td></td><td></td><td></td><td></td></tr>
+                <tr><td>3</td><td></td><td></td><td></td><td></td><td></td></tr>
+                <tr><td>4</td><td></td><td></td><td></td><td></td><td></td></tr>
+                <tr><td>5</td><td></td><td></td><td></td><td></td><td></td></tr>
+                <tr><td>6</td><td></td><td></td><td></td><td></td><td></td></tr>
+                <tr><td>7</td><td></td><td></td><td></td><td></td><td></td></tr>
               </tbody>
             </table>
           </div>
+          <p class="a-top"><a href="#purpose">&uarr; Back to top</a></p>
         </section>
 
-        <section class="a-section">
-          <h2><span class="a-num">7</span>Post-Test Data Analysis</h2>
+        <section class="a-section" id="analysis">
+          <h2><span class="a-num">4</span>Post-Test Data Analysis</h2>
           <p class="tbf">To be filled out after testing.</p>
           <div class="a-table-wrap">
             <table class="a-table sheet">
-              <thead>
-                <tr><th>Source</th><th>CG Height h (in)</th><th>Spread Across Trials (in)</th><th>Difference from CAD (in)</th></tr>
-              </thead>
+              <thead><tr><th>Source</th><th>h (in)</th><th>Spread (in)</th><th>vs. CAD (in)</th></tr></thead>
               <tbody>
                 <tr><td>Method A: Side Tilt</td><td></td><td></td><td></td></tr>
-                <tr><td>Method B: Rear Lift</td><td></td><td></td><td></td></tr>
+                <tr><td>Method B: Front Lift</td><td></td><td></td><td></td></tr>
                 <tr><td>CAD Estimate</td><td></td><td>&mdash;</td><td>&mdash;</td></tr>
               </tbody>
             </table>
           </div>
-          <h3><span class="a-num">7.1</span>Method A Results</h3>
+          <h3><span class="a-num">4.1</span>Method B Results</h3>
           <p class="tbf">To be filled out after testing.</p>
-          <h3><span class="a-num">7.2</span>Method B Results</h3>
-          <p class="tbf">To be filled out after testing.</p>
-          <h3><span class="a-num">7.3</span>Comparison with CAD and Discussion</h3>
+          <h3><span class="a-num">4.2</span>Comparison with CAD and Discussion</h3>
           <p class="tbf">To be filled out after testing.</p>
         </section>
 
         <section class="a-section">
-          <h2><span class="a-num">8</span>References</h2>
+          <h2><span class="a-num">5</span>References</h2>
           <ol class="a-refs">
             <li>J. Segers, Analysis Techniques for Racecar Data Acquisition, 2nd ed., pp. 222&ndash;224.</li>
             <li>W. F. Milliken and D. L. Milliken, Race Car Vehicle Dynamics, SAE, 1995, Section 18.2.</li>
@@ -392,6 +445,6 @@
       <a href="mailto:dr653@cornell.edu">dr653@cornell.edu</a>
     </div>
   </footer>
-  <script src="../assets/js/main.js?v=53854c4c"></script>
+  <script src="../assets/js/main.js?v=91c6eb63"></script>
 </body>
 </html>

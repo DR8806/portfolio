@@ -1092,37 +1092,91 @@ html.in-preview .topbar {
 
 /* ---------- Test procedure pages ---------- */
 
-.article .a-meta {
-  margin: 0;
-  padding-top: 8px;
-}
-
-/* Fill-in data sheets: full grid, room to write */
+/* Fill-in data sheets: compact grid, sized to content */
 
 .a-table.sheet {
-  min-width: 560px;
+  width: auto;
+  min-width: 0;
+  max-width: 100%;
+  font-size: 15px;
+  line-height: 1.35;
 }
 
 .a-table.sheet th,
 .a-table.sheet td {
-  padding: 8px 10px;
+  padding: 5px 12px;
   border: 1px solid var(--line-strong);
 }
 
 .a-table.sheet th {
   text-transform: none;
   letter-spacing: 0.02em;
-  font-size: 12px;
+  font-size: 11px;
+  white-space: nowrap;
 }
 
 .a-table.sheet td {
-  height: 38px;
+  height: 30px;
   vertical-align: middle;
 }
 
 .a-table.sheet td:first-child {
   width: auto;
   white-space: nowrap;
+}
+
+/* blank write-in columns get a fixed width */
+.a-table.sheet td:empty {
+  min-width: 72px;
+}
+
+/* Status note, e.g. a section still in progress */
+
+.article .a-note {
+  display: flex;
+  gap: 14px;
+  align-items: baseline;
+  margin: 0 0 8px;
+  padding: 10px 14px;
+  border-left: 2px solid var(--accent);
+  background: var(--bg-raised);
+  font-size: 17px;
+}
+
+.a-note .mono {
+  flex: none;
+  color: var(--accent);
+}
+
+/* Clickable index at the top of a procedure */
+
+.a-index a {
+  font-weight: 500;
+  text-decoration: underline;
+  text-decoration-color: var(--accent);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 4px;
+}
+
+.a-index a:hover {
+  color: var(--accent);
+}
+
+.article .a-top {
+  margin-top: 20px;
+  font-size: 15px;
+}
+
+.a-top a {
+  color: var(--muted);
+}
+
+.a-top a:hover {
+  color: var(--accent);
+}
+
+.a-section[id] {
+  scroll-margin-top: 80px;
 }
 
 /* Line drawings */
@@ -1160,6 +1214,13 @@ html.in-preview .topbar {
 .dg-cg { fill: var(--accent); }
 .dg-scale { fill: var(--fg); }
 .dg-chock { fill: var(--muted); }
+.dg-centerline { stroke: var(--muted); stroke-width: 1; stroke-dasharray: 14 4 2 4; }
+.dg-dimline { stroke: var(--fg); stroke-width: 1.2; }
+.dg-dim-arrow { stroke: var(--accent); stroke-width: 1.6; }
+.dg-arrowhead { fill: var(--fg); }
+.dg-arrowhead-acc { fill: var(--accent); }
+.dg-cg-open { fill: var(--bg); stroke: var(--accent); stroke-width: 1.6; }
+.dg-cg-x { stroke: var(--accent); stroke-width: 1.4; }
 
 /* Printing a procedure: drop site chrome */
 
