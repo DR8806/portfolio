@@ -1089,3 +1089,95 @@ html.in-preview .topbar {
   text-decoration-color: var(--accent);
   text-underline-offset: 3px;
 }
+
+/* ---------- Test procedure pages ---------- */
+
+.article .a-meta {
+  margin: 0;
+  padding-top: 8px;
+}
+
+/* Fill-in data sheets: full grid, room to write */
+
+.a-table.sheet {
+  min-width: 560px;
+}
+
+.a-table.sheet th,
+.a-table.sheet td {
+  padding: 8px 10px;
+  border: 1px solid var(--line-strong);
+}
+
+.a-table.sheet th {
+  text-transform: none;
+  letter-spacing: 0.02em;
+  font-size: 12px;
+}
+
+.a-table.sheet td {
+  height: 38px;
+  vertical-align: middle;
+}
+
+.a-table.sheet td:first-child {
+  width: auto;
+  white-space: nowrap;
+}
+
+/* Line drawings */
+
+.a-diagram svg {
+  display: block;
+  width: 100%;
+  max-width: 520px;
+  height: auto;
+  margin: 0 auto;
+  border: 1px solid var(--line);
+  background: #fff;
+}
+
+.a-diagram text {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  fill: var(--fg);
+}
+
+.a-diagram .dg-acc {
+  font-size: 15px;
+  fill: var(--accent);
+}
+
+.dg-ground { stroke: var(--fg); stroke-width: 1.5; }
+.dg-floor { fill: var(--bg-raised); }
+.dg-tire { fill: var(--bg-raised); stroke: var(--fg); stroke-width: 1.5; }
+.dg-body { fill: none; stroke: var(--fg); stroke-width: 1.5; }
+.dg-ref { stroke: var(--muted); stroke-width: 1; stroke-dasharray: 4 4; }
+.dg-dash { stroke: var(--muted); stroke-width: 1; stroke-dasharray: 6 5; }
+.dg-dim { stroke: var(--accent); stroke-width: 2; }
+.dg-arc { fill: none; stroke: var(--accent); stroke-width: 1.5; }
+.dg-strap { stroke: var(--muted); stroke-width: 2; }
+.dg-cg { fill: var(--accent); }
+.dg-scale { fill: var(--fg); }
+.dg-chock { fill: var(--muted); }
+
+/* Printing a procedure: drop site chrome */
+
+@media print {
+  .topbar,
+  .footer,
+  .p-nav,
+  .preview {
+    display: none !important;
+  }
+  body {
+    background: #fff;
+  }
+  .a-section {
+    break-inside: auto;
+  }
+  .a-fig,
+  .a-table-wrap {
+    break-inside: avoid;
+  }
+}
