@@ -89,6 +89,34 @@ img {
   margin: 0;
 }
 
+/* ---------- Site notice banner ---------- */
+
+.site-notice {
+  background: var(--fg);
+  color: var(--bg);
+  font-size: 15px;
+  line-height: 1.4;
+}
+
+.site-notice .wrap {
+  display: flex;
+  justify-content: center;
+  align-items: baseline;
+  gap: 12px;
+  padding-top: 9px;
+  padding-bottom: 9px;
+  text-align: center;
+}
+
+.site-notice .mono {
+  flex: none;
+  color: var(--accent);
+}
+
+html.in-preview .site-notice {
+  display: none;
+}
+
 /* ---------- Top bar ---------- */
 
 .topbar {
@@ -134,6 +162,7 @@ img {
   border: 0;
   padding: 0;
   line-height: 1;
+  white-space: nowrap;
   cursor: pointer;
   transition: color 0.2s;
 }
@@ -156,14 +185,23 @@ img {
 }
 
 @media (max-width: 560px) {
+  .topbar .wrap {
+    gap: 12px;
+  }
   .brand {
-    font-size: 14px;
-    letter-spacing: 0.18em;
+    font-size: 13px;
+    letter-spacing: 0.1em;
+  }
+  .nav {
+    gap: 12px;
   }
   .nav a,
   .nav button {
     font-size: 12px;
-    letter-spacing: 0.14em;
+    letter-spacing: 0.06em;
+  }
+  .nav .caret {
+    margin-left: 3px;
   }
 }
 
