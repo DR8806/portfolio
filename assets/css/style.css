@@ -1458,3 +1458,8 @@ html.in-preview .topbar {
   border-color: var(--accent);
   color: #fff;
 }
+
+.article .a-byline {
+  margin: 0;
+  padding-top: 8px;
+}
