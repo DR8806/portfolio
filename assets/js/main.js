@@ -193,7 +193,21 @@
       const d = num(inputs.d);
       const hcad = num(inputs.hcad);
       const drh = num(inputs.drh);
-      const sf = num(inputs.sf);
+      const wcar = num(inputs.wcar);
+      const wun = num(inputs.wun);
+      // The driver is sprung mass, so each case has its own sprung fraction.
+      const sprungFraction = (c) => {
+        const key = c.dataset.driver;
+        const wd = key ? num(inputs[key]) : 0;
+        if (wcar == null || wun == null || wd == null) return null;
+        const w = wcar + wd;
+        return w > 0 ? (w - wun) / w : null;
+      };
+      const sfOut = document.querySelector('[data-cg-out="sf"]');
+      if (sfOut) {
+        const list = [...cgCases].map(sprungFraction);
+        sfOut.textContent = list.some((v) => v != null) ? list.map((v) => (v == null ? "?" : v.toFixed(3))).join(", ") : "";
+      }
       const exp = document.querySelector('[data-cg-out="theta-exp"]');
       if (exp) exp.textContent = d && hcad ? fmt((Math.atan(d / 2 / hcad) * 180) / Math.PI) : "";
 
@@ -219,6 +233,7 @@
         set("avg", st ? fmt(st.avg) : "");
         set("min", st ? fmt(st.min) : "");
         set("max", st ? fmt(st.max) : "");
+        const sf = sprungFraction(c);
         set("nom", st && drh != null && sf != null ? fmt(st.avg - drh * sf) : "");
         series.push({ label: c.dataset.label, values });
       });
