@@ -1476,3 +1476,9 @@ html.in-preview .topbar {
 .a-table.sheet.a-sources td:last-child {
   min-width: 260px;
 }
+
+/* Status note opening a section */
+
+.article .a-section > .a-note:first-child {
+  margin-bottom: 28px;
+}
