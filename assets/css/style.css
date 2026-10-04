@@ -1482,3 +1482,38 @@ html.in-preview .topbar {
 .article .a-section > .a-note:first-child {
   margin-bottom: 28px;
 }
+
+/* Sensitivity charts: inline SVG line charts, two per row on wide screens */
+
+.sv-grid-wrap {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 8px 32px;
+  margin: 24px 0;
+}
+
+.sv-grid-wrap .a-fig {
+  margin: 0;
+}
+
+.sv-chart {
+  display: block;
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+
+.sv-chart text {
+  font-family: var(--font-mono);
+  font-size: 10px;
+}
+
+.sv-grid { stroke: var(--line); stroke-width: 1; }
+.sv-axis { stroke: var(--line-strong); stroke-width: 1; }
+.sv-tick, .sv-title { fill: var(--muted); }
+.sv-label { fill: var(--fg); }
+.sv-line { fill: none; stroke: var(--accent); stroke-width: 2; stroke-linejoin: round; }
+.sv-dot { fill: var(--accent); stroke: var(--bg); stroke-width: 2; }
+.sv-dot-alt { fill: var(--bg); stroke: var(--accent); }
+.sv-hit { fill: transparent; }
+.sv-hit:hover { fill: var(--line); }

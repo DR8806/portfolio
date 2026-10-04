@@ -69,6 +69,9 @@ html = f"""<!DOCTYPE html>
   h2, h3 {{ break-after: avoid; }}
   p:has(+ .a-table-wrap), p:has(+ .eq) {{ break-after: avoid; }}  /* keep a lead-in line with what it introduces */
   #appendix {{ break-before: page; }}
+  .sv-grid-wrap {{ grid-template-columns: 1fr 1fr; gap: 6px 26px; margin: 10px 0 0; break-inside: avoid; }}
+  .sv-fig {{ break-inside: avoid; }}
+  .sv-fig figcaption {{ max-width: none; }}
 </style>
 </head>
 <body>
