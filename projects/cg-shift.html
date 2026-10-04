@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>CG Shift Calculation — Davis Rattanavijai</title>
+  <meta name="description" content="Calculating how far the longitudinal CG moves on ARG27 as the accumulator and inverter change, and what that means for a 50/50 weight distribution." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;500&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../assets/css/style.css?v=731ce4ac" />
+</head>
+<body>
+  <!-- EDIT: site notice banner; delete this div to remove it -->
+  <div class="site-notice"><div class="wrap"><span class="mono">Notice</span>This site is still being worked on and should be mostly filled out by 10/5.</div></div>
+  <header class="topbar">
+    <div class="wrap">
+      <a class="brand" href="../index.html">Davis Rattanavijai</a>
+      <nav class="nav">
+        <a href="../index.html#work">Work</a>
+        <div class="nav-item contact">
+          <button type="button" class="contact-toggle" aria-expanded="false" aria-controls="contact-panel">Contact</button>
+          <div class="contact-panel" id="contact-panel">
+            <div class="contact-card">
+              <span class="mono">Email</span>
+              <button type="button" class="copy-email" data-copy="dr653@cornell.edu">
+                <span class="email">dr653@cornell.edu</span>
+                <span class="copy-label mono" data-default="Click to copy">Click to copy</span>
+              </button>
+            </div>
+          </div>
+        </div>
+        <button type="button" data-resume-toggle aria-expanded="false" aria-controls="resume-panel">Resume<span class="caret" aria-hidden="true">&#9662;</span></button>
+      </nav>
+      <div class="resume-panel" id="resume-panel">
+        <div class="resume-head mono"><span>Resume</span><span>Sep 2026</span></div>
+        <div class="resume-doc" data-src="../DavisRattanavijai_Resume.pdf#toolbar=0&amp;navpanes=0&amp;view=FitH"></div>
+        <div class="resume-actions">
+          <a class="primary" href="../DavisRattanavijai_Resume.pdf" download>Download PDF</a>
+          <a href="../resume.html">Open &rarr;</a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="p-hero">
+      <div class="wrap">
+        <div class="crumbs mono"><a href="../index.html#work">Index</a><span class="sep">/</span><span>Cornell Racing</span><span class="sep">/</span><span>Suspension Lead</span></div>
+        <h1 class="display p-title">CG Shift Calculation</h1>
+        <!-- EDIT: description -->
+        <p class="p-desc">Calculating how far the longitudinal CG moves on ARG27 as the accumulator and inverter change, and what that means for a 50/50 weight distribution.</p>
+      </div>
+    </section>
+
+    <article class="article">
+      <div class="wrap">
+
+        <p class="a-byline mono">Davis Rattanavijai &middot; Last edited October 4, 2026</p>
+
+        <section class="a-section" id="context">
+          <h2><span class="a-num">1</span>Context</h2>
+          <p>For ARG27, the accumulator and inverter are being moved and both are getting lighter. We design the car to a 50/50 weight distribution, so if the longitudinal (front to rear) CG moves, we may have to shift the wheelbase to bring it back. This page calculates that longitudinal CG shift.</p>
+          <figure class="a-fig">
+            <img src="../assets/img/cg-shift/01-arg26.webp" alt="Side view of the ARG26 chassis with the accumulator packaged low at the rear" width="1906" height="920" loading="lazy" />
+            <figcaption><span class="mono">Figure 1</span> ARG26 packaging, side view.</figcaption>
+          </figure>
+          <figure class="a-fig">
+            <img src="../assets/img/cg-shift/02-arg27.webp" alt="Side view of the preliminary ARG27 chassis with an estimated accumulator block at the rear" width="1668" height="752" loading="lazy" />
+            <figcaption><span class="mono">Figure 2</span> Preliminary ARG27 packaging, side view, with the accumulator shown as an estimate.</figcaption>
+          </figure>
+        </section>
+
+        <section class="a-section" id="method">
+          <h2><span class="a-num">2</span>Methodology</h2>
+          <p>Positions are x in vehicle coordinates, in inches, with +x pointing forward. All masses are sprung masses, so the ARG26 total (m<sub>26</sub>) is the total sprung mass of the car with the driver and x<sub>26</sub> is its sprung CG. Everything other than the accumulator and inverter is lumped together as "other" and assumed to be the same on both cars.</p>
+
+          <h3><span class="a-num">2.1</span>Remove the ARG26 Accumulator and Inverter</h3>
+          <p class="eq">m<sub>other</sub> = m<sub>26</sub> &#8722; m<sub>ACC26</sub> &#8722; m<sub>INV26</sub></p>
+          <p class="eq">x<sub>other</sub> = (m<sub>26</sub> x<sub>26</sub> &#8722; m<sub>ACC26</sub> x<sub>ACC26</sub> &#8722; m<sub>INV26</sub> x<sub>INV26</sub>) / m<sub>other</sub></p>
+
+          <h3><span class="a-num">2.2</span>Add the ARG27 Accumulator and Inverter</h3>
+          <p class="eq">m<sub>27</sub> = m<sub>other</sub> + m<sub>ACC27</sub> + m<sub>INV27</sub></p>
+          <p class="eq">x<sub>27</sub> = (m<sub>other</sub> x<sub>other</sub> + m<sub>ACC27</sub> x<sub>ACC27</sub> + m<sub>INV27</sub> x<sub>INV27</sub>) / m<sub>27</sub></p>
+
+          <h3><span class="a-num">2.3</span>Longitudinal CG Shift</h3>
+          <p class="eq">&Delta;x<sub>CG</sub> = x<sub>27</sub> &#8722; x<sub>26</sub></p>
+          <p>A positive shift means the CG moved forward.</p>
+
+          <h3><span class="a-num">2.4</span>Effect on Weight Distribution</h3>
+          <p>With wheelbase L, the shift moves this much of the weight onto the front axle:</p>
+          <p class="eq">&Delta;(front %) = 100 &times; &Delta;x<sub>CG</sub> / L</p>
+        </section>
+
+        <section class="a-section" id="results">
+          <h2><span class="a-num">3</span>Results</h2>
+
+          <h3><span class="a-num">3.1</span>Inputs</h3>
+          <div class="a-table-wrap">
+            <table class="a-table sheet">
+              <thead><tr><th>Part</th><th>Mass (lb)</th><th>x (in)</th></tr></thead>
+              <tbody>
+                <tr><td>ARG26 sprung mass with driver</td><td>470</td><td>&#8722;50.79</td></tr>
+                <tr><td>ACC26 (accumulator)</td><td>102</td><td>&#8722;64.00</td></tr>
+                <tr><td>INV26 (inverter)</td><td>34.17</td><td>&#8722;78.20</td></tr>
+                <tr><td>ACC27 (accumulator)</td><td>95</td><td>&#8722;66.56</td></tr>
+                <tr><td>INV27 (inverter)</td><td>16.53</td><td>&#8722;74.77</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p>The ARG27 accumulator moves 2.56 in toward the rear, from x = &#8722;64.00 in to x = &#8722;66.56 in. The ARG27 inverter moves 3.43 in forward, from x = &#8722;78.20 in to x = &#8722;74.77 in. See the <a href="#appendix">appendix</a> for where each input comes from.</p>
+
+          <h3><span class="a-num">3.2</span>Change in Each Part</h3>
+          <div class="a-table-wrap">
+            <table class="a-table sheet">
+              <thead><tr><th>Part</th><th>Mass removed (lb)</th><th>x shift (in), + is forward</th></tr></thead>
+              <tbody>
+                <tr><td>Accumulator</td><td>7.00</td><td>&#8722;2.56</td></tr>
+                <tr><td>Inverter</td><td>17.64</td><td>+3.43</td></tr>
+                <tr class="a-row-total"><td>Total</td><td>24.64</td><td></td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <h3><span class="a-num">3.3</span>Calculation</h3>
+          <p>Step 1, everything else on the car:</p>
+          <p class="eq">m<sub>other</sub> = 470 &#8722; 102 &#8722; 34.17 = 333.83 lb</p>
+          <p class="eq">x<sub>other</sub> = (470(&#8722;50.789) &#8722; 102(&#8722;64) &#8722; 34.17(&#8722;78.2)) / 333.83 = &#8722;43.947 in</p>
+          <p>Step 2, ARG27:</p>
+          <p class="eq">m<sub>27</sub> = 333.83 + 95 + 16.53 = 445.36 lb</p>
+          <p class="eq">x<sub>27</sub> = (333.83(&#8722;43.947) + 95(&#8722;66.56) + 16.53(&#8722;74.77)) / 445.36 = &#8722;49.915 in</p>
+          <p>Step 3, CG shift:</p>
+          <p class="eq">&Delta;x<sub>CG</sub> = &#8722;49.915 &#8722; (&#8722;50.789) = +0.87 in</p>
+          <p>The longitudinal CG moves 0.87 in forward. Moving the accumulator back pulls the CG rearward, but moving the inverter forward and taking 24.6 lb out of the two parts, which both sit behind the CG, has a bigger effect and pushes it forward.</p>
+
+          <h3><span class="a-num">3.4</span>Effect on Weight Distribution</h3>
+          <p>With the ARG26 wheelbase of 61 in, a 0.87 in forward shift moves about 1.4% of the weight onto the front axle:</p>
+          <p class="eq">&Delta;(front %) = 100 &times; 0.87 / 61 = 1.4%</p>
+          <p>So a car that was 50/50 would become about 51.4/48.6 front to rear.</p>
+        </section>
+
+        <section class="a-section" id="remedy">
+          <h2><span class="a-num">4</span>Remedy: Moving the Axles</h2>
+          <p>For 50/50, the CG has to sit at the midpoint between the front and rear axles. Since the CG moves forward 0.87 in, we move both the front and rear axles forward 0.87 in. The midpoint moves with them, the car goes back to 50/50, and the wheelbase stays at 61 in.</p>
+        </section>
+
+        <section class="a-section" id="appendix">
+          <h2><span class="a-num">A</span>Appendix: Input Sources</h2>
+          <div class="a-table-wrap">
+            <table class="a-table sheet a-sources">
+              <thead><tr><th>Input</th><th>Value</th><th>Source</th></tr></thead>
+              <tbody>
+                <tr><td>ARG26 sprung mass with driver</td><td>470&nbsp;lb</td><td class="tbf">To be filled out.</td></tr>
+                <tr><td>ARG26 sprung CG, x</td><td>&#8722;50.79&nbsp;in</td><td>The car is designed to 50/50, so the CG is half the wheelbase behind the front axle: &#8722;20.289 &#8722; 61 &times; 0.5 = &#8722;50.789. Front axle location from CAD (<a href="#fig-3">Figure 3</a>).</td></tr>
+                <tr><td>ACC26 mass</td><td>102&nbsp;lb</td><td>ARG26 weight budget, accumulator current weight of 46.266 kg (<a href="#fig-8">Figure 8</a>).</td></tr>
+                <tr><td>ACC26 CG, x</td><td>&#8722;64.00&nbsp;in</td><td>iProperties of the accumulator master assembly in CAD, &#8722;1625.284 mm (<a href="#fig-4">Figure 4</a>).</td></tr>
+                <tr><td>INV26 mass</td><td>34.17&nbsp;lb</td><td>ARG26 weight budget, inverter current weight of 15.5 kg (<a href="#fig-9">Figure 9</a>).</td></tr>
+                <tr><td>INV26 CG, x</td><td>&#8722;78.20&nbsp;in</td><td>iProperties of the inverter enclosure assembly in CAD (<a href="#fig-5">Figure 5</a>).</td></tr>
+                <tr><td>ACC27 mass</td><td>95&nbsp;lb</td><td>Estimate from Aryaman (HV lead).</td></tr>
+                <tr><td>ACC27 CG, x</td><td>&#8722;66.56&nbsp;in</td><td>Rectangular approximation of the accumulator. The ARG27 case is longer, so its CG moves back by half the added length, 2.56 in, from the ACC26 CG (<a href="#fig-6">Figure 6</a>).</td></tr>
+                <tr><td>INV27 mass</td><td>16.53&nbsp;lb</td><td>Estimate of 7.5 kg for the new inverter from Aryaman (HV lead).</td></tr>
+                <tr><td>INV27 CG, x</td><td>&#8722;74.77&nbsp;in</td><td>Assumes the same enclosure with its CG in the middle, turned from standing up on ARG26 to lying flat on ARG27. The CG moves forward by half the height minus half the width, 13.01 / 2 &#8722; 6.15 / 2 = +3.43 in, from the INV26 CG (<a href="#fig-7">Figure 7</a>).</td></tr>
+                <tr><td>Wheelbase, L</td><td>61&nbsp;in</td><td>From our design. Kept the same on ARG27.</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <figure class="a-fig" id="fig-3">
+            <img src="../assets/img/cg-shift/03-front-axle.webp" alt="Top view of the ARG26 front of the chassis with x = 0 at the front bulkhead and the front axle at x = -20.289 in" width="1104" height="970" loading="lazy" />
+            <figcaption><span class="mono">Figure 3</span> ARG26 front axle location in CAD, x = &#8722;20.289 in.</figcaption>
+          </figure>
+          <figure class="a-fig a-fig--chart" id="fig-4">
+            <img src="../assets/img/cg-shift/04-acc26-iproperties.png" alt="Inventor iProperties for the ARG26 accumulator master assembly showing a center of gravity x of -1625.284 mm" width="802" height="972" loading="lazy" />
+            <figcaption><span class="mono">Figure 4</span> iProperties of the ARG26 accumulator master assembly, CG x = &#8722;1625.284 mm (&#8722;64.00 in).</figcaption>
+          </figure>
+          <figure class="a-fig a-fig--chart" id="fig-5">
+            <img src="../assets/img/cg-shift/05-inv26-iproperties.png" alt="Inventor iProperties for the ARG26 inverter enclosure assembly showing a center of gravity x of -78.200 in" width="794" height="948" loading="lazy" />
+            <figcaption><span class="mono">Figure 5</span> iProperties of the ARG26 inverter enclosure assembly, CG x = &#8722;78.20 in.</figcaption>
+          </figure>
+          <figure class="a-fig a-fig--chart" id="fig-6">
+            <img src="../assets/img/cg-shift/06-acc27-cg-calc.webp" alt="Hand calculation approximating the accumulator as a rectangle to find how far its CG moves when the case gets longer and shorter" width="1500" height="2000" loading="lazy" />
+            <figcaption><span class="mono">Figure 6</span> Hand calculation of the ACC27 CG using a rectangular approximation of the accumulator.</figcaption>
+          </figure>
+          <figure class="a-fig a-fig--chart" id="fig-7">
+            <img src="../assets/img/cg-shift/07-inv27-cg-calc.webp" alt="Hand sketch of the ARG26 and ARG27 inverter enclosure positions with the x and y CG shift calculation" width="1500" height="2000" loading="lazy" />
+            <figcaption><span class="mono">Figure 7</span> Hand calculation of the INV27 CG shift, x = +3.43 in.</figcaption>
+          </figure>
+          <figure class="a-fig a-fig--wide" id="fig-8">
+            <a href="../assets/img/cg-shift/08-acc-weight-budget.png" target="_blank" rel="noopener"><img src="../assets/img/cg-shift/08-acc-weight-budget.png" alt="Accumulator weight targets table from the ARG26 weight budget, with a current total of 46.266 kg" width="1900" height="490" loading="lazy" /></a>
+            <figcaption><span class="mono">Figure 8</span> ARG26 weight budget, accumulator weight targets.</figcaption>
+          </figure>
+          <figure class="a-fig a-fig--wide" id="fig-9">
+            <a href="../assets/img/cg-shift/09-powertrain-weight-budget.png" target="_blank" rel="noopener"><img src="../assets/img/cg-shift/09-powertrain-weight-budget.png" alt="Powertrain peripherals weight targets table from the ARG26 weight budget, with the inverters at 15.5 kg" width="1890" height="766" loading="lazy" /></a>
+            <figcaption><span class="mono">Figure 9</span> ARG26 weight budget, powertrain peripherals weight targets.</figcaption>
+          </figure>
+          <figure class="a-fig" id="fig-10">
+            <img src="../assets/img/cg-shift/10-whiteboard-1.webp" alt="Whiteboard sketches of the accumulator and inverter packaging in top and side view, with ARG26 and ARG27 pack and inverter weights" width="1500" height="2000" loading="lazy" />
+            <figcaption><span class="mono">Figure 10</span> Whiteboard sketches mapping out the initial work on the accumulator and inverter changes.</figcaption>
+          </figure>
+          <figure class="a-fig" id="fig-11">
+            <img src="../assets/img/cg-shift/11-whiteboard-2.webp" alt="Whiteboard sketches comparing the ARG26 and ARG27 accumulator layouts and splitting the accumulator CG into case and inside parts" width="2000" height="1500" loading="lazy" />
+            <figcaption><span class="mono">Figure 11</span> Whiteboard sketches comparing the ARG26 and ARG27 accumulator layouts.</figcaption>
+          </figure>
+        </section>
+
+      </div>
+    </article>
+
+    <nav class="p-nav">
+      <div class="wrap">
+        <a class="prev" href="cg-height-test.html"><span class="mono">&larr; Previous</span><span class="display">CG Height Test</span></a>
+        <a class="next" href="suspension-bible.html"><span class="mono">Next &rarr;</span><span class="display">Suspension Bible</span></a>
+      </div>
+    </nav>
+  </main>
+
+  <footer class="footer">
+    <div class="wrap mono">
+      <span>&copy; 2026 Davis Rattanavijai</span>
+      <a href="mailto:dr653@cornell.edu">dr653@cornell.edu</a>
+    </div>
+  </footer>
+  <script src="../assets/js/main.js?v=731ce4ac"></script>
+</body>
+</html>

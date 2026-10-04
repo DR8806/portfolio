@@ -28,9 +28,10 @@ def article(name):
 SECTIONS = [
     ("Cornell Racing", "cornell-racing", "Formula SAE · Electric", [
         ("Suspension Lead", [
-            ("Kinematics Work", "kinematics", "To be filled out.", None),
+            ("Suspension Kinematics Design", "kinematics", "Suspension kinematics design for the ARG26 car, done in OptimumK.", article("kinematics")),
             ("Rates and Parameters", "rates-and-parameters", "To be filled out.", None),
             ("CG Height Test", "cg-height-test", "Test procedure for measuring the CG height of ARG26 with two methods: a side tilt test and a front lift test.", article("cg-height-test")),
+            ("CG Shift Calculation", "cg-shift", "Calculating how far the longitudinal CG moves on ARG27 as the accumulator and inverter change, and what that means for a 50/50 weight distribution.", article("cg-shift")),
             ("Suspension Bible", "suspension-bible", "To be filled out.", None),
             ("Ackermann Selection Methodology", "ackermann-selection-methodology", "The methodology used on ARG27 to determine what Ackermann geometry to design the car to.", article("ackermann-selection-methodology")),
         ]),

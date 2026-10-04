@@ -1463,3 +1463,16 @@ html.in-preview .topbar {
   margin: 0;
   padding-top: 8px;
 }
+
+/* Wide figures (spreadsheet screenshots) use the full column */
+
+.a-fig--wide img,
+.a-fig--wide figcaption {
+  max-width: none;
+}
+
+/* Source tables: let the source column wrap */
+
+.a-table.sheet.a-sources td:last-child {
+  min-width: 260px;
+}

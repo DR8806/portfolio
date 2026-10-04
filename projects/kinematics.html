@@ -3,12 +3,12 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Kinematics Work — Davis Rattanavijai</title>
-  <meta name="description" content="To be filled out." />
+  <title>Suspension Kinematics Design — Davis Rattanavijai</title>
+  <meta name="description" content="Suspension kinematics design for the ARG26 car, done in OptimumK." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;500&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="../assets/css/style.css?v=04d8c385" />
+  <link rel="stylesheet" href="../assets/css/style.css?v=731ce4ac" />
 </head>
 <body>
   <!-- EDIT: site notice banner; delete this div to remove it -->
@@ -47,11 +47,45 @@
     <section class="p-hero">
       <div class="wrap">
         <div class="crumbs mono"><a href="../index.html#work">Index</a><span class="sep">/</span><span>Cornell Racing</span><span class="sep">/</span><span>Suspension Lead</span></div>
-        <h1 class="display p-title">Kinematics Work</h1>
+        <h1 class="display p-title">Suspension Kinematics Design</h1>
         <!-- EDIT: description -->
-        <p class="p-desc">To be filled out.</p>
+        <p class="p-desc">Suspension kinematics design for the ARG26 car, done in OptimumK.</p>
       </div>
     </section>
+
+    <article class="article">
+      <div class="wrap">
+
+        <figure class="a-fig a-fig--chart">
+          <img src="../assets/img/kinematics/01-optimumk.png" alt="Full car suspension model in OptimumK showing the front and rear suspension links, wheels and roll axis" width="400" height="250" />
+          <figcaption><span class="mono">Figure 1</span> OptimumK suspension software.</figcaption>
+        </figure>
+
+        <section class="a-section" id="arg26">
+          <h2><span class="a-num">1</span>ARG26 Suspension</h2>
+          <p>ARG26 uses a double wishbone suspension at all four corners. Each corner has an upper and lower A-arm made from 4130 steel tube, welded on the jig plate so every link comes out at its designed geometry. The A-arms hold a machined upright, and camber is set with shims at the upright.</p>
+          <p>A push link runs from the lower A-arm up to a rocker on the chassis. The rocker turns the wheel's vertical travel into motion of an Öhlins TTX25 MKII damper with a Hyperco coil spring. Each rocker also drives a blade style anti-roll bar through a drop link, front and rear. The front wheels are steered by the steering link, and a toe link sets toe at the rear.</p>
+          <div class="a-table-wrap">
+            <table class="a-table sheet">
+              <thead><tr><th>Item</th><th>ARG26</th></tr></thead>
+              <tbody>
+                <tr><td>Suspension type</td><td>Double wishbone, front and rear</td></tr>
+                <tr><td>Spring and damper actuation</td><td>Push link and rocker, front and rear</td></tr>
+                <tr><td>Dampers</td><td>Öhlins TTX25 MKII</td></tr>
+                <tr><td>Springs</td><td>Hyperco FSAE coil springs</td></tr>
+                <tr><td>Anti-roll bars</td><td>Blade style, front and rear</td></tr>
+                <tr><td>Rear toe control</td><td>Toe link</td></tr>
+                <tr><td>Link material</td><td>4130 steel tube</td></tr>
+                <tr><td>Wheelbase</td><td>61 in</td></tr>
+                <tr><td>Design ride height</td><td>1.5 in</td></tr>
+                <tr><td>Car weight without driver</td><td>440 lb</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+      </div>
+    </article>
 
     <nav class="p-nav">
       <div class="wrap">
@@ -67,6 +101,6 @@
       <a href="mailto:dr653@cornell.edu">dr653@cornell.edu</a>
     </div>
   </footer>
-  <script src="../assets/js/main.js?v=04d8c385"></script>
+  <script src="../assets/js/main.js?v=731ce4ac"></script>
 </body>
 </html>
