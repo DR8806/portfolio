@@ -548,7 +548,7 @@ html.in-preview .site-notice {
 .dir-link {
   position: relative;
   display: grid;
-  grid-template-columns: 64px minmax(0, 1fr) auto;
+  grid-template-columns: 64px minmax(0, 1fr) auto auto;
   align-items: center;
   gap: 16px;
   padding: 16px 0;
@@ -582,12 +582,52 @@ html.in-preview .site-notice {
   line-height: 1.15;
 }
 
-.dir-link .tag {
-  margin-left: 14px;
+/* Status flag: complete, live updating, to be filled out */
+.status {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
   font-size: 10px;
-  vertical-align: middle;
-  color: var(--accent);
+  white-space: nowrap;
+  color: var(--muted);
+  transition: color 0.2s;
 }
+
+.status::before {
+  content: "";
+  flex: none;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  box-sizing: border-box;
+}
+
+.status--complete { color: var(--fg); }
+.status--complete::before { background: var(--fg); }
+.status--live { color: var(--accent); }
+.status--live::before { background: var(--accent); animation: status-pulse 2s ease-in-out infinite; }
+.status--todo { color: var(--muted); }
+.status--todo::before { border: 1.5px solid var(--muted); }
+
+@keyframes status-pulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(217, 72, 28, 0.45); }
+  50% { box-shadow: 0 0 0 4px rgba(217, 72, 28, 0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .status--live::before { animation: none; }
+}
+
+.dir-link:hover .status,
+.dir-link:focus-visible .status { color: var(--dim); }
+.dir-link:hover .status--complete,
+.dir-link:focus-visible .status--complete { color: var(--bg); }
+.dir-link:hover .status--todo::before,
+.dir-link:focus-visible .status--todo::before { border-color: var(--dim); }
+.dir-link:hover .status--live,
+.dir-link:focus-visible .status--live { color: var(--accent); }
+.dir-link:hover .status--complete::before,
+.dir-link:focus-visible .status--complete::before { background: var(--bg); }
 
 .dir-link .arrow {
   font-family: var(--font-mono);
@@ -624,8 +664,13 @@ html.in-preview .site-notice {
 @media (max-width: 560px) {
   .dir-link {
     grid-template-columns: 44px minmax(0, 1fr) auto;
-    gap: 10px;
+    grid-template-areas: "idx title arrow" ". status .";
+    gap: 6px 10px;
   }
+  .dir-link .idx { grid-area: idx; }
+  .dir-link .title { grid-area: title; }
+  .dir-link .status { grid-area: status; }
+  .dir-link .arrow { grid-area: arrow; }
 }
 
 /* ---------- Hover preview ---------- */

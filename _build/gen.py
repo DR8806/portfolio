@@ -25,46 +25,50 @@ def article(name):
     return dict(article=open(path).read())
 
 
+# status: "complete", "live" (live updating) or "todo" (to be filled out)
 SECTIONS = [
     ("Cornell Racing", "cornell-racing", "Formula SAE · Electric", [
         ("Suspension Lead", [
-            ("Suspension Kinematics Design", "kinematics", "Suspension kinematics design for the ARG26 car, done in OptimumK.", article("kinematics")),
-            ("Rates and Parameters", "rates-and-parameters", "To be filled out.", None),
-            ("CG Height Test", "cg-height-test", "Test procedure for measuring the CG height of ARG26 with two methods: a side tilt test and a front lift test.", article("cg-height-test")),
-            ("CG Shift Calculation", "cg-shift", "A preliminary calculation of how far the longitudinal CG moves on ARG27 as the accumulator and inverter change, and what that means for a 50/50 weight distribution.", article("cg-shift")),
-            ("Suspension Bible", "suspension-bible", "To be filled out.", None),
-            ("Ackermann Selection Methodology", "ackermann-selection-methodology", "The methodology used on ARG27 to determine what Ackermann geometry to design the car to.", article("ackermann-selection-methodology")),
+            ("Suspension Kinematics Design", "kinematics", "Suspension kinematics design for the ARG26 car, done in OptimumK.", article("kinematics"), "live"),
+            ("Suspension Rates and Parameters Selection", "rates-and-parameters", "To be filled out.", None, "todo"),
+            ("Physical CG Height Test", "cg-height-test", "Test procedure for measuring the CG height of ARG26 with two methods: a side tilt test and a front lift test.", article("cg-height-test"), "complete"),
+            ("Longitudinal CG Shift Calculation", "cg-shift", "A preliminary calculation of how far the longitudinal CG moves on ARG27 as the accumulator and inverter change, and what that means for a 50/50 weight distribution.", article("cg-shift"), "complete"),
+            ("Tire Analysis", "tire-analysis", "To be filled out.", None, "todo"),
+            ("Ackermann Selection Methodology", "ackermann-selection-methodology", "The methodology used on ARG27 to determine what Ackermann geometry to design the car to.", article("ackermann-selection-methodology"), "live"),
+            ("Manufacturing Compilation", "manufacturing-compilation", "To be filled out.", None, "todo"),
         ]),
         ("Suspension Part Designer", [
-            ("Jig Plate", "jig-plate", "My spring 2026 technical report on the jig plate, the fixture that holds each suspension link in position while it is welded.", doc("ARG26_Jig_Plate_Technical_Report.pdf", 23)),
+            ("Jig Plate", "jig-plate", "My spring 2026 technical report on the jig plate, the fixture that holds each suspension link in position while it is welded.", doc("ARG26_Jig_Plate_Technical_Report.pdf", 23), "complete"),
         ]),
         ("Purchasing Coordinator", [
-            ("Managing Purchasing", "managing-purchasing", "To be filled out.", None),
-            ("RFQ Business Case Submission", "rfq-business-case", "The request for quote I wrote for our Formula SAE Business Case, asking a supplier to manufacture and assemble the ARG26 suspension system.", doc("ARG26_Suspension_RFQ.pdf", 214)),
+            ("Managing Purchasing", "managing-purchasing", "To be filled out.", None, "todo"),
+            ("RFQ Business Case Submission", "rfq-business-case", "The request for quote I wrote for our Formula SAE Business Case, asking a supplier to manufacture and assemble the ARG26 suspension system.", doc("ARG26_Suspension_RFQ.pdf", 214), "complete"),
         ]),
     ]),
     ("Entrepreneurship", "entrepreneurship", "Product Development", [
         (None, [
-            ("KIX Shoe Rack", "kix-shoe-rack", "A shoe rack that takes your shoes off and stores them in one step.", article("kix-shoe-rack")),
-            ("Door-Mounted Cable Machine Prototype", "cable-machine-prototype", "To be filled out.", None),
+            ("KIX Shoe Rack", "kix-shoe-rack", "A shoe rack that takes your shoes off and stores them in one step.", article("kix-shoe-rack"), "live"),
+            ("Door-Mounted Cable Machine Prototype", "cable-machine-prototype", "To be filled out.", None, "todo"),
         ]),
     ]),
     ("Machine Shop", "machine-shop", "Manufacturing Learning Studio · Staff", [
         ("Training Manuals", [
-            ("HAAS CNC Overview Manual", "haas-cnc-manual", "I wrote this manual for the Cornell Engineering machine shop so students can learn how to set up and run the HAAS CNC mills.", doc("HAAS_CNC_Overview_Manual.pdf", 10)),
-            ("C-Block CAM Manual", "c-block-cam-manual", "I wrote this manual for the Cornell Engineering machine shop so students can learn how to program a part in Fusion 360 and machine it on the HAAS.", doc("C-Block_CAM_Manual.pdf", 27)),
+            ("HAAS CNC Overview Manual", "haas-cnc-manual", "I wrote this manual for the Cornell Engineering machine shop so students can learn how to set up and run the HAAS CNC mills.", doc("HAAS_CNC_Overview_Manual.pdf", 10), "complete"),
+            ("C-Block CAM Manual", "c-block-cam-manual", "I wrote this manual for the Cornell Engineering machine shop so students can learn how to program a part in Fusion 360 and machine it on the HAAS.", doc("C-Block_CAM_Manual.pdf", 27), "complete"),
         ]),
     ]),
     ("Math Modeling Papers", "math-modeling", "Team Lead · Newton North HS", [
         (None, [
-            ("Pets Paper", "pets-paper", "Our team's paper for the 2024 International Mathematical Modeling Challenge (IMMC). We built a model to measure whether a household is ready to own a pet.", doc("IMMC2024_Pets_Paper.pdf", 31)),
-            ("Lake Mead Paper", "lake-mead-paper", "Our team's paper for the 2023–24 Modeling the Future Challenge (MTFC), on Lake Mead and the Colorado River water supply.", doc("MTFC2023_Colorado_River_Paper.pdf", 31)),
-            ("E-Bus Paper", "e-bus-paper", "Our team's paper for the 2023 High School Mathematical Contest in Modeling (HiMCM). We modeled the cost of switching a bus fleet to electric buses.", doc("HiMCM2023_E_Bus_Paper.pdf", 24)),
-            ("Melanoma Paper", "melanoma-paper", "Our team's paper for the 2022–23 Modeling the Future Challenge (MTFC). We looked at how demographic and geographic factors relate to melanoma rates.", doc("MTFC2022_Melanoma_Paper.pdf", 31)),
-            ("Plane Boarding Paper", "plane-boarding-paper", "Our team's paper for the 2022 International Mathematical Modeling Challenge (IMMC). We modeled plane boarding and exiting methods to find the fastest one.", doc("IMMC2022_Plane_Boarding_Paper.pdf", 45)),
+            ("Household Readiness of Pet Ownership Model (Paper)", "pets-paper", "Our team's paper for the 2024 International Mathematical Modeling Challenge (IMMC). We built a model to measure whether a household is ready to own a pet.", doc("IMMC2024_Pets_Paper.pdf", 31), "complete"),
+            ("Forecasting Hydroelectric Power Decline at Hoover Dam (Paper)", "lake-mead-paper", "Our team's paper for the 2023–24 Modeling the Future Challenge (MTFC), on Lake Mead and the Colorado River water supply.", doc("MTFC2023_Colorado_River_Paper.pdf", 31), "complete"),
+            ("Model of the Electrification of Buses in Metropolitan Cities (Paper)", "e-bus-paper", "Our team's paper for the 2023 High School Mathematical Contest in Modeling (HiMCM). We modeled the cost of switching a bus fleet to electric buses.", doc("HiMCM2023_E_Bus_Paper.pdf", 24), "complete"),
+            ("Statistical Analysis of Melanoma Cancer in America (Paper)", "melanoma-paper", "Our team's paper for the 2022–23 Modeling the Future Challenge (MTFC). We looked at how demographic and geographic factors relate to melanoma rates.", doc("MTFC2022_Melanoma_Paper.pdf", 31), "complete"),
+            ("Modeling the Optimal Plane Boarding Method (Paper)", "plane-boarding-paper", "Our team's paper for the 2022 International Mathematical Modeling Challenge (IMMC). We modeled plane boarding and exiting methods to find the fastest one.", doc("IMMC2022_Plane_Boarding_Paper.pdf", 45), "complete"),
         ]),
     ]),
 ]
+
+STATUS = {"complete": "Complete", "live": "Live updating", "todo": "To be filled out"}
 
 HEAD = """<!DOCTYPE html>
 <html lang="en">
@@ -80,7 +84,7 @@ HEAD = """<!DOCTYPE html>
 </head>
 <body{body_class}>
   <!-- EDIT: site notice banner; delete this div to remove it -->
-  <div class="site-notice"><div class="wrap"><span class="mono">Notice</span>This site is still being worked on and should be mostly filled out by 10/5.</div></div>
+  <div class="site-notice"><div class="wrap"><span class="mono">Notice</span>This site is continually being updated throughout the year, but check out what I&rsquo;ve written about so far!</div></div>
   <header class="topbar">
     <div class="wrap">
       <a class="brand" href="{base}index.html">Davis Rattanavijai</a>
@@ -147,7 +151,7 @@ pages = []
 for si, (sec, sec_slug, sec_tag, groups) in enumerate(SECTIONS, 1):
     n = 0
     for role, items in groups:
-        for title, slug, blurb, doc in items:
+        for title, slug, blurb, doc, status in items:
             n += 1
             pages.append(dict(sec=sec, role=role, title=title, slug=slug, blurb=blurb, doc=doc,
                               idx=f"{si:02d}.{n:02d}"))
@@ -209,11 +213,11 @@ for si, (sec, sec_slug, sec_tag, groups) in enumerate(SECTIONS, 1):
             out.append(f"""
             <div class="dir-role"><h3 class="caps">{e(role)}</h3><span class="mono">{len(items):02d} {'item' if len(items) == 1 else 'items'}</span></div>""")
         out.append('\n            <ul class="dir-list">')
-        for title, slug, blurb, doc in items:
+        for title, slug, blurb, doc, status in items:
             p = by_slug[slug]
-            tag = f'<span class="tag mono">PDF &middot; {doc["pages"]} pp</span>' if doc and "pdf" in doc else ""
+            flag = f'<span class="status status--{status} mono">{STATUS[status]}</span>'
             out.append(f"""
-              <li><a class="dir-link" href="projects/{slug}.html" data-preview="{p['idx']} / {e(title)}"><span class="idx">{p['idx']}</span><span class="title">{e(title)}{tag}</span><span class="arrow">&rarr;</span></a></li>""")
+              <li><a class="dir-link" href="projects/{slug}.html" data-preview="{p['idx']} / {e(title)}"><span class="idx">{p['idx']}</span><span class="title">{e(title)}</span>{flag}<span class="arrow">&rarr;</span></a></li>""")
         out.append("\n            </ul>\n          </div>")
     out.append("""
         </div>
