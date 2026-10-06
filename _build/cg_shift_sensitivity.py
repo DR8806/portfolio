@@ -22,7 +22,7 @@ INV_LEN = 13.5           # ARG27 inverter enclosure length along x
 NOM = dict(
     m_acc=95.0,
     x_acc=X_ACC26 - (7.25 - 50 / 25.4) / 2,      # grows rearward to 50 mm from the rear face
-    m_inv=7.5 * 2.20462,
+    m_inv=15.0,
     x_inv=REAR_FACE + INV_LEN * (1 - 0.60),      # 60% rearward weight bias
 )
 
@@ -42,9 +42,9 @@ X27 = X26 + BASE
 W, H = 380, 236
 L, R, T, B = 46, 48, 18, 44
 WHEELBASE = 61.0
-FRONT_TICKS = [0.5, 1.0, 1.5, 2.0]   # right axis: change in front weight %, as in section 3.4
-Y_MIN, Y_MAX = 0.3, 1.3            # shared vertical scale so the four charts compare directly
-Y_TICKS = [0.4, 0.6, 0.8, 1.0, 1.2]
+FRONT_TICKS = [1.0, 1.5, 2.0]   # right axis: change in front weight %, as in section 3.4
+Y_MIN, Y_MAX = 0.4, 1.4            # shared vertical scale so the four charts compare directly
+Y_TICKS = [0.4, 0.6, 0.8, 1.0, 1.2, 1.4]
 
 
 def num(v, d=2, sign=False):
@@ -123,7 +123,7 @@ CHARTS = [
      f"ACC27 CG x, nominal {num(NOM['x_acc'])} in."),
     ("m_inv", (-5, 5), "lb", "Error in INV27 mass (lb)",
      "CG shift versus error in INV27 mass from minus 5 to plus 5 lb", [(0, "nominal")],
-     "INV27 mass, nominal 16.53 lb."),
+     f"INV27 mass, nominal {NOM['m_inv']:.0f} lb."),
     ("x_inv", (-2, 2), "in", "Error in INV27 CG x (in), + is forward",
      "CG shift versus error in INV27 CG position from minus 2 to plus 2 in, with rearward weight biases from 50 to 70 percent marked",
      bias_marks,
