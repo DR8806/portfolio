@@ -1562,3 +1562,9 @@ html.in-preview .topbar {
 .sv-dot-alt { fill: var(--bg); stroke: var(--accent); }
 .sv-hit { fill: transparent; }
 .sv-hit:hover { fill: var(--line); }
+
+.a-link {
+  text-decoration: underline;
+  text-decoration-color: var(--accent);
+  text-underline-offset: 3px;
+}

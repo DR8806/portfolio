@@ -3,14 +3,14 @@
       <div class="wrap">
 
         <figure class="a-fig a-fig--chart">
-          <img src="../assets/img/kinematics/01-optimumk.png" alt="Full car suspension model in OptimumK showing the front and rear suspension links, wheels and roll axis" width="400" height="250" />
-          <figcaption><span class="mono">Figure 1</span> OptimumK suspension software.</figcaption>
+          <img src="../assets/img/kinematics/01-optimumk.png" alt="ARG26 front and rear suspension modeled in OptimumK, showing the A-arms, push links, rockers, dampers and wheels" width="643" height="388" />
+          <figcaption><span class="mono">Figure 1</span> ARG26 suspension in OptimumK.</figcaption>
         </figure>
 
         <section class="a-section" id="arg26">
           <h2><span class="a-num">1</span>ARG26 Suspension</h2>
-          <p>ARG26 uses a double wishbone suspension at all four corners. Each corner has an upper and lower A-arm made from 4130 steel tube, welded on the jig plate so every link comes out at its designed geometry. The A-arms hold a machined upright, and camber is set with shims at the upright.</p>
-          <p>A push link runs from the lower A-arm up to a rocker on the chassis. The rocker turns the wheel's vertical travel into motion of an Öhlins TTX25 MKII damper with a Hyperco coil spring. Each rocker also drives a blade style anti-roll bar through a drop link, front and rear. The front wheels are steered by the steering link, and a toe link sets toe at the rear.</p>
+          <p>ARG26 uses a double wishbone suspension at all four corners, with push link and rocker actuated dampers and blade style anti-roll bars front and rear.</p>
+          <p class="a-note"><span class="mono">Note</span><span>ARG27 does not introduce major kinematics changes. The ARG27 suspension work is focused on rates.</span></p>
           <div class="a-table-wrap">
             <table class="a-table sheet">
               <thead><tr><th>Item</th><th>ARG26</th></tr></thead>
@@ -30,9 +30,69 @@
           </div>
         </section>
 
+        <section class="a-section" id="methodology">
+          <h2><span class="a-num">2</span>Kinematics Methodology</h2>
+          <p>Kinematics are chosen by looking at how the suspension behaves at static ride height and how it changes as the car moves through sweeps in OptimumK. The sweeps checked are:</p>
+
+          <h3><span class="a-num">2.1</span>Heave</h3>
+          <ul>
+            <li>Camber change vs heave</li>
+            <li>Steering angle vs heave</li>
+            <li>Motion ratio vs heave</li>
+          </ul>
+
+          <h3><span class="a-num">2.2</span>Roll</h3>
+          <ul>
+            <li>Camber change vs roll</li>
+            <li>Lateral roll center position vs roll</li>
+            <li>Vertical roll center position vs roll</li>
+          </ul>
+
+          <h3><span class="a-num">2.3</span>Steering</h3>
+          <ul>
+            <li>Left and right steer angles vs steering wheel angle</li>
+          </ul>
+        </section>
+
+        <section class="a-section" id="expected-motion">
+          <h2><span class="a-num">3</span>Expected Motion</h2>
+          <p>Each sweep needs a range to run over. The ranges come from the motion the car is expected to see on track.</p>
+
+          <h3><span class="a-num">3.1</span>Heave</h3>
+          <p>The heave sweep runs from full compression to full droop. For ARG26 that is 2 in of compression to <span class="tbf">TBD</span> in of rebound.</p>
+
+          <h3><span class="a-num">3.2</span>Load Cases</h3>
+          <p>The load cases were determined by our unsprung lead, Parker. She compiled racing data from the IMU on the PDU to get the acceleration cases. The IMU does not sit at the CG, so the data is post processed to the CG first with the <a class="a-link" href="https://alicejones1.github.io/FSAE-IMU-CG-Telemetry-Corrector/" target="_blank" rel="noopener">IMU CG telemetry corrector</a>, which uses:</p>
+          <p class="eq">a<sub>CG</sub> = a<sub>IMU</sub> &#8722; &alpha; &times; r &#8722; &omega; &times; (&omega; &times; r)</p>
+          <p>where &alpha; is the angular acceleration, &omega; is the angular velocity, and r is the position of the IMU relative to the CG.</p>
+          <figure class="a-fig a-fig--chart">
+            <img src="../assets/img/kinematics/02-load-cases.png" alt="Spreadsheet of ARG26 and ARG27 load cases in g, with a year over year comparison" width="708" height="1042" loading="lazy" />
+            <figcaption><span class="mono">Figure 2</span> ARG26 and ARG27 load cases.</figcaption>
+          </figure>
+          <p>The combined cases apply the listed acceleration both laterally and longitudinally. Bump is vertical only. ARG27 is slightly higher in cornering and accel, and similar in braking.</p>
+
+          <h3><span class="a-num">3.3</span>Pitch and Roll Gradients</h3>
+          <p>With the load cases, the pitch and roll of the car can be estimated by multiplying each acceleration by its gradient. The pitch gradients come from the Pitch sheet of the SU26 Parameters and Analysis spreadsheet: &#8722;0.523 deg/g in dive and &#8722;0.556 deg/g in squat. The roll gradient is designed to fall between 0.55 and 0.7 deg/g. The maximum, 0.7 deg/g, is used here to get the largest range of motion.</p>
+
+          <h3><span class="a-num">3.4</span>Summary</h3>
+          <div class="a-table-wrap">
+            <table class="a-table sheet">
+              <thead><tr><th>Motion</th><th>Load case</th><th>ARG27</th></tr></thead>
+              <tbody>
+                <tr><td>Heave</td><td>Full travel</td><td>2 in compression to <span class="tbf">TBD</span> in rebound</td></tr>
+                <tr><td>Roll</td><td>Cornering</td><td>1.68&deg;</td></tr>
+                <tr><td>Dive</td><td>Braking</td><td>0.99&deg;</td></tr>
+                <tr><td>Squat</td><td>Accel</td><td>0.89&deg;</td></tr>
+                <tr><td>Roll<br />Dive</td><td>Combined braking + cornering</td><td>1.05&deg;<br />0.78&deg;</td></tr>
+                <tr><td>Roll<br />Squat</td><td>Combined accel + cornering</td><td>0.95&deg;<br />0.75&deg;</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
         <section class="a-section" id="bump-steer">
-          <h2><span class="a-num">2</span>Bump Steer</h2>
-          <h3><span class="a-num">2.1</span>OptimumK Sign Convention</h3>
+          <h2><span class="a-num">4</span>Bump Steer</h2>
+          <h3><span class="a-num">4.1</span>OptimumK Sign Convention</h3>
           <ul>
             <li>+Heave = rebound</li>
             <li>&minus;Heave = compression</li>
