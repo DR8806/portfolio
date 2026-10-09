@@ -153,6 +153,58 @@
             <li>Positive toe = toe out</li>
             <li>Negative toe = toe in</li>
           </ul>
+
+          <h3><span class="a-num">4.2</span>ARG26 Bump Steer</h3>
+          <p>On ARG26, the front toe changed along a curve of about 0.7&deg; across the wheel travel, and the rear toe changed linearly at &#8722;0.38 deg/in designed and &#8722;0.40 deg/in measured.</p>
+          <figure class="a-fig a-fig--wide">
+            <img src="../assets/img/kinematics/03-arg26-bump-steer.webp" alt="ARG26 front and rear toe angle vs wheel displacement, designed in OptimumK and measured on each corner" width="2000" height="1107" loading="lazy" />
+            <figcaption><span class="mono">Figure 3</span> ARG26 toe angle gain in heave, designed and measured.</figcaption>
+          </figure>
+
+          <h3><span class="a-num">4.3</span>Zero Bump Steer on ARG27</h3>
+          <p>For ARG27 we changed to zero bump steer, and therefore zero ride steer, at the front and the rear. Toe change in heave adds understeer or oversteer that the driver does not ask for. We do not want that from the kinematics, because we can get the balance we want from elsewhere on the car.</p>
+          <figure class="a-fig a-fig--chart">
+            <img src="../assets/img/kinematics/04-milliken-zero-ride-steer.png" alt="Rear view of a left front wheel showing the outer tie rod path and the center of its arc, next to a plot of zero toe change from 4 in jounce to 4 in rebound" width="1070" height="1006" loading="lazy" />
+            <figcaption><span class="mono">Figure 4</span> Zero ride steer, from Milliken and Milliken, Race Car Vehicle Dynamics, p. 723.</figcaption>
+          </figure>
+
+          <h3><span class="a-num">4.4</span>Moving the Toe and Steering Links</h3>
+          <p>As the wheel moves up and down, the A-arms move the outer point of the toe link (rear) or steering link (front) along a path. The link itself swings the outer point along an arc around its inner point. If the two paths do not match, the link pushes or pulls on the upright as the wheel moves, and the wheel steers.</p>
+          <p>For zero bump steer, the link has to follow the same arc as the path the suspension sets. That means the inner point sits at the center of that arc and the link is the right length, as in Figure 4. On ARG26 the links did not follow that arc, so for ARG27 we moved the inner and outer pickup points of the toe and steering links and reran the heave sweep in OptimumK until the toe change was close to zero across the travel.</p>
+        </section>
+
+        <section class="a-section" id="ackermann">
+          <h2><span class="a-num">5</span>Ackermann</h2>
+          <p>ARG26 used 12% Ackermann. The methodology for choosing the ARG27 Ackermann is on the <a class="a-link" href="ackermann-selection-methodology.html">Ackermann Selection Methodology</a> page.</p>
+        </section>
+
+        <section class="a-section" id="rocker">
+          <h2><span class="a-num">6</span>Rocker Pickup Points</h2>
+          <p>The rocker pickup points were moved on ARG27 for better packaging.</p>
+        </section>
+
+        <section class="a-section" id="anti-roll-bar">
+          <h2><span class="a-num">7</span>Anti-Roll Bar</h2>
+          <p>On ARG27 the front anti-roll bar moves up 0.5 in so the car meets the foot well template rule, and the rear anti-roll bar moves up by the same amount.</p>
+          <div class="a-table-wrap">
+            <table class="a-table sheet">
+              <thead><tr><th>Axle</th><th>OptimumK point</th><th>ARG26 z (in)</th><th>ARG27 z (in)</th></tr></thead>
+              <tbody>
+                <tr><td>Front</td><td>Drop link left: Anti-Roll Bar</td><td>17.525</td><td>18.025</td></tr>
+                <tr><td>Front</td><td>Chassis left: Pivot</td><td>17.525</td><td>18.025</td></tr>
+                <tr><td>Rear</td><td>Drop link left: Anti-Roll Bar</td><td>14.629</td><td>15.129</td></tr>
+                <tr><td>Rear</td><td>Chassis left: Pivot</td><td>14.629</td><td>15.129</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <figure class="a-fig a-fig--wide">
+            <img src="../assets/img/kinematics/05-arb-cad.webp" alt="Chassis CAD with the front anti-roll bar measured 1.403 in below a plane at the top of the chassis opening" width="1437" height="810" loading="lazy" />
+            <figcaption><span class="mono">Figure 5</span> Current anti-roll bar position in CAD.</figcaption>
+          </figure>
+          <figure class="a-fig a-fig--chart">
+            <img src="../assets/img/kinematics/06-arb-foot-well.webp" alt="View into the foot well of the car with the anti-roll bar running across the top of the opening" width="1500" height="2000" loading="lazy" />
+            <figcaption><span class="mono">Figure 6</span> The anti-roll bar across the top of the foot well.</figcaption>
+          </figure>
         </section>
 
       </div>

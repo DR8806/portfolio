@@ -33,7 +33,7 @@ SECTIONS = [
             ("Suspension Rates and Parameters Selection", "rates-and-parameters", "To be filled out.", None, "todo"),
             ("Physical CG Height Test", "cg-height-test", "Test procedure for measuring the CG height of ARG26 with two methods: a side tilt test and a front lift test.", article("cg-height-test"), "complete"),
             ("Longitudinal CG Shift Calculation", "cg-shift", "A preliminary calculation of how far the longitudinal CG moves on ARG27 as the accumulator and inverter change, and what that means for a 50/50 weight distribution.", article("cg-shift"), "complete"),
-            ("Tire Analysis", "tire-analysis", "To be filled out.", None, "todo"),
+            ("Tire Analysis", "tire-analysis", "Lateral force plots from TTC tire data, comparing Hoosier tire candidates.", article("tire-analysis"), "live"),
             ("Ackermann Selection Methodology", "ackermann-selection-methodology", "The methodology used on ARG27 to determine what Ackermann geometry to design the car to.", article("ackermann-selection-methodology"), "live"),
             ("Manufacturing Compilation", "manufacturing-compilation", "To be filled out.", None, "todo"),
         ]),

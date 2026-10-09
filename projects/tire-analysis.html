@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Tire Analysis — Davis Rattanavijai</title>
-  <meta name="description" content="To be filled out." />
+  <meta name="description" content="Lateral force plots from TTC tire data, comparing Hoosier tire candidates." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;500&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet" />
@@ -49,9 +49,41 @@
         <div class="crumbs mono"><a href="../index.html#work">Index</a><span class="sep">/</span><span>Cornell Racing</span><span class="sep">/</span><span>Suspension Lead</span></div>
         <h1 class="display p-title">Tire Analysis</h1>
         <!-- EDIT: description -->
-        <p class="p-desc">To be filled out.</p>
+        <p class="p-desc">Lateral force plots from TTC tire data, comparing Hoosier tire candidates.</p>
       </div>
     </section>
+    <article class="article">
+      <div class="wrap">
+
+        <p class="a-byline mono">Davis Rattanavijai &middot; Last edited October 8, 2026</p>
+
+        <section class="a-section" id="data">
+          <h2><span class="a-num">1</span>Data</h2>
+          <p>All plots on this page use run B2356run8.mat from the TTC (Tire Test Consortium) Round 9 data, in the MATLAB format with USCS (US customary) units.</p>
+        </section>
+
+        <section class="a-section" id="plots">
+          <h2><span class="a-num">2</span>Plots</h2>
+          <figure class="a-fig a-fig--chart">
+            <img src="../assets/img/tire-analysis/01-load-sensitivity.png" alt="Lateral force vs normal load for five Hoosier tire candidates, from 0 to 300 lbf of normal load" width="1204" height="986" loading="lazy" />
+            <figcaption><span class="mono">Figure 1</span> Load sensitivity: lateral force vs normal load for each tire candidate.</figcaption>
+          </figure>
+          <figure class="a-fig a-fig--chart">
+            <img src="../assets/img/tire-analysis/02-fy-vs-sa-candidates.png" alt="Lateral force vs slip angle from -12 to 12 deg for five Hoosier tire candidates" width="1092" height="962" loading="lazy" />
+            <figcaption><span class="mono">Figure 2</span> Lateral force vs slip angle for each tire candidate.</figcaption>
+          </figure>
+          <figure class="a-fig a-fig--chart">
+            <img src="../assets/img/tire-analysis/03-fy-vs-sa-normal-load.png" alt="Lateral force vs slip angle from -20 to 20 deg at 50, 100, 150 and 200 lbf normal load and 0 deg inclination angle" width="1142" height="1026" loading="lazy" />
+            <figcaption><span class="mono">Figure 3</span> Lateral force vs slip angle at 50, 100, 150 and 200 lbf normal load, 0&deg; inclination angle.</figcaption>
+          </figure>
+          <figure class="a-fig a-fig--chart">
+            <img src="../assets/img/tire-analysis/04-fy-vs-ia.png" alt="Lateral force vs inclination angle from -5 to 5 deg at 8, 10 and 12 deg slip angle, peaking near 0 deg" width="1336" height="952" loading="lazy" />
+            <figcaption><span class="mono">Figure 4</span> Lateral force vs inclination angle at 8&deg;, 10&deg; and 12&deg; slip angle.</figcaption>
+          </figure>
+        </section>
+
+      </div>
+    </article>
 
     <nav class="p-nav">
       <div class="wrap">
