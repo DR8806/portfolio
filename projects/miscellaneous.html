@@ -1,0 +1,660 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Miscellaneous — Davis Rattanavijai</title>
+  <meta name="description" content="Other calculations done for the suspension." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;500&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../assets/css/style.css?v=0e77c8ff" />
+</head>
+<body>
+  <!-- EDIT: site notice banner; delete this div to remove it -->
+  <div class="site-notice"><div class="wrap"><span class="mono">Notice</span>This site is continually being updated throughout the year, but check out what I&rsquo;ve written about so far!</div></div>
+  <header class="topbar">
+    <div class="wrap">
+      <a class="brand" href="../index.html">Davis Rattanavijai <span>Portfolio</span></a>
+      <nav class="nav">
+        <a href="../index.html#work">Work</a>
+        <div class="nav-item contact">
+          <button type="button" class="contact-toggle" aria-expanded="false" aria-controls="contact-panel">Contact</button>
+          <div class="contact-panel" id="contact-panel">
+            <div class="contact-card">
+              <span class="mono">Email</span>
+              <button type="button" class="copy-email" data-copy="dr653@cornell.edu">
+                <span class="email">dr653@cornell.edu</span>
+                <span class="copy-label mono" data-default="Click to copy">Click to copy</span>
+              </button>
+            </div>
+          </div>
+        </div>
+        <button type="button" data-resume-toggle aria-expanded="false" aria-controls="resume-panel">Resume<span class="caret" aria-hidden="true">&#9662;</span></button>
+      </nav>
+      <div class="resume-panel" id="resume-panel">
+        <div class="resume-head mono"><span>Resume</span><span>Oct 2026</span></div>
+        <div class="resume-doc" data-src="../DavisRattanavijai_Resume.pdf#toolbar=0&amp;navpanes=0&amp;view=FitH"></div>
+        <div class="resume-actions">
+          <a class="primary" href="../DavisRattanavijai_Resume.pdf" download>Download PDF</a>
+          <a href="../resume.html">Open &rarr;</a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="p-hero">
+      <div class="wrap">
+        <div class="crumbs mono"><a href="../index.html#work">Index</a><span class="sep">/</span><span>Cornell Racing</span><span class="sep">/</span><span>Suspension Lead</span></div>
+        <h1 class="display p-title">Miscellaneous</h1>
+        <!-- EDIT: description -->
+        <p class="p-desc">Other calculations done for the suspension.</p>
+      </div>
+    </section>
+
+    <article class="article">
+      <div class="wrap a-doc">
+        <nav class="toc" aria-label="Contents">
+          <button type="button" class="toc-toggle mono" aria-expanded="false">Contents<span class="caret" aria-hidden="true">&#9662;</span></button>
+          <p class="toc-head mono">Contents</p>
+          <ol class="toc-list">
+          <li class="toc-part"><a href="#cg-shift">Longitudinal CG Shift Calculation</a>
+            <ol>
+              <li><a href="#longitudinal-cg-shift-calculation-context"><span class="toc-num mono">1</span><span>Context</span></a></li>
+              <li><a href="#method"><span class="toc-num mono">2</span><span>Methodology</span></a>
+                <ol class="toc-sub">
+                  <li><a href="#assumptions"><span class="toc-num mono">2.1</span><span>Assumptions</span></a></li>
+                  <li><a href="#longitudinal-cg-shift-calculation-remove-the-arg26-accumulator-and-inverter"><span class="toc-num mono">2.2</span><span>Remove the ARG26 Accumulator and Inverter</span></a></li>
+                  <li><a href="#longitudinal-cg-shift-calculation-add-the-arg27-accumulator-and-inverter"><span class="toc-num mono">2.3</span><span>Add the ARG27 Accumulator and Inverter</span></a></li>
+                  <li><a href="#longitudinal-cg-shift-calculation-longitudinal-cg-shift"><span class="toc-num mono">2.4</span><span>Longitudinal CG Shift</span></a></li>
+                  <li><a href="#longitudinal-cg-shift-calculation-effect-on-weight-distribution"><span class="toc-num mono">2.5</span><span>Effect on Weight Distribution</span></a></li>
+                </ol>
+              </li>
+              <li><a href="#results"><span class="toc-num mono">3</span><span>Results</span></a>
+                <ol class="toc-sub">
+                  <li><a href="#longitudinal-cg-shift-calculation-inputs"><span class="toc-num mono">3.1</span><span>Inputs</span></a></li>
+                  <li><a href="#longitudinal-cg-shift-calculation-change-in-each-part"><span class="toc-num mono">3.2</span><span>Change in Each Part</span></a></li>
+                  <li><a href="#longitudinal-cg-shift-calculation-calculation"><span class="toc-num mono">3.3</span><span>Calculation</span></a></li>
+                  <li><a href="#longitudinal-cg-shift-calculation-effect-on-weight-distribution-2"><span class="toc-num mono">3.4</span><span>Effect on Weight Distribution</span></a></li>
+                </ol>
+              </li>
+              <li><a href="#sensitivity"><span class="toc-num mono">4</span><span>Error Sensitivity</span></a></li>
+              <li><a href="#remedy"><span class="toc-num mono">5</span><span>Remedy: Moving the Axles</span></a></li>
+              <li><a href="#appendix"><span class="toc-num mono">A</span><span>Appendix: Input Sources</span></a></li>
+            </ol>
+          </li>
+          </ol>
+        </nav>
+        <div class="a-doc-body">
+
+        <section class="a-part" id="cg-shift">
+          <header class="a-part-head">
+            <h2 class="display a-part-title">Longitudinal CG Shift Calculation</h2>
+            <p class="a-part-desc">A preliminary calculation of how far the longitudinal CG moves on ARG27 as the accumulator and inverter change, and what that means for a 50/50 weight distribution.</p>
+          </header>
+
+
+        <p class="a-byline mono">Davis Rattanavijai &middot; Last edited October 5, 2026</p>
+
+        <section class="a-section" id="context">
+          <p class="a-note"><span class="mono">Preliminary</span><span>The ARG27 accumulator and inverter CAD were not built or placeable in the car at the time of this calculation, so their ARG27 positions are estimates. See the <a href="#assumptions">assumptions</a>.</span></p>
+          <h2 id="longitudinal-cg-shift-calculation-context"><span class="a-num">1</span>Context</h2>
+          <p>For ARG27, the accumulator and inverter are being moved and both are getting lighter. We design the car to a 50/50 weight distribution, so if the longitudinal (front to rear) CG moves, we may have to shift the wheelbase to bring it back. This page calculates a preliminary estimate of that longitudinal CG shift.</p>
+          <figure class="a-fig">
+            <img src="../assets/img/cg-shift/01-arg26.webp" alt="Side view of the ARG26 chassis with the accumulator packaged low at the rear" width="1906" height="920" loading="lazy" />
+            <figcaption><span class="mono">Figure 1</span> ARG26 packaging, side view.</figcaption>
+          </figure>
+          <figure class="a-fig">
+            <img src="../assets/img/cg-shift/02-arg27.webp" alt="Side view of the preliminary ARG27 chassis with an estimated accumulator block at the rear" width="1668" height="752" loading="lazy" />
+            <figcaption><span class="mono">Figure 2</span> Preliminary ARG27 packaging, side view, with the accumulator shown as an estimate.</figcaption>
+          </figure>
+        </section>
+
+        <section class="a-section" id="method">
+          <h2><span class="a-num">2</span>Methodology</h2>
+          <p>Positions are x in vehicle coordinates, in inches, with +x pointing forward. All masses are sprung masses, so the ARG26 total (m<sub>26</sub>) is the total sprung mass of the car with the driver and x<sub>26</sub> is its sprung CG.</p>
+
+          <h3 id="assumptions"><span class="a-num">2.1</span>Assumptions</h3>
+          <ul>
+            <li>This calculation is preliminary. The ARG27 accumulator and inverter CAD were not built or placeable in the car at the time, so the ARG27 positions come from hand estimates instead of CAD.</li>
+            <li>The accumulator CG shift can be modeled with a rectangular analysis. The accumulator is treated as a rectangle with its CG in the middle. Its front face stays in the same place and the case grows rearward to within 50 mm of the monocoque rear inner face, so its CG moves back by half the added length.</li>
+            <li>The ARG27 inverter enclosure is a 13.5 &times; 10 &times; 5 in box sitting flush against the monocoque rear inner face. It has a 60% rearward weight bias, meaning 60% of its weight is in the rear part, so its CG sits 40% of its 13.5 in length from the rear face.</li>
+            <li>The ARG27 accumulator and inverter masses are estimates.</li>
+            <li>Everything other than the accumulator and inverter is lumped together as "other" and is the same on both cars.</li>
+          </ul>
+
+          <h3 id="longitudinal-cg-shift-calculation-remove-the-arg26-accumulator-and-inverter"><span class="a-num">2.2</span>Remove the ARG26 Accumulator and Inverter</h3>
+          <p class="eq">m<sub>other</sub> = m<sub>26</sub> &#8722; m<sub>ACC26</sub> &#8722; m<sub>INV26</sub></p>
+          <p class="eq">x<sub>other</sub> = (m<sub>26</sub> x<sub>26</sub> &#8722; m<sub>ACC26</sub> x<sub>ACC26</sub> &#8722; m<sub>INV26</sub> x<sub>INV26</sub>) / m<sub>other</sub></p>
+
+          <h3 id="longitudinal-cg-shift-calculation-add-the-arg27-accumulator-and-inverter"><span class="a-num">2.3</span>Add the ARG27 Accumulator and Inverter</h3>
+          <p class="eq">m<sub>27</sub> = m<sub>other</sub> + m<sub>ACC27</sub> + m<sub>INV27</sub></p>
+          <p class="eq">x<sub>27</sub> = (m<sub>other</sub> x<sub>other</sub> + m<sub>ACC27</sub> x<sub>ACC27</sub> + m<sub>INV27</sub> x<sub>INV27</sub>) / m<sub>27</sub></p>
+
+          <h3 id="longitudinal-cg-shift-calculation-longitudinal-cg-shift"><span class="a-num">2.4</span>Longitudinal CG Shift</h3>
+          <p class="eq">&Delta;x<sub>CG</sub> = x<sub>27</sub> &#8722; x<sub>26</sub></p>
+          <p>A positive shift means the CG moved forward.</p>
+
+          <h3 id="longitudinal-cg-shift-calculation-effect-on-weight-distribution"><span class="a-num">2.5</span>Effect on Weight Distribution</h3>
+          <p>With wheelbase L, the shift moves this much of the weight onto the front axle:</p>
+          <p class="eq">&Delta;(front %) = 100 &times; &Delta;x<sub>CG</sub> / L</p>
+        </section>
+
+        <section class="a-section" id="results">
+          <h2><span class="a-num">3</span>Results</h2>
+
+          <h3 id="longitudinal-cg-shift-calculation-inputs"><span class="a-num">3.1</span>Inputs</h3>
+          <div class="a-table-wrap">
+            <table class="a-table sheet">
+              <thead><tr><th>Part</th><th>Mass (lb)</th><th>x (in)</th></tr></thead>
+              <tbody>
+                <tr><td>ARG26 sprung mass with driver</td><td>470</td><td>&#8722;50.79</td></tr>
+                <tr><td>ACC26 (accumulator)</td><td>102</td><td>&#8722;64.00</td></tr>
+                <tr><td>INV26 (inverter)</td><td>34.17</td><td>&#8722;78.20</td></tr>
+                <tr><td>ACC27 (accumulator)</td><td>95</td><td>&#8722;66.64</td></tr>
+                <tr><td>INV27 (inverter)</td><td>15</td><td>&#8722;76.28</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p>The ARG27 accumulator CG moves 2.64 in toward the rear, from x = &#8722;64.00 in to x = &#8722;66.64 in, because the case grows rearward into the space behind it. The ARG27 inverter sits flush against the monocoque rear inner face with its CG at x = &#8722;76.28 in, 1.92 in forward of the ARG26 inverter. See the <a href="#appendix">appendix</a> for where each input comes from.</p>
+
+          <h3 id="longitudinal-cg-shift-calculation-change-in-each-part"><span class="a-num">3.2</span>Change in Each Part</h3>
+          <div class="a-table-wrap">
+            <table class="a-table sheet">
+              <thead><tr><th>Part</th><th>Mass removed (lb)</th><th>x shift (in), + is forward</th></tr></thead>
+              <tbody>
+                <tr><td>Accumulator</td><td>7.00</td><td>&#8722;2.64</td></tr>
+                <tr><td>Inverter</td><td>19.17</td><td>+1.92</td></tr>
+                <tr class="a-row-total"><td>Total</td><td>26.17</td><td></td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <h3 id="longitudinal-cg-shift-calculation-calculation"><span class="a-num">3.3</span>Calculation</h3>
+          <p>Step 1, everything else on the car:</p>
+          <p class="eq">m<sub>other</sub> = 470 &#8722; 102 &#8722; 34.17 = 333.83 lb</p>
+          <p class="eq">x<sub>other</sub> = (470(&#8722;50.789) &#8722; 102(&#8722;64) &#8722; 34.17(&#8722;78.2)) / 333.83 = &#8722;43.947 in</p>
+          <p>Step 2, ARG27:</p>
+          <p class="eq">m<sub>27</sub> = 333.83 + 95 + 15 = 443.83 lb</p>
+          <p class="eq">x<sub>27</sub> = (333.83(&#8722;43.947) + 95(&#8722;66.64) + 15(&#8722;76.28)) / 443.83 = &#8722;49.897 in</p>
+          <p>Step 3, CG shift:</p>
+          <p class="eq">&Delta;x<sub>CG</sub> = &#8722;49.897 &#8722; (&#8722;50.789) = +0.89 in</p>
+          <p>The longitudinal CG moves 0.89 in forward. Moving the accumulator back pulls the CG rearward, but moving the inverter forward and taking 26.2 lb out of the two parts, which both sit behind the CG, has a bigger effect and pushes it forward.</p>
+
+          <h3 id="longitudinal-cg-shift-calculation-effect-on-weight-distribution-2"><span class="a-num">3.4</span>Effect on Weight Distribution</h3>
+          <p>With the ARG26 wheelbase of 61 in, a 0.89 in forward shift moves about 1.5% of the weight onto the front axle:</p>
+          <p class="eq">&Delta;(front %) = 100 &times; 0.89 / 61 = 1.5%</p>
+          <p>So a car that was 50/50 would become about 51.5/48.5 front to rear.</p>
+        </section>
+
+        <!-- sensitivity:start -->
+        <!-- generated by _build/cg_shift_sensitivity.py; edit that script, not this block -->
+        <section class="a-section" id="sensitivity">
+          <h2><span class="a-num">4</span>Error Sensitivity</h2>
+          <p>The ARG27 masses and positions are estimates, so this section shows how much the CG shift changes if one of them is off. Each chart varies one input and keeps the others at their nominal values. All four charts use the same vertical scale, so a steeper line means the result depends more on that input. The nominal CG shift is +0.89 in. The right axis reads the same CG shift as the change in front weight percentage from section 3.4: &Delta;(front %) = 100 &times; &Delta;x<sub>CG</sub> / 61.</p>
+          <div class="a-table-wrap">
+            <table class="a-table sheet">
+              <thead><tr><th>Input</th><th>Error range</th><th>CG shift range</th><th>Change in CG shift</th></tr></thead>
+              <tbody>
+                <tr><td>ACC27 mass</td><td>&#8722;10 to +10&nbsp;lb</td><td>+0.52 to +1.28&nbsp;in</td><td>&#8722;0.038&nbsp;in per lb</td></tr>
+                <tr><td>ACC27 CG, x</td><td>&#8722;2 to +2&nbsp;in</td><td>+0.46 to +1.32&nbsp;in</td><td>+0.214&nbsp;in per in</td></tr>
+                <tr><td>INV27 mass</td><td>&#8722;5 to +5&nbsp;lb</td><td>+0.60 to +1.19&nbsp;in</td><td>&#8722;0.059&nbsp;in per lb</td></tr>
+                <tr><td>INV27 CG, x</td><td>&#8722;2 to +2&nbsp;in</td><td>+0.82 to +0.96&nbsp;in</td><td>+0.034&nbsp;in per in</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p>The slopes in the last column come from differentiating the ARG27 CG equation. For a part i, the accumulator or the inverter, moving its CG by 1 in moves the car's CG by its share of the total mass, and adding 1 lb pulls the car's CG toward that part by its distance from the CG divided by the total mass:</p>
+          <p class="eq">&part;&Delta;x<sub>CG</sub> / &part;x<sub>i</sub> = m<sub>i</sub> / m<sub>27</sub></p>
+          <p class="eq">&part;&Delta;x<sub>CG</sub> / &part;m<sub>i</sub> = (x<sub>i</sub> &#8722; x<sub>27</sub>) / m<sub>27</sub></p>
+          <p>With m<sub>27</sub> = 443.83 lb and x<sub>27</sub> = &#8722;49.897 in:</p>
+          <ul>
+            <li>ACC27 CG, x: 95 / 443.83 = +0.214 in per in</li>
+            <li>ACC27 mass: (&#8722;66.64 &#8722; (&#8722;49.897)) / 443.83 = &#8722;0.038 in per lb</li>
+            <li>INV27 CG, x: 15.00 / 443.83 = +0.034 in per in</li>
+            <li>INV27 mass: (&#8722;76.28 &#8722; (&#8722;49.897)) / 443.83 = &#8722;0.059 in per lb</li>
+          </ul>
+          <p>The position lines are straight. The mass lines curve slightly because the mass also appears in m<sub>27</sub>, so their slope is given at the nominal mass.</p>
+          <p>The accumulator CG position matters most: every inch it is off changes the CG shift by about 0.21 in. The inverter CG position matters least. Going from a 50% to a 70% rearward weight bias only moves the CG shift between +0.85 and +0.94 in.</p>
+          <div class="sv-grid-wrap">
+            <figure class="a-fig sv-fig" id="sens-1">
+<svg class="sv-chart" viewBox="0 0 380 236" role="img" aria-label="CG shift versus error in ACC27 mass from minus 10 to plus 10 lb">
+<line class="sv-grid" x1="46" x2="332" y1="192.0" y2="192.0" />
+<text class="sv-tick" x="40" y="195.5" text-anchor="end">0.40</text>
+<line class="sv-grid" x1="46" x2="332" y1="157.2" y2="157.2" />
+<text class="sv-tick" x="40" y="160.7" text-anchor="end">0.60</text>
+<line class="sv-grid" x1="46" x2="332" y1="122.4" y2="122.4" />
+<text class="sv-tick" x="40" y="125.9" text-anchor="end">0.80</text>
+<line class="sv-grid" x1="46" x2="332" y1="87.6" y2="87.6" />
+<text class="sv-tick" x="40" y="91.1" text-anchor="end">1.00</text>
+<line class="sv-grid" x1="46" x2="332" y1="52.8" y2="52.8" />
+<text class="sv-tick" x="40" y="56.3" text-anchor="end">1.20</text>
+<line class="sv-grid" x1="46" x2="332" y1="18.0" y2="18.0" />
+<text class="sv-tick" x="40" y="21.5" text-anchor="end">1.40</text>
+<line class="sv-axis" x1="46" x2="332" y1="192" y2="192" />
+<line class="sv-axis" x1="46.0" x2="46.0" y1="192" y2="196" />
+<text class="sv-tick" x="46.0" y="208" text-anchor="middle">&#8722;10</text>
+<line class="sv-axis" x1="117.5" x2="117.5" y1="192" y2="196" />
+<text class="sv-tick" x="117.5" y="208" text-anchor="middle">&#8722;5</text>
+<line class="sv-axis" x1="189.0" x2="189.0" y1="192" y2="196" />
+<text class="sv-tick" x="189.0" y="208" text-anchor="middle">0</text>
+<line class="sv-axis" x1="260.5" x2="260.5" y1="192" y2="196" />
+<text class="sv-tick" x="260.5" y="208" text-anchor="middle">+5</text>
+<line class="sv-axis" x1="332.0" x2="332.0" y1="192" y2="196" />
+<text class="sv-tick" x="332.0" y="208" text-anchor="middle">+10</text>
+<text class="sv-title" x="189.0" y="230" text-anchor="middle">Error in ACC27 mass (lb)</text>
+<text class="sv-title" x="12" y="105.0" text-anchor="middle" transform="rotate(-90 12 105.0)">CG shift (in)</text>
+<line class="sv-axis" x1="332" x2="332" y1="18" y2="192" />
+<line class="sv-axis" x1="332" x2="336" y1="155.5" y2="155.5" />
+<text class="sv-tick" x="339" y="159.0">+1.0</text>
+<line class="sv-axis" x1="332" x2="336" y1="102.4" y2="102.4" />
+<text class="sv-tick" x="339" y="105.9">+1.5</text>
+<line class="sv-axis" x1="332" x2="336" y1="49.3" y2="49.3" />
+<text class="sv-tick" x="339" y="52.8">+2.0</text>
+<text class="sv-title" x="372" y="105.0" text-anchor="middle" transform="rotate(90 372 105.0)">Change in front weight (%)</text>
+<path class="sv-line" d="M46.0,39.2 L53.1,42.7 L60.3,46.1 L67.5,49.5 L74.6,52.9 L81.8,56.3 L88.9,59.7 L96.0,63.1 L103.2,66.5 L110.4,69.8 L117.5,73.2 L124.7,76.5 L131.8,79.9 L138.9,83.2 L146.1,86.6 L153.2,89.9 L160.4,93.2 L167.6,96.5 L174.7,99.8 L181.8,103.1 L189.0,106.4 L196.2,109.7 L203.3,112.9 L210.4,116.2 L217.6,119.4 L224.8,122.7 L231.9,125.9 L239.1,129.2 L246.2,132.4 L253.3,135.6 L260.5,138.8 L267.6,142.0 L274.8,145.2 L281.9,148.4 L289.1,151.6 L296.2,154.8 L303.4,158.0 L310.6,161.1 L317.7,164.3 L324.8,167.4 L332.0,170.6" />
+<rect class="sv-hit" x="42.4" y="18" width="7.2" height="174"><title>Error &#8722;10.00 lb: CG shift +1.28 in, front weight +2.1%</title></rect>
+<rect class="sv-hit" x="49.6" y="18" width="7.2" height="174"><title>Error &#8722;9.50 lb: CG shift +1.26 in, front weight +2.1%</title></rect>
+<rect class="sv-hit" x="56.7" y="18" width="7.2" height="174"><title>Error &#8722;9.00 lb: CG shift +1.24 in, front weight +2.0%</title></rect>
+<rect class="sv-hit" x="63.9" y="18" width="7.2" height="174"><title>Error &#8722;8.50 lb: CG shift +1.22 in, front weight +2.0%</title></rect>
+<rect class="sv-hit" x="71.0" y="18" width="7.2" height="174"><title>Error &#8722;8.00 lb: CG shift +1.20 in, front weight +2.0%</title></rect>
+<rect class="sv-hit" x="78.2" y="18" width="7.2" height="174"><title>Error &#8722;7.50 lb: CG shift +1.18 in, front weight +1.9%</title></rect>
+<rect class="sv-hit" x="85.3" y="18" width="7.2" height="174"><title>Error &#8722;7.00 lb: CG shift +1.16 in, front weight +1.9%</title></rect>
+<rect class="sv-hit" x="92.5" y="18" width="7.2" height="174"><title>Error &#8722;6.50 lb: CG shift +1.14 in, front weight +1.9%</title></rect>
+<rect class="sv-hit" x="99.6" y="18" width="7.2" height="174"><title>Error &#8722;6.00 lb: CG shift +1.12 in, front weight +1.8%</title></rect>
+<rect class="sv-hit" x="106.8" y="18" width="7.2" height="174"><title>Error &#8722;5.50 lb: CG shift +1.10 in, front weight +1.8%</title></rect>
+<rect class="sv-hit" x="113.9" y="18" width="7.2" height="174"><title>Error &#8722;5.00 lb: CG shift +1.08 in, front weight +1.8%</title></rect>
+<rect class="sv-hit" x="121.1" y="18" width="7.2" height="174"><title>Error &#8722;4.50 lb: CG shift +1.06 in, front weight +1.7%</title></rect>
+<rect class="sv-hit" x="128.2" y="18" width="7.2" height="174"><title>Error &#8722;4.00 lb: CG shift +1.04 in, front weight +1.7%</title></rect>
+<rect class="sv-hit" x="135.4" y="18" width="7.2" height="174"><title>Error &#8722;3.50 lb: CG shift +1.03 in, front weight +1.7%</title></rect>
+<rect class="sv-hit" x="142.5" y="18" width="7.2" height="174"><title>Error &#8722;3.00 lb: CG shift +1.01 in, front weight +1.6%</title></rect>
+<rect class="sv-hit" x="149.7" y="18" width="7.2" height="174"><title>Error &#8722;2.50 lb: CG shift +0.99 in, front weight +1.6%</title></rect>
+<rect class="sv-hit" x="156.8" y="18" width="7.2" height="174"><title>Error &#8722;2.00 lb: CG shift +0.97 in, front weight +1.6%</title></rect>
+<rect class="sv-hit" x="164.0" y="18" width="7.2" height="174"><title>Error &#8722;1.50 lb: CG shift +0.95 in, front weight +1.6%</title></rect>
+<rect class="sv-hit" x="171.1" y="18" width="7.2" height="174"><title>Error &#8722;1.00 lb: CG shift +0.93 in, front weight +1.5%</title></rect>
+<rect class="sv-hit" x="178.3" y="18" width="7.2" height="174"><title>Error &#8722;0.50 lb: CG shift +0.91 in, front weight +1.5%</title></rect>
+<rect class="sv-hit" x="185.4" y="18" width="7.2" height="174"><title>Error 0.00 lb: CG shift +0.89 in, front weight +1.5%</title></rect>
+<rect class="sv-hit" x="192.6" y="18" width="7.2" height="174"><title>Error +0.50 lb: CG shift +0.87 in, front weight +1.4%</title></rect>
+<rect class="sv-hit" x="199.7" y="18" width="7.2" height="174"><title>Error +1.00 lb: CG shift +0.85 in, front weight +1.4%</title></rect>
+<rect class="sv-hit" x="206.9" y="18" width="7.2" height="174"><title>Error +1.50 lb: CG shift +0.84 in, front weight +1.4%</title></rect>
+<rect class="sv-hit" x="214.0" y="18" width="7.2" height="174"><title>Error +2.00 lb: CG shift +0.82 in, front weight +1.3%</title></rect>
+<rect class="sv-hit" x="221.2" y="18" width="7.2" height="174"><title>Error +2.50 lb: CG shift +0.80 in, front weight +1.3%</title></rect>
+<rect class="sv-hit" x="228.3" y="18" width="7.2" height="174"><title>Error +3.00 lb: CG shift +0.78 in, front weight +1.3%</title></rect>
+<rect class="sv-hit" x="235.5" y="18" width="7.2" height="174"><title>Error +3.50 lb: CG shift +0.76 in, front weight +1.2%</title></rect>
+<rect class="sv-hit" x="242.6" y="18" width="7.2" height="174"><title>Error +4.00 lb: CG shift +0.74 in, front weight +1.2%</title></rect>
+<rect class="sv-hit" x="249.8" y="18" width="7.2" height="174"><title>Error +4.50 lb: CG shift +0.72 in, front weight +1.2%</title></rect>
+<rect class="sv-hit" x="256.9" y="18" width="7.2" height="174"><title>Error +5.00 lb: CG shift +0.71 in, front weight +1.2%</title></rect>
+<rect class="sv-hit" x="264.1" y="18" width="7.2" height="174"><title>Error +5.50 lb: CG shift +0.69 in, front weight +1.1%</title></rect>
+<rect class="sv-hit" x="271.2" y="18" width="7.2" height="174"><title>Error +6.00 lb: CG shift +0.67 in, front weight +1.1%</title></rect>
+<rect class="sv-hit" x="278.4" y="18" width="7.2" height="174"><title>Error +6.50 lb: CG shift +0.65 in, front weight +1.1%</title></rect>
+<rect class="sv-hit" x="285.5" y="18" width="7.2" height="174"><title>Error +7.00 lb: CG shift +0.63 in, front weight +1.0%</title></rect>
+<rect class="sv-hit" x="292.7" y="18" width="7.2" height="174"><title>Error +7.50 lb: CG shift +0.61 in, front weight +1.0%</title></rect>
+<rect class="sv-hit" x="299.8" y="18" width="7.2" height="174"><title>Error +8.00 lb: CG shift +0.60 in, front weight +1.0%</title></rect>
+<rect class="sv-hit" x="307.0" y="18" width="7.2" height="174"><title>Error +8.50 lb: CG shift +0.58 in, front weight +0.9%</title></rect>
+<rect class="sv-hit" x="314.1" y="18" width="7.2" height="174"><title>Error +9.00 lb: CG shift +0.56 in, front weight +0.9%</title></rect>
+<rect class="sv-hit" x="321.3" y="18" width="7.2" height="174"><title>Error +9.50 lb: CG shift +0.54 in, front weight +0.9%</title></rect>
+<rect class="sv-hit" x="328.4" y="18" width="7.2" height="174"><title>Error +10.00 lb: CG shift +0.52 in, front weight +0.9%</title></rect>
+<circle class="sv-dot" cx="189.0" cy="106.4" r="4.5"><title>nominal: CG shift +0.89 in, front weight +1.5%</title></circle>
+<text class="sv-label" x="198.0" y="98.4" text-anchor="start">nominal</text>
+</svg>
+              <figcaption><span class="mono">Chart 1</span> ACC27 mass, nominal 95 lb.</figcaption>
+            </figure>
+            <figure class="a-fig sv-fig" id="sens-2">
+<svg class="sv-chart" viewBox="0 0 380 236" role="img" aria-label="CG shift versus error in ACC27 CG position from minus 2 to plus 2 in">
+<line class="sv-grid" x1="46" x2="332" y1="192.0" y2="192.0" />
+<text class="sv-tick" x="40" y="195.5" text-anchor="end">0.40</text>
+<line class="sv-grid" x1="46" x2="332" y1="157.2" y2="157.2" />
+<text class="sv-tick" x="40" y="160.7" text-anchor="end">0.60</text>
+<line class="sv-grid" x1="46" x2="332" y1="122.4" y2="122.4" />
+<text class="sv-tick" x="40" y="125.9" text-anchor="end">0.80</text>
+<line class="sv-grid" x1="46" x2="332" y1="87.6" y2="87.6" />
+<text class="sv-tick" x="40" y="91.1" text-anchor="end">1.00</text>
+<line class="sv-grid" x1="46" x2="332" y1="52.8" y2="52.8" />
+<text class="sv-tick" x="40" y="56.3" text-anchor="end">1.20</text>
+<line class="sv-grid" x1="46" x2="332" y1="18.0" y2="18.0" />
+<text class="sv-tick" x="40" y="21.5" text-anchor="end">1.40</text>
+<line class="sv-axis" x1="46" x2="332" y1="192" y2="192" />
+<line class="sv-axis" x1="46.0" x2="46.0" y1="192" y2="196" />
+<text class="sv-tick" x="46.0" y="208" text-anchor="middle">&#8722;2</text>
+<line class="sv-axis" x1="117.5" x2="117.5" y1="192" y2="196" />
+<text class="sv-tick" x="117.5" y="208" text-anchor="middle">&#8722;1</text>
+<line class="sv-axis" x1="189.0" x2="189.0" y1="192" y2="196" />
+<text class="sv-tick" x="189.0" y="208" text-anchor="middle">0</text>
+<line class="sv-axis" x1="260.5" x2="260.5" y1="192" y2="196" />
+<text class="sv-tick" x="260.5" y="208" text-anchor="middle">+1</text>
+<line class="sv-axis" x1="332.0" x2="332.0" y1="192" y2="196" />
+<text class="sv-tick" x="332.0" y="208" text-anchor="middle">+2</text>
+<text class="sv-title" x="189.0" y="230" text-anchor="middle">Error in ACC27 CG x (in), + is forward</text>
+<text class="sv-title" x="12" y="105.0" text-anchor="middle" transform="rotate(-90 12 105.0)">CG shift (in)</text>
+<line class="sv-axis" x1="332" x2="332" y1="18" y2="192" />
+<line class="sv-axis" x1="332" x2="336" y1="155.5" y2="155.5" />
+<text class="sv-tick" x="339" y="159.0">+1.0</text>
+<line class="sv-axis" x1="332" x2="336" y1="102.4" y2="102.4" />
+<text class="sv-tick" x="339" y="105.9">+1.5</text>
+<line class="sv-axis" x1="332" x2="336" y1="49.3" y2="49.3" />
+<text class="sv-tick" x="339" y="52.8">+2.0</text>
+<text class="sv-title" x="372" y="105.0" text-anchor="middle" transform="rotate(90 372 105.0)">Change in front weight (%)</text>
+<path class="sv-line" d="M46.0,180.9 L53.2,177.1 L60.3,173.4 L67.5,169.7 L74.6,166.0 L81.8,162.2 L88.9,158.5 L96.0,154.8 L103.2,151.1 L110.3,147.3 L117.5,143.6 L124.7,139.9 L131.8,136.2 L138.9,132.4 L146.1,128.7 L153.2,125.0 L160.4,121.3 L167.6,117.6 L174.7,113.8 L181.8,110.1 L189.0,106.4 L196.2,102.7 L203.3,98.9 L210.4,95.2 L217.6,91.5 L224.8,87.8 L231.9,84.0 L239.1,80.3 L246.2,76.6 L253.3,72.9 L260.5,69.1 L267.6,65.4 L274.8,61.7 L281.9,58.0 L289.1,54.2 L296.2,50.5 L303.4,46.8 L310.6,43.1 L317.7,39.3 L324.8,35.6 L332.0,31.9" />
+<rect class="sv-hit" x="42.4" y="18" width="7.2" height="174"><title>Error &#8722;2.00 in: CG shift +0.46 in, front weight +0.8%</title></rect>
+<rect class="sv-hit" x="49.6" y="18" width="7.2" height="174"><title>Error &#8722;1.90 in: CG shift +0.49 in, front weight +0.8%</title></rect>
+<rect class="sv-hit" x="56.7" y="18" width="7.2" height="174"><title>Error &#8722;1.80 in: CG shift +0.51 in, front weight +0.8%</title></rect>
+<rect class="sv-hit" x="63.9" y="18" width="7.2" height="174"><title>Error &#8722;1.70 in: CG shift +0.53 in, front weight +0.9%</title></rect>
+<rect class="sv-hit" x="71.0" y="18" width="7.2" height="174"><title>Error &#8722;1.60 in: CG shift +0.55 in, front weight +0.9%</title></rect>
+<rect class="sv-hit" x="78.2" y="18" width="7.2" height="174"><title>Error &#8722;1.50 in: CG shift +0.57 in, front weight +0.9%</title></rect>
+<rect class="sv-hit" x="85.3" y="18" width="7.2" height="174"><title>Error &#8722;1.40 in: CG shift +0.59 in, front weight +1.0%</title></rect>
+<rect class="sv-hit" x="92.5" y="18" width="7.2" height="174"><title>Error &#8722;1.30 in: CG shift +0.61 in, front weight +1.0%</title></rect>
+<rect class="sv-hit" x="99.6" y="18" width="7.2" height="174"><title>Error &#8722;1.20 in: CG shift +0.64 in, front weight +1.0%</title></rect>
+<rect class="sv-hit" x="106.8" y="18" width="7.2" height="174"><title>Error &#8722;1.10 in: CG shift +0.66 in, front weight +1.1%</title></rect>
+<rect class="sv-hit" x="113.9" y="18" width="7.2" height="174"><title>Error &#8722;1.00 in: CG shift +0.68 in, front weight +1.1%</title></rect>
+<rect class="sv-hit" x="121.1" y="18" width="7.2" height="174"><title>Error &#8722;0.90 in: CG shift +0.70 in, front weight +1.1%</title></rect>
+<rect class="sv-hit" x="128.2" y="18" width="7.2" height="174"><title>Error &#8722;0.80 in: CG shift +0.72 in, front weight +1.2%</title></rect>
+<rect class="sv-hit" x="135.4" y="18" width="7.2" height="174"><title>Error &#8722;0.70 in: CG shift +0.74 in, front weight +1.2%</title></rect>
+<rect class="sv-hit" x="142.5" y="18" width="7.2" height="174"><title>Error &#8722;0.60 in: CG shift +0.76 in, front weight +1.3%</title></rect>
+<rect class="sv-hit" x="149.7" y="18" width="7.2" height="174"><title>Error &#8722;0.50 in: CG shift +0.79 in, front weight +1.3%</title></rect>
+<rect class="sv-hit" x="156.8" y="18" width="7.2" height="174"><title>Error &#8722;0.40 in: CG shift +0.81 in, front weight +1.3%</title></rect>
+<rect class="sv-hit" x="164.0" y="18" width="7.2" height="174"><title>Error &#8722;0.30 in: CG shift +0.83 in, front weight +1.4%</title></rect>
+<rect class="sv-hit" x="171.1" y="18" width="7.2" height="174"><title>Error &#8722;0.20 in: CG shift +0.85 in, front weight +1.4%</title></rect>
+<rect class="sv-hit" x="178.3" y="18" width="7.2" height="174"><title>Error &#8722;0.10 in: CG shift +0.87 in, front weight +1.4%</title></rect>
+<rect class="sv-hit" x="185.4" y="18" width="7.2" height="174"><title>Error 0.00 in: CG shift +0.89 in, front weight +1.5%</title></rect>
+<rect class="sv-hit" x="192.6" y="18" width="7.2" height="174"><title>Error +0.10 in: CG shift +0.91 in, front weight +1.5%</title></rect>
+<rect class="sv-hit" x="199.7" y="18" width="7.2" height="174"><title>Error +0.20 in: CG shift +0.93 in, front weight +1.5%</title></rect>
+<rect class="sv-hit" x="206.9" y="18" width="7.2" height="174"><title>Error +0.30 in: CG shift +0.96 in, front weight +1.6%</title></rect>
+<rect class="sv-hit" x="214.0" y="18" width="7.2" height="174"><title>Error +0.40 in: CG shift +0.98 in, front weight +1.6%</title></rect>
+<rect class="sv-hit" x="221.2" y="18" width="7.2" height="174"><title>Error +0.50 in: CG shift +1.00 in, front weight +1.6%</title></rect>
+<rect class="sv-hit" x="228.3" y="18" width="7.2" height="174"><title>Error +0.60 in: CG shift +1.02 in, front weight +1.7%</title></rect>
+<rect class="sv-hit" x="235.5" y="18" width="7.2" height="174"><title>Error +0.70 in: CG shift +1.04 in, front weight +1.7%</title></rect>
+<rect class="sv-hit" x="242.6" y="18" width="7.2" height="174"><title>Error +0.80 in: CG shift +1.06 in, front weight +1.7%</title></rect>
+<rect class="sv-hit" x="249.8" y="18" width="7.2" height="174"><title>Error +0.90 in: CG shift +1.08 in, front weight +1.8%</title></rect>
+<rect class="sv-hit" x="256.9" y="18" width="7.2" height="174"><title>Error +1.00 in: CG shift +1.11 in, front weight +1.8%</title></rect>
+<rect class="sv-hit" x="264.1" y="18" width="7.2" height="174"><title>Error +1.10 in: CG shift +1.13 in, front weight +1.8%</title></rect>
+<rect class="sv-hit" x="271.2" y="18" width="7.2" height="174"><title>Error +1.20 in: CG shift +1.15 in, front weight +1.9%</title></rect>
+<rect class="sv-hit" x="278.4" y="18" width="7.2" height="174"><title>Error +1.30 in: CG shift +1.17 in, front weight +1.9%</title></rect>
+<rect class="sv-hit" x="285.5" y="18" width="7.2" height="174"><title>Error +1.40 in: CG shift +1.19 in, front weight +2.0%</title></rect>
+<rect class="sv-hit" x="292.7" y="18" width="7.2" height="174"><title>Error +1.50 in: CG shift +1.21 in, front weight +2.0%</title></rect>
+<rect class="sv-hit" x="299.8" y="18" width="7.2" height="174"><title>Error +1.60 in: CG shift +1.23 in, front weight +2.0%</title></rect>
+<rect class="sv-hit" x="307.0" y="18" width="7.2" height="174"><title>Error +1.70 in: CG shift +1.26 in, front weight +2.1%</title></rect>
+<rect class="sv-hit" x="314.1" y="18" width="7.2" height="174"><title>Error +1.80 in: CG shift +1.28 in, front weight +2.1%</title></rect>
+<rect class="sv-hit" x="321.3" y="18" width="7.2" height="174"><title>Error +1.90 in: CG shift +1.30 in, front weight +2.1%</title></rect>
+<rect class="sv-hit" x="328.4" y="18" width="7.2" height="174"><title>Error +2.00 in: CG shift +1.32 in, front weight +2.2%</title></rect>
+<circle class="sv-dot" cx="189.0" cy="106.4" r="4.5"><title>nominal: CG shift +0.89 in, front weight +1.5%</title></circle>
+<text class="sv-label" x="180.0" y="98.4" text-anchor="end">nominal</text>
+</svg>
+              <figcaption><span class="mono">Chart 2</span> ACC27 CG x, nominal &#8722;66.64 in.</figcaption>
+            </figure>
+            <figure class="a-fig sv-fig" id="sens-3">
+<svg class="sv-chart" viewBox="0 0 380 236" role="img" aria-label="CG shift versus error in INV27 mass from minus 5 to plus 5 lb">
+<line class="sv-grid" x1="46" x2="332" y1="192.0" y2="192.0" />
+<text class="sv-tick" x="40" y="195.5" text-anchor="end">0.40</text>
+<line class="sv-grid" x1="46" x2="332" y1="157.2" y2="157.2" />
+<text class="sv-tick" x="40" y="160.7" text-anchor="end">0.60</text>
+<line class="sv-grid" x1="46" x2="332" y1="122.4" y2="122.4" />
+<text class="sv-tick" x="40" y="125.9" text-anchor="end">0.80</text>
+<line class="sv-grid" x1="46" x2="332" y1="87.6" y2="87.6" />
+<text class="sv-tick" x="40" y="91.1" text-anchor="end">1.00</text>
+<line class="sv-grid" x1="46" x2="332" y1="52.8" y2="52.8" />
+<text class="sv-tick" x="40" y="56.3" text-anchor="end">1.20</text>
+<line class="sv-grid" x1="46" x2="332" y1="18.0" y2="18.0" />
+<text class="sv-tick" x="40" y="21.5" text-anchor="end">1.40</text>
+<line class="sv-axis" x1="46" x2="332" y1="192" y2="192" />
+<line class="sv-axis" x1="46.0" x2="46.0" y1="192" y2="196" />
+<text class="sv-tick" x="46.0" y="208" text-anchor="middle">&#8722;5</text>
+<line class="sv-axis" x1="117.5" x2="117.5" y1="192" y2="196" />
+<text class="sv-tick" x="117.5" y="208" text-anchor="middle">&#8722;2.5</text>
+<line class="sv-axis" x1="189.0" x2="189.0" y1="192" y2="196" />
+<text class="sv-tick" x="189.0" y="208" text-anchor="middle">0</text>
+<line class="sv-axis" x1="260.5" x2="260.5" y1="192" y2="196" />
+<text class="sv-tick" x="260.5" y="208" text-anchor="middle">+2.5</text>
+<line class="sv-axis" x1="332.0" x2="332.0" y1="192" y2="196" />
+<text class="sv-tick" x="332.0" y="208" text-anchor="middle">+5</text>
+<text class="sv-title" x="189.0" y="230" text-anchor="middle">Error in INV27 mass (lb)</text>
+<text class="sv-title" x="12" y="105.0" text-anchor="middle" transform="rotate(-90 12 105.0)">CG shift (in)</text>
+<line class="sv-axis" x1="332" x2="332" y1="18" y2="192" />
+<line class="sv-axis" x1="332" x2="336" y1="155.5" y2="155.5" />
+<text class="sv-tick" x="339" y="159.0">+1.0</text>
+<line class="sv-axis" x1="332" x2="336" y1="102.4" y2="102.4" />
+<text class="sv-tick" x="339" y="105.9">+1.5</text>
+<line class="sv-axis" x1="332" x2="336" y1="49.3" y2="49.3" />
+<text class="sv-tick" x="339" y="52.8">+2.0</text>
+<text class="sv-title" x="372" y="105.0" text-anchor="middle" transform="rotate(90 372 105.0)">Change in front weight (%)</text>
+<path class="sv-line" d="M46.0,54.1 L53.1,56.7 L60.3,59.4 L67.5,62.0 L74.6,64.6 L81.8,67.3 L88.9,69.9 L96.0,72.5 L103.2,75.1 L110.4,77.8 L117.5,80.4 L124.7,83.0 L131.8,85.6 L138.9,88.2 L146.1,90.8 L153.2,93.4 L160.4,96.0 L167.6,98.6 L174.7,101.2 L181.8,103.8 L189.0,106.4 L196.2,109.0 L203.3,111.5 L210.4,114.1 L217.6,116.7 L224.8,119.3 L231.9,121.8 L239.1,124.4 L246.2,127.0 L253.3,129.5 L260.5,132.1 L267.6,134.6 L274.8,137.2 L281.9,139.7 L289.1,142.3 L296.2,144.8 L303.4,147.4 L310.6,149.9 L317.7,152.4 L324.8,155.0 L332.0,157.5" />
+<rect class="sv-hit" x="42.4" y="18" width="7.2" height="174"><title>Error &#8722;5.00 lb: CG shift +1.19 in, front weight +2.0%</title></rect>
+<rect class="sv-hit" x="49.6" y="18" width="7.2" height="174"><title>Error &#8722;4.75 lb: CG shift +1.18 in, front weight +1.9%</title></rect>
+<rect class="sv-hit" x="56.7" y="18" width="7.2" height="174"><title>Error &#8722;4.50 lb: CG shift +1.16 in, front weight +1.9%</title></rect>
+<rect class="sv-hit" x="63.9" y="18" width="7.2" height="174"><title>Error &#8722;4.25 lb: CG shift +1.15 in, front weight +1.9%</title></rect>
+<rect class="sv-hit" x="71.0" y="18" width="7.2" height="174"><title>Error &#8722;4.00 lb: CG shift +1.13 in, front weight +1.9%</title></rect>
+<rect class="sv-hit" x="78.2" y="18" width="7.2" height="174"><title>Error &#8722;3.75 lb: CG shift +1.12 in, front weight +1.8%</title></rect>
+<rect class="sv-hit" x="85.3" y="18" width="7.2" height="174"><title>Error &#8722;3.50 lb: CG shift +1.10 in, front weight +1.8%</title></rect>
+<rect class="sv-hit" x="92.5" y="18" width="7.2" height="174"><title>Error &#8722;3.25 lb: CG shift +1.09 in, front weight +1.8%</title></rect>
+<rect class="sv-hit" x="99.6" y="18" width="7.2" height="174"><title>Error &#8722;3.00 lb: CG shift +1.07 in, front weight +1.8%</title></rect>
+<rect class="sv-hit" x="106.8" y="18" width="7.2" height="174"><title>Error &#8722;2.75 lb: CG shift +1.06 in, front weight +1.7%</title></rect>
+<rect class="sv-hit" x="113.9" y="18" width="7.2" height="174"><title>Error &#8722;2.50 lb: CG shift +1.04 in, front weight +1.7%</title></rect>
+<rect class="sv-hit" x="121.1" y="18" width="7.2" height="174"><title>Error &#8722;2.25 lb: CG shift +1.03 in, front weight +1.7%</title></rect>
+<rect class="sv-hit" x="128.2" y="18" width="7.2" height="174"><title>Error &#8722;2.00 lb: CG shift +1.01 in, front weight +1.7%</title></rect>
+<rect class="sv-hit" x="135.4" y="18" width="7.2" height="174"><title>Error &#8722;1.75 lb: CG shift +1.00 in, front weight +1.6%</title></rect>
+<rect class="sv-hit" x="142.5" y="18" width="7.2" height="174"><title>Error &#8722;1.50 lb: CG shift +0.98 in, front weight +1.6%</title></rect>
+<rect class="sv-hit" x="149.7" y="18" width="7.2" height="174"><title>Error &#8722;1.25 lb: CG shift +0.97 in, front weight +1.6%</title></rect>
+<rect class="sv-hit" x="156.8" y="18" width="7.2" height="174"><title>Error &#8722;1.00 lb: CG shift +0.95 in, front weight +1.6%</title></rect>
+<rect class="sv-hit" x="164.0" y="18" width="7.2" height="174"><title>Error &#8722;0.75 lb: CG shift +0.94 in, front weight +1.5%</title></rect>
+<rect class="sv-hit" x="171.1" y="18" width="7.2" height="174"><title>Error &#8722;0.50 lb: CG shift +0.92 in, front weight +1.5%</title></rect>
+<rect class="sv-hit" x="178.3" y="18" width="7.2" height="174"><title>Error &#8722;0.25 lb: CG shift +0.91 in, front weight +1.5%</title></rect>
+<rect class="sv-hit" x="185.4" y="18" width="7.2" height="174"><title>Error 0.00 lb: CG shift +0.89 in, front weight +1.5%</title></rect>
+<rect class="sv-hit" x="192.6" y="18" width="7.2" height="174"><title>Error +0.25 lb: CG shift +0.88 in, front weight +1.4%</title></rect>
+<rect class="sv-hit" x="199.7" y="18" width="7.2" height="174"><title>Error +0.50 lb: CG shift +0.86 in, front weight +1.4%</title></rect>
+<rect class="sv-hit" x="206.9" y="18" width="7.2" height="174"><title>Error +0.75 lb: CG shift +0.85 in, front weight +1.4%</title></rect>
+<rect class="sv-hit" x="214.0" y="18" width="7.2" height="174"><title>Error +1.00 lb: CG shift +0.83 in, front weight +1.4%</title></rect>
+<rect class="sv-hit" x="221.2" y="18" width="7.2" height="174"><title>Error +1.25 lb: CG shift +0.82 in, front weight +1.3%</title></rect>
+<rect class="sv-hit" x="228.3" y="18" width="7.2" height="174"><title>Error +1.50 lb: CG shift +0.80 in, front weight +1.3%</title></rect>
+<rect class="sv-hit" x="235.5" y="18" width="7.2" height="174"><title>Error +1.75 lb: CG shift +0.79 in, front weight +1.3%</title></rect>
+<rect class="sv-hit" x="242.6" y="18" width="7.2" height="174"><title>Error +2.00 lb: CG shift +0.77 in, front weight +1.3%</title></rect>
+<rect class="sv-hit" x="249.8" y="18" width="7.2" height="174"><title>Error +2.25 lb: CG shift +0.76 in, front weight +1.2%</title></rect>
+<rect class="sv-hit" x="256.9" y="18" width="7.2" height="174"><title>Error +2.50 lb: CG shift +0.74 in, front weight +1.2%</title></rect>
+<rect class="sv-hit" x="264.1" y="18" width="7.2" height="174"><title>Error +2.75 lb: CG shift +0.73 in, front weight +1.2%</title></rect>
+<rect class="sv-hit" x="271.2" y="18" width="7.2" height="174"><title>Error +3.00 lb: CG shift +0.71 in, front weight +1.2%</title></rect>
+<rect class="sv-hit" x="278.4" y="18" width="7.2" height="174"><title>Error +3.25 lb: CG shift +0.70 in, front weight +1.1%</title></rect>
+<rect class="sv-hit" x="285.5" y="18" width="7.2" height="174"><title>Error +3.50 lb: CG shift +0.69 in, front weight +1.1%</title></rect>
+<rect class="sv-hit" x="292.7" y="18" width="7.2" height="174"><title>Error +3.75 lb: CG shift +0.67 in, front weight +1.1%</title></rect>
+<rect class="sv-hit" x="299.8" y="18" width="7.2" height="174"><title>Error +4.00 lb: CG shift +0.66 in, front weight +1.1%</title></rect>
+<rect class="sv-hit" x="307.0" y="18" width="7.2" height="174"><title>Error +4.25 lb: CG shift +0.64 in, front weight +1.1%</title></rect>
+<rect class="sv-hit" x="314.1" y="18" width="7.2" height="174"><title>Error +4.50 lb: CG shift +0.63 in, front weight +1.0%</title></rect>
+<rect class="sv-hit" x="321.3" y="18" width="7.2" height="174"><title>Error +4.75 lb: CG shift +0.61 in, front weight +1.0%</title></rect>
+<rect class="sv-hit" x="328.4" y="18" width="7.2" height="174"><title>Error +5.00 lb: CG shift +0.60 in, front weight +1.0%</title></rect>
+<circle class="sv-dot" cx="189.0" cy="106.4" r="4.5"><title>nominal: CG shift +0.89 in, front weight +1.5%</title></circle>
+<text class="sv-label" x="198.0" y="98.4" text-anchor="start">nominal</text>
+</svg>
+              <figcaption><span class="mono">Chart 3</span> INV27 mass, nominal 15 lb.</figcaption>
+            </figure>
+            <figure class="a-fig sv-fig" id="sens-4">
+<svg class="sv-chart" viewBox="0 0 380 236" role="img" aria-label="CG shift versus error in INV27 CG position from minus 2 to plus 2 in, with rearward weight biases from 50 to 70 percent marked">
+<line class="sv-grid" x1="46" x2="332" y1="192.0" y2="192.0" />
+<text class="sv-tick" x="40" y="195.5" text-anchor="end">0.40</text>
+<line class="sv-grid" x1="46" x2="332" y1="157.2" y2="157.2" />
+<text class="sv-tick" x="40" y="160.7" text-anchor="end">0.60</text>
+<line class="sv-grid" x1="46" x2="332" y1="122.4" y2="122.4" />
+<text class="sv-tick" x="40" y="125.9" text-anchor="end">0.80</text>
+<line class="sv-grid" x1="46" x2="332" y1="87.6" y2="87.6" />
+<text class="sv-tick" x="40" y="91.1" text-anchor="end">1.00</text>
+<line class="sv-grid" x1="46" x2="332" y1="52.8" y2="52.8" />
+<text class="sv-tick" x="40" y="56.3" text-anchor="end">1.20</text>
+<line class="sv-grid" x1="46" x2="332" y1="18.0" y2="18.0" />
+<text class="sv-tick" x="40" y="21.5" text-anchor="end">1.40</text>
+<line class="sv-axis" x1="46" x2="332" y1="192" y2="192" />
+<line class="sv-axis" x1="46.0" x2="46.0" y1="192" y2="196" />
+<text class="sv-tick" x="46.0" y="208" text-anchor="middle">&#8722;2</text>
+<line class="sv-axis" x1="117.5" x2="117.5" y1="192" y2="196" />
+<text class="sv-tick" x="117.5" y="208" text-anchor="middle">&#8722;1</text>
+<line class="sv-axis" x1="189.0" x2="189.0" y1="192" y2="196" />
+<text class="sv-tick" x="189.0" y="208" text-anchor="middle">0</text>
+<line class="sv-axis" x1="260.5" x2="260.5" y1="192" y2="196" />
+<text class="sv-tick" x="260.5" y="208" text-anchor="middle">+1</text>
+<line class="sv-axis" x1="332.0" x2="332.0" y1="192" y2="196" />
+<text class="sv-tick" x="332.0" y="208" text-anchor="middle">+2</text>
+<text class="sv-title" x="189.0" y="230" text-anchor="middle">Error in INV27 CG x (in), + is forward</text>
+<text class="sv-title" x="12" y="105.0" text-anchor="middle" transform="rotate(-90 12 105.0)">CG shift (in)</text>
+<line class="sv-axis" x1="332" x2="332" y1="18" y2="192" />
+<line class="sv-axis" x1="332" x2="336" y1="155.5" y2="155.5" />
+<text class="sv-tick" x="339" y="159.0">+1.0</text>
+<line class="sv-axis" x1="332" x2="336" y1="102.4" y2="102.4" />
+<text class="sv-tick" x="339" y="105.9">+1.5</text>
+<line class="sv-axis" x1="332" x2="336" y1="49.3" y2="49.3" />
+<text class="sv-tick" x="339" y="52.8">+2.0</text>
+<text class="sv-title" x="372" y="105.0" text-anchor="middle" transform="rotate(90 372 105.0)">Change in front weight (%)</text>
+<path class="sv-line" d="M46.0,118.1 L53.2,117.6 L60.3,117.0 L67.5,116.4 L74.6,115.8 L81.8,115.2 L88.9,114.6 L96.0,114.0 L103.2,113.4 L110.3,112.8 L117.5,112.3 L124.7,111.7 L131.8,111.1 L138.9,110.5 L146.1,109.9 L153.2,109.3 L160.4,108.7 L167.6,108.1 L174.7,107.6 L181.8,107.0 L189.0,106.4 L196.2,105.8 L203.3,105.2 L210.4,104.6 L217.6,104.0 L224.8,103.4 L231.9,102.8 L239.1,102.3 L246.2,101.7 L253.3,101.1 L260.5,100.5 L267.6,99.9 L274.8,99.3 L281.9,98.7 L289.1,98.1 L296.2,97.6 L303.4,97.0 L310.6,96.4 L317.7,95.8 L324.8,95.2 L332.0,94.6" />
+<rect class="sv-hit" x="42.4" y="18" width="7.2" height="174"><title>Error &#8722;2.00 in: CG shift +0.82 in, front weight +1.4%</title></rect>
+<rect class="sv-hit" x="49.6" y="18" width="7.2" height="174"><title>Error &#8722;1.90 in: CG shift +0.83 in, front weight +1.4%</title></rect>
+<rect class="sv-hit" x="56.7" y="18" width="7.2" height="174"><title>Error &#8722;1.80 in: CG shift +0.83 in, front weight +1.4%</title></rect>
+<rect class="sv-hit" x="63.9" y="18" width="7.2" height="174"><title>Error &#8722;1.70 in: CG shift +0.83 in, front weight +1.4%</title></rect>
+<rect class="sv-hit" x="71.0" y="18" width="7.2" height="174"><title>Error &#8722;1.60 in: CG shift +0.84 in, front weight +1.4%</title></rect>
+<rect class="sv-hit" x="78.2" y="18" width="7.2" height="174"><title>Error &#8722;1.50 in: CG shift +0.84 in, front weight +1.4%</title></rect>
+<rect class="sv-hit" x="85.3" y="18" width="7.2" height="174"><title>Error &#8722;1.40 in: CG shift +0.84 in, front weight +1.4%</title></rect>
+<rect class="sv-hit" x="92.5" y="18" width="7.2" height="174"><title>Error &#8722;1.30 in: CG shift +0.85 in, front weight +1.4%</title></rect>
+<rect class="sv-hit" x="99.6" y="18" width="7.2" height="174"><title>Error &#8722;1.20 in: CG shift +0.85 in, front weight +1.4%</title></rect>
+<rect class="sv-hit" x="106.8" y="18" width="7.2" height="174"><title>Error &#8722;1.10 in: CG shift +0.85 in, front weight +1.4%</title></rect>
+<rect class="sv-hit" x="113.9" y="18" width="7.2" height="174"><title>Error &#8722;1.00 in: CG shift +0.86 in, front weight +1.4%</title></rect>
+<rect class="sv-hit" x="121.1" y="18" width="7.2" height="174"><title>Error &#8722;0.90 in: CG shift +0.86 in, front weight +1.4%</title></rect>
+<rect class="sv-hit" x="128.2" y="18" width="7.2" height="174"><title>Error &#8722;0.80 in: CG shift +0.87 in, front weight +1.4%</title></rect>
+<rect class="sv-hit" x="135.4" y="18" width="7.2" height="174"><title>Error &#8722;0.70 in: CG shift +0.87 in, front weight +1.4%</title></rect>
+<rect class="sv-hit" x="142.5" y="18" width="7.2" height="174"><title>Error &#8722;0.60 in: CG shift +0.87 in, front weight +1.4%</title></rect>
+<rect class="sv-hit" x="149.7" y="18" width="7.2" height="174"><title>Error &#8722;0.50 in: CG shift +0.88 in, front weight +1.4%</title></rect>
+<rect class="sv-hit" x="156.8" y="18" width="7.2" height="174"><title>Error &#8722;0.40 in: CG shift +0.88 in, front weight +1.4%</title></rect>
+<rect class="sv-hit" x="164.0" y="18" width="7.2" height="174"><title>Error &#8722;0.30 in: CG shift +0.88 in, front weight +1.4%</title></rect>
+<rect class="sv-hit" x="171.1" y="18" width="7.2" height="174"><title>Error &#8722;0.20 in: CG shift +0.89 in, front weight +1.5%</title></rect>
+<rect class="sv-hit" x="178.3" y="18" width="7.2" height="174"><title>Error &#8722;0.10 in: CG shift +0.89 in, front weight +1.5%</title></rect>
+<rect class="sv-hit" x="185.4" y="18" width="7.2" height="174"><title>Error 0.00 in: CG shift +0.89 in, front weight +1.5%</title></rect>
+<rect class="sv-hit" x="192.6" y="18" width="7.2" height="174"><title>Error +0.10 in: CG shift +0.90 in, front weight +1.5%</title></rect>
+<rect class="sv-hit" x="199.7" y="18" width="7.2" height="174"><title>Error +0.20 in: CG shift +0.90 in, front weight +1.5%</title></rect>
+<rect class="sv-hit" x="206.9" y="18" width="7.2" height="174"><title>Error +0.30 in: CG shift +0.90 in, front weight +1.5%</title></rect>
+<rect class="sv-hit" x="214.0" y="18" width="7.2" height="174"><title>Error +0.40 in: CG shift +0.91 in, front weight +1.5%</title></rect>
+<rect class="sv-hit" x="221.2" y="18" width="7.2" height="174"><title>Error +0.50 in: CG shift +0.91 in, front weight +1.5%</title></rect>
+<rect class="sv-hit" x="228.3" y="18" width="7.2" height="174"><title>Error +0.60 in: CG shift +0.91 in, front weight +1.5%</title></rect>
+<rect class="sv-hit" x="235.5" y="18" width="7.2" height="174"><title>Error +0.70 in: CG shift +0.92 in, front weight +1.5%</title></rect>
+<rect class="sv-hit" x="242.6" y="18" width="7.2" height="174"><title>Error +0.80 in: CG shift +0.92 in, front weight +1.5%</title></rect>
+<rect class="sv-hit" x="249.8" y="18" width="7.2" height="174"><title>Error +0.90 in: CG shift +0.92 in, front weight +1.5%</title></rect>
+<rect class="sv-hit" x="256.9" y="18" width="7.2" height="174"><title>Error +1.00 in: CG shift +0.93 in, front weight +1.5%</title></rect>
+<rect class="sv-hit" x="264.1" y="18" width="7.2" height="174"><title>Error +1.10 in: CG shift +0.93 in, front weight +1.5%</title></rect>
+<rect class="sv-hit" x="271.2" y="18" width="7.2" height="174"><title>Error +1.20 in: CG shift +0.93 in, front weight +1.5%</title></rect>
+<rect class="sv-hit" x="278.4" y="18" width="7.2" height="174"><title>Error +1.30 in: CG shift +0.94 in, front weight +1.5%</title></rect>
+<rect class="sv-hit" x="285.5" y="18" width="7.2" height="174"><title>Error +1.40 in: CG shift +0.94 in, front weight +1.5%</title></rect>
+<rect class="sv-hit" x="292.7" y="18" width="7.2" height="174"><title>Error +1.50 in: CG shift +0.94 in, front weight +1.5%</title></rect>
+<rect class="sv-hit" x="299.8" y="18" width="7.2" height="174"><title>Error +1.60 in: CG shift +0.95 in, front weight +1.6%</title></rect>
+<rect class="sv-hit" x="307.0" y="18" width="7.2" height="174"><title>Error +1.70 in: CG shift +0.95 in, front weight +1.6%</title></rect>
+<rect class="sv-hit" x="314.1" y="18" width="7.2" height="174"><title>Error +1.80 in: CG shift +0.95 in, front weight +1.6%</title></rect>
+<rect class="sv-hit" x="321.3" y="18" width="7.2" height="174"><title>Error +1.90 in: CG shift +0.96 in, front weight +1.6%</title></rect>
+<rect class="sv-hit" x="328.4" y="18" width="7.2" height="174"><title>Error +2.00 in: CG shift +0.96 in, front weight +1.6%</title></rect>
+<circle class="sv-dot sv-dot-alt" cx="92.5" cy="114.3" r="4.5"><title>70%: CG shift +0.85 in, front weight +1.4%</title></circle>
+<text class="sv-label" x="92.5" y="103.3" text-anchor="middle">70%</text>
+<circle class="sv-dot sv-dot-alt" cx="140.7" cy="110.3" r="4.5"><title>65%: CG shift +0.87 in, front weight +1.4%</title></circle>
+<text class="sv-label" x="140.7" y="99.3" text-anchor="middle">65%</text>
+<circle class="sv-dot" cx="189.0" cy="106.4" r="4.5"><title>60%: CG shift +0.89 in, front weight +1.5%</title></circle>
+<text class="sv-label" x="189.0" y="95.4" text-anchor="middle">60%</text>
+<circle class="sv-dot sv-dot-alt" cx="237.3" cy="102.4" r="4.5"><title>55%: CG shift +0.91 in, front weight +1.5%</title></circle>
+<text class="sv-label" x="237.3" y="91.4" text-anchor="middle">55%</text>
+<circle class="sv-dot sv-dot-alt" cx="285.5" cy="98.4" r="4.5"><title>50%: CG shift +0.94 in, front weight +1.5%</title></circle>
+<text class="sv-label" x="285.5" y="87.4" text-anchor="middle">50%</text>
+</svg>
+              <figcaption><span class="mono">Chart 4</span> INV27 CG x, nominal &#8722;76.28 in. Labels mark the CG for rearward weight biases of 70% to 50%; 60% is nominal.</figcaption>
+            </figure>
+          </div>
+        </section>
+        <!-- sensitivity:end -->
+
+        <section class="a-section" id="remedy">
+          <h2><span class="a-num">5</span>Remedy: Moving the Axles</h2>
+          <p>For 50/50, the CG has to sit at the midpoint between the front and rear axles. Since the CG moves forward 0.89 in, we move both the front and rear axles forward 0.89 in. The midpoint moves with them, the car goes back to 50/50, and the wheelbase stays at 61 in.</p>
+        </section>
+
+        <section class="a-section" id="appendix">
+          <h2><span class="a-num">A</span>Appendix: Input Sources</h2>
+          <div class="a-table-wrap">
+            <table class="a-table sheet a-sources">
+              <thead><tr><th>Input</th><th>Value</th><th>Source</th></tr></thead>
+              <tbody>
+                <tr><td>ARG26 sprung mass with driver</td><td>470&nbsp;lb</td><td>Sprung mass without the driver, 320 lb, plus a driver weight of 150 lb.</td></tr>
+                <tr><td>ARG26 sprung CG, x</td><td>&#8722;50.79&nbsp;in</td><td>The car is designed to 50/50, so the CG is half the wheelbase behind the front axle: &#8722;20.289 &#8722; 61 &times; 0.5 = &#8722;50.789. Front axle location from CAD (<a href="#fig-3">Figure 3</a>).</td></tr>
+                <tr><td>ACC26 mass</td><td>102&nbsp;lb</td><td>ARG26 weight budget, accumulator current weight of 46.266 kg (<a href="#fig-12">Figure 12</a>).</td></tr>
+                <tr><td>ACC26 CG, x</td><td>&#8722;64.00&nbsp;in</td><td>iProperties of the accumulator master assembly in CAD, &#8722;1625.284 mm (<a href="#fig-4">Figure 4</a>).</td></tr>
+                <tr><td>INV26 mass</td><td>34.17&nbsp;lb</td><td>ARG26 weight budget, inverter current weight of 15.5 kg (<a href="#fig-13">Figure 13</a>).</td></tr>
+                <tr><td>INV26 CG, x</td><td>&#8722;78.20&nbsp;in</td><td>iProperties of the inverter enclosure assembly in CAD (<a href="#fig-5">Figure 5</a>).</td></tr>
+                <tr><td>ACC27 mass</td><td>95&nbsp;lb</td><td>Estimate from Aryaman (HV lead).</td></tr>
+                <tr><td>ACC27 CG, x</td><td>&#8722;66.64&nbsp;in</td><td>Rectangular approximation of the accumulator. The front face stays in place and the case grows rearward into the 7.25 in gap between the ARG26 accumulator and the monocoque rear inner face (<a href="#fig-7">Figure 7</a>), leaving 50 mm of clearance: 7.25 in &#8722; 50 mm = 5.28 in (134.15 mm), close to the estimated 130 mm size change. The CG moves back by half of that, &#8722;2.64 in, from the ACC26 CG (<a href="#fig-6">Figure 6</a>).</td></tr>
+                <tr><td>INV27 mass</td><td>15&nbsp;lb</td><td>Estimate of 15 lb for the new inverter.</td></tr>
+                <tr><td>INV27 CG, x</td><td>&#8722;76.28&nbsp;in</td><td>ARG27 inverter enclosure is 13.5 &times; 10 &times; 5 in (<a href="#fig-10">Figure 10</a>, <a href="#fig-11">Figure 11</a>), assumed flush to the monocoque rear inner face at x = &#8722;81.676 in (<a href="#fig-9">Figure 9</a>). With a 60% rearward weight bias, the CG is 13.5 &#8722; (13.5)(0.6) = 5.4 in forward of the rear face: &#8722;81.676 + 5.4 = &#8722;76.28 in (<a href="#fig-8">Figure 8</a>).</td></tr>
+                <tr><td>Wheelbase, L</td><td>61&nbsp;in</td><td>From our design. Kept the same on ARG27.</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <figure class="a-fig" id="fig-3">
+            <img src="../assets/img/cg-shift/03-front-axle.webp" alt="Top view of the ARG26 front of the chassis with x = 0 at the front bulkhead and the front axle at x = -20.289 in" width="1104" height="970" loading="lazy" />
+            <figcaption><span class="mono">Figure 3</span> ARG26 front axle location in CAD, x = &#8722;20.289 in.</figcaption>
+          </figure>
+          <figure class="a-fig a-fig--chart" id="fig-4">
+            <img src="../assets/img/cg-shift/04-acc26-iproperties.png" alt="Inventor iProperties for the ARG26 accumulator master assembly showing a center of gravity x of -1625.284 mm" width="802" height="972" loading="lazy" />
+            <figcaption><span class="mono">Figure 4</span> iProperties of the ARG26 accumulator master assembly, CG x = &#8722;1625.284 mm (&#8722;64.00 in).</figcaption>
+          </figure>
+          <figure class="a-fig a-fig--chart" id="fig-5">
+            <img src="../assets/img/cg-shift/05-inv26-iproperties.png" alt="Inventor iProperties for the ARG26 inverter enclosure assembly showing a center of gravity x of -78.200 in" width="794" height="948" loading="lazy" />
+            <figcaption><span class="mono">Figure 5</span> iProperties of the ARG26 inverter enclosure assembly, CG x = &#8722;78.20 in.</figcaption>
+          </figure>
+          <figure class="a-fig a-fig--chart" id="fig-6">
+            <img src="../assets/img/cg-shift/06-acc27-cg-calc.webp" alt="Hand calculation of the ARG27 accumulator growing rearward into the space behind it, leaving 50 mm clearance to the rear inner face, so its CG moves back 2.61 in" width="1500" height="2000" loading="lazy" />
+            <figcaption><span class="mono">Figure 6</span> Hand calculation of the ACC27 CG shift. The accumulator grows rearward to within 50 mm of the rear inner face, so its CG moves back half the added length. The sketch uses 7.2 in; the results use the CAD measurement of 7.25 in (Figure 7), which gives &#8722;2.64 in.</figcaption>
+          </figure>
+          <figure class="a-fig a-fig--wide" id="fig-7">
+            <a href="../assets/img/cg-shift/07-acc-rear-gap-measure.webp" target="_blank" rel="noopener"><img src="../assets/img/cg-shift/07-acc-rear-gap-measure.webp" alt="CAD measurement of 7.250 in in x between the ARG26 accumulator and the monocoque rear inner face" width="2000" height="834" loading="lazy" /></a>
+            <figcaption><span class="mono">Figure 7</span> Distance between the ARG26 accumulator and the monocoque rear inner face measured in CAD, 7.25 in.</figcaption>
+          </figure>
+          <figure class="a-fig a-fig--chart" id="fig-8">
+            <img src="../assets/img/cg-shift/08-inv27-cg-calc.webp" alt="Hand calculation placing the 13.5 by 10 by 5 in ARG27 inverter enclosure flush to the monocoque rear inner face with a 60% rearward bias, so its CG is 5.4 in forward of that face at x = -76.276 in" width="1500" height="2000" loading="lazy" />
+            <figcaption><span class="mono">Figure 8</span> Hand calculation of the INV27 CG. The enclosure sits flush to the monocoque rear inner face with a 60% rearward bias, so its CG is 5.4 in forward of it, x = &#8722;76.28 in.</figcaption>
+          </figure>
+          <figure class="a-fig a-fig--wide" id="fig-9">
+            <a href="../assets/img/cg-shift/09-rear-inner-face.webp" target="_blank" rel="noopener"><img src="../assets/img/cg-shift/09-rear-inner-face.webp" alt="CAD measurement of the monocoque rear inner face at x = -81.676 in" width="2000" height="836" loading="lazy" /></a>
+            <figcaption><span class="mono">Figure 9</span> Monocoque rear inner face location in CAD, x = &#8722;81.676 in.</figcaption>
+          </figure>
+          <figure class="a-fig a-fig--wide" id="fig-10">
+            <a href="../assets/img/cg-shift/10-inv27-design-dims.webp" target="_blank" rel="noopener"><img src="../assets/img/cg-shift/10-inv27-design-dims.webp" alt="ARG27 inverter enclosure design slide listing major changes and current dimensions of 13.5 by 10 by 5 in" width="2000" height="1128" loading="lazy" /></a>
+            <figcaption><span class="mono">Figure 10</span> ARG27 inverter enclosure design, current dimensions 13.5 &times; 10 &times; 5 in.</figcaption>
+          </figure>
+          <figure class="a-fig a-fig--wide" id="fig-11">
+            <a href="../assets/img/cg-shift/11-inv27-design-3d.webp" target="_blank" rel="noopener"><img src="../assets/img/cg-shift/11-inv27-design-3d.webp" alt="Two views of the ARG27 inverter enclosure with connectors, with the +x direction marked" width="2000" height="1119" loading="lazy" /></a>
+            <figcaption><span class="mono">Figure 11</span> ARG27 inverter enclosure design, with +x marked.</figcaption>
+          </figure>
+          <figure class="a-fig a-fig--wide" id="fig-12">
+            <a href="../assets/img/cg-shift/12-acc-weight-budget.png" target="_blank" rel="noopener"><img src="../assets/img/cg-shift/12-acc-weight-budget.png" alt="Accumulator weight targets table from the ARG26 weight budget, with a current total of 46.266 kg" width="1900" height="490" loading="lazy" /></a>
+            <figcaption><span class="mono">Figure 12</span> ARG26 weight budget, accumulator weight targets.</figcaption>
+          </figure>
+          <figure class="a-fig a-fig--wide" id="fig-13">
+            <a href="../assets/img/cg-shift/13-powertrain-weight-budget.png" target="_blank" rel="noopener"><img src="../assets/img/cg-shift/13-powertrain-weight-budget.png" alt="Powertrain peripherals weight targets table from the ARG26 weight budget, with the inverters at 15.5 kg" width="1890" height="766" loading="lazy" /></a>
+            <figcaption><span class="mono">Figure 13</span> ARG26 weight budget, powertrain peripherals weight targets.</figcaption>
+          </figure>
+          <figure class="a-fig" id="fig-14">
+            <img src="../assets/img/cg-shift/14-whiteboard-1.webp" alt="Whiteboard sketches of the accumulator and inverter packaging in top and side view, with ARG26 and ARG27 pack and inverter weights" width="1500" height="2000" loading="lazy" />
+            <figcaption><span class="mono">Figure 14</span> Whiteboard sketches mapping out the initial work on the accumulator and inverter changes.</figcaption>
+          </figure>
+          <figure class="a-fig" id="fig-15">
+            <img src="../assets/img/cg-shift/15-whiteboard-2.webp" alt="Whiteboard sketches comparing the ARG26 and ARG27 accumulator layouts and splitting the accumulator CG into case and inside parts" width="2000" height="1500" loading="lazy" />
+            <figcaption><span class="mono">Figure 15</span> Whiteboard sketches comparing the ARG26 and ARG27 accumulator layouts.</figcaption>
+          </figure>
+        </section>
+        </section>
+        </div>
+      </div>
+    </article>
+
+    <nav class="p-nav">
+      <div class="wrap">
+        <a class="prev" href="physical-tests.html"><span class="mono">&larr; Previous</span><span class="display">Physical Tests</span></a>
+        <a class="next" href="jig-plate.html"><span class="mono">Next &rarr;</span><span class="display">Suspension Jig Plate Project</span></a>
+      </div>
+    </nav>
+  </main>
+
+  <footer class="footer">
+    <div class="wrap mono">
+      <span>&copy; 2026 Davis Rattanavijai</span>
+      <a href="mailto:dr653@cornell.edu">dr653@cornell.edu</a>
+    </div>
+  </footer>
+  <script src="../assets/js/main.js?v=0e77c8ff"></script>
+</body>
+</html>

@@ -1,0 +1,738 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Physical Tests — Davis Rattanavijai</title>
+  <meta name="description" content="Tests run on the car to measure its real properties." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;500&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../assets/css/style.css?v=0e77c8ff" />
+</head>
+<body>
+  <!-- EDIT: site notice banner; delete this div to remove it -->
+  <div class="site-notice"><div class="wrap"><span class="mono">Notice</span>This site is continually being updated throughout the year, but check out what I&rsquo;ve written about so far!</div></div>
+  <header class="topbar">
+    <div class="wrap">
+      <a class="brand" href="../index.html">Davis Rattanavijai <span>Portfolio</span></a>
+      <nav class="nav">
+        <a href="../index.html#work">Work</a>
+        <div class="nav-item contact">
+          <button type="button" class="contact-toggle" aria-expanded="false" aria-controls="contact-panel">Contact</button>
+          <div class="contact-panel" id="contact-panel">
+            <div class="contact-card">
+              <span class="mono">Email</span>
+              <button type="button" class="copy-email" data-copy="dr653@cornell.edu">
+                <span class="email">dr653@cornell.edu</span>
+                <span class="copy-label mono" data-default="Click to copy">Click to copy</span>
+              </button>
+            </div>
+          </div>
+        </div>
+        <button type="button" data-resume-toggle aria-expanded="false" aria-controls="resume-panel">Resume<span class="caret" aria-hidden="true">&#9662;</span></button>
+      </nav>
+      <div class="resume-panel" id="resume-panel">
+        <div class="resume-head mono"><span>Resume</span><span>Oct 2026</span></div>
+        <div class="resume-doc" data-src="../DavisRattanavijai_Resume.pdf#toolbar=0&amp;navpanes=0&amp;view=FitH"></div>
+        <div class="resume-actions">
+          <a class="primary" href="../DavisRattanavijai_Resume.pdf" download>Download PDF</a>
+          <a href="../resume.html">Open &rarr;</a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="p-hero">
+      <div class="wrap">
+        <div class="crumbs mono"><a href="../index.html#work">Index</a><span class="sep">/</span><span>Cornell Racing</span><span class="sep">/</span><span>Suspension Lead</span></div>
+        <h1 class="display p-title">Physical Tests</h1>
+        <!-- EDIT: description -->
+        <p class="p-desc">Tests run on the car to measure its real properties.</p>
+      </div>
+    </section>
+
+    <article class="article">
+      <div class="wrap a-doc">
+        <nav class="toc" aria-label="Contents">
+          <button type="button" class="toc-toggle mono" aria-expanded="false">Contents<span class="caret" aria-hidden="true">&#9662;</span></button>
+          <p class="toc-head mono">Contents</p>
+          <ol class="toc-list">
+          <li class="toc-part"><a href="#cg-height-test">CG Height Test</a>
+            <ol>
+              <li><a href="#purpose"><span class="toc-num mono">1</span><span>Purpose</span></a></li>
+              <li><a href="#method-a"><span class="toc-num mono">2</span><span>Method A: Side Tilt (Balance) Test</span></a>
+                <ol class="toc-sub">
+                  <li><a href="#cg-height-test-theory"><span class="toc-num mono">2.1</span><span>Theory</span></a></li>
+                  <li><a href="#cg-height-test-materials"><span class="toc-num mono">2.2</span><span>Materials</span></a></li>
+                  <li><a href="#cg-height-test-pre-test-procedure"><span class="toc-num mono">2.3</span><span>Pre-Test Procedure</span></a></li>
+                  <li><a href="#cg-height-test-measurements-before-tilting"><span class="toc-num mono">2.4</span><span>Measurements Before Tilting</span></a></li>
+                  <li><a href="#cg-height-test-equations"><span class="toc-num mono">2.5</span><span>Equations</span></a></li>
+                  <li><a href="#cg-height-test-procedure"><span class="toc-num mono">2.6</span><span>Procedure</span></a></li>
+                  <li><a href="#cg-height-test-data-and-results"><span class="toc-num mono">2.7</span><span>Data and Results</span></a></li>
+                  <li><a href="#cg-height-test-arg26-results"><span class="toc-num mono">2.8</span><span>ARG26 Results</span></a></li>
+                  <li><a href="#cg-height-test-downloadable-test-plan"><span class="toc-num mono">2.9</span><span>Downloadable Test Plan</span></a></li>
+                </ol>
+              </li>
+              <li><a href="#method-b"><span class="toc-num mono">3</span><span>Method B: Front Lift (Axle Load) Test</span></a>
+                <ol class="toc-sub">
+                  <li><a href="#cg-height-test-theory-2"><span class="toc-num mono">3.1</span><span>Theory</span></a></li>
+                  <li><a href="#cg-height-test-materials-2"><span class="toc-num mono">3.2</span><span>Materials</span></a></li>
+                  <li><a href="#cg-height-test-pre-test-procedure-2"><span class="toc-num mono">3.3</span><span>Pre-Test Procedure</span></a></li>
+                  <li><a href="#cg-height-test-measurements-before-lifting"><span class="toc-num mono">3.4</span><span>Measurements Before Lifting</span></a></li>
+                  <li><a href="#cg-height-test-derivation"><span class="toc-num mono">3.5</span><span>Derivation</span></a></li>
+                  <li><a href="#cg-height-test-equations-2"><span class="toc-num mono">3.6</span><span>Equations</span></a></li>
+                  <li><a href="#cg-height-test-procedure-2"><span class="toc-num mono">3.7</span><span>Procedure</span></a></li>
+                  <li><a href="#cg-height-test-data-sheet"><span class="toc-num mono">3.8</span><span>Data Sheet</span></a></li>
+                </ol>
+              </li>
+              <li><a href="#analysis"><span class="toc-num mono">4</span><span>Post-Test Data Analysis</span></a>
+                <ol class="toc-sub">
+                  <li><a href="#cg-height-test-method-b-results"><span class="toc-num mono">4.1</span><span>Method B Results</span></a></li>
+                  <li><a href="#cg-height-test-comparison-with-cad-and-discussion"><span class="toc-num mono">4.2</span><span>Comparison with CAD and Discussion</span></a></li>
+                </ol>
+              </li>
+              <li><a href="#cg-height-test-references"><span class="toc-num mono">5</span><span>References</span></a></li>
+            </ol>
+          </li>
+          </ol>
+        </nav>
+        <div class="a-doc-body">
+
+        <section class="a-part" id="cg-height-test">
+          <header class="a-part-head">
+            <h2 class="display a-part-title">CG Height Test</h2>
+            <p class="a-part-desc">Test procedure for measuring the CG height of ARG26 with two methods: a side tilt test and a front lift test.</p>
+          </header>
+
+
+        <p class="a-byline mono">Davis Rattanavijai &middot; Last edited October 3, 2026</p>
+
+        <section class="a-section" id="purpose">
+          <h2><span class="a-num">1</span>Purpose</h2>
+          <p>This document outlines how we find the center of gravity (cg) height of ARG26 through a physical test. Although we can make reasonable estimates through CAD, validating the cg height is important because it influences a lot of our load transfer and handling characteristics.</p>
+          <p>There are two main independent methods to calculate the cg height:</p>
+          <ol class="a-index">
+            <li><a href="#method-a">Method A: Side Tilt (Balance) Test.</a> The car is tipped onto the tires of one side until it balances. The balance angle gives the CG height directly.</li>
+            <li><a href="#method-b">Method B: Front Lift (Axle Load) Test.</a> The front of the car is lifted while the rear tires sit on scales. The change in rear axle load gives the CG height.</li>
+          </ol>
+        </section>
+
+        <!-- ==================== METHOD A ==================== -->
+        <section class="a-section" id="method-a">
+          <h2><span class="a-num">2</span>Method A: Side Tilt (Balance) Test</h2>
+
+          <h3 id="cg-height-test-theory"><span class="a-num">2.1</span>Theory</h3>
+          <p>A body balances on a pivot when its CG is directly above the pivot. In this test the car is tipped sideways onto the tires of one side, so it rests only on the outer edges of those two tires. The car is slowly rotated until it balances and can be held in place with a couple of fingers, with the crane chain slack. At that point the CG lies on the vertical line through the pivot.</p>
+          <p>In the car's own frame, the CG sits half the car's width, d / 2, in from the pivot edge and a height h above the ground plane. When the car is rotated by the balance angle &theta;, the line from the pivot to the CG is vertical, so tan &theta; = (d / 2) / h.</p>
+          <figure class="a-fig a-diagram">
+            <svg viewBox="0 0 520 345" role="img" aria-label="Front view of the car balanced on its left tires at angle theta, with the CG directly above the pivot">
+              <rect x="20" y="320" width="480" height="10" class="dg-floor" />
+              <line x1="20" y1="320" x2="500" y2="320" class="dg-ground" />
+              <line x1="140" y1="320" x2="140" y2="26" class="dg-dash" />
+              <text x="148" y="20">vertical through pivot and CG</text>
+              <g transform="translate(140 320) rotate(-65.2)">
+                <line x1="0" y1="0" x2="310" y2="0" class="dg-ref" />
+                <rect x="0" y="-76" width="34" height="76" rx="8" class="dg-tire" />
+                <rect x="226" y="-76" width="34" height="76" rx="8" class="dg-tire" />
+                <rect x="48" y="-104" width="164" height="62" rx="6" class="dg-body" />
+                <line x1="34" y1="-58" x2="48" y2="-80" class="dg-body" />
+                <line x1="34" y1="-22" x2="48" y2="-52" class="dg-body" />
+                <line x1="226" y1="-58" x2="212" y2="-80" class="dg-body" />
+                <line x1="226" y1="-22" x2="212" y2="-52" class="dg-body" />
+                <line x1="0" y1="0" x2="130" y2="0" class="dg-dim" />
+                <line x1="130" y1="0" x2="130" y2="-60" class="dg-dim" />
+              </g>
+              <circle cx="140" cy="177" r="6" class="dg-cg" />
+              <text x="128" y="181" text-anchor="end">CG</text>
+              <text x="174" y="178" class="dg-acc">h</text>
+              <text x="184" y="268" class="dg-acc">d/2</text>
+              <path d="M 190 320 A 50 50 0 0 0 161 274.6" class="dg-arc" />
+              <text x="196" y="297" class="dg-acc">&#952;</text>
+              <line x1="249" y1="84" x2="249" y2="32" class="dg-strap" />
+              <text x="257" y="44">crane chain</text>
+              <text x="257" y="57">(slack at balance)</text>
+              <text x="257" y="100">raised side</text>
+              <text x="150" y="340">pivot: outer edge of the lower tires</text>
+            </svg>
+            <figcaption><span class="mono">Figure 1</span><span>Front view of the car balanced on its left tires. At balance the CG is directly above the pivot, so tan &theta; = (d / 2) / h.</span></figcaption>
+          </figure>
+          <h3 id="cg-height-test-materials"><span class="a-num">2.2</span>Materials</h3>
+          <div class="a-table-wrap">
+            <table class="a-table sheet">
+              <thead><tr><th>#</th><th>Item</th><th>Where</th></tr></thead>
+              <tbody>
+                <tr><td>1</td><td>ARG26</td><td>Lab</td></tr>
+                <tr><td>2</td><td>Drivers (driver 1 and driver 2)</td><td>&mdash;</td></tr>
+                <tr><td>3</td><td>Vehicle scales (corner weights)</td><td>Lab</td></tr>
+                <tr><td>4</td><td>Digital level</td><td>Lab</td></tr>
+                <tr><td>5</td><td>Crane with hook</td><td>Lab</td></tr>
+                <tr><td>6</td><td>Chain long enough to wrap around a front rim and a rear rim together, with a maillon on both ends</td><td>Lab</td></tr>
+                <tr><td>7</td><td>Dummy shocks and dummy cones</td><td>Lab</td></tr>
+                <tr><td>8</td><td>Magnesium rims</td><td>Lab</td></tr>
+                <tr><td>9</td><td>Tire pump and pressure gauge</td><td>Lab</td></tr>
+                <tr><td>10</td><td>Camera or phone (to video the digital level)</td><td>&mdash;</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <h3 id="cg-height-test-pre-test-procedure"><span class="a-num">2.3</span>Pre-Test Procedure</h3>
+          <ol>
+            <li>Install the accumulator and bolt it down (ask someone on high voltage).</li>
+            <li>Install the dummy shocks and dummy cones.</li>
+            <li>Make sure the car is on the magnesium rims.</li>
+            <li>Overinflate the tires to 30 psi.</li>
+            <li>Once the car is on the ground, measure the ride height. It will be larger than usual because the dummy shocks are in.</li>
+            <li>Put the digital level on a flat, visible part of the car and zero it.</li>
+          </ol>
+
+          <h3 id="cg-height-test-measurements-before-tilting"><span class="a-num">2.4</span>Measurements Before Tilting</h3>
+          <p>Record these with the car level on the scales, once for each test case.</p>
+          <div class="a-table-wrap">
+            <table class="a-table sheet">
+              <thead><tr><th>Symbol</th><th>Measurement</th><th>Without driver</th><th>Driver 1</th><th>Driver 2</th></tr></thead>
+              <tbody>
+                <tr><td>W<sub>FL</sub></td><td>Front left corner weight (lb)</td><td></td><td></td><td></td></tr>
+                <tr><td>W<sub>FR</sub></td><td>Front right corner weight (lb)</td><td></td><td></td><td></td></tr>
+                <tr><td>W<sub>RL</sub></td><td>Rear left corner weight (lb)</td><td></td><td></td><td></td></tr>
+                <tr><td>W<sub>RR</sub></td><td>Rear right corner weight (lb)</td><td></td><td></td><td></td></tr>
+                <tr><td>W<sub>driver</sub></td><td>Driver weight (lb)</td><td>&mdash;</td><td></td><td></td></tr>
+                <tr><td>W</td><td>Total weight (lb)</td><td></td><td></td><td></td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p>These are the same for all three cases:</p>
+          <div class="a-table-wrap">
+            <table class="a-table sheet">
+              <thead><tr><th>Symbol</th><th>Measurement</th><th>Value</th></tr></thead>
+              <tbody>
+                <tr><td>L</td><td>Wheelbase (in)</td><td></td></tr>
+                <tr><td>d<sub>f</sub></td><td>Front width, outside tire edge to outside tire edge (in)</td><td></td></tr>
+                <tr><td>d<sub>r</sub></td><td>Rear width, outside tire edge to outside tire edge (in)</td><td></td></tr>
+                <tr><td>p</td><td>Tire pressure (psi)</td><td></td></tr>
+                <tr><td>RH</td><td>Ride height with dummy shocks in (in)</td><td></td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <h3 id="cg-height-test-equations"><span class="a-num">2.5</span>Equations</h3>
+          <p>The front and rear of the car have different widths, so the width is taken at the lengthwise position of the CG (Figure 2) [2]. The CG sits a distance a behind the front axle, set by the fraction of weight on the rear axle, W<sub>R</sub> = W<sub>RL</sub> + W<sub>RR</sub>:</p>
+          <p class="eq">a = L &times; W<sub>R</sub> / W</p>
+          <p class="eq">d = d<sub>f</sub> + (d<sub>r</sub> &minus; d<sub>f</sub>) &times; W<sub>R</sub> / W</p>
+
+          <figure class="a-fig a-diagram">
+            <svg viewBox="0 0 520 270" role="img" aria-label="Plan view of the car showing front width, rear width, wheelbase, and the width at the CG">
+              <defs>
+                <marker id="arw" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+                  <path d="M 0 0 L 10 5 L 0 10 z" class="dg-arrowhead" />
+                </marker>
+                <marker id="arw-acc" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+                  <path d="M 0 0 L 10 5 L 0 10 z" class="dg-arrowhead-acc" />
+                </marker>
+              </defs>
+              <text x="110" y="24" text-anchor="middle">rear</text>
+              <text x="430" y="24" text-anchor="middle">front</text>
+              <polygon points="110,60 430,45 430,215 110,200" class="dg-body" />
+              <line x1="60" y1="130" x2="480" y2="130" class="dg-centerline" />
+              <line x1="286" y1="32" x2="286" y2="228" class="dg-dash" />
+              <line x1="90" y1="62" x2="90" y2="198" class="dg-dimline" marker-start="url(#arw)" marker-end="url(#arw)" />
+              <text x="82" y="118" text-anchor="end">d<tspan dy="3" font-size="9">r</tspan></text>
+              <line x1="452" y1="47" x2="452" y2="213" class="dg-dimline" marker-start="url(#arw)" marker-end="url(#arw)" />
+              <text x="460" y="118">d<tspan dy="3" font-size="9">f</tspan></text>
+              <line x1="272" y1="128" x2="272" y2="55" class="dg-dim-arrow" marker-start="url(#arw-acc)" marker-end="url(#arw-acc)" />
+              <text x="262" y="96" text-anchor="end" class="dg-acc">d/2</text>
+              <line x1="288" y1="172" x2="428" y2="172" class="dg-dimline" marker-start="url(#arw)" marker-end="url(#arw)" />
+              <text x="358" y="164" text-anchor="middle">a = L &#215; W<tspan dy="3" font-size="9">R</tspan><tspan dy="-3"> / W</tspan></text>
+              <line x1="112" y1="246" x2="428" y2="246" class="dg-dimline" marker-start="url(#arw)" marker-end="url(#arw)" />
+              <text x="270" y="240" text-anchor="middle">L</text>
+              <circle cx="286" cy="130" r="7" class="dg-cg-open" />
+              <line x1="281" y1="125" x2="291" y2="135" class="dg-cg-x" />
+              <line x1="291" y1="125" x2="281" y2="135" class="dg-cg-x" />
+              <text x="298" y="122">CG</text>
+            </svg>
+            <figcaption><span class="mono">Figure 2</span><span>Plan view. The width d is taken across the outside tire edges at the lengthwise position of the CG. Adapted from [2].</span></figcaption>
+          </figure>
+
+          <p>CG height above the ground at static ride height:</p>
+          <p class="eq">h = (d / 2) / tan &theta;</p>
+          <p>where &theta; is the digital level reading at balance (the level is zeroed with the car flat on the ground). This assumes the CG is on the car's centerline.</p>
+          <p>Before lifting, estimate the angle the car should balance at from the expected CG height (for example, from CAD), so you know roughly where to stop the crane:</p>
+          <p class="eq">&theta;<sub>expected</sub> = arctan( (d / 2) / h<sub>expected</sub> )</p>
+          <h4 class="cg-case-title">Ride Height Correction</h4>
+          <p>The dummy shocks hold the car above its normal ride height, so the measured h is the CG at the tested ride height. Only the sprung mass moves with ride height, so the CG at the design ride height is:</p>
+          <p class="eq">h<sub>nominal</sub> = h<sub>measured</sub> &minus; (m<sub>sprung</sub> / m<sub>total</sub>) &times; (RH<sub>tested</sub> &minus; RH<sub>nominal</sub>)</p>
+          <p>The driver is part of the sprung mass, so the sprung fraction is different for each case. With W<sub>unsprung</sub> the same in every case:</p>
+          <p class="eq">W = W<sub>car</sub> + W<sub>driver</sub>,&nbsp;&nbsp;m<sub>sprung</sub> / m<sub>total</sub> = (W &minus; W<sub>unsprung</sub>) / W</p>
+          <details class="a-details">
+            <summary>Show derivation</summary>
+            <div class="a-details-body">
+              <p>Split the car into its sprung mass (chassis, driver, accumulator, powertrain) and unsprung mass (wheels, tires, uprights). The CG height is the mass-weighted average of the parts:</p>
+              <p class="eq">h = &Sigma;(m<sub>i</sub> r<sub>i</sub>) / &Sigma; m<sub>i</sub></p>
+              <p>As tested, where r<sub>sprung</sub> and r<sub>unsprung</sub> are the CG heights of the sprung and unsprung mass:</p>
+              <p class="eq">h<sub>measured</sub> = ( m<sub>sprung</sub> r<sub>sprung</sub> + m<sub>unsprung</sub> r<sub>unsprung</sub> ) / m<sub>total</sub></p>
+              <p>Changing the ride height by &Delta;RH moves only the sprung mass. The wheels, tires and uprights stay where they are:</p>
+              <p class="eq">h<sub>new</sub> = ( m<sub>sprung</sub> (r<sub>sprung</sub> + &Delta;RH) + m<sub>unsprung</sub> r<sub>unsprung</sub> ) / m<sub>total</sub></p>
+              <p class="eq">h<sub>new</sub> = h<sub>measured</sub> + (m<sub>sprung</sub> / m<sub>total</sub>) &times; &Delta;RH</p>
+              <p>where &Delta;RH = RH<sub>new</sub> &minus; RH<sub>tested</sub>. Going from the tested ride height down to the design ride height, &Delta;RH = &minus;(RH<sub>tested</sub> &minus; RH<sub>nominal</sub>), which gives the equation above. The mass ratio m<sub>sprung</sub> / m<sub>total</sub> is the same as the weight ratio W<sub>sprung</sub> / W.</p>
+            </div>
+          </details>
+          <p>An error in &theta; changes h by roughly &Delta;h &asymp; (d / 2) &times; &Delta;&theta; / sin<sup>2</sup>&theta; (&Delta;&theta; in radians). A 0.2&deg; error gave roughly a 0.1 in error in h for the car measured in [2], so balance the car several times and average.</p>
+
+          <h3 id="cg-height-test-procedure"><span class="a-num">2.6</span>Procedure</h3>
+          <ol>
+            <li>Prepare the car by following the pre-test procedure.</li>
+            <li>Wrap the chain around one front rim and one rear rim on the same side, and close it with the maillons.</li>
+            <li>Attach the crane hook to the chain you just wrapped.</li>
+            <li>With the crane, raise the car slowly toward the expected angle from the expected CG height, watching the digital level. Use &theta;<sub>expected</sub> = arctan( (d / 2) / h<sub>expected</sub> ).</li>
+            <li>Stand by the driver's seat as the car tilts. Put one hand on the roll hoop and one hand on the inner side of the monocoque. These are the points where you apply force to slowly balance the car.</li>
+            <li>Have someone record a video of the digital level while you teeter the car back and forth. When you get it to balance at the right point, call out a word. This lets us go back through the video and read exactly what angle was measured.</li>
+            <li>Keep the video going and balance the car several more times to get multiple data points (about 5). Someone else can also teeter the car to get another source of data points.</li>
+          </ol>
+          <p>Use this procedure to measure three cases:</p>
+          <ol>
+            <li>Without the driver</li>
+            <li>With driver 1</li>
+            <li>With driver 2</li>
+          </ol>
+
+          <h3 id="cg-height-test-data-and-results"><span class="a-num">2.7</span>Data and Results</h3>
+          <!-- web-only -->
+          <p>Type the balance angles into the tables below. The CG height, the results for each case, and the plot update as you type. Entries are saved in this browser.</p>
+          <!-- /web-only -->
+          <div class="a-table-wrap">
+            <table class="a-table sheet cg-inputs">
+              <thead><tr><th>Input</th><th>Value</th></tr></thead>
+              <tbody>
+                <tr><td>d, width across outside tire edges at the CG (in)</td><td class="cg-in"><input type="number" step="0.01" inputmode="decimal" data-cg="d" aria-label="d" /></td></tr>
+                <tr><td>h<sub>expected</sub>, expected CG height, can be from CAD (in)</td><td class="cg-in"><input type="number" step="0.01" inputmode="decimal" data-cg="hcad" aria-label="expected CG height" /></td></tr>
+                <tr><td>&theta;<sub>expected</sub> (deg)</td><td class="cg-out" data-cg-out="theta-exp"></td></tr>
+                <tr><td>RH<sub>tested</sub> &minus; RH<sub>nominal</sub>, ride height raise from the dummy shocks (in)</td><td class="cg-in"><input type="number" step="0.01" inputmode="decimal" data-cg="drh" aria-label="ride height raise" /></td></tr>
+                <tr><td>W<sub>car</sub>, car weight without driver (lb)</td><td class="cg-in"><input type="number" step="0.1" inputmode="decimal" data-cg="wcar" aria-label="car weight" /></td></tr>
+                <tr><td>W<sub>unsprung</sub>, unsprung weight (lb)</td><td class="cg-in"><input type="number" step="0.1" inputmode="decimal" data-cg="wun" aria-label="unsprung weight" /></td></tr>
+                <tr><td>Driver 1 weight (lb)</td><td class="cg-in"><input type="number" step="0.1" inputmode="decimal" data-cg="dw1" aria-label="driver 1 weight" /></td></tr>
+                <tr><td>Driver 2 weight (lb)</td><td class="cg-in"><input type="number" step="0.1" inputmode="decimal" data-cg="dw2" aria-label="driver 2 weight" /></td></tr>
+                <tr><td>W<sub>sprung</sub> / W: without driver, driver 1, driver 2</td><td class="cg-out" data-cg-out="sf"></td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="cg-case" data-case="0" data-label="Without driver">
+            <h4 class="cg-case-title"><span class="cg-swatch cg-c0" aria-hidden="true"></span>Case 1: Without driver</h4>
+            <div class="cg-case-grid">
+              <div class="a-table-wrap">
+                <table class="a-table sheet">
+                  <thead><tr><th>Trial</th><th>&theta; (deg)</th><th>h (in)</th><th>Notes</th></tr></thead>
+                  <tbody>
+                    <tr><td>1</td><td class="cg-in"><input type="number" step="0.01" inputmode="decimal" data-theta aria-label="Without driver trial 1 angle" /></td><td class="cg-out" data-h></td><td class="cg-in"><input type="text" data-note aria-label="Without driver trial 1 notes" /></td></tr>
+                    <tr><td>2</td><td class="cg-in"><input type="number" step="0.01" inputmode="decimal" data-theta aria-label="Without driver trial 2 angle" /></td><td class="cg-out" data-h></td><td class="cg-in"><input type="text" data-note aria-label="Without driver trial 2 notes" /></td></tr>
+                    <tr><td>3</td><td class="cg-in"><input type="number" step="0.01" inputmode="decimal" data-theta aria-label="Without driver trial 3 angle" /></td><td class="cg-out" data-h></td><td class="cg-in"><input type="text" data-note aria-label="Without driver trial 3 notes" /></td></tr>
+                    <tr><td>4</td><td class="cg-in"><input type="number" step="0.01" inputmode="decimal" data-theta aria-label="Without driver trial 4 angle" /></td><td class="cg-out" data-h></td><td class="cg-in"><input type="text" data-note aria-label="Without driver trial 4 notes" /></td></tr>
+                    <tr><td>5</td><td class="cg-in"><input type="number" step="0.01" inputmode="decimal" data-theta aria-label="Without driver trial 5 angle" /></td><td class="cg-out" data-h></td><td class="cg-in"><input type="text" data-note aria-label="Without driver trial 5 notes" /></td></tr>
+                    <tr><td>6</td><td class="cg-in"><input type="number" step="0.01" inputmode="decimal" data-theta aria-label="Without driver trial 6 angle" /></td><td class="cg-out" data-h></td><td class="cg-in"><input type="text" data-note aria-label="Without driver trial 6 notes" /></td></tr>
+                    <tr><td>7</td><td class="cg-in"><input type="number" step="0.01" inputmode="decimal" data-theta aria-label="Without driver trial 7 angle" /></td><td class="cg-out" data-h></td><td class="cg-in"><input type="text" data-note aria-label="Without driver trial 7 notes" /></td></tr>
+                    <tr><td>8</td><td class="cg-in"><input type="number" step="0.01" inputmode="decimal" data-theta aria-label="Without driver trial 8 angle" /></td><td class="cg-out" data-h></td><td class="cg-in"><input type="text" data-note aria-label="Without driver trial 8 notes" /></td></tr>
+                  </tbody>
+                </table>
+              </div>
+              <div class="a-table-wrap">
+                <table class="a-table sheet">
+                  <thead><tr><th>Result</th><th>Value</th></tr></thead>
+                  <tbody>
+                    <tr><td>Trials used</td><td class="cg-out" data-r="n"></td></tr>
+                    <tr><td>Average h (in)</td><td class="cg-out" data-r="avg"></td></tr>
+                    <tr><td>Lowest h (in)</td><td class="cg-out" data-r="min"></td></tr>
+                    <tr><td>Highest h (in)</td><td class="cg-out" data-r="max"></td></tr>
+                    <tr><td>Average h at normal ride height (in)</td><td class="cg-out" data-r="nom"></td></tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+          <div class="cg-case" data-case="1" data-label="Driver 1" data-driver="dw1">
+            <h4 class="cg-case-title"><span class="cg-swatch cg-c1" aria-hidden="true"></span>Case 2: Driver 1</h4>
+            <div class="cg-case-grid">
+              <div class="a-table-wrap">
+                <table class="a-table sheet">
+                  <thead><tr><th>Trial</th><th>&theta; (deg)</th><th>h (in)</th><th>Notes</th></tr></thead>
+                  <tbody>
+                    <tr><td>1</td><td class="cg-in"><input type="number" step="0.01" inputmode="decimal" data-theta aria-label="Driver 1 trial 1 angle" /></td><td class="cg-out" data-h></td><td class="cg-in"><input type="text" data-note aria-label="Driver 1 trial 1 notes" /></td></tr>
+                    <tr><td>2</td><td class="cg-in"><input type="number" step="0.01" inputmode="decimal" data-theta aria-label="Driver 1 trial 2 angle" /></td><td class="cg-out" data-h></td><td class="cg-in"><input type="text" data-note aria-label="Driver 1 trial 2 notes" /></td></tr>
+                    <tr><td>3</td><td class="cg-in"><input type="number" step="0.01" inputmode="decimal" data-theta aria-label="Driver 1 trial 3 angle" /></td><td class="cg-out" data-h></td><td class="cg-in"><input type="text" data-note aria-label="Driver 1 trial 3 notes" /></td></tr>
+                    <tr><td>4</td><td class="cg-in"><input type="number" step="0.01" inputmode="decimal" data-theta aria-label="Driver 1 trial 4 angle" /></td><td class="cg-out" data-h></td><td class="cg-in"><input type="text" data-note aria-label="Driver 1 trial 4 notes" /></td></tr>
+                    <tr><td>5</td><td class="cg-in"><input type="number" step="0.01" inputmode="decimal" data-theta aria-label="Driver 1 trial 5 angle" /></td><td class="cg-out" data-h></td><td class="cg-in"><input type="text" data-note aria-label="Driver 1 trial 5 notes" /></td></tr>
+                    <tr><td>6</td><td class="cg-in"><input type="number" step="0.01" inputmode="decimal" data-theta aria-label="Driver 1 trial 6 angle" /></td><td class="cg-out" data-h></td><td class="cg-in"><input type="text" data-note aria-label="Driver 1 trial 6 notes" /></td></tr>
+                    <tr><td>7</td><td class="cg-in"><input type="number" step="0.01" inputmode="decimal" data-theta aria-label="Driver 1 trial 7 angle" /></td><td class="cg-out" data-h></td><td class="cg-in"><input type="text" data-note aria-label="Driver 1 trial 7 notes" /></td></tr>
+                    <tr><td>8</td><td class="cg-in"><input type="number" step="0.01" inputmode="decimal" data-theta aria-label="Driver 1 trial 8 angle" /></td><td class="cg-out" data-h></td><td class="cg-in"><input type="text" data-note aria-label="Driver 1 trial 8 notes" /></td></tr>
+                  </tbody>
+                </table>
+              </div>
+              <div class="a-table-wrap">
+                <table class="a-table sheet">
+                  <thead><tr><th>Result</th><th>Value</th></tr></thead>
+                  <tbody>
+                    <tr><td>Trials used</td><td class="cg-out" data-r="n"></td></tr>
+                    <tr><td>Average h (in)</td><td class="cg-out" data-r="avg"></td></tr>
+                    <tr><td>Lowest h (in)</td><td class="cg-out" data-r="min"></td></tr>
+                    <tr><td>Highest h (in)</td><td class="cg-out" data-r="max"></td></tr>
+                    <tr><td>Average h at normal ride height (in)</td><td class="cg-out" data-r="nom"></td></tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+          <div class="cg-case" data-case="2" data-label="Driver 2" data-driver="dw2">
+            <h4 class="cg-case-title"><span class="cg-swatch cg-c2" aria-hidden="true"></span>Case 3: Driver 2</h4>
+            <div class="cg-case-grid">
+              <div class="a-table-wrap">
+                <table class="a-table sheet">
+                  <thead><tr><th>Trial</th><th>&theta; (deg)</th><th>h (in)</th><th>Notes</th></tr></thead>
+                  <tbody>
+                    <tr><td>1</td><td class="cg-in"><input type="number" step="0.01" inputmode="decimal" data-theta aria-label="Driver 2 trial 1 angle" /></td><td class="cg-out" data-h></td><td class="cg-in"><input type="text" data-note aria-label="Driver 2 trial 1 notes" /></td></tr>
+                    <tr><td>2</td><td class="cg-in"><input type="number" step="0.01" inputmode="decimal" data-theta aria-label="Driver 2 trial 2 angle" /></td><td class="cg-out" data-h></td><td class="cg-in"><input type="text" data-note aria-label="Driver 2 trial 2 notes" /></td></tr>
+                    <tr><td>3</td><td class="cg-in"><input type="number" step="0.01" inputmode="decimal" data-theta aria-label="Driver 2 trial 3 angle" /></td><td class="cg-out" data-h></td><td class="cg-in"><input type="text" data-note aria-label="Driver 2 trial 3 notes" /></td></tr>
+                    <tr><td>4</td><td class="cg-in"><input type="number" step="0.01" inputmode="decimal" data-theta aria-label="Driver 2 trial 4 angle" /></td><td class="cg-out" data-h></td><td class="cg-in"><input type="text" data-note aria-label="Driver 2 trial 4 notes" /></td></tr>
+                    <tr><td>5</td><td class="cg-in"><input type="number" step="0.01" inputmode="decimal" data-theta aria-label="Driver 2 trial 5 angle" /></td><td class="cg-out" data-h></td><td class="cg-in"><input type="text" data-note aria-label="Driver 2 trial 5 notes" /></td></tr>
+                    <tr><td>6</td><td class="cg-in"><input type="number" step="0.01" inputmode="decimal" data-theta aria-label="Driver 2 trial 6 angle" /></td><td class="cg-out" data-h></td><td class="cg-in"><input type="text" data-note aria-label="Driver 2 trial 6 notes" /></td></tr>
+                    <tr><td>7</td><td class="cg-in"><input type="number" step="0.01" inputmode="decimal" data-theta aria-label="Driver 2 trial 7 angle" /></td><td class="cg-out" data-h></td><td class="cg-in"><input type="text" data-note aria-label="Driver 2 trial 7 notes" /></td></tr>
+                    <tr><td>8</td><td class="cg-in"><input type="number" step="0.01" inputmode="decimal" data-theta aria-label="Driver 2 trial 8 angle" /></td><td class="cg-out" data-h></td><td class="cg-in"><input type="text" data-note aria-label="Driver 2 trial 8 notes" /></td></tr>
+                  </tbody>
+                </table>
+              </div>
+              <div class="a-table-wrap">
+                <table class="a-table sheet">
+                  <thead><tr><th>Result</th><th>Value</th></tr></thead>
+                  <tbody>
+                    <tr><td>Trials used</td><td class="cg-out" data-r="n"></td></tr>
+                    <tr><td>Average h (in)</td><td class="cg-out" data-r="avg"></td></tr>
+                    <tr><td>Lowest h (in)</td><td class="cg-out" data-r="min"></td></tr>
+                    <tr><td>Highest h (in)</td><td class="cg-out" data-r="max"></td></tr>
+                    <tr><td>Average h at normal ride height (in)</td><td class="cg-out" data-r="nom"></td></tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+
+          <!-- web-only -->
+          <figure class="a-fig cg-plot">
+            <div class="cg-plot-frame" data-cg-plot aria-label="CG height for each trial, by case"></div>
+            <figcaption><span class="mono">Figure 3</span><span>CG height from every trial, one row per case. Each dot is a trial, the bar is the average, and the line runs from the lowest to the highest trial.</span></figcaption>
+          </figure>
+          <p class="cg-tools"><button type="button" class="btn" data-cg-clear>Clear all entries</button></p>
+          <!-- /web-only -->
+
+          <!-- web-only -->
+          <h3 id="cg-height-test-arg26-results"><span class="a-num">2.8</span>ARG26 Results</h3>
+          <p>CG height of ARG26 at its nominal 1.5 in ride height. These values already include the ride height correction, so they can be used directly for any vehicle calculations with CG height.</p>
+          <div class="a-table-wrap">
+            <table class="a-table sheet">
+              <thead><tr><th>Case</th><th>Trials</th><th>Average h (in)</th><th>Lowest (in)</th><th>Highest (in)</th></tr></thead>
+              <tbody>
+                <tr><td><span class="cg-swatch cg-c0" aria-hidden="true"></span>No driver</td><td>4</td><td><strong>8.75</strong></td><td>8.61</td><td>8.86</td></tr>
+                <tr><td><span class="cg-swatch cg-c1" aria-hidden="true"></span>Driver 1 (Caroline)</td><td>6</td><td><strong>9.60</strong></td><td>9.46</td><td>9.73</td></tr>
+                <tr><td><span class="cg-swatch cg-c2" aria-hidden="true"></span>Driver 2 (Aryaman)</td><td>5</td><td><strong>9.96</strong></td><td>9.78</td><td>10.05</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <details class="a-details">
+            <summary>Show data and calculations</summary>
+            <div class="a-details-body">
+              <p class="a-note"><span class="mono">Note</span>Due to the time crunch, we assumed the weight is split evenly (50/50) at all four corners instead of measuring corner weights. We also assumed the CG of the car and the driver both sit at that 50/50 midpoint, so adding the driver does not change the longitudinal position of the CG.</p>
+              <p class="a-note"><span class="mono">Note</span>The unsprung weight is 30 lbf at each corner, so 120 lbf total. It is the same with or without a driver, since the driver is part of the sprung mass.</p>
+
+              <h4 class="cg-case-title">Inputs</h4>
+              <div class="a-table-wrap">
+                <table class="a-table sheet">
+                  <thead><tr><th>Symbol</th><th>Measurement</th><th>Value</th></tr></thead>
+                  <tbody>
+                    <tr><td>W<sub>car</sub></td><td>Car weight without driver (lb)</td><td>440</td></tr>
+                    <tr><td>W<sub>driver</sub></td><td>Driver weight, driver 1 and driver 2 (lb)</td><td>130</td></tr>
+                    <tr><td>W</td><td>Total weight: no driver, with driver (lb)</td><td>440, 570</td></tr>
+                    <tr><td>W<sub>FL</sub> = W<sub>FR</sub> = W<sub>RL</sub> = W<sub>RR</sub></td><td>Corner weights, assumed even: no driver, with driver (lb)</td><td>110, 142.5</td></tr>
+                    <tr><td>W<sub>unsprung</sub></td><td>Unsprung weight, 30 lb per corner (lb)</td><td>120</td></tr>
+                    <tr><td>L</td><td>Wheelbase (in)</td><td>61</td></tr>
+                    <tr><td>d<sub>f</sub> = d<sub>r</sub></td><td>Width across outside tire edges (in)</td><td>51.8</td></tr>
+                    <tr><td>p</td><td>Tire pressure (psi)</td><td>20</td></tr>
+                    <tr><td>RH<sub>tested</sub></td><td>Ride height with dummy shocks (in)</td><td>2.7</td></tr>
+                    <tr><td>RH<sub>nominal</sub></td><td>Design ride height (in)</td><td>1.5</td></tr>
+                    <tr><td>&theta;<sub>0</sub></td><td>Level reading, car level (deg)</td><td>0</td></tr>
+                  </tbody>
+                </table>
+              </div>
+
+              <h4 class="cg-case-title">Calculations</h4>
+              <p>With d<sub>f</sub> = d<sub>r</sub>, the width at the CG does not depend on the weight split:</p>
+              <p class="eq">d = d<sub>f</sub> + (d<sub>r</sub> &minus; d<sub>f</sub>) &times; W<sub>R</sub> / W = 51.8 in,&nbsp;&nbsp;d / 2 = 25.9 in</p>
+              <p class="eq">h = (d / 2) / tan &theta;</p>
+              <p>Ride height correction (Section 2.5), from the 2.7 in tested ride height down to the 1.5 in design ride height. The driver adds sprung mass, so the sprung fraction is worked out for each case:</p>
+              <p class="eq">RH<sub>tested</sub> &minus; RH<sub>nominal</sub> = 2.7 &minus; 1.5 = 1.2 in</p>
+              <p class="eq">W<sub>sprung</sub> / W = (W &minus; W<sub>unsprung</sub>) / W</p>
+              <p class="eq">h<sub>nominal</sub> = h &minus; (W<sub>sprung</sub> / W) &times; (RH<sub>tested</sub> &minus; RH<sub>nominal</sub>)</p>
+
+              <h4 class="cg-case-title"><span class="cg-swatch cg-c0" aria-hidden="true"></span>No driver</h4>
+              <p>W = 440 lb, W<sub>sprung</sub> / W = (440 &minus; 120) / 440 = 0.727, correction = 0.727 &times; 1.2 = 0.873 in</p>
+              <div class="a-table-wrap">
+                <table class="a-table sheet">
+                  <thead><tr><th>Trial</th><th>&theta; (deg)</th><th>h as tested (in)</th><th>h at 1.5 in ride height (in)</th></tr></thead>
+                  <tbody>
+                    <tr><td>1</td><td>69.5</td><td>9.68</td><td>8.81</td></tr>
+                    <tr><td>2</td><td>69.9</td><td>9.48</td><td>8.61</td></tr>
+                    <tr><td>3</td><td>69.7</td><td>9.58</td><td>8.71</td></tr>
+                    <tr><td>4</td><td>69.4</td><td>9.74</td><td>8.86</td></tr>
+                    <tr class="a-row-total"><td>Average</td><td>69.62</td><td>9.62</td><td>8.75</td></tr>
+                  </tbody>
+                </table>
+              </div>
+              <h4 class="cg-case-title"><span class="cg-swatch cg-c1" aria-hidden="true"></span>Driver 1 (Caroline)</h4>
+              <p>W = 570 lb, W<sub>sprung</sub> / W = (570 &minus; 120) / 570 = 0.789, correction = 0.789 &times; 1.2 = 0.947 in</p>
+              <div class="a-table-wrap">
+                <table class="a-table sheet">
+                  <thead><tr><th>Trial</th><th>&theta; (deg)</th><th>h as tested (in)</th><th>h at 1.5 in ride height (in)</th></tr></thead>
+                  <tbody>
+                    <tr><td>1</td><td>67.8</td><td>10.57</td><td>9.62</td></tr>
+                    <tr><td>2</td><td>68.1</td><td>10.41</td><td>9.46</td></tr>
+                    <tr><td>3</td><td>67.9</td><td>10.52</td><td>9.57</td></tr>
+                    <tr><td>4</td><td>67.7</td><td>10.62</td><td>9.67</td></tr>
+                    <tr><td>5</td><td>68.0</td><td>10.46</td><td>9.52</td></tr>
+                    <tr><td>6</td><td>67.6</td><td>10.68</td><td>9.73</td></tr>
+                    <tr class="a-row-total"><td>Average</td><td>67.85</td><td>10.54</td><td>9.60</td></tr>
+                  </tbody>
+                </table>
+              </div>
+              <h4 class="cg-case-title"><span class="cg-swatch cg-c2" aria-hidden="true"></span>Driver 2 (Aryaman)</h4>
+              <p>W = 570 lb, W<sub>sprung</sub> / W = (570 &minus; 120) / 570 = 0.789, correction = 0.789 &times; 1.2 = 0.947 in</p>
+              <div class="a-table-wrap">
+                <table class="a-table sheet">
+                  <thead><tr><th>Trial</th><th>&theta; (deg)</th><th>h as tested (in)</th><th>h at 1.5 in ride height (in)</th></tr></thead>
+                  <tbody>
+                    <tr><td>1</td><td>67.0</td><td>10.99</td><td>10.05</td></tr>
+                    <tr><td>2</td><td>67.1</td><td>10.94</td><td>9.99</td></tr>
+                    <tr><td>3</td><td>67.1</td><td>10.94</td><td>9.99</td></tr>
+                    <tr><td>4</td><td>67.5</td><td>10.73</td><td>9.78</td></tr>
+                    <tr><td>5</td><td>67.1</td><td>10.94</td><td>9.99</td></tr>
+                    <tr class="a-row-total"><td>Average</td><td>67.16</td><td>10.91</td><td>9.96</td></tr>
+                  </tbody>
+                </table>
+              </div>
+
+              <figure class="a-fig cg-plot">
+                <div class="cg-plot-frame"><svg viewBox="0 0 640 238" role="img" aria-label="ARG26 CG height at nominal ride height by case"><line x1="186.9" y1="14" x2="186.9" y2="194" class="cg-grid"/><text x="186.9" y="212" text-anchor="middle" class="cg-tick">8.50</text><line x1="249.3" y1="14" x2="249.3" y2="194" class="cg-grid"/><text x="249.3" y="212" text-anchor="middle" class="cg-tick">8.75</text><line x1="311.7" y1="14" x2="311.7" y2="194" class="cg-grid"/><text x="311.7" y="212" text-anchor="middle" class="cg-tick">9.00</text><line x1="374.1" y1="14" x2="374.1" y2="194" class="cg-grid"/><text x="374.1" y="212" text-anchor="middle" class="cg-tick">9.25</text><line x1="436.4" y1="14" x2="436.4" y2="194" class="cg-grid"/><text x="436.4" y="212" text-anchor="middle" class="cg-tick">9.50</text><line x1="498.8" y1="14" x2="498.8" y2="194" class="cg-grid"/><text x="498.8" y="212" text-anchor="middle" class="cg-tick">9.75</text><line x1="561.2" y1="14" x2="561.2" y2="194" class="cg-grid"/><text x="561.2" y="212" text-anchor="middle" class="cg-tick">10.00</text><line x1="170" y1="194" x2="616" y2="194" class="cg-axis"/><text x="393.0" y="234" text-anchor="middle" class="cg-tick">CG height at 1.5 in ride height (in)</text><text x="156" y="46" text-anchor="end" class="cg-label" fill="#d9481c">No driver</text><line x1="170" y1="42" x2="616" y2="42" class="cg-row"/><line x1="213.2" y1="42" x2="277.3" y2="42" stroke="#d9481c" stroke-width="2"/><circle cx="264.5" cy="42" r="5.5" fill="#d9481c" fill-opacity="0.75"/><circle cx="213.2" cy="42" r="5.5" fill="#d9481c" fill-opacity="0.75"/><circle cx="238.8" cy="42" r="5.5" fill="#d9481c" fill-opacity="0.75"/><circle cx="277.3" cy="42" r="5.5" fill="#d9481c" fill-opacity="0.75"/><line x1="248.4" y1="27" x2="248.4" y2="57" stroke="#d9481c" stroke-width="3"/><text x="248.4" y="22" text-anchor="middle" class="cg-avg" fill="#d9481c">8.75</text><text x="156" y="102" text-anchor="end" class="cg-label" fill="#2b6cb0">Driver 1 (Caroline)</text><line x1="170" y1="98" x2="616" y2="98" class="cg-row"/><line x1="427.5" y1="98" x2="493.3" y2="98" stroke="#2b6cb0" stroke-width="2"/><rect x="461.9" y="93" width="10" height="10" fill="#2b6cb0" fill-opacity="0.75"/><rect x="422.5" y="93" width="10" height="10" fill="#2b6cb0" fill-opacity="0.75"/><rect x="448.8" y="93" width="10" height="10" fill="#2b6cb0" fill-opacity="0.75"/><rect x="475.1" y="93" width="10" height="10" fill="#2b6cb0" fill-opacity="0.75"/><rect x="435.7" y="93" width="10" height="10" fill="#2b6cb0" fill-opacity="0.75"/><rect x="488.3" y="93" width="10" height="10" fill="#2b6cb0" fill-opacity="0.75"/><line x1="460.4" y1="83" x2="460.4" y2="113" stroke="#2b6cb0" stroke-width="3"/><text x="460.4" y="78" text-anchor="middle" class="cg-avg" fill="#2b6cb0">9.60</text><text x="156" y="158" text-anchor="end" class="cg-label" fill="#2f855a">Driver 2 (Aryaman)</text><line x1="170" y1="154" x2="616" y2="154" class="cg-row"/><line x1="506.5" y1="154" x2="572.8" y2="154" stroke="#2f855a" stroke-width="2"/><path d="M 572.8 147.5 L 578.8 158.5 L 566.8 158.5 Z" fill="#2f855a" fill-opacity="0.75"/><path d="M 559.5 147.5 L 565.5 158.5 L 553.5 158.5 Z" fill="#2f855a" fill-opacity="0.75"/><path d="M 559.5 147.5 L 565.5 158.5 L 553.5 158.5 Z" fill="#2f855a" fill-opacity="0.75"/><path d="M 506.5 147.5 L 512.5 158.5 L 500.5 158.5 Z" fill="#2f855a" fill-opacity="0.75"/><path d="M 559.5 147.5 L 565.5 158.5 L 553.5 158.5 Z" fill="#2f855a" fill-opacity="0.75"/><line x1="551.6" y1="139" x2="551.6" y2="169" stroke="#2f855a" stroke-width="3"/><text x="551.6" y="134" text-anchor="middle" class="cg-avg" fill="#2f855a">9.96</text></svg></div>
+                <figcaption><span class="mono">Figure 4</span><span>ARG26 CG height at the 1.5 in design ride height for each trial. The bar is the average and the line runs from the lowest to the highest trial.</span></figcaption>
+              </figure>
+            </div>
+          </details>
+          <!-- /web-only -->
+
+          <h3 id="cg-height-test-downloadable-test-plan"><span class="a-num">2.9</span>Downloadable Test Plan</h3>
+          <div class="a-download">
+            <div class="doc-embed">
+              <div class="doc-head mono"><span>Method A Test Plan</span><span>6 pages &middot; PDF</span></div>
+              <iframe src="../assets/docs/ARG27_CG_Height_Test_Method_A.pdf#view=FitH&amp;navpanes=0" title="ARG26 CG Height Test Plan, Method A" loading="lazy"></iframe>
+            </div>
+            <div class="doc-actions">
+              <a class="btn primary" href="../assets/docs/ARG27_CG_Height_Test_Method_A.pdf" download>Download PDF</a>
+            </div>
+          </div>
+          <p class="a-top"><a href="#purpose">&uarr; Back to top</a></p>
+        </section>
+
+        <!-- ==================== METHOD B ==================== -->
+        <section class="a-section" id="method-b">
+          <h2><span class="a-num">3</span>Method B: Front Lift (Axle Load) Test</h2>
+          <p class="a-note"><span class="mono">In progress</span>Method B is not finished yet.</p>
+
+          <h3 id="cg-height-test-theory-2"><span class="a-num">3.1</span>Theory</h3>
+          <p>With the rear tires on the scales, the front of the car is lifted by the crane so the car pivots about the rear axle. As the front rises, the CG moves rearward relative to the rear axle, so the rear scales read more weight. The higher the CG sits above the axle line, the larger that increase is. Measuring how much the rear axle load increases for a known change in angle gives the CG height [1].</p>
+
+          <figure class="a-fig a-diagram">
+            <svg viewBox="0 0 520 300" role="img" aria-label="Side view of the car with rear tires on scales and the front lifted by crane at angle alpha, showing a, b, L, h_a and the forces">
+              <defs>
+                <marker id="arw-b" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+                  <path d="M 0 0 L 10 5 L 0 10 z" class="dg-arrowhead" />
+                </marker>
+                <marker id="arw-b-acc" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+                  <path d="M 0 0 L 10 5 L 0 10 z" class="dg-arrowhead-acc" />
+                </marker>
+              </defs>
+              <rect x="20" y="260" width="480" height="10" class="dg-floor" />
+              <line x1="20" y1="260" x2="500" y2="260" class="dg-ground" />
+              <rect x="76" y="250" width="68" height="10" class="dg-scale" />
+              <polygon points="140,250 156,250 140,236" class="dg-chock" />
+              <circle cx="110" cy="222" r="28" class="dg-tire" />
+              <line x1="110" y1="222" x2="230" y2="222" class="dg-ref" />
+              <g transform="translate(110 222) rotate(-20)">
+                <rect x="-30" y="-72" width="360" height="44" rx="8" class="dg-body" />
+                <line x1="0" y1="0" x2="300" y2="0" class="dg-ref" />
+                <circle cx="300" cy="0" r="28" class="dg-tire" />
+                <line x1="165" y1="0" x2="165" y2="-45" class="dg-dim" />
+                <line x1="0" y1="10" x2="163" y2="10" class="dg-dimline" marker-start="url(#arw-b)" marker-end="url(#arw-b)" />
+                <line x1="167" y1="10" x2="300" y2="10" class="dg-dimline" marker-start="url(#arw-b)" marker-end="url(#arw-b)" />
+              </g>
+              <circle cx="110" cy="222" r="3" class="dg-cg" />
+              <circle cx="392" cy="119.4" r="3" class="dg-cg" />
+              <circle cx="249.7" cy="123.3" r="6" class="dg-cg" />
+              <text x="238" y="116" text-anchor="end">CG</text>
+              <text x="266" y="143" class="dg-acc">h<tspan dy="3" font-size="9">a</tspan></text>
+              <text x="196" y="214">b</text>
+              <text x="340" y="164">a</text>
+              <path d="M 160 222 A 50 50 0 0 0 157 204.9" class="dg-arc" />
+              <text x="170" y="217" class="dg-acc">&#945;</text>
+              <line x1="386" y1="45" x2="386" y2="8" class="dg-strap" marker-end="url(#arw-b)" />
+              <text x="394" y="22">F (crane, front)</text>
+              <text x="110" y="286" text-anchor="middle">rear scales (W<tspan dy="3" font-size="9">RL</tspan><tspan dy="-3">, W</tspan><tspan dy="3" font-size="9">RR</tspan><tspan dy="-3">)</tspan></text>
+              <text x="74" y="229" text-anchor="end">rear axle</text>
+              <text x="74" y="242" text-anchor="end">(pivot)</text>
+            </svg>
+            <figcaption><span class="mono">Figure 5</span><span>Side view of the car pivoting about the rear axle with the front lifted. a and b are the distances from the CG to the front and rear axles along the axle line, and h<sub>a</sub> is the CG height above that line. Adapted from [1].</span></figcaption>
+          </figure>
+
+          <h3 id="cg-height-test-materials-2"><span class="a-num">3.2</span>Materials</h3>
+          <div class="a-table-wrap">
+            <table class="a-table sheet">
+              <thead><tr><th>#</th><th>Item</th><th>Where</th></tr></thead>
+              <tbody>
+                <tr><td>1</td><td>ARG26</td><td>Lab</td></tr>
+                <tr><td>2</td><td>Driver</td><td>&mdash;</td></tr>
+                <tr><td>3</td><td>Vehicle scales</td><td>Lab</td></tr>
+                <tr><td>4</td><td>Known calibration weight (33 lb)</td><td>Lab</td></tr>
+                <tr><td>5</td><td>Digital level</td><td>Lab</td></tr>
+                <tr><td>6</td><td>Crane with chain</td><td>Lab</td></tr>
+                <tr><td>7</td><td>Dummy shocks and dummy cones</td><td>Lab</td></tr>
+                <tr><td>8</td><td>Magnesium rims</td><td>Lab</td></tr>
+                <tr><td>9</td><td>Tire pump and pressure gauge</td><td>Lab</td></tr>
+                <tr><td>10</td><td>Tape measure</td><td>Lab</td></tr>
+                <tr><td>11</td><td>Cinder blocks (raise the rear scales for larger angles)</td><td>Lab</td></tr>
+                <tr><td>12</td><td>Wheel chocks (sandbags) for the rear tires</td><td>Lab</td></tr>
+                <tr><td>13</td><td>Camera or phone</td><td>&mdash;</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <h3 id="cg-height-test-pre-test-procedure-2"><span class="a-num">3.3</span>Pre-Test Procedure</h3>
+          <ol>
+            <li>Install the dummy shocks and dummy cones.</li>
+            <li>Install the accumulator and bolt it down (ask someone on high voltage).</li>
+            <li>Make sure the car is on the magnesium rims.</li>
+            <li>Overinflate the tires to 30 psi.</li>
+            <li>Check each scale with the known weight: less than 0.5 lbf of variance among the scales, and less than 0.5 lbf of error from the known weight, per 50 lb added.</li>
+            <li>Set the rear scales on the cinder blocks, then level and zero them.</li>
+            <li>Chock the rear wheels.</li>
+          </ol>
+
+          <h3 id="cg-height-test-measurements-before-lifting"><span class="a-num">3.4</span>Measurements Before Lifting</h3>
+          <p>Record these with the car level on the scales, driver in the car.</p>
+          <div class="a-table-wrap">
+            <table class="a-table sheet">
+              <thead><tr><th>Symbol</th><th>Measurement</th><th>Value</th></tr></thead>
+              <tbody>
+                <tr><td>W</td><td>Total weight, all four scales (lb)</td><td></td></tr>
+                <tr><td>W<sub>RL1</sub></td><td>Rear left weight, car level (lb)</td><td></td></tr>
+                <tr><td>W<sub>RR1</sub></td><td>Rear right weight, car level (lb)</td><td></td></tr>
+                <tr><td>&alpha;<sub>1</sub></td><td>Level reading, car level (deg)</td><td></td></tr>
+                <tr><td>L</td><td>Wheelbase (in)</td><td></td></tr>
+                <tr><td>r<sub>f</sub></td><td>Front loaded radius, ground to axle center (in)</td><td></td></tr>
+                <tr><td>r<sub>r</sub></td><td>Rear loaded radius, ground to axle center (in)</td><td></td></tr>
+                <tr><td>p</td><td>Tire pressure (psi)</td><td></td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <h3 id="cg-height-test-derivation"><span class="a-num">3.5</span>Derivation</h3>
+          <p>The car does not need a 50/50 weight split. Let a be the distance from the CG to the front axle and b the distance from the CG to the rear axle, measured along the axle line, so a + b = L (Figure 5). The CG sits a height h<sub>a</sub> above that line.</p>
+          <p>With the front raised by an angle &alpha;, the horizontal distance from the rear axle to the CG is:</p>
+          <p class="eq">x = b cos &alpha; &minus; h<sub>a</sub> sin &alpha;</p>
+          <p>The crane force F acts at the front axle, a horizontal distance L cos &alpha; from the rear axle. Taking moments about the rear axle:</p>
+          <p class="eq">F &times; L cos &alpha; = W &times; (b cos &alpha; &minus; h<sub>a</sub> sin &alpha;)</p>
+          <p class="eq">F = W &times; b / L &minus; W &times; (h<sub>a</sub> / L) &times; tan &alpha;</p>
+          <p>The rear scales carry the rest of the weight, W<sub>R</sub> = W &minus; F. Using a + b = L:</p>
+          <p class="eq">W<sub>R</sub> = W &times; a / L + W &times; (h<sub>a</sub> / L) &times; tan &alpha;</p>
+          <p>With the car level (&alpha; = 0) this is just the static rear weight, W<sub>R1</sub> = W &times; a / L. The weight split only sets that starting reading. Subtracting it leaves the change in rear weight, which depends only on h<sub>a</sub>:</p>
+          <p class="eq">W<sub>Rn</sub> &minus; W<sub>R1</sub> = W &times; (h<sub>a</sub> / L) &times; tan(&alpha;<sub>n</sub> &minus; &alpha;<sub>1</sub>)</p>
+
+          <h3 id="cg-height-test-equations-2"><span class="a-num">3.6</span>Equations</h3>
+          <p>Rear axle weight at each position n:</p>
+          <p class="eq">W<sub>Rn</sub> = W<sub>RLn</sub> + W<sub>RRn</sub></p>
+          <p>CG height above the axle centerline:</p>
+          <p class="eq">h<sub>a</sub> = L &times; (W<sub>Rn</sub> &minus; W<sub>R1</sub>) / ( W &times; tan(&alpha;<sub>n</sub> &minus; &alpha;<sub>1</sub>) )</p>
+          <p>CG height above the ground at static ride height, adding the average loaded radius:</p>
+          <p class="eq">h = h<sub>a</sub> + (r<sub>f</sub> + r<sub>r</sub>) / 2</p>
+          <p>The level corner weights also locate the CG along the car: a = L &times; W<sub>R1</sub> / W and b = L &times; W<sub>F1</sub> / W.</p>
+          <p>The change in rear weight is small compared with the total weight, so scale error can become a large part of the result [2]. Use large angles (20&deg; to 40&deg; of change) and average several measurements [3]. The tires also deform under load, lowering the CG slightly, and the value is not exact at speed because of aero loads and tire pressure changes [3].</p>
+
+          <h3 id="cg-height-test-procedure-2"><span class="a-num">3.7</span>Procedure</h3>
+          <ol>
+            <li>Complete the pre-test procedure and the measurements before lifting.</li>
+            <li>Lift the front of the car with the crane, keeping the chain vertical.</li>
+            <li>Hold the car still and record the level reading &alpha;<sub>n</sub> and the rear corner weights W<sub>RLn</sub> and W<sub>RRn</sub>.</li>
+            <li>Repeat at several angles, aiming for about 10&deg;, 20&deg;, 30&deg; and 40&deg; of change.</li>
+            <li>Lower the car, re-zero the scales, and repeat the full set for a second run.</li>
+          </ol>
+
+          <h3 id="cg-height-test-data-sheet"><span class="a-num">3.8</span>Data Sheet</h3>
+          <div class="a-table-wrap">
+            <table class="a-table sheet">
+              <thead><tr><th>n</th><th>&alpha;<sub>n</sub> (deg)</th><th>W<sub>RLn</sub> (lb)</th><th>W<sub>RRn</sub> (lb)</th><th>W<sub>Rn</sub> (lb)</th><th>h (in)</th></tr></thead>
+              <tbody>
+                <tr><td>2</td><td></td><td></td><td></td><td></td><td></td></tr>
+                <tr><td>3</td><td></td><td></td><td></td><td></td><td></td></tr>
+                <tr><td>4</td><td></td><td></td><td></td><td></td><td></td></tr>
+                <tr><td>5</td><td></td><td></td><td></td><td></td><td></td></tr>
+                <tr><td>6</td><td></td><td></td><td></td><td></td><td></td></tr>
+                <tr><td>7</td><td></td><td></td><td></td><td></td><td></td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p class="a-top"><a href="#purpose">&uarr; Back to top</a></p>
+        </section>
+
+        <section class="a-section" id="analysis">
+          <h2><span class="a-num">4</span>Post-Test Data Analysis</h2>
+          <p class="tbf">To be filled out after testing.</p>
+          <div class="a-table-wrap">
+            <table class="a-table sheet">
+              <thead><tr><th>Source</th><th>h (in)</th><th>Spread (in)</th><th>vs. CAD (in)</th></tr></thead>
+              <tbody>
+                <tr><td>Method A: Side Tilt</td><td></td><td></td><td></td></tr>
+                <tr><td>Method B: Front Lift</td><td></td><td></td><td></td></tr>
+                <tr><td>CAD Estimate</td><td></td><td>&mdash;</td><td>&mdash;</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <h3 id="cg-height-test-method-b-results"><span class="a-num">4.1</span>Method B Results</h3>
+          <p class="tbf">To be filled out after testing.</p>
+          <h3 id="cg-height-test-comparison-with-cad-and-discussion"><span class="a-num">4.2</span>Comparison with CAD and Discussion</h3>
+          <p class="tbf">To be filled out after testing.</p>
+        </section>
+
+        <section class="a-section">
+          <h2 id="cg-height-test-references"><span class="a-num">5</span>References</h2>
+          <ol class="a-refs">
+            <li>W. F. Milliken and D. L. Milliken, Race Car Vehicle Dynamics, SAE, 1995, Section 18.2.</li>
+            <li>J. Hakewill, "Measuring Center-of-Gravity Height on a Formula Car," June 2007. Method credited to Claude Rouelle.</li>
+            <li>J. Callister and L. Sganderlla, ARG16 CG Height Measurement Testing Protocol, Cornell Racing.</li>
+          </ol>
+        </section>
+        </section>
+        </div>
+      </div>
+    </article>
+
+    <nav class="p-nav">
+      <div class="wrap">
+        <a class="prev" href="rates-and-parameters.html"><span class="mono">&larr; Previous</span><span class="display">Suspension Rates and Parameter Selection</span></a>
+        <a class="next" href="miscellaneous.html"><span class="mono">Next &rarr;</span><span class="display">Miscellaneous</span></a>
+      </div>
+    </nav>
+  </main>
+
+  <footer class="footer">
+    <div class="wrap mono">
+      <span>&copy; 2026 Davis Rattanavijai</span>
+      <a href="mailto:dr653@cornell.edu">dr653@cornell.edu</a>
+    </div>
+  </footer>
+  <script src="../assets/js/main.js?v=0e77c8ff"></script>
+</body>
+</html>

@@ -278,6 +278,57 @@
     }
   }
 
+  // ---------- Contents column on write-up pages ----------
+  // Highlights the section being read and opens its sub sections.
+  const toc = document.querySelector(".toc");
+  if (toc) {
+    const tocLinks = Array.from(toc.querySelectorAll("a[href^='#']"));
+    const targets = tocLinks.map((a) => document.getElementById(a.getAttribute("href").slice(1)));
+    const tocToggle = toc.querySelector(".toc-toggle");
+    let current = null;
+
+    function setExpanded(open) {
+      toc.classList.toggle("is-expanded", open);
+      tocToggle.setAttribute("aria-expanded", String(open));
+    }
+    tocToggle.addEventListener("click", () => setExpanded(!toc.classList.contains("is-expanded")));
+    tocLinks.forEach((a) => a.addEventListener("click", () => setExpanded(false)));
+
+    function update() {
+      // last heading that has scrolled past the top bar
+      let idx = 0;
+      targets.forEach((t, i) => {
+        if (t && t.getBoundingClientRect().top <= 120) idx = i;
+      });
+      // at the very bottom the last sections can't reach the top, so mark the last one
+      if (window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 2) idx = targets.length - 1;
+      const link = tocLinks[idx];
+      if (link === current) return;
+      current = link;
+      tocLinks.forEach((a) => a.classList.toggle("is-active", a === link));
+      toc.querySelectorAll("li.is-open").forEach((li) => li.classList.remove("is-open"));
+      for (let li = link.parentElement; li && li !== toc; li = li.parentElement.closest("li")) {
+        li.classList.add("is-open");
+      }
+      // keep the active entry visible inside the contents column without moving the page
+      const box = toc.getBoundingClientRect();
+      const r = link.getBoundingClientRect();
+      if (r.top < box.top + 40) toc.scrollTop -= box.top + 40 - r.top;
+      else if (r.bottom > box.bottom - 40) toc.scrollTop += r.bottom - box.bottom + 40;
+    }
+
+    let ticking = false;
+    window.addEventListener("scroll", () => {
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(() => {
+        update();
+        ticking = false;
+      });
+    }, { passive: true });
+    update();
+  }
+
   // ---------- Hover preview ----------
   // Shows a live, scaled-down render of the linked page next to the cursor.
   const links = document.querySelectorAll("[data-preview]");

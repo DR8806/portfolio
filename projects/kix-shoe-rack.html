@@ -8,14 +8,14 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;500&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="../assets/css/style.css?v=4a6af428" />
+  <link rel="stylesheet" href="../assets/css/style.css?v=0e77c8ff" />
 </head>
 <body>
   <!-- EDIT: site notice banner; delete this div to remove it -->
   <div class="site-notice"><div class="wrap"><span class="mono">Notice</span>This site is continually being updated throughout the year, but check out what I&rsquo;ve written about so far!</div></div>
   <header class="topbar">
     <div class="wrap">
-      <a class="brand" href="../index.html">Davis Rattanavijai</a>
+      <a class="brand" href="../index.html">Davis Rattanavijai <span>Portfolio</span></a>
       <nav class="nav">
         <a href="../index.html#work">Work</a>
         <div class="nav-item contact">
@@ -54,10 +54,21 @@
     </section>
 
     <article class="article">
-      <div class="wrap">
+      <div class="wrap a-doc">
+        <nav class="toc" aria-label="Contents">
+          <button type="button" class="toc-toggle mono" aria-expanded="false">Contents<span class="caret" aria-hidden="true">&#9662;</span></button>
+          <p class="toc-head mono">Contents</p>
+          <ol class="toc-list">
+          <li><a href="#the-product"><span>The Product</span></a></li>
+          <li><a href="#next-steps"><span>Next Steps</span></a></li>
+          <li><a href="#slides"><span>Slides</span></a></li>
+          </ol>
+        </nav>
+        <div class="a-doc-body">
+
 
         <section class="a-section">
-          <h2>The Product</h2>
+          <h2 id="the-product">The Product</h2>
           <!-- EDIT: product explanation -->
           <p>KIX is a shoe rack with built-in mechanisms that takes your shoes off and stores them in one step. We are trying to tackle the hassle of taking off your shoes and putting them away, and to eliminate the clutter that builds up in entryways.</p>
           <figure class="a-fig">
@@ -67,7 +78,7 @@
         </section>
 
         <section class="a-section">
-          <h2>Next Steps</h2>
+          <h2 id="next-steps">Next Steps</h2>
           <ul>
             <li>Customer discovery</li>
             <li>Pitch competitions</li>
@@ -76,7 +87,7 @@
         </section>
 
         <section class="a-section">
-          <h2>Slides</h2>
+          <h2 id="slides">Slides</h2>
           <div class="doc-embed">
             <div class="doc-head mono"><span>KIX Shoe Rack</span><span>11 slides &middot; PDF</span></div>
             <iframe src="../assets/docs/KIX_Shoe_Rack_Slides.pdf#view=Fit&amp;navpanes=0" title="KIX Shoe Rack slides" loading="lazy"></iframe>
@@ -85,14 +96,14 @@
             <a class="btn primary" href="../assets/docs/KIX_Shoe_Rack_Slides.pdf" download>Download PDF</a>
           </div>
         </section>
-
+        </div>
       </div>
     </article>
 
     <nav class="p-nav">
       <div class="wrap">
         <a class="prev" href="../index.html#work"><span class="mono">&larr; Back</span><span class="display">Index</span></a>
-        <a class="next" href="cable-machine-prototype.html"><span class="mono">Next &rarr;</span><span class="display">Door-Mounted Cable Machine Prototype</span></a>
+        <a class="next" href="../index.html#work"><span class="mono">Back &rarr;</span><span class="display">Index</span></a>
       </div>
     </nav>
   </main>
@@ -103,6 +114,6 @@
       <a href="mailto:dr653@cornell.edu">dr653@cornell.edu</a>
     </div>
   </footer>
-  <script src="../assets/js/main.js?v=4a6af428"></script>
+  <script src="../assets/js/main.js?v=0e77c8ff"></script>
 </body>
 </html>
