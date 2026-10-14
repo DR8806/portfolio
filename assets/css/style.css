@@ -524,7 +524,7 @@ html.in-preview .site-notice {
 .dir-link {
   position: relative;
   display: grid;
-  grid-template-columns: minmax(0, 1fr) auto auto;
+  grid-template-columns: minmax(0, 1fr) auto 72px;
   align-items: center;
   gap: 16px;
   padding: 16px 0;
@@ -551,7 +551,19 @@ html.in-preview .site-notice {
   transition: padding 0.35s;
 }
 
-/* Status flag: complete, live updating, to be filled out */
+.dir-link .year {
+  text-align: right;
+  padding-right: 4px;
+  transition: color 0.2s, padding 0.35s;
+}
+
+.dir-link:hover .year,
+.dir-link:focus-visible .year {
+  color: var(--dim);
+  padding-right: 12px;
+}
+
+/* Note on pages that are still being added to */
 .status {
   display: inline-flex;
   align-items: center;
@@ -571,12 +583,8 @@ html.in-preview .site-notice {
   box-sizing: border-box;
 }
 
-.status--complete { color: var(--fg); }
-.status--complete::before { background: var(--fg); }
 .status--live { color: var(--accent); }
 .status--live::before { background: var(--accent); animation: status-pulse 2s ease-in-out infinite; }
-.status--todo { color: var(--muted); }
-.status--todo::before { border: 1.5px solid var(--muted); }
 
 @keyframes status-pulse {
   0%, 100% { box-shadow: 0 0 0 0 rgba(217, 72, 28, 0.45); }
@@ -589,23 +597,8 @@ html.in-preview .site-notice {
 
 .dir-link:hover .status,
 .dir-link:focus-visible .status { color: var(--dim); }
-.dir-link:hover .status--complete,
-.dir-link:focus-visible .status--complete { color: var(--bg); }
-.dir-link:hover .status--todo::before,
-.dir-link:focus-visible .status--todo::before { border-color: var(--dim); }
 .dir-link:hover .status--live,
 .dir-link:focus-visible .status--live { color: var(--accent); }
-.dir-link:hover .status--complete::before,
-.dir-link:focus-visible .status--complete::before { background: var(--bg); }
-
-.dir-link .arrow {
-  font-family: var(--font-mono);
-  font-size: 16px;
-  padding-right: 4px;
-  transform: translateX(-8px);
-  opacity: 0.35;
-  transition: transform 0.35s, opacity 0.2s;
-}
 
 .dir-link:hover,
 .dir-link:focus-visible {
@@ -623,21 +616,16 @@ html.in-preview .site-notice {
   padding-left: 12px;
 }
 
-.dir-link:hover .arrow,
-.dir-link:focus-visible .arrow {
-  transform: translateX(-12px);
-  opacity: 1;
-}
-
 @media (max-width: 560px) {
   .dir-link {
     grid-template-columns: minmax(0, 1fr) auto;
-    grid-template-areas: "title arrow" "status .";
+    grid-template-areas: "title year" "status .";
     gap: 6px 10px;
   }
   .dir-link .title { grid-area: title; }
   .dir-link .status { grid-area: status; }
-  .dir-link .arrow { grid-area: arrow; }
+  .dir-link .year { grid-area: year; }
+  .dir-link .status:empty { display: none; }
 }
 
 /* ---------- Hover preview ---------- */
@@ -1941,11 +1929,6 @@ html.in-preview .topbar {
 }
 
 /* ---------- Math modeling papers ---------- */
-
-/* competition and year in place of a status flag */
-.status--tag::before {
-  display: none;
-}
 
 /* Competition, dates, result, team and coach under the page title */
 .p-facts {

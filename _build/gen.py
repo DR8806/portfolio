@@ -31,9 +31,9 @@ def parts(*items):
     return dict(parts=[dict(title=t, content=c, blurb=d) for t, c, d in items])
 
 
-# status: "complete" or "live" (continually updated)
-def item(title, slug, blurb, body, status):
-    return dict(title=title, slug=slug, blurb=blurb, doc=body, status=status)
+# status: "complete" or "live" (continually updated); year: shown on the home page list
+def item(title, slug, blurb, body, status, year):
+    return dict(title=title, slug=slug, blurb=blurb, doc=body, status=status, year=year)
 
 
 # old page -> where its write-up lives now, so old links still work
@@ -63,11 +63,11 @@ COACH_THEN = "Mrs. Michele MacDonald (then Ms. Michele Widener)"
 MENTOR = "; MTFC mentor Mrs. Susan Witcraft"
 
 
-def paper(title, slug, file, pages, tag, summary, comp, dates, result, team, coach, results=None):
+def paper(title, slug, file, pages, year, summary, comp, dates, result, team, coach, results=None):
     # math modeling paper: details at the top, the PDF, then our row of the official results if there is one
     facts = [("Competition", comp), ("Written", dates), ("Result", result), ("Team", team), ("Coach", coach)]
     body = dict(doc(file, pages), facts=facts, results=results)
-    return dict(item(title, slug, summary, body, None), tag=tag)
+    return item(title, slug, summary, body, "complete", year)
 
 
 SECTIONS = [
@@ -77,41 +77,43 @@ SECTIONS = [
                 ("Kinematics", "kinematics", "Suspension kinematics design for the ARG26 car, done in OptimumK."),
                 ("Tires", "tire-analysis", "Lateral force plots from TTC tire data, comparing Hoosier tire candidates."),
                 ("Ackermann", "ackermann-selection-methodology", "The methodology used on ARG27 to determine what Ackermann geometry to design the car to."),
-            ), "live"),
-            item("Suspension Rates and Parameter Selection", "rates-and-parameters", "Selection of the suspension rates and parameters. More will be added here as the work continues.", None, "live"),
+            ), "live", "2026"),
+            item("Suspension Rates and Parameter Selection", "rates-and-parameters", "Selection of the suspension rates and parameters. More will be added here as the work continues.", None, "live", "2026"),
             item("Physical Tests", "physical-tests", "Tests run on the car to measure its real properties.", parts(
                 ("CG Height Test", "cg-height-test", "Test procedure for measuring the CG height of ARG26 with two methods: a side tilt test and a front lift test."),
-            ), "complete"),
+            ), "complete", "2026"),
             item("Miscellaneous", "miscellaneous", "Other calculations done for the suspension.", parts(
                 ("Longitudinal CG Shift Calculation", "cg-shift", "A preliminary calculation of how far the longitudinal CG moves on ARG27 as the accumulator and inverter change, and what that means for a 50/50 weight distribution."),
-            ), "complete"),
+            ), "complete", "2026"),
         ]),
-        (None, [
-            item("Suspension Jig Plate Project", "jig-plate", "My spring 2026 technical report on the jig plate, the fixture that holds each suspension link in position while it is welded.", doc("ARG26_Jig_Plate_Technical_Report.pdf", 23), "complete"),
-            item("RFQ Business Case Submission", "rfq-business-case", "The request for quote I wrote for our Formula SAE Business Case, asking a supplier to manufacture and assemble the ARG26 suspension system.", doc("ARG26_Suspension_RFQ.pdf", 214), "complete"),
+        ("Suspension Engineer", [
+            item("Suspension Jig Plate Project", "jig-plate", "My spring 2026 technical report on the jig plate, the fixture that holds each suspension link in position while it is welded.", doc("ARG26_Jig_Plate_Technical_Report.pdf", 23), "complete", "2026"),
+        ]),
+        ("Procurement Lead", [
+            item("RFQ Business Case Submission", "rfq-business-case", "The request for quote I wrote for our Formula SAE Business Case, asking a supplier to manufacture and assemble the ARG26 suspension system.", doc("ARG26_Suspension_RFQ.pdf", 214), "complete", "2026"),
         ]),
     ]),
     ("Entrepreneurship", "entrepreneurship", [
         (None, [
-            item("KIX Shoe Rack", "kix-shoe-rack", "A shoe rack that takes your shoes off and stores them in one step.", article("kix-shoe-rack"), "live"),
+            item("KIX Shoe Rack", "kix-shoe-rack", "A shoe rack that takes your shoes off and stores them in one step.", article("kix-shoe-rack"), "live", "2026"),
         ]),
     ]),
     ("Machine Shop", "machine-shop", [
         (None, [
-            item("HAAS CNC Overview Manual", "haas-cnc-manual", "I wrote this manual for the Cornell Engineering machine shop so students can learn how to set up and run the HAAS CNC mills.", doc("HAAS_CNC_Overview_Manual.pdf", 10), "complete"),
-            item("C-Block CAM Manual", "c-block-cam-manual", "I wrote this manual for the Cornell Engineering machine shop so students can learn how to program a part in Fusion 360 and machine it on the HAAS.", doc("C-Block_CAM_Manual.pdf", 27), "complete"),
+            item("HAAS CNC Overview Manual", "haas-cnc-manual", "I wrote this manual for the Cornell Engineering machine shop so students can learn how to set up and run the HAAS CNC mills.", doc("HAAS_CNC_Overview_Manual.pdf", 10), "complete", "2026"),
+            item("C-Block CAM Manual", "c-block-cam-manual", "I wrote this manual for the Cornell Engineering machine shop so students can learn how to program a part in Fusion 360 and machine it on the HAAS.", doc("C-Block_CAM_Manual.pdf", 27), "complete", "2026"),
         ]),
     ]),
     ("Math Modeling Papers", "math-modeling", [
         (None, [
-            paper("Household Readiness of Pet Ownership Model (Paper)", "pets-paper", "IMMC2024_Pets_Paper.pdf", 31, "IMMC 2024",
+            paper("Household Readiness of Pet Ownership Model (Paper)", "pets-paper", "IMMC2024_Pets_Paper.pdf", 31, "2024",
                   "Written in April 2024 over five days for the International Mathematical Modeling Challenge (IMMC), which our team qualified for through HiMCM. "
                   "We built a model that scores whether a household is ready to own a cat by balancing the well-being of the people and the pet. "
                   "It compares household answers to breed data using modified cosine similarity and vector projection, then extends to dogs, birds, guinea pigs and fish.",
                   IMMC, "April 12 &ndash; 16, 2024",
                   "USA Regional Finalist, top 5 of 13 qualified teams. " + link_out("Results (PDF)", IMMC24_RESULTS),
                   TEAM, COACH, results=("immc2024-results.png", IMMC24_RESULTS)),
-            paper("Forecasting Hydroelectric Power Decline at Hoover Dam (Paper)", "lake-mead-paper", "MTFC2023_Colorado_River_Paper.pdf", 31, "MTFC 2023&ndash;24",
+            paper("Forecasting Hydroelectric Power Decline at Hoover Dam (Paper)", "lake-mead-paper", "MTFC2023_Colorado_River_Paper.pdf", 31, "2023&ndash;24",
                   "Written between December 2023 and March 2024 for the Modeling the Future Challenge (MTFC), a three-month competition with semifinal and final rounds. "
                   "We forecast how far Lake Mead will fall through 2030 and what that means for hydroelectric power at Hoover Dam, using symbolic regression and Facebook Prophet. "
                   "The model estimated a 29.2% drop in volume and $440M in replacement energy costs, and we proposed ways to reduce the impact.",
@@ -119,33 +121,33 @@ SECTIONS = [
                   "3rd place ($10,000 award), top 3 of 268 teams. " + link_out("Awards", "https://www.mtfchallenge.org/awards/") + " &middot; "
                   + link_out("Finalists", "https://www.mtfchallenge.org/unveiling-the-2023-2024-modeling-the-future-challenge-finalists/"),
                   "Davis Rattanavijai, Tsubasa Tamura, Karina Chung, Avnish Kumar, Maya Figelman", COACH + MENTOR),
-            paper("Model of the Electrification of Buses in Metropolitan Cities (Paper)", "e-bus-paper", "HiMCM2023_E_Bus_Paper.pdf", 24, "HiMCM 2023",
+            paper("Model of the Electrification of Buses in Metropolitan Cities (Paper)", "e-bus-paper", "HiMCM2023_E_Bus_Paper.pdf", 24, "2023",
                   "Written in November 2023 over two weeks for the High School Mathematical Contest in Modeling (HiMCM). "
                   "We built an optimization model using Lagrange multipliers to find how many electric buses and chargers a city like Boston, Philadelphia or Detroit should buy. "
                   "The model used real route data, energy prices and ecological benefits, with the algorithms written in code.",
                   HIMCM, "November 1 &ndash; 14, 2023",
                   "Finalist, top 6% of 967 submissions. " + link_out("Results (PDF)", HIMCM23_RESULTS),
                   TEAM, COACH, results=("himcm2023-results.png", HIMCM23_RESULTS)),
-            paper("Statistical Analysis of Melanoma Cancer in America (Paper)", "melanoma-paper", "MTFC2022_Melanoma_Paper.pdf", 31, "MTFC 2022&ndash;23",
+            paper("Statistical Analysis of Melanoma Cancer in America (Paper)", "melanoma-paper", "MTFC2022_Melanoma_Paper.pdf", 31, "2022&ndash;23",
                   "Written between December 2022 and March 2023 for the Modeling the Future Challenge (MTFC). "
                   "We built a geospatial model linking melanoma rates across the U.S. to UV exposure, elevation and demographics, using ArcGIS, regression and image analysis in MATLAB. "
                   "The results pointed to high-risk regions where public health efforts could be targeted.",
                   MTFC, "December 2022 &ndash; March 3, 2023",
                   "Finalist, top 13 of 227 teams. " + link_out("Finalists", "https://actuarialfoundation.org/2023-modeling-the-future-challenge-finalists/"),
                   "Davis Rattanavijai, Tsubasa Tamura, Youcef Chahboun, Michael Dai, Jennifer Li", COACH + MENTOR),
-            paper("Modeling the Optimal Plane Boarding Method (Paper)", "plane-boarding-paper", "IMMC2022_Plane_Boarding_Paper.pdf", 45, "IMMC 2022",
+            paper("Modeling the Optimal Plane Boarding Method (Paper)", "plane-boarding-paper", "IMMC2022_Plane_Boarding_Paper.pdf", 45, "2022",
                   "Written in April 2022 over five days for the International Mathematical Modeling Challenge (IMMC). "
                   "We built a simulation in Python and R to test airline boarding methods, with random variation between passengers. "
                   "The model found methods that beat the standard boarding strategies.",
                   IMMC, "April 8 &ndash; 12, 2022", "USA Regional Meritorious.", TEAM, COACH),
-            paper("Honey Bee Population and Orchard Pollination Model (Paper)", "honey-bees-paper", "HiMCM2022_Honey_Bees_Paper.pdf", 25, "HiMCM 2022",
+            paper("Honey Bee Population and Orchard Pollination Model (Paper)", "honey-bees-paper", "HiMCM2022_Honey_Bees_Paper.pdf", 25, "2022",
                   "Written in November 2022 over two weeks for the High School Mathematical Contest in Modeling (HiMCM). "
                   "We simulated a honey bee hive's population in R under reproduction, starvation, mites, predators and hurricanes. "
                   "We then used the model to find how many hives it takes to pollinate a 20-acre apple orchard.",
                   HIMCM, "November 2 &ndash; 15, 2022",
                   "Honorable Mention. " + link_out("Results (PDF)", HIMCM22_RESULTS),
                   TEAM, COACH_THEN, results=("himcm2022-results.png", HIMCM22_RESULTS)),
-            paper("Off-Grid Battery Model and Evaluation (Paper)", "batteries-paper", "HiMCM2021_Electric_Batteries_Paper.pdf", 22, "HiMCM 2021",
+            paper("Off-Grid Battery Model and Evaluation (Paper)", "batteries-paper", "HiMCM2021_Electric_Batteries_Paper.pdf", 22, "2021",
                   "Written in November 2021, my sophomore year of high school, as our team's first paper, for the High School Mathematical Contest in Modeling (HiMCM). "
                   "We modeled the daily power demand of an off-grid 1,600 sq ft home from its appliances and compared home battery systems against it. "
                   "The model picked the Tesla Powerwall 2 as the best option and looked at whether newer batteries could do better.",
@@ -156,7 +158,6 @@ SECTIONS = [
     ]),
 ]
 
-STATUS = {"complete": "Complete", "live": "Continually updated"}
 
 HEAD = """<!DOCTYPE html>
 <html lang="en">
@@ -278,12 +279,9 @@ out.append("""
 """)
 
 def link(it):
-    if it.get("tag"):
-        flag = f'<span class="status status--tag mono">{it["tag"]}</span>'
-    else:
-        flag = f'<span class="status status--{it["status"]} mono">{STATUS[it["status"]]}</span>'
+    note = '<span class="status status--live mono">Continually updated</span>' if it["status"] == "live" else '<span class="status"></span>'
     return (f'\n              <li><a class="dir-link" href="projects/{it["slug"]}.html" data-preview="{e(it["title"])}">'
-            f'<span class="title">{e(it["title"])}</span>{flag}<span class="arrow">&rarr;</span></a></li>')
+            f'<span class="title">{e(it["title"])}</span>{note}<span class="year mono">{it["year"]}</span></a></li>')
 
 
 for si, (sec, sec_slug, groups) in enumerate(SECTIONS):
