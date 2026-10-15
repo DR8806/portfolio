@@ -425,37 +425,35 @@
 
         <section class="a-section">
           <h2 id="ackermann-incorporating-slip-angles"><span class="a-num">4</span>Incorporating Slip Angles</h2>
-          <p>Section 3 still assumed the front tires have no slip angle. To make lateral force, each front tire has to run at a slip angle, so each front wheel's steering angle is its travel angle from Section 3 plus its slip angle. To find the slip angle each front tire wants, we look at the tire data.</p>
+          <p>Section 3 still assumed the front tires have no slip angle. To make lateral force, each front tire has to run at a slip angle, so each front wheel's steering angle is its attitude angle β from Section 3 plus its slip angle. To find the slip angle each front tire wants, we look at the tire data.</p>
 
           <figure class="a-fig a-fig--chart">
-            <img src="../assets/img/ackermann/07-tire-data.png" alt="Lateral force versus slip angle for the R20 16x7.5x10 tire at 50, 100, 150 and 200 lbf normal load" width="940" height="760" loading="lazy" />
-            <figcaption><span class="mono">Figure 7</span> R20 16x7.5x10 lateral force (Fy) versus slip angle (SA) at four normal loads (Fz), 0° inclination angle. TTC data.</figcaption>
+            <img src="../assets/img/tire-analysis/03-fy-vs-sa-normal-load.png" alt="Lateral force vs slip angle from -20 to 20 deg at 50, 100, 150 and 200 lbf normal load and 0 deg inclination angle" width="1142" height="1026" loading="lazy" />
+            <figcaption><span class="mono">Figure 7</span> R20 16x7.5x10 lateral force (Fy) versus slip angle (SA) at 50, 100, 150 and 200 lbf normal load (Fz), 0° inclination angle. TTC Round 9 data, from the Tires section.</figcaption>
           </figure>
 
-          <p>These points were not exported directly from OptimumTire. OptimumTire was down, so the points were read off the OptimumTire plot (Figure 11) using pixel analysis. The full list of points is in Appendix A.</p>
-
-          <p>Next we find where each curve peaks. The top of each curve is flat, so we take the peak as the middle of the slip angle range where the force is within 0.5% of its maximum.</p>
+          <p>Next we find the slip angle where each load curve peaks.</p>
 
           <figure class="a-fig a-fig--chart">
-            <img src="../assets/img/ackermann/08-tire-peaks.png" alt="Lateral force versus slip angle with the peak of each load curve marked and joined by a line of peaks" width="940" height="760" loading="lazy" />
-            <figcaption><span class="mono">Figure 8</span> Peak of each load curve, with the line of peaks on each side.</figcaption>
+            <img src="../assets/img/ackermann/08-tire-peaks.png" alt="Lateral force versus slip angle at four normal loads with the peak of each curve marked and joined by a line of peaks" width="1388" height="1000" loading="lazy" />
+            <figcaption><span class="mono">Figure 8</span> Peak lateral force at each load, with the line of peaks.*<br />* Points taken off Figure 7 by pixel analysis since OptimumTire was down. Listed in Appendix A.</figcaption>
           </figure>
 
           <div class="a-table-wrap">
             <table class="a-table sheet">
               <thead>
-                <tr><th>Fz [lbf]</th><th>Peak Fy [lbf]</th><th>Peak SA, positive side</th><th>Peak SA, negative side</th></tr>
+                <tr><th>Fz [lbf]</th><th>Peak Fy [lbf]</th><th>Peak SA</th></tr>
               </thead>
               <tbody>
-                <tr><td>50</td><td>124</td><td>10.5°</td><td>−13.75°</td></tr>
-                <tr><td>100</td><td>252</td><td>10.5°</td><td>−14.25°</td></tr>
-                <tr><td>150</td><td>383</td><td>10.5°</td><td>−15.25°</td></tr>
-                <tr><td>200</td><td>519</td><td>10.75°</td><td>−16°</td></tr>
+                <tr><td>50</td><td>124</td><td>10.8°</td></tr>
+                <tr><td>100</td><td>252</td><td>11.0°</td></tr>
+                <tr><td>150</td><td>383</td><td>11.0°</td></tr>
+                <tr><td>200</td><td>519</td><td>11.1°</td></tr>
               </tbody>
             </table>
           </div>
 
-          <p>The tire peaks are close to invariable with load. On the positive side, the peak slip angle stays between 10.5° and 10.75° from 50 to 200 lbf. The negative side moves more, from −13.75° to −16°, but the tops of those curves are also very flat. Since the peak barely moves with load, the inside and outside front tires want almost the same slip angle. Appendix B shows how the slope of the line of peaks relates to Ackermann.</p>
+          <p>The tire peaks are close to invariable with load. The peak slip angle stays between 10.8° and 11.1° from 50 to 200 lbf, so the inside and outside front tires want almost the same slip angle. Appendix B shows how the slope of the line of peaks relates to Ackermann.</p>
         </section>
 
         <section class="a-section">
@@ -472,8 +470,7 @@
           </ul>
 
           <h3 id="ackermann-method-and-inputs"><span class="a-num">5.2</span>Method and Inputs</h3>
-          <p>The method in one line:</p>
-          <p class="eq">tire loads → front peak slip angles → rear slip angle (sets i<sub>c</sub>) → front steering angles → difference ÷ 100% difference</p>
+          <p>For a given corner, we find the load on each tire and the slip angle each tire runs at. The rear slip angle places the instant center (Section 3). Each front wheel's steering angle is then its attitude angle β about the instant center plus its slip angle. The difference between the two front steering angles, divided by the pure Ackermann difference at the same radius, gives % Ackermann.</p>
           <p>Below are the six steps for one corner, using ARG27 numbers for a 5 m hairpin.</p>
           <div class="a-table-wrap">
             <table class="a-table sheet">
@@ -487,7 +484,7 @@
                 <tr><td>Weight, W</td><td>570 lb, 50% front</td></tr>
                 <tr><td>CG height, h</td><td>9.875 in</td></tr>
                 <tr><td>Front lateral load transfer distribution (LLTD)</td><td>48%</td></tr>
-                <tr><td>Tire data</td><td>Figure 8, positive side</td></tr>
+                <tr><td>Tire data</td><td>Figure 8</td></tr>
               </tbody>
             </table>
           </div>
@@ -512,105 +509,119 @@
           <p>Repeating this with the rear share (52%) gives ΔF<sub>rear</sub> = 100 lb, so about 43 lb on the inside rear and 242 lb on the outside rear.</p>
 
           <h3 id="ackermann-step-3-front-slip-angles"><span class="a-num">5.5</span>Step 3: Front Slip Angles</h3>
-          <p>From Figure 8, find the slip angle where each front tire makes its peak force at its own load. The outside load of 235 lb is past the 200 lbf curve, so we extend the line of peaks.</p>
+          <p>From Figure 8, the peak slip angle is about α = 11° at every load. Reading each front tire's peak at its own load gives the values below. The outside load of 235 lb is past the 200 lbf curve, so we extend the line of peaks.</p>
           <div class="a-table-wrap">
             <table class="a-table sheet">
               <thead>
                 <tr><th>Tire</th><th>Load [lb]</th><th>Peak slip angle, α</th></tr>
               </thead>
               <tbody>
-                <tr><td>Inside front</td><td>50</td><td>10.5°</td></tr>
-                <tr><td>Outside front</td><td>235</td><td>10.75°</td></tr>
+                <tr><td>Inside front</td><td>50</td><td>10.8°</td></tr>
+                <tr><td>Outside front</td><td>235</td><td>11.2°</td></tr>
               </tbody>
             </table>
           </div>
-          <p>This is where the tire data decides the answer. If the two slip angles were far apart, that difference would show up directly in the result.</p>
+          <p>We assume a neutral car at the limit, with every tire at its peak. Figure 3 shows this case: a neutral car in steady-state cornering with equal slip angles at the front and rear. Because the peak slip angle barely changes with load (Section 4), every tire at its peak means every tire at about 11°, so the rear tires also run at about 11°.</p>
 
           <h3 id="ackermann-step-4-rear-slip-angle-and-instant-center"><span class="a-num">5.6</span>Step 4: Rear Slip Angle and Instant Center</h3>
-          <p>At the limit, the rear tires are also at their peak. At the rear loads from Step 2 (43 lb and 242 lb), Figure 8 gives a peak slip angle of 10.5° to 10.75°, so we use α<sub>R</sub> ≈ 10.6°. This can also be checked against logged data.</p>
-          <p>The rear slip angle sets how far the instant center moves forward of the geometric center (Section 3):</p>
-          <p class="eq">i<sub>c</sub> = R × tan(α<sub>R</sub>) = 5 × tan(10.6°) = 0.935 m</p>
-          <p class="eq">L − i<sub>c</sub> = 1.549 − 0.935 = 0.614 m</p>
+          <p>From Step 3, the rear slip angle is α<sub>R</sub> = 11°. The rear slip angle sets how far the instant center moves forward of the geometric center (Section 3):</p>
+          <p class="eq">i<sub>c</sub> = R × tan(α<sub>R</sub>) = 5 × tan(11.0°) = 0.972 m</p>
+          <p class="eq">L − i<sub>c</sub> = 1.549 − 0.972 = 0.577 m</p>
 
           <h3 id="ackermann-step-5-steering-angle-of-each-front-wheel"><span class="a-num">5.7</span>Step 5: Steering Angle of Each Front Wheel</h3>
-          <p>Each front wheel's steering angle is its travel angle (Section 3) plus its slip angle:</p>
-          <p class="eq">δ = tan<sup>−1</sup>( (L − i<sub>c</sub>) / (R ∓ T/2) ) + α</p>
+          <p>Each front wheel's steering angle is its attitude angle β (Section 1.2, Section 3) plus its slip angle α:</p>
+          <p class="eq">β = tan<sup>−1</sup>( (L − i<sub>c</sub>) / (R ∓ T/2) )</p>
+          <p class="eq">δ = β + α</p>
+          <p>The inside wheel is R − T/2 = 5 − 0.559 = 4.441 m from the instant center, and the outside wheel is R + T/2 = 5 + 0.559 = 5.559 m.</p>
           <div class="a-table-wrap">
             <table class="a-table sheet">
               <thead>
-                <tr><th>Wheel</th><th>Travel angle</th><th>+ Slip angle</th><th>= Steering angle</th></tr>
+                <tr><th>Wheel</th><th>Attitude angle, β</th><th>+ Slip angle, α</th><th>= Steering angle, δ</th></tr>
               </thead>
               <tbody>
-                <tr><td>Inside</td><td>tan<sup>−1</sup>(0.614 / 4.441) = 7.87°</td><td>+ 10.5°</td><td>18.37°</td></tr>
-                <tr><td>Outside</td><td>tan<sup>−1</sup>(0.614 / 5.559) = 6.30°</td><td>+ 10.75°</td><td>17.05°</td></tr>
+                <tr><td>Inside</td><td>tan<sup>−1</sup>(0.577 / 4.441) = 7.41°</td><td>+ 10.8°</td><td>18.21°</td></tr>
+                <tr><td>Outside</td><td>tan<sup>−1</sup>(0.577 / 5.559) = 5.93°</td><td>+ 11.2°</td><td>17.13°</td></tr>
               </tbody>
             </table>
           </div>
-          <p class="eq">Δδ<sub>target</sub> = 18.37° − 17.05° = 1.32°</p>
+          <p class="eq">Δδ<sub>target</sub> = 18.21° − 17.13° = 1.08°</p>
 
           <h3 id="ackermann-step-6-convert-to-ackermann"><span class="a-num">5.8</span>Step 6: Convert to % Ackermann</h3>
-          <p>100% Ackermann is the same corner with no rear slip (full L) and no front slip:</p>
+          <p>100% Ackermann is the same corner with no rear slip (full L = 1.549 m) and no front slip, using the same distances of 4.441 m and 5.559 m from Step 5:</p>
           <p class="eq">Δδ<sub>100%</sub> = tan<sup>−1</sup>(1.549 / 4.441) − tan<sup>−1</sup>(1.549 / 5.559) = 19.23° − 15.57° = 3.66°</p>
-          <p class="eq">%Ack = 100 × 1.32 / 3.66 = 36%</p>
-
-          <p>Where the answer comes from:</p>
-          <ul>
-            <li>Step 3: whether the inside and outside front tires want different slip angles. This is what changes between the positive and negative sides of the tire data.</li>
-            <li>Step 4: how much the rear tires slip. This is the other big lever, and the one to check against logged data.</li>
-            <li>Everything else is fixed geometry.</li>
-          </ul>
+          <p>The target difference is Δδ<sub>target</sub> = 1.08° from Step 5, the inside steering angle (18.21°) minus the outside steering angle (17.13°).</p>
+          <p class="eq">%Ack = 100 × 1.08 / 3.66 = 30%</p>
+          <p>So for a 5 m corner radius, the target is about 30% Ackermann.</p>
         </section>
 
         <section class="a-section">
           <h2 id="ackermann-radius-sweep"><span class="a-num">6</span>Radius Sweep</h2>
           <p>Section 5 found the target for one corner. Here we repeat the same six steps at every cornering radius from the hairpin minimum (4.5 m) to the constant radius maximum (27 m).</p>
-          <p>We hold A<sub>y</sub> at 1.5 g at every radius. This assumes the grip limit does not change with speed (no aero). The tire loads and slip angles from Steps 2 to 4 are then the same at every radius, and only the geometry changes. We run the sweep twice, once with the positive side of the tire data (as in Section 5) and once with the negative side, since the two sides peak differently (Section 4). The slip angles come from the line of peaks in Figure 8.</p>
+          <p>Assumed inputs, the same at every radius:</p>
+          <div class="a-table-wrap">
+            <table class="a-table sheet">
+              <thead>
+                <tr><th>Input</th><th>Value</th><th>From</th></tr>
+              </thead>
+              <tbody>
+                <tr><td>Wheelbase, L</td><td>1.549 m</td><td>Inputs</td></tr>
+                <tr><td>Track width, T</td><td>1.118 m, so T/2 = 0.559 m</td><td>Inputs</td></tr>
+                <tr><td>Slip angle, α, all four tires</td><td>11° (inside front, outside front and rear)</td><td>Figure 8</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <p>As in Step 3, we assume a neutral car at the limit, with every tire at its peak (Figure 3). Since the peak slip angle barely changes with load (Figure 8), every tire, front and rear, inside and outside, runs at 11°. Since the slip angles no longer depend on load, the lateral acceleration and tire loads do not enter the sweep. Section 5 used 10.8° and 11.2° for the front tires, so its 5 m result (30%) is lower than the 5 m row here (40%).</p>
+
+          <p>Each column in the table below is one step of the calculation:</p>
+          <ul>
+            <li>i<sub>c</sub> = R × tan(α<sub>R</sub>)</li>
+            <li>Attitude angle β = tan<sup>−1</sup>( (L − i<sub>c</sub>) / (R ∓ T/2) )</li>
+            <li>Steering angle δ = β + α</li>
+            <li>Δδ<sub>target</sub> (actual) = δ<sub>in</sub> − δ<sub>out</sub></li>
+            <li>Δδ<sub>100%</sub> (ideal) = tan<sup>−1</sup>( L / (R − T/2) ) − tan<sup>−1</sup>( L / (R + T/2) )</li>
+            <li>%Ack = 100 × Δδ<sub>target</sub> / Δδ<sub>100%</sub></li>
+          </ul>
 
           <div class="a-table-wrap">
             <table class="a-table sheet">
               <thead>
-                <tr><th>Tire data</th><th>Inside front α (50 lb)</th><th>Outside front α (235 lb)</th><th>Rear α<sub>R</sub></th></tr>
+                <tr><th>R [m]</th><th>α (all tires)</th><th>i<sub>c</sub> [m]</th><th>L − i<sub>c</sub> [m]</th><th>R − T/2 [m]</th><th>R + T/2 [m]</th><th>β<sub>in</sub></th><th>β<sub>out</sub></th><th>δ<sub>in</sub></th><th>δ<sub>out</sub></th><th>Δδ<sub>target</sub> (actual)</th><th>Δδ<sub>100%</sub> (ideal)</th><th>%Ack</th></tr>
               </thead>
               <tbody>
-                <tr><td>Positive side</td><td>10.5°</td><td>10.75°</td><td>10.6°</td></tr>
-                <tr><td>Negative side</td><td>13.65°</td><td>16.5°</td><td>15.1°</td></tr>
+                <tr><td>4.5 (hairpin min)</td><td>11°</td><td>0.875</td><td>0.675</td><td>3.941</td><td>5.059</td><td>9.71°</td><td>7.60°</td><td>20.71°</td><td>18.60°</td><td>2.12°</td><td>4.43°</td><td>48%</td></tr>
+                <tr><td>5</td><td>11°</td><td>0.972</td><td>0.577</td><td>4.441</td><td>5.559</td><td>7.41°</td><td>5.93°</td><td>18.41°</td><td>16.93°</td><td>1.48°</td><td>3.66°</td><td>40%</td></tr>
+                <tr><td>5.5</td><td>11°</td><td>1.069</td><td>0.480</td><td>4.941</td><td>6.059</td><td>5.55°</td><td>4.53°</td><td>16.55°</td><td>15.53°</td><td>1.02°</td><td>3.07°</td><td>33%</td></tr>
+                <tr><td>6</td><td>11°</td><td>1.166</td><td>0.383</td><td>5.441</td><td>6.559</td><td>4.03°</td><td>3.34°</td><td>15.03°</td><td>14.34°</td><td>0.68°</td><td>2.60°</td><td>26%</td></tr>
+                <tr><td>6.5</td><td>11°</td><td>1.263</td><td>0.286</td><td>5.941</td><td>7.059</td><td>2.76°</td><td>2.32°</td><td>13.76°</td><td>13.32°</td><td>0.44°</td><td>2.24°</td><td>20%</td></tr>
+                <tr><td>7</td><td>11°</td><td>1.361</td><td>0.189</td><td>6.441</td><td>7.559</td><td>1.68°</td><td>1.43°</td><td>12.68°</td><td>12.43°</td><td>0.25°</td><td>1.94°</td><td>13%</td></tr>
+                <tr><td>7.5 (skidpad)</td><td>11°</td><td>1.458</td><td>0.092</td><td>6.941</td><td>8.059</td><td>0.76°</td><td>0.65°</td><td>11.76°</td><td>11.65°</td><td>0.10°</td><td>1.70°</td><td>6%</td></tr>
+                <tr><td>8</td><td>11°</td><td>1.555</td><td>−0.006</td><td>7.441</td><td>8.559</td><td>−0.04°</td><td>−0.04°</td><td>10.96°</td><td>10.96°</td><td>−0.01°</td><td>1.50°</td><td>−1%</td></tr>
+                <tr><td>9</td><td>11°</td><td>1.749</td><td>−0.200</td><td>8.441</td><td>9.559</td><td>−1.36°</td><td>−1.20°</td><td>9.64°</td><td>9.80°</td><td>−0.16°</td><td>1.19°</td><td>−13%</td></tr>
+                <tr><td>10</td><td>11°</td><td>1.944</td><td>−0.394</td><td>9.441</td><td>10.559</td><td>−2.39°</td><td>−2.14°</td><td>8.61°</td><td>8.86°</td><td>−0.25°</td><td>0.97°</td><td>−26%</td></tr>
+                <tr><td>12</td><td>11°</td><td>2.333</td><td>−0.783</td><td>11.441</td><td>12.559</td><td>−3.92°</td><td>−3.57°</td><td>7.08°</td><td>7.43°</td><td>−0.35°</td><td>0.68°</td><td>−51%</td></tr>
+                <tr><td>15</td><td>11°</td><td>2.916</td><td>−1.366</td><td>14.441</td><td>15.559</td><td>−5.40°</td><td>−5.02°</td><td>5.60°</td><td>5.98°</td><td>−0.39°</td><td>0.44°</td><td>−89%</td></tr>
+                <tr><td>20</td><td>11°</td><td>3.888</td><td>−2.338</td><td>19.441</td><td>20.559</td><td>−6.86°</td><td>−6.49°</td><td>4.14°</td><td>4.51°</td><td>−0.37°</td><td>0.25°</td><td>−148%</td></tr>
+                <tr><td>27 (constant radius max)</td><td>11°</td><td>5.248</td><td>−3.699</td><td>26.441</td><td>27.559</td><td>−7.96°</td><td>−7.64°</td><td>3.04°</td><td>3.36°</td><td>−0.32°</td><td>0.14°</td><td>−229%</td></tr>
               </tbody>
             </table>
           </div>
 
           <figure class="a-fig a-fig--chart">
-            <img src="../assets/img/ackermann/09-sweep-angle-difference.png" alt="Target steering angle difference versus cornering radius for both sides of the tire data, compared with pure Ackermann" width="940" height="700" loading="lazy" />
+            <img src="../assets/img/ackermann/09-sweep-angle-difference.png" alt="Target steering angle difference versus cornering radius compared with pure Ackermann" width="940" height="700" loading="lazy" />
             <figcaption><span class="mono">Figure 9</span> Target steering angle difference versus cornering radius, compared with pure Ackermann (Section 2).</figcaption>
           </figure>
 
           <figure class="a-fig a-fig--chart">
-            <img src="../assets/img/ackermann/10-sweep-percent-ackermann.png" alt="Percent Ackermann versus cornering radius for both sides of the tire data" width="940" height="700" loading="lazy" />
-            <figcaption><span class="mono">Figure 10</span> % Ackermann versus cornering radius. Both lines keep falling below −200% at larger radii.</figcaption>
+            <img src="../assets/img/ackermann/10-sweep-percent-ackermann.png" alt="Percent Ackermann versus cornering radius" width="940" height="700" loading="lazy" />
+            <figcaption><span class="mono">Figure 10</span> % Ackermann versus cornering radius. The line keeps falling below −200% at larger radii.</figcaption>
           </figure>
-
-          <div class="a-table-wrap">
-            <table class="a-table sheet">
-              <thead>
-                <tr><th>R [m]</th><th>Δδ<sub>100%</sub></th><th>Δδ<sub>target</sub>, positive</th><th>%Ack, positive</th><th>Δδ<sub>target</sub>, negative</th><th>%Ack, negative</th></tr>
-              </thead>
-              <tbody>
-                <tr><td>4.5 (hairpin min)</td><td>4.43°</td><td>1.96°</td><td>44%</td><td>−1.78°</td><td>−40%</td></tr>
-                <tr><td>5</td><td>3.66°</td><td>1.32°</td><td>36%</td><td>−2.33°</td><td>−64%</td></tr>
-                <tr><td>7.5 (skidpad)</td><td>1.70°</td><td>−0.08°</td><td>−5%</td><td>−3.39°</td><td>−200%</td></tr>
-                <tr><td>10</td><td>0.97°</td><td>−0.46°</td><td>−47%</td><td>−3.58°</td><td>−369%</td></tr>
-                <tr><td>15</td><td>0.44°</td><td>−0.61°</td><td>−139%</td><td>−3.54°</td><td>−811%</td></tr>
-                <tr><td>20</td><td>0.25°</td><td>−0.60°</td><td>−242%</td><td>−3.44°</td><td>−1396%</td></tr>
-                <tr><td>27 (constant radius max)</td><td>0.14°</td><td>−0.55°</td><td>−407%</td><td>−3.33°</td><td>−2455%</td></tr>
-              </tbody>
-            </table>
-          </div>
 
           <p>What the sweep shows:</p>
           <ul>
-            <li>Positive side: about 44% Ackermann at the hairpin minimum, falling to about parallel (−5%) at the skidpad radius, then reverse Ackermann at larger radii.</li>
-            <li>Negative side: reverse Ackermann at every radius, because the outside front tire wants about 2.9° more slip angle than the inside front tire.</li>
-            <li>The target drops as the radius grows because the rear slip angle pushes the instant center forward by i<sub>c</sub> = R × tan(α<sub>R</sub>). Past about 8.3 m (positive side), i<sub>c</sub> is longer than the wheelbase, so the instant center sits ahead of the front axle and the front wheels' travel angles flip toward reverse Ackermann.</li>
-            <li>At large radii, % Ackermann gets very large because pure Ackermann's angle difference is tiny there (0.14° at 27 m), so a small slip angle difference becomes a big percentage. In degrees, the positive-side target stays within 0.6° of parallel past the skidpad (Figure 9). The tight corners are where the choice of Ackermann matters most.</li>
+            <li>About 48% Ackermann at the hairpin minimum and 6% at the skidpad radius, crossing to reverse Ackermann at about 8 m.</li>
+            <li>The target drops as the radius grows because the rear slip angle pushes the instant center forward by i<sub>c</sub> = R × tan(α<sub>R</sub>). Past about 8 m, i<sub>c</sub> is longer than the wheelbase, so the instant center sits ahead of the front axle and the front wheels' attitude angles flip toward reverse Ackermann.</li>
+            <li>At large radii, % Ackermann gets very large because pure Ackermann's angle difference is tiny there (0.14° at 27 m), so a small difference becomes a big percentage. In degrees, the target stays within 0.4° of parallel past the skidpad (Figure 9). The tight corners are where the choice of Ackermann matters most.</li>
           </ul>
         </section>
 
@@ -632,7 +643,7 @@
 
         <section class="a-section">
           <h2 id="ackermann-arg27-ackermann"><span class="a-num">8</span>ARG27 Ackermann</h2>
-          <p>ARG26 used 12% Ackermann. The worked example in Section 5 gives about 36% Ackermann at a 5 m hairpin, using the positive side of the tire data. The target for ARG27 will be set from the radius sweep in Section 6.</p>
+          <p>ARG26 used 12% Ackermann. The worked example in Section 5 gives about 30% Ackermann at a 5 m hairpin. The target for ARG27 will be set from the radius sweep in Section 6.</p>
           <p class="tbf">To be filled out.</p>
         </section>
 
@@ -652,11 +663,7 @@
 
         <section class="a-section">
           <h2 id="ackermann-appendix-tire-data-points"><span class="a-num">A</span>Appendix: Tire Data Points</h2>
-          <p>The tire data points used in Section 4. OptimumTire was down, so instead of exporting the data, the points were read off the plot below using pixel analysis, every 0.5° of slip angle.</p>
-          <figure class="a-fig">
-            <img src="../assets/img/ackermann/11-tire-source-plot.png" alt="OptimumTire plot of lateral force versus slip angle at four normal loads, used as the source for the pixel analysis" width="942" height="872" loading="lazy" />
-            <figcaption><span class="mono">Figure 11</span> OptimumTire plot the points were read from. R20 16x7.5x10, 0° inclination angle.</figcaption>
-          </figure>
+          <p>Tire data points for Figure 8, taken off Figure 7 by pixel analysis every 0.5° of slip angle.</p>
           <div class="a-table-wrap">
             <table class="a-table sheet">
               <thead>
@@ -753,8 +760,8 @@
           <h2 id="ackermann-appendix-peak-slip-angle-and-ackermann"><span class="a-num">B</span>Appendix: Peak Slip Angle and Ackermann</h2>
           <p>How the slope of the line of peaks relates to the Ackermann a tire asks for.</p>
           <figure class="a-fig">
-            <img src="../assets/img/ackermann/12-pro-anti-ackermann.png" alt="Two lateral force versus slip angle plots: peak slip angle rising as load drops gives pro Ackermann, peak slip angle rising with load gives anti Ackermann" width="1276" height="970" loading="lazy" />
-            <figcaption><span class="mono">Figure 12</span> The steering geometry is a function of the tire curve. Steering Ackerman, slide 80.</figcaption>
+            <img src="../assets/img/ackermann/11-pro-anti-ackermann.png" alt="Two lateral force versus slip angle plots: peak slip angle rising as load drops gives pro Ackermann, peak slip angle rising with load gives anti Ackermann" width="1276" height="970" loading="lazy" />
+            <figcaption><span class="mono">Figure 11</span> The steering geometry is a function of the tire curve. Steering Ackerman, slide 80.</figcaption>
           </figure>
 
           <div class="a-table-wrap">
