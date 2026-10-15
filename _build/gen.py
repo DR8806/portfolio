@@ -85,6 +85,7 @@ SECTIONS = [
             item("Race Data Analysis", "race-data-analysis", "Lateral acceleration, speed and corner radius from ARG26's autocross and endurance runs at competition.", article("race-data-analysis"), "complete", "2026"),
             item("Miscellaneous", "miscellaneous", "Other calculations done for the suspension.", parts(
                 ("Longitudinal CG Shift Calculation", "cg-shift", "A preliminary calculation of how far the longitudinal CG moves on ARG27 as the accumulator and inverter change, and what that means for a 50/50 weight distribution."),
+                ("CFD Data", "cfd-data", "Downforce and drag from a CFD speed sweep at 0° yaw, roll and pitch."),
             ), "complete", "2026"),
         ]),
         ("Suspension Engineer", [

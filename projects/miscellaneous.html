@@ -84,6 +84,12 @@
               <li><a href="#appendix"><span class="toc-num mono">A</span><span>Appendix: Input Sources</span></a></li>
             </ol>
           </li>
+          <li class="toc-part"><a href="#cfd-data">CFD Data</a>
+            <ol>
+              <li><a href="#cfd-data-data"><span>Data</span></a></li>
+              <li><a href="#cfd-data-plots"><span>Plots</span></a></li>
+            </ol>
+          </li>
           </ol>
         </nav>
         <div class="a-doc-body">
@@ -634,6 +640,54 @@
           <figure class="a-fig" id="fig-15">
             <img src="../assets/img/cg-shift/15-whiteboard-2.webp" alt="Whiteboard sketches comparing the ARG26 and ARG27 accumulator layouts and splitting the accumulator CG into case and inside parts" width="2000" height="1500" loading="lazy" />
             <figcaption><span class="mono">Figure 15</span> Whiteboard sketches comparing the ARG26 and ARG27 accumulator layouts.</figcaption>
+          </figure>
+        </section>
+        </section>
+        <section class="a-part" id="cfd-data">
+          <header class="a-part-head">
+            <h2 class="display a-part-title">CFD Data</h2>
+            <p class="a-part-desc">Downforce and drag from a CFD speed sweep at 0° yaw, roll and pitch.</p>
+          </header>
+
+
+        <section class="a-section">
+          <h2 id="cfd-data-data">Data</h2>
+          <!-- EDIT: CFD data explanation -->
+          <p>This is CFD data from a speed sweep of the car from 10 to 20 m/s, with the car at 0&deg; yaw, 0&deg; roll and 0&deg; pitch.</p>
+          <div class="a-table-wrap">
+            <table class="a-table sheet">
+              <thead><tr><th>Speed (m/s)</th><th>Downforce (N)</th><th>Drag (N)</th><th>L/D</th><th>Front downforce (N)</th><th>Rear downforce (N)</th><th>Front balance (%)</th><th>C<sub>L</sub>A (m&sup2;)</th><th>C<sub>D</sub>A (m&sup2;)</th></tr></thead>
+              <tbody>
+                <tr><td>10</td><td>227.38</td><td>87.43</td><td>2.601</td><td>102.72</td><td>124.66</td><td>45.18</td><td>3.7123</td><td>1.4275</td></tr>
+                <tr><td>11</td><td>277.38</td><td>109.20</td><td>2.540</td><td>124.45</td><td>152.92</td><td>44.87</td><td>3.7426</td><td>1.4734</td></tr>
+                <tr><td>12</td><td>331.18</td><td>130.38</td><td>2.540</td><td>148.59</td><td>182.59</td><td>44.87</td><td>3.7549</td><td>1.4782</td></tr>
+                <tr><td>13</td><td>386.08</td><td>152.51</td><td>2.531</td><td>176.81</td><td>209.27</td><td>45.80</td><td>3.7298</td><td>1.4734</td></tr>
+                <tr><td>14</td><td>450.97</td><td>181.37</td><td>2.486</td><td>201.72</td><td>249.26</td><td>44.73</td><td>3.7565</td><td>1.5108</td></tr>
+                <tr><td>15</td><td>521.71</td><td>203.84</td><td>2.559</td><td>240.16</td><td>281.55</td><td>46.03</td><td>3.7856</td><td>1.4791</td></tr>
+                <tr><td>16</td><td>594.91</td><td>235.67</td><td>2.524</td><td>269.78</td><td>325.13</td><td>45.35</td><td>3.7941</td><td>1.5030</td></tr>
+                <tr><td>17</td><td>675.56</td><td>264.17</td><td>2.557</td><td>309.17</td><td>366.38</td><td>45.77</td><td>3.8164</td><td>1.4924</td></tr>
+                <tr><td>18</td><td>756.41</td><td>292.93</td><td>2.582</td><td>348.70</td><td>407.71</td><td>46.10</td><td>3.8116</td><td>1.4761</td></tr>
+                <tr><td>19</td><td>855.14</td><td>337.50</td><td>2.534</td><td>382.61</td><td>472.53</td><td>44.74</td><td>3.8675</td><td>1.5264</td></tr>
+                <tr><td>20</td><td>956.77</td><td>379.60</td><td>2.520</td><td>422.13</td><td>534.64</td><td>44.12</td><td>3.9052</td><td>1.5494</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="doc-actions">
+            <a class="btn" href="../assets/docs/cfd-speed-sweep-yaw0-roll0-pitch0.csv" download>Download CSV</a>
+          </div>
+        </section>
+
+        <section class="a-section">
+          <h2 id="cfd-data-plots">Plots</h2>
+          <p>Downforce and drag both grow with the square of speed. Downforce goes from 227 N at 10 m/s to 957 N at 20 m/s, and drag goes from 87 N to 380 N.</p>
+          <figure class="a-fig a-fig--chart">
+            <img src="../assets/img/cfd/01-forces-vs-speed.png" alt="Total, front and rear downforce and drag plotted against speed from 10 to 20 m/s" width="960" height="690" loading="lazy" />
+            <figcaption><span class="mono">Figure 1</span><span>Downforce and drag vs speed, CFD data.</span></figcaption>
+          </figure>
+          <p>Because the forces grow with speed squared, C<sub>L</sub>A and C<sub>D</sub>A stay almost constant across the sweep, at 3.71 to 3.91 m&sup2; and 1.43 to 1.55 m&sup2;. The lift to drag ratio stays between 2.49 and 2.60 and the front balance stays between 44% and 46%.</p>
+          <figure class="a-fig a-fig--chart">
+            <img src="../assets/img/cfd/02-cla-cda-vs-speed.png" alt="ClA and CdA plotted against speed, both nearly flat" width="960" height="690" loading="lazy" />
+            <figcaption><span class="mono">Figure 2</span><span>C<sub>L</sub>A and C<sub>D</sub>A vs speed, CFD data.</span></figcaption>
           </figure>
         </section>
         </section>
