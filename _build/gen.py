@@ -82,6 +82,7 @@ SECTIONS = [
             item("Physical Tests", "physical-tests", "Tests run on the car to measure its real properties.", parts(
                 ("CG Height Test", "cg-height-test", "Test procedure for measuring the CG height of ARG26 with two methods: a side tilt test and a front lift test."),
             ), "complete", "2026"),
+            item("Race Data Analysis", "race-data-analysis", "Lateral acceleration, speed and corner radius from ARG26's autocross and endurance runs at competition.", article("race-data-analysis"), "complete", "2026"),
             item("Miscellaneous", "miscellaneous", "Other calculations done for the suspension.", parts(
                 ("Longitudinal CG Shift Calculation", "cg-shift", "A preliminary calculation of how far the longitudinal CG moves on ARG27 as the accumulator and inverter change, and what that means for a 50/50 weight distribution."),
             ), "complete", "2026"),
