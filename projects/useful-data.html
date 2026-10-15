@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Useful Data — Davis Rattanavijai</title>
+  <meta name="description" content="Race data, tire data and CFD data used across the suspension work." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;500&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../assets/css/style.css?v=6f029fa8" />
+</head>
+<body>
+  <!-- EDIT: site notice banner; delete this div to remove it -->
+  <div class="site-notice"><div class="wrap"><span class="mono">Notice</span>This site is continually being updated throughout the year, but check out what I&rsquo;ve written about so far!</div></div>
+  <header class="topbar">
+    <div class="wrap">
+      <a class="brand" href="../index.html">Davis Rattanavijai <span>Portfolio</span></a>
+      <nav class="nav">
+        <a href="../index.html#work">Work</a>
+        <div class="nav-item contact">
+          <button type="button" class="contact-toggle" aria-expanded="false" aria-controls="contact-panel">Contact</button>
+          <div class="contact-panel" id="contact-panel">
+            <div class="contact-card">
+              <span class="mono">Email</span>
+              <button type="button" class="copy-email" data-copy="dr653@cornell.edu">
+                <span class="email">dr653@cornell.edu</span>
+                <span class="copy-label mono" data-default="Click to copy">Click to copy</span>
+              </button>
+            </div>
+          </div>
+        </div>
+        <button type="button" data-resume-toggle aria-expanded="false" aria-controls="resume-panel">Resume<span class="caret" aria-hidden="true">&#9662;</span></button>
+      </nav>
+      <div class="resume-panel" id="resume-panel">
+        <div class="resume-head mono"><span>Resume</span><span>Oct 2026</span></div>
+        <div class="resume-doc" data-src="../DavisRattanavijai_Resume.pdf#toolbar=0&amp;navpanes=0&amp;view=FitH"></div>
+        <div class="resume-actions">
+          <a class="primary" href="../DavisRattanavijai_Resume.pdf" download>Download PDF</a>
+          <a href="../resume.html">Open &rarr;</a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="p-hero">
+      <div class="wrap">
+        <div class="crumbs mono"><a href="../index.html#work">Index</a><span class="sep">/</span><span>Cornell Racing</span><span class="sep">/</span><span>Suspension Lead</span></div>
+        <h1 class="display p-title">Useful Data</h1>
+        <!-- EDIT: description -->
+        <p class="p-desc">Race data, tire data and CFD data used across the suspension work.</p>
+      </div>
+    </section>
+
+    <article class="article">
+      <div class="wrap a-doc">
+        <nav class="toc" aria-label="Contents">
+          <button type="button" class="toc-toggle mono" aria-expanded="false">Contents<span class="caret" aria-hidden="true">&#9662;</span></button>
+          <p class="toc-head mono">Contents</p>
+          <ol class="toc-list">
+          <li class="toc-part"><a href="#race-data-analysis">Race Data Analysis</a>
+            <ol>
+              <li><a href="#race-data-analysis-autocross"><span>Autocross</span></a></li>
+              <li><a href="#race-data-analysis-endurance"><span>Endurance</span></a></li>
+            </ol>
+          </li>
+          <li class="toc-part"><a href="#tire-analysis">Tires</a>
+            <ol>
+              <li><a href="#data"><span class="toc-num mono">1</span><span>Data</span></a></li>
+              <li><a href="#plots"><span class="toc-num mono">2</span><span>Plots</span></a></li>
+            </ol>
+          </li>
+          <li class="toc-part"><a href="#cfd-data">CFD Data</a>
+            <ol>
+              <li><a href="#cfd-data-data"><span>Data</span></a></li>
+              <li><a href="#cfd-data-plots"><span>Plots</span></a></li>
+            </ol>
+          </li>
+          </ol>
+        </nav>
+        <div class="a-doc-body">
+
+        <section class="a-part" id="race-data-analysis">
+          <header class="a-part-head">
+            <h2 class="display a-part-title">Race Data Analysis</h2>
+            <p class="a-part-desc">Lateral acceleration, speed and corner radius from ARG26&#x27;s autocross and endurance runs at competition.</p>
+          </header>
+
+
+        <section class="a-section">
+          <h2 id="race-data-analysis-autocross">Autocross</h2>
+          <!-- EDIT: autocross explanation -->
+          <p>This is competition data from ARG26's autocross run (49.6 s). The lateral acceleration and speed maps come from the car's GPS, and the corner radius map comes from our quasi-steady-state (QSS) lap model of the same track.</p>
+          <figure class="a-fig a-fig--wide">
+            <img src="../assets/img/race-data/01-autox-lateral-accel.webp" alt="Autocross track map colored by lateral acceleration, with the peak lateral acceleration labeled at each corner" width="2000" height="491" loading="lazy" />
+            <figcaption><span class="mono">Figure 1</span> Autocross lateral acceleration. Labels are the peak lateral acceleration in each corner, in g.</figcaption>
+          </figure>
+          <figure class="a-fig a-fig--wide">
+            <img src="../assets/img/race-data/02-autox-speed.webp" alt="Autocross track map colored by GPS speed, with corner minimum and local maximum speeds labeled" width="2000" height="468" loading="lazy" />
+            <figcaption><span class="mono">Figure 2</span> Autocross speed. Red labels are the minimum speed in each corner and blue labels are the local maximum speeds, in km/h.</figcaption>
+          </figure>
+          <figure class="a-fig a-fig--wide">
+            <img src="../assets/img/race-data/03-autox-corner-radius.webp" alt="Autocross track map colored by corner radius from the QSS model, with apex radii under 10 m labeled" width="2000" height="477" loading="lazy" />
+            <figcaption><span class="mono">Figure 3</span> Autocross corner radius from the QSS model. Labels are the apex radius of each corner tighter than 10 m.</figcaption>
+          </figure>
+        </section>
+
+        <section class="a-section">
+          <h2 id="race-data-analysis-endurance">Endurance</h2>
+          <!-- EDIT: endurance explanation -->
+          <p>This is competition data from ARG26's fastest endurance lap (63.10 s). The other laps are shown in grey behind it. As with autocross, the corner radius map comes from the QSS lap model.</p>
+          <figure class="a-fig a-fig--wide">
+            <img src="../assets/img/race-data/04-endurance-lateral-accel.webp" alt="Endurance track map colored by lateral acceleration on the fastest lap, with the peak lateral acceleration labeled at each corner" width="2000" height="440" loading="lazy" />
+            <figcaption><span class="mono">Figure 4</span> Endurance lateral acceleration on the fastest lap. Labels are the peak lateral acceleration in each corner, in g.</figcaption>
+          </figure>
+          <figure class="a-fig a-fig--wide">
+            <img src="../assets/img/race-data/05-endurance-speed.webp" alt="Endurance track map colored by GPS speed on the fastest lap, with corner minimum and local maximum speeds labeled" width="2000" height="427" loading="lazy" />
+            <figcaption><span class="mono">Figure 5</span> Endurance speed on the fastest lap. Red labels are the minimum speed in each corner and blue labels are the local maximum speeds, in km/h.</figcaption>
+          </figure>
+          <figure class="a-fig a-fig--wide">
+            <img src="../assets/img/race-data/06-endurance-corner-radius.webp" alt="Endurance track map colored by corner radius from the QSS model, with apex radii under 10 m labeled" width="2000" height="425" loading="lazy" />
+            <figcaption><span class="mono">Figure 6</span> Endurance corner radius from the QSS model. Labels are the apex radius of each corner tighter than 10 m.</figcaption>
+          </figure>
+        </section>
+        </section>
+        <section class="a-part" id="tire-analysis">
+          <header class="a-part-head">
+            <h2 class="display a-part-title">Tires</h2>
+            <p class="a-part-desc">Lateral force plots from TTC tire data, comparing Hoosier tire candidates.</p>
+          </header>
+
+
+        <p class="a-byline mono">Davis Rattanavijai &middot; Last edited October 8, 2026</p>
+
+        <section class="a-section" id="data">
+          <h2><span class="a-num">1</span>Data</h2>
+          <p>All plots on this page use run B2356run8.mat from the TTC (Tire Test Consortium) Round 9 data, in the MATLAB format with USCS (US customary) units.</p>
+          <p class="a-note"><span class="mono">To do</span><span>Rerun the tire data in OptimumTire, and run it at different tire pressures. There is good work on both from previous years to start from.</span></p>
+        </section>
+
+        <section class="a-section" id="plots">
+          <h2><span class="a-num">2</span>Plots</h2>
+          <figure class="a-fig a-fig--chart">
+            <img src="../assets/img/tire-analysis/01-load-sensitivity.png" alt="Lateral force vs normal load for five Hoosier tire candidates, from 0 to 300 lbf of normal load" width="1204" height="986" loading="lazy" />
+            <figcaption><span class="mono">Figure 1</span> Load sensitivity: lateral force vs normal load for each tire candidate.</figcaption>
+          </figure>
+          <figure class="a-fig a-fig--chart">
+            <img src="../assets/img/tire-analysis/02-fy-vs-sa-candidates.png" alt="Lateral force vs slip angle from -12 to 12 deg for five Hoosier tire candidates" width="1092" height="962" loading="lazy" />
+            <figcaption><span class="mono">Figure 2</span> Lateral force vs slip angle for each tire candidate.</figcaption>
+          </figure>
+          <figure class="a-fig a-fig--chart">
+            <img src="../assets/img/tire-analysis/03-fy-vs-sa-normal-load.png" alt="Lateral force vs slip angle from -20 to 20 deg at 50, 100, 150 and 200 lbf normal load and 0 deg inclination angle" width="1142" height="1026" loading="lazy" />
+            <figcaption><span class="mono">Figure 3</span> Lateral force vs slip angle at 50, 100, 150 and 200 lbf normal load, 0&deg; inclination angle.</figcaption>
+          </figure>
+          <figure class="a-fig a-fig--chart">
+            <img src="../assets/img/tire-analysis/04-fy-vs-ia.png" alt="Lateral force vs inclination angle from -5 to 5 deg at 8, 10 and 12 deg slip angle, peaking near 0 deg" width="1336" height="952" loading="lazy" />
+            <figcaption><span class="mono">Figure 4</span> Lateral force vs inclination angle at 8&deg;, 10&deg; and 12&deg; slip angle.</figcaption>
+          </figure>
+        </section>
+        </section>
+        <section class="a-part" id="cfd-data">
+          <header class="a-part-head">
+            <h2 class="display a-part-title">CFD Data</h2>
+            <p class="a-part-desc">Downforce and drag from a CFD speed sweep at 0° yaw, roll and pitch.</p>
+          </header>
+
+
+        <section class="a-section">
+          <h2 id="cfd-data-data">Data</h2>
+          <!-- EDIT: CFD data explanation -->
+          <p>This is CFD data from a speed sweep of the car from 10 to 20 m/s, with the car at 0&deg; yaw, 0&deg; roll and 0&deg; pitch.</p>
+          <div class="a-table-wrap">
+            <table class="a-table sheet">
+              <thead><tr><th>Speed (m/s)</th><th>Downforce (N)</th><th>Drag (N)</th><th>L/D</th><th>Front downforce (N)</th><th>Rear downforce (N)</th><th>Front balance (%)</th><th>C<sub>L</sub>A (m&sup2;)</th><th>C<sub>D</sub>A (m&sup2;)</th></tr></thead>
+              <tbody>
+                <tr><td>10</td><td>227.38</td><td>87.43</td><td>2.601</td><td>102.72</td><td>124.66</td><td>45.18</td><td>3.7123</td><td>1.4275</td></tr>
+                <tr><td>11</td><td>277.38</td><td>109.20</td><td>2.540</td><td>124.45</td><td>152.92</td><td>44.87</td><td>3.7426</td><td>1.4734</td></tr>
+                <tr><td>12</td><td>331.18</td><td>130.38</td><td>2.540</td><td>148.59</td><td>182.59</td><td>44.87</td><td>3.7549</td><td>1.4782</td></tr>
+                <tr><td>13</td><td>386.08</td><td>152.51</td><td>2.531</td><td>176.81</td><td>209.27</td><td>45.80</td><td>3.7298</td><td>1.4734</td></tr>
+                <tr><td>14</td><td>450.97</td><td>181.37</td><td>2.486</td><td>201.72</td><td>249.26</td><td>44.73</td><td>3.7565</td><td>1.5108</td></tr>
+                <tr><td>15</td><td>521.71</td><td>203.84</td><td>2.559</td><td>240.16</td><td>281.55</td><td>46.03</td><td>3.7856</td><td>1.4791</td></tr>
+                <tr><td>16</td><td>594.91</td><td>235.67</td><td>2.524</td><td>269.78</td><td>325.13</td><td>45.35</td><td>3.7941</td><td>1.5030</td></tr>
+                <tr><td>17</td><td>675.56</td><td>264.17</td><td>2.557</td><td>309.17</td><td>366.38</td><td>45.77</td><td>3.8164</td><td>1.4924</td></tr>
+                <tr><td>18</td><td>756.41</td><td>292.93</td><td>2.582</td><td>348.70</td><td>407.71</td><td>46.10</td><td>3.8116</td><td>1.4761</td></tr>
+                <tr><td>19</td><td>855.14</td><td>337.50</td><td>2.534</td><td>382.61</td><td>472.53</td><td>44.74</td><td>3.8675</td><td>1.5264</td></tr>
+                <tr><td>20</td><td>956.77</td><td>379.60</td><td>2.520</td><td>422.13</td><td>534.64</td><td>44.12</td><td>3.9052</td><td>1.5494</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="doc-actions">
+            <a class="btn" href="../assets/docs/cfd-speed-sweep-yaw0-roll0-pitch0.csv" download>Download CSV</a>
+          </div>
+        </section>
+
+        <section class="a-section">
+          <h2 id="cfd-data-plots">Plots</h2>
+          <p>Downforce and drag both grow with the square of speed. Downforce goes from 227 N at 10 m/s to 957 N at 20 m/s, and drag goes from 87 N to 380 N.</p>
+          <figure class="a-fig a-fig--chart">
+            <img src="../assets/img/cfd/01-forces-vs-speed.png" alt="Total, front and rear downforce and drag plotted against speed from 10 to 20 m/s" width="960" height="690" loading="lazy" />
+            <figcaption><span class="mono">Figure 1</span><span>Downforce and drag vs speed, CFD data.</span></figcaption>
+          </figure>
+          <p>Because the forces grow with speed squared, C<sub>L</sub>A and C<sub>D</sub>A stay almost constant across the sweep, at 3.71 to 3.91 m&sup2; and 1.43 to 1.55 m&sup2;. The lift to drag ratio stays between 2.49 and 2.60 and the front balance stays between 44% and 46%.</p>
+          <figure class="a-fig a-fig--chart">
+            <img src="../assets/img/cfd/02-cla-cda-vs-speed.png" alt="ClA and CdA plotted against speed, both nearly flat" width="960" height="690" loading="lazy" />
+            <figcaption><span class="mono">Figure 2</span><span>C<sub>L</sub>A and C<sub>D</sub>A vs speed, CFD data.</span></figcaption>
+          </figure>
+        </section>
+        </section>
+        </div>
+      </div>
+    </article>
+
+    <nav class="p-nav">
+      <div class="wrap">
+        <a class="prev" href="physical-tests.html"><span class="mono">&larr; Previous</span><span class="display">Physical Tests</span></a>
+        <a class="next" href="miscellaneous.html"><span class="mono">Next &rarr;</span><span class="display">Miscellaneous</span></a>
+      </div>
+    </nav>
+  </main>
+
+  <footer class="footer">
+    <div class="wrap mono">
+      <span>&copy; 2026 Davis Rattanavijai</span>
+      <a href="mailto:dr653@cornell.edu">dr653@cornell.edu</a>
+    </div>
+  </footer>
+  <script src="../assets/js/main.js?v=6f029fa8"></script>
+</body>
+</html>

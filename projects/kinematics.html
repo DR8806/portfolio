@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Suspension Kinematics Design — Davis Rattanavijai</title>
-  <meta name="description" content="Suspension kinematics design done in OptimumK, along with the tire analysis and Ackermann selection that go into it." />
+  <meta name="description" content="Suspension kinematics design done in OptimumK, along with the Ackermann selection that goes into it." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;500&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet" />
@@ -49,7 +49,7 @@
         <div class="crumbs mono"><a href="../index.html#work">Index</a><span class="sep">/</span><span>Cornell Racing</span><span class="sep">/</span><span>Suspension Lead</span></div>
         <h1 class="display p-title">Suspension Kinematics Design</h1>
         <!-- EDIT: description -->
-        <p class="p-desc">Suspension kinematics design done in OptimumK, along with the tire analysis and Ackermann selection that go into it.</p>
+        <p class="p-desc">Suspension kinematics design done in OptimumK, along with the Ackermann selection that goes into it.</p>
       </div>
     </section>
 
@@ -88,12 +88,6 @@
               <li><a href="#ackermann"><span class="toc-num mono">5</span><span>Ackermann</span></a></li>
               <li><a href="#rocker"><span class="toc-num mono">6</span><span>Rocker Pickup Points</span></a></li>
               <li><a href="#anti-roll-bar"><span class="toc-num mono">7</span><span>Anti-Roll Bar</span></a></li>
-            </ol>
-          </li>
-          <li class="toc-part"><a href="#tire-analysis">Tires</a>
-            <ol>
-              <li><a href="#data"><span class="toc-num mono">1</span><span>Data</span></a></li>
-              <li><a href="#plots"><span class="toc-num mono">2</span><span>Plots</span></a></li>
             </ol>
           </li>
           <li class="toc-part"><a href="#ackermann-selection-methodology">Ackermann</a>
@@ -268,7 +262,36 @@
 
         <section class="a-section" id="rocker">
           <h2><span class="a-num">6</span>Rocker Pickup Points</h2>
-          <p>The rocker pickup points were moved on ARG27 for better packaging.</p>
+          <p>On ARG27 the rocker pivot moves down 0.2 in, front and rear, to lower the height the rocker needs.</p>
+          <p>The limit is the bolt head under the rocker. In CAD there is 0.450 in from the rocker hub to the bottom of the clevis (Figure 5), and the bolt head takes up about 0.16 in of that (Figure 6). That leaves 0.29 in of room, so we moved the pivot 0.2 in and kept about 0.09 in of clearance.</p>
+          <figure class="a-fig a-fig--wide">
+            <img src="../assets/img/kinematics/05-rocker-clearance.webp" alt="Front rocker assembly in Inventor with 0.450 in measured from the rocker hub to the bottom of the clevis" width="2000" height="911" loading="lazy" />
+            <figcaption><span class="mono">Figure 5</span> 0.450 in from the rocker hub to the bottom of the clevis.</figcaption>
+          </figure>
+          <figure class="a-fig a-fig--wide">
+            <img src="../assets/img/kinematics/06-rocker-bolt-head.webp" alt="Front rocker assembly in Inventor with 0.162 in measured on the bolt head at the bottom of the clevis" width="2000" height="900" loading="lazy" />
+            <figcaption><span class="mono">Figure 6</span> The bolt head at the bottom of the clevis, about 0.16 in.</figcaption>
+          </figure>
+          <p>The move is at 45&deg; in the &minus;Y/&minus;Z plane, so the 0.2 in is split evenly between the two axes:</p>
+          <ul>
+            <li>Change in each axis = 0.2 &times; cos 45&deg; = 0.2 / &radic;2 &asymp; 0.1414 in</li>
+            <li>X: no change</li>
+            <li>Y: &minus;0.1414 in</li>
+            <li>Z: &minus;0.1414 in</li>
+          </ul>
+          <div class="a-table-wrap">
+            <table class="a-table sheet">
+              <thead><tr><th>Axle</th><th>OptimumK point</th><th>ARG26 (x, y, z) (in)</th><th>ARG27 (x, y, z) (in)</th></tr></thead>
+              <tbody>
+                <tr><td>Front</td><td>Rocker left: Pivot</td><td>&minus;19.489, 8.407, 18.634</td><td>&minus;19.489, 8.2656, 18.4926</td></tr>
+                <tr><td>Rear</td><td>Rocker left: Pivot</td><td>x, y, z</td><td>x, y &minus; 0.1414, z &minus; 0.1414</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <figure class="a-fig a-fig--wide">
+            <img src="../assets/img/kinematics/07-rocker-pivot-optimumk.png" alt="OptimumK push pull input data with the front left rocker pivot at -19.489, 8.407, 18.634" width="1610" height="901" loading="lazy" />
+            <figcaption><span class="mono">Figure 7</span> ARG26 front rocker pivot in OptimumK.</figcaption>
+          </figure>
         </section>
 
         <section class="a-section" id="anti-roll-bar">
@@ -286,46 +309,12 @@
             </table>
           </div>
           <figure class="a-fig a-fig--wide">
-            <img src="../assets/img/kinematics/05-arb-cad.webp" alt="Chassis CAD with the front anti-roll bar measured 1.403 in below a plane at the top of the chassis opening" width="1437" height="810" loading="lazy" />
-            <figcaption><span class="mono">Figure 5</span> Current anti-roll bar position in CAD.</figcaption>
+            <img src="../assets/img/kinematics/08-arb-cad.webp" alt="Chassis CAD with the front anti-roll bar measured 1.403 in below a plane at the top of the chassis opening" width="1437" height="810" loading="lazy" />
+            <figcaption><span class="mono">Figure 8</span> Current anti-roll bar position in CAD.</figcaption>
           </figure>
           <figure class="a-fig a-fig--chart">
-            <img src="../assets/img/kinematics/06-arb-foot-well.webp" alt="View into the foot well of the car with the anti-roll bar running across the top of the opening" width="1500" height="2000" loading="lazy" />
-            <figcaption><span class="mono">Figure 6</span> The anti-roll bar across the top of the foot well.</figcaption>
-          </figure>
-        </section>
-        </section>
-        <section class="a-part" id="tire-analysis">
-          <header class="a-part-head">
-            <h2 class="display a-part-title">Tires</h2>
-            <p class="a-part-desc">Lateral force plots from TTC tire data, comparing Hoosier tire candidates.</p>
-          </header>
-
-
-        <p class="a-byline mono">Davis Rattanavijai &middot; Last edited October 8, 2026</p>
-
-        <section class="a-section" id="data">
-          <h2><span class="a-num">1</span>Data</h2>
-          <p>All plots on this page use run B2356run8.mat from the TTC (Tire Test Consortium) Round 9 data, in the MATLAB format with USCS (US customary) units.</p>
-        </section>
-
-        <section class="a-section" id="plots">
-          <h2><span class="a-num">2</span>Plots</h2>
-          <figure class="a-fig a-fig--chart">
-            <img src="../assets/img/tire-analysis/01-load-sensitivity.png" alt="Lateral force vs normal load for five Hoosier tire candidates, from 0 to 300 lbf of normal load" width="1204" height="986" loading="lazy" />
-            <figcaption><span class="mono">Figure 1</span> Load sensitivity: lateral force vs normal load for each tire candidate.</figcaption>
-          </figure>
-          <figure class="a-fig a-fig--chart">
-            <img src="../assets/img/tire-analysis/02-fy-vs-sa-candidates.png" alt="Lateral force vs slip angle from -12 to 12 deg for five Hoosier tire candidates" width="1092" height="962" loading="lazy" />
-            <figcaption><span class="mono">Figure 2</span> Lateral force vs slip angle for each tire candidate.</figcaption>
-          </figure>
-          <figure class="a-fig a-fig--chart">
-            <img src="../assets/img/tire-analysis/03-fy-vs-sa-normal-load.png" alt="Lateral force vs slip angle from -20 to 20 deg at 50, 100, 150 and 200 lbf normal load and 0 deg inclination angle" width="1142" height="1026" loading="lazy" />
-            <figcaption><span class="mono">Figure 3</span> Lateral force vs slip angle at 50, 100, 150 and 200 lbf normal load, 0&deg; inclination angle.</figcaption>
-          </figure>
-          <figure class="a-fig a-fig--chart">
-            <img src="../assets/img/tire-analysis/04-fy-vs-ia.png" alt="Lateral force vs inclination angle from -5 to 5 deg at 8, 10 and 12 deg slip angle, peaking near 0 deg" width="1336" height="952" loading="lazy" />
-            <figcaption><span class="mono">Figure 4</span> Lateral force vs inclination angle at 8&deg;, 10&deg; and 12&deg; slip angle.</figcaption>
+            <img src="../assets/img/kinematics/09-arb-foot-well.webp" alt="View into the foot well of the car with the anti-roll bar running across the top of the opening" width="1500" height="2000" loading="lazy" />
+            <figcaption><span class="mono">Figure 9</span> The anti-roll bar across the top of the foot well.</figcaption>
           </figure>
         </section>
         </section>
@@ -429,7 +418,7 @@
 
           <figure class="a-fig a-fig--chart">
             <img src="../assets/img/tire-analysis/03-fy-vs-sa-normal-load.png" alt="Lateral force vs slip angle from -20 to 20 deg at 50, 100, 150 and 200 lbf normal load and 0 deg inclination angle" width="1142" height="1026" loading="lazy" />
-            <figcaption><span class="mono">Figure 7</span> R20 16x7.5x10 lateral force (Fy) versus slip angle (SA) at 50, 100, 150 and 200 lbf normal load (Fz), 0° inclination angle. TTC Round 9 data, from the Tires section.</figcaption>
+            <figcaption><span class="mono">Figure 7</span> R20 16x7.5x10 lateral force (Fy) versus slip angle (SA) at 50, 100, 150 and 200 lbf normal load (Fz), 0° inclination angle. TTC Round 9 data, from the <a class="a-link" href="useful-data.html#tire-analysis">Tires</a> section of Useful Data.</figcaption>
           </figure>
 
           <p>Next we find the slip angle where each load curve peaks.</p>

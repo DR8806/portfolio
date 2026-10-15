@@ -38,7 +38,8 @@ def item(title, slug, blurb, body, status, year):
 
 # old page -> where its write-up lives now, so old links still work
 MOVED = {
-    "tire-analysis": "kinematics",
+    "tire-analysis": "useful-data",
+    "race-data-analysis": "useful-data",
     "ackermann-selection-methodology": "kinematics",
     "cg-height-test": "physical-tests",
     "cg-shift": "miscellaneous",
@@ -73,19 +74,21 @@ def paper(title, slug, file, pages, year, summary, comp, dates, result, team, co
 SECTIONS = [
     ("Cornell Racing", "cornell-racing", [
         ("Suspension Lead", [
-            item("Suspension Kinematics Design", "kinematics", "Suspension kinematics design done in OptimumK, along with the tire analysis and Ackermann selection that go into it.", parts(
+            item("Suspension Kinematics Design", "kinematics", "Suspension kinematics design done in OptimumK, along with the Ackermann selection that goes into it.", parts(
                 ("Kinematics", "kinematics", "Suspension kinematics design for the ARG26 car, done in OptimumK."),
-                ("Tires", "tire-analysis", "Lateral force plots from TTC tire data, comparing Hoosier tire candidates."),
                 ("Ackermann", "ackermann-selection-methodology", "The methodology used on ARG27 to determine what Ackermann geometry to design the car to."),
             ), "live", "2026"),
             item("Suspension Rates and Parameter Selection", "rates-and-parameters", "Selection of the suspension rates and parameters. More will be added here as the work continues.", None, "live", "2026"),
             item("Physical Tests", "physical-tests", "Tests run on the car to measure its real properties.", parts(
                 ("CG Height Test", "cg-height-test", "Test procedure for measuring the CG height of ARG26 with two methods: a side tilt test and a front lift test."),
             ), "complete", "2026"),
-            item("Race Data Analysis", "race-data-analysis", "Lateral acceleration, speed and corner radius from ARG26's autocross and endurance runs at competition.", article("race-data-analysis"), "complete", "2026"),
+            item("Useful Data", "useful-data", "Race data, tire data and CFD data used across the suspension work.", parts(
+                ("Race Data Analysis", "race-data-analysis", "Lateral acceleration, speed and corner radius from ARG26's autocross and endurance runs at competition."),
+                ("Tires", "tire-analysis", "Lateral force plots from TTC tire data, comparing Hoosier tire candidates."),
+                ("CFD Data", "cfd-data", "Downforce and drag from a CFD speed sweep at 0° yaw, roll and pitch."),
+            ), "live", "2026"),
             item("Miscellaneous", "miscellaneous", "Other calculations done for the suspension.", parts(
                 ("Longitudinal CG Shift Calculation", "cg-shift", "A preliminary calculation of how far the longitudinal CG moves on ARG27 as the accumulator and inverter change, and what that means for a 50/50 weight distribution."),
-                ("CFD Data", "cfd-data", "Downforce and drag from a CFD speed sweep at 0° yaw, roll and pitch."),
             ), "complete", "2026"),
         ]),
         ("Suspension Engineer", [
