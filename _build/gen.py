@@ -78,12 +78,13 @@ SECTIONS = [
                 ("Kinematics", "kinematics", "Suspension kinematics design for the ARG26 car, done in OptimumK."),
                 ("Ackermann", "ackermann-selection-methodology", "The methodology used on ARG27 to determine what Ackermann geometry to design the car to."),
             ), "live", "2026"),
-            item("Suspension Rates and Parameter Selection", "rates-and-parameters", "Selection of the suspension rates and parameters. More will be added here as the work continues.", None, "live", "2026"),
+            item("Suspension Rates and Parameter Selection", "rates-and-parameters", "Selection of the suspension rates and parameters for ARG27. More will be added here as the work continues.", article("rates-and-parameters"), "live", "2026"),
             item("Physical Tests", "physical-tests", "Tests run on the car to measure its real properties.", parts(
                 ("CG Height Test", "cg-height-test", "Test procedure for measuring the CG height of ARG26 with two methods: a side tilt test and a front lift test."),
             ), "complete", "2026"),
-            item("Useful Data", "useful-data", "Race data, tire data and CFD data used across the suspension work.", parts(
+            item("Useful Data", "useful-data", "Race data, load cases, tire data and CFD data used across the suspension work.", parts(
                 ("Race Data Analysis", "race-data-analysis", "Lateral acceleration, speed and corner radius from ARG26's autocross and endurance runs at competition."),
+                ("Load Cases", "load-cases", "ARG26 and ARG27 load cases from IMU data, with a year over year comparison."),
                 ("Tires", "tire-analysis", "Lateral force plots from TTC tire data, comparing Hoosier tire candidates."),
                 ("CFD Data", "cfd-data", "Downforce and drag from a CFD speed sweep at 0° yaw, roll and pitch."),
             ), "live", "2026"),

@@ -4,11 +4,11 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Useful Data — Davis Rattanavijai</title>
-  <meta name="description" content="Race data, tire data and CFD data used across the suspension work." />
+  <meta name="description" content="Race data, load cases, tire data and CFD data used across the suspension work." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;500&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="../assets/css/style.css?v=6f029fa8" />
+  <link rel="stylesheet" href="../assets/css/style.css?v=dabb6651" />
 </head>
 <body>
   <!-- EDIT: site notice banner; delete this div to remove it -->
@@ -49,7 +49,7 @@
         <div class="crumbs mono"><a href="../index.html#work">Index</a><span class="sep">/</span><span>Cornell Racing</span><span class="sep">/</span><span>Suspension Lead</span></div>
         <h1 class="display p-title">Useful Data</h1>
         <!-- EDIT: description -->
-        <p class="p-desc">Race data, tire data and CFD data used across the suspension work.</p>
+        <p class="p-desc">Race data, load cases, tire data and CFD data used across the suspension work.</p>
       </div>
     </section>
 
@@ -63,6 +63,11 @@
             <ol>
               <li><a href="#race-data-analysis-autocross"><span>Autocross</span></a></li>
               <li><a href="#race-data-analysis-endurance"><span>Endurance</span></a></li>
+            </ol>
+          </li>
+          <li class="toc-part"><a href="#load-cases">Load Cases</a>
+            <ol>
+              <li><a href="#load-cases-data"><span>Data</span></a></li>
             </ol>
           </li>
           <li class="toc-part"><a href="#tire-analysis">Tires</a>
@@ -122,6 +127,32 @@
             <img src="../assets/img/race-data/06-endurance-corner-radius.webp" alt="Endurance track map colored by corner radius from the QSS model, with apex radii under 10 m labeled" width="2000" height="425" loading="lazy" />
             <figcaption><span class="mono">Figure 6</span> Endurance corner radius from the QSS model. Labels are the apex radius of each corner tighter than 10 m.</figcaption>
           </figure>
+        </section>
+        </section>
+        <section class="a-part" id="load-cases">
+          <header class="a-part-head">
+            <h2 class="display a-part-title">Load Cases</h2>
+            <p class="a-part-desc">ARG26 and ARG27 load cases from IMU data, with a year over year comparison.</p>
+          </header>
+
+
+        <section class="a-section">
+          <h2 id="load-cases-data">Data</h2>
+          <p>The load cases were determined by our unsprung lead, Parker, from IMU data on the car, post processed to the CG. All values are in g. The combined cases apply the listed acceleration both laterally and longitudinally. Bump is vertical only.</p>
+          <div class="a-table-wrap">
+            <table class="a-table sheet">
+              <thead><tr><th>Load case</th><th>ARG26 (g)</th><th>ARG27 (g)</th><th>Change (g)</th></tr></thead>
+              <tbody>
+                <tr><td>Cornering</td><td>2.3</td><td>2.4</td><td>+0.1</td></tr>
+                <tr><td>Accel</td><td>1.5</td><td>1.6</td><td>+0.1</td></tr>
+                <tr><td>Braking</td><td>1.9</td><td>1.9</td><td>0.0</td></tr>
+                <tr><td>Combined accel + cornering</td><td>1.24</td><td>1.35</td><td>+0.11</td></tr>
+                <tr><td>Combined braking + cornering</td><td>1.47</td><td>1.5</td><td>+0.03</td></tr>
+                <tr><td>Bump</td><td>3.5</td><td>3.5</td><td>0.0</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p>ARG27 is slightly higher in cornering and accel, and similar in braking.</p>
         </section>
         </section>
         <section class="a-part" id="tire-analysis">
@@ -225,6 +256,6 @@
       <a href="mailto:dr653@cornell.edu">dr653@cornell.edu</a>
     </div>
   </footer>
-  <script src="../assets/js/main.js?v=6f029fa8"></script>
+  <script src="../assets/js/main.js?v=dabb6651"></script>
 </body>
 </html>

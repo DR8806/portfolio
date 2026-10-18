@@ -1072,6 +1072,22 @@ html.in-preview .topbar {
   overflow-x: auto;
 }
 
+.a-hl {
+  background: #fff176;
+  padding: 1px 4px;
+}
+
+.a-table-wrap:has(+ .a-table-fn) {
+  margin-bottom: 12px;
+}
+
+.a-table-fn {
+  margin-top: 0;
+  font-size: 16px;
+  line-height: 1.45;
+  color: var(--muted);
+}
+
 .a-table {
   width: 100%;
   min-width: 620px;

@@ -273,21 +273,25 @@
             </table>
           </div>
 
-          <figure class="a-fig a-fig--chart">
-            <img src="../assets/img/ackermann/09-sweep-angle-difference.png" alt="Target steering angle difference versus cornering radius compared with pure Ackermann" width="940" height="700" loading="lazy" />
-            <figcaption><span class="mono">Figure 9</span> Target steering angle difference versus cornering radius, compared with pure Ackermann (Section 2).</figcaption>
-          </figure>
-
-          <figure class="a-fig a-fig--chart">
-            <img src="../assets/img/ackermann/10-sweep-percent-ackermann.png" alt="Percent Ackermann versus cornering radius" width="940" height="700" loading="lazy" />
-            <figcaption><span class="mono">Figure 10</span> % Ackermann versus cornering radius. The line keeps falling below −200% at larger radii.</figcaption>
-          </figure>
-
           <p>What the sweep shows:</p>
           <ul>
             <li>About 48% Ackermann at the hairpin minimum and 6% at the skidpad radius, crossing to reverse Ackermann at about 8 m.</li>
-            <li>The target drops as the radius grows because the rear slip angle pushes the instant center forward by i<sub>c</sub> = R × tan(α<sub>R</sub>). Past about 8 m, i<sub>c</sub> is longer than the wheelbase, so the instant center sits ahead of the front axle and the front wheels' attitude angles flip toward reverse Ackermann.</li>
-            <li>At large radii, % Ackermann gets very large because pure Ackermann's angle difference is tiny there (0.14° at 27 m), so a small difference becomes a big percentage. In degrees, the target stays within 0.4° of parallel past the skidpad (Figure 9). The tight corners are where the choice of Ackermann matters most.</li>
+            <li>The target drops as the radius grows because the rear slip angle pushes the instant center forward by i<sub>c</sub> = R × tan(α<sub>R</sub>). Past about 8 m, i<sub>c</sub> is longer than the wheelbase, so the instant center sits ahead of the front axle and the front wheels' attitude angles flip toward reverse Ackermann. This means the whole car is crabbing around the corner with its nose pointed in, which only happens when the rear slip angle is larger than tan<sup>−1</sup>(L/R).</li>
+            <li>At large radii, % Ackermann gets very large because pure Ackermann's angle difference is tiny there (0.14° at 27 m), so a small difference becomes a big percentage. In degrees, the target stays within 0.4° of parallel past the skidpad (Δδ<sub>target</sub> column). The tight corners are where the choice of Ackermann matters most.</li>
+          </ul>
+
+          <h3><span class="a-num">6.1</span>Flaws and Drawbacks</h3>
+          <p>These apply to both the method in Section 5 and the radius sweep here.</p>
+          <ul>
+            <li><strong>Rear slip angle is fixed at 11°.</strong> This is the biggest lever. Because i<sub>c</sub> = R × tan(α<sub>R</sub>), the instant center moves forward 0.19 m for every meter of radius, which is what makes the target fall so fast. With α<sub>R</sub> = 6° instead of 11°, the result at 5 m rises from 40% to 70%, at the skidpad from 6% to 51%, and the switch to reverse Ackermann moves from 8 m out to about 15 m. The real rear slip angle has not been measured.</li>
+            <li><strong>Neutral car at the limit.</strong> Every tire is assumed to be at its peak at the same time (Figure 3). A real car usually reaches the limit on one axle first. If the car understeers, the rear tires sit below their peak and run less slip angle.</li>
+            <li><strong>Raw tire test data.</strong> The TTC data is not scaled to the track. At 200 lbf it peaks at 519 lbf, a friction coefficient of about 2.6, well above what the car pulls on track. It is also one tire at one pressure, 0° inclination angle, cornering only (no braking or drive force), on a test belt.</li>
+            <li><strong>Peak slip angle is hard to pin down.</strong> The curves are flat near the top, so the force stays within about 1% of its peak from roughly 9° to 12°. The points were also read off a plot by pixel analysis. The 0.4° difference between the inside and outside front tires in Section 5 is within this uncertainty, but it moves the 5 m result from 40% to 30%.</li>
+            <li><strong>Fixed loads in Section 5.</strong> The tire loads assume 1.5 g, a fixed 48% front load transfer split and no aero. The outside front load (235 lb) is past the highest tire data load (200 lbf), so its peak slip angle is extrapolated.</li>
+            <li><strong>Steady-state cornering only.</strong> Corner entry, trail braking, corner exit and transient steering are not included.</li>
+            <li><strong>Simplified geometry.</strong> The car is rigid with the same track front and rear. Static toe, bump steer, roll steer, compliance steer and how the steering axis (kingpin and caster) changes the wheel angles are all ignored.</li>
+            <li><strong>% Ackermann is compared at the same radius.</strong> At large radii, pure Ackermann's angle difference is tiny, so the percentage gets very large even though the target is under half a degree. A real steering linkage sets Ackermann by steering angle, not radius. Past about 10 m, the result is really a static toe question.</li>
+            <li><strong>Not checked against data.</strong> None of the slip or attitude angles have been compared with logged data. Yaw rate, speed and steering angle from the car would give the real body slip angle and steering angles to check against.</li>
           </ul>
         </section>
 
@@ -426,8 +430,8 @@
           <h2><span class="a-num">B</span>Appendix: Peak Slip Angle and Ackermann</h2>
           <p>How the slope of the line of peaks relates to the Ackermann a tire asks for.</p>
           <figure class="a-fig">
-            <img src="../assets/img/ackermann/11-pro-anti-ackermann.png" alt="Two lateral force versus slip angle plots: peak slip angle rising as load drops gives pro Ackermann, peak slip angle rising with load gives anti Ackermann" width="1276" height="970" loading="lazy" />
-            <figcaption><span class="mono">Figure 11</span> The steering geometry is a function of the tire curve. Steering Ackerman, slide 80.</figcaption>
+            <img src="../assets/img/ackermann/09-pro-anti-ackermann.png" alt="Two lateral force versus slip angle plots: peak slip angle rising as load drops gives pro Ackermann, peak slip angle rising with load gives anti Ackermann" width="1276" height="970" loading="lazy" />
+            <figcaption><span class="mono">Figure 9</span> The steering geometry is a function of the tire curve. Steering Ackerman, slide 80.</figcaption>
           </figure>
 
           <div class="a-table-wrap">
