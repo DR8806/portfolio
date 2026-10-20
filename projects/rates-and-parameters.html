@@ -60,21 +60,11 @@
           <p class="toc-head mono">Contents</p>
           <ol class="toc-list">
           <li><a href="#introduction"><span class="toc-num mono">0</span><span>Introduction</span></a></li>
-          <li><a href="#background"><span class="toc-num mono">1</span><span>Background</span></a>
+          <li><a href="#spring-and-motion-ratio"><span class="toc-num mono">1</span><span>Spring and Motion Ratio</span></a>
             <ol class="toc-sub">
-              <li><a href="#definitions"><span class="toc-num mono">1.1</span><span>Definitions</span></a></li>
-              <li><a href="#arg26-baseline"><span class="toc-num mono">1.2</span><span>ARG26 Baseline</span></a></li>
+              <li><a href="#methodology"><span class="toc-num mono">1.1</span><span>Methodology</span></a></li>
             </ol>
           </li>
-          <li><a href="#spring-and-motion-ratio"><span class="toc-num mono">2</span><span>Spring and Motion Ratio</span></a>
-            <ol class="toc-sub">
-              <li><a href="#process"><span class="toc-num mono">2.1</span><span>Process</span></a></li>
-              <li><a href="#evaluating-a-choice"><span class="toc-num mono">2.2</span><span>Evaluating a Choice</span></a></li>
-              <li><a href="#minimum-wheel-rate-for-aero-clearance"><span class="toc-num mono">2.3</span><span>Minimum Wheel Rate for Aero Clearance</span></a></li>
-              <li><a href="#aero-sensitivity"><span class="toc-num mono">2.4</span><span>Aero Sensitivity</span></a></li>
-            </ol>
-          </li>
-          <li><a href="#arg27-inputs"><span class="toc-num mono">3</span><span>ARG27 Inputs</span></a></li>
           <li><a href="#appendix"><span class="toc-num mono">A</span><span>Appendix: ARG26 Parameters Spreadsheet</span></a></li>
           <li><a href="#appendix-dampers"><span class="toc-num mono">B</span><span>Appendix: Öhlins TTX25 MKII Dampers</span></a></li>
           <li><a href="#appendix-springs"><span class="toc-num mono">C</span><span>Appendix: Available Hyperco Springs</span></a></li>
@@ -86,176 +76,37 @@
         <section class="a-section">
           <h2 id="introduction"><span class="a-num">0</span>Introduction</h2>
           <!-- EDIT: what this page finds -->
-          <p>The goal is to define the suspension rates for ARG27. This page will find:</p>
-          <ul>
-            <li>Ride frequency, front and rear</li>
-            <li>Motion ratio, front and rear</li>
-            <li>Wheel rate and spring rate, front and rear</li>
-            <li>Roll gradient and total roll stiffness</li>
-            <li>Roll stiffness distribution between the front and rear</li>
-            <li>Anti-roll bar rates, front and rear</li>
-            <li>Pitch gradient</li>
-            <li>Damping ratio and damper settings, front and rear</li>
-          </ul>
+          <p>This is the other half of suspension design: selecting the spring rates, motion ratios, anti-roll bar rates and the rest of the parameters that set how the car rides, rolls and pitches. The goal for ARG27 is a suspension that accommodates a considerable aero package.</p>
         </section>
 
         <section class="a-section">
-          <h2 id="background"><span class="a-num">1</span>Background</h2>
-
-          <h3 id="definitions"><span class="a-num">1.1</span>Definitions</h3>
-          <div class="a-table-wrap">
-            <table class="a-table sheet">
-              <thead><tr><th>Term</th><th>Definition</th></tr></thead>
-              <tbody>
-                <tr><td>Sprung mass</td><td>Everything held up by the springs: chassis, driver, accumulator, powertrain.</td></tr>
-                <tr><td>Unsprung mass</td><td>Everything below the springs: wheels, tires, uprights, part of the links.</td></tr>
-                <tr><td>Motion ratio, MR</td><td>Wheel travel ÷ shock travel. Set by the rocker.</td></tr>
-                <tr><td>Spring rate, k</td><td>Stiffness of the coil spring at the shock.</td></tr>
-                <tr><td>Wheel rate, K</td><td>Spring stiffness felt at the wheel. K = k ÷ MR<sup>2</sup>.</td></tr>
-                <tr><td>Tire rate</td><td>Vertical stiffness of the tire. Acts in series with the wheel rate.</td></tr>
-                <tr><td>Ride frequency, f</td><td>Natural frequency of one corner bouncing. f = (1 ÷ 2π) √(K ÷ m).</td></tr>
-                <tr><td>Roll center height</td><td>Height of the point the chassis rolls about. Set by the kinematics.</td></tr>
-                <tr><td>Roll stiffness</td><td>Moment needed to roll the chassis one degree. From springs, anti-roll bars and tires.</td></tr>
-                <tr><td>Roll gradient</td><td>Degrees of roll per g of lateral acceleration.</td></tr>
-                <tr><td>LLTD</td><td>Share of the lateral load transfer carried by the front axle. Main tool for tuning balance.</td></tr>
-                <tr><td>ARB rate</td><td>Roll stiffness added by the anti-roll bar.</td></tr>
-                <tr><td>ARB motion ratio</td><td>Chassis roll angle per degree of bar twist.</td></tr>
-                <tr><td>Pitch gradient</td><td>Degrees of pitch per g of braking or acceleration.</td></tr>
-                <tr><td>Damping ratio, ζ</td><td>Damping as a fraction of critical damping.</td></tr>
-                <tr><td>Static sag</td><td>How far the damper is compressed at rest, as a fraction of its stroke.</td></tr>
-                <tr><td>Spring preload</td><td>How far the spring is already compressed with the damper fully extended.</td></tr>
-              </tbody>
-            </table>
-          </div>
-
-          <h3 id="arg26-baseline"><span class="a-num">1.2</span>ARG26 Baseline</h3>
-          <!-- EDIT: ARG26 baseline -->
-          <p>These are the ARG26 values, from the ARG26 suspension parameters spreadsheet (download in the <a class="a-link" href="#appendix">appendix</a>). They are the starting point the ARG27 rates are compared against.</p>
-
-          <div class="a-table-wrap">
-            <table class="a-table sheet">
-              <thead><tr><th>Vehicle</th><th>ARG26</th></tr></thead>
-              <tbody>
-                <tr><td>Wheelbase</td><td>61 in</td></tr>
-                <tr><td>Track width, front and rear</td><td>44 in</td></tr>
-                <tr><td>Ride height</td><td>1.5 in</td></tr>
-                <tr><td>Car weight without driver</td><td>420 lb</td></tr>
-                <tr><td>Driver weight</td><td>150 lb</td></tr>
-                <tr><td>Total weight with driver</td><td>570 lb</td></tr>
-                <tr><td>Sprung weight with driver</td><td>450 lb</td></tr>
-                <tr><td>Unsprung weight per corner</td><td>30 lb</td></tr>
-                <tr><td>Weight distribution</td><td>50% front</td></tr>
-                <tr><td>CG height with driver</td><td>9.875 in</td></tr>
-                <tr><td>Tires</td><td>Hoosier R20 16.0 x 7.5-10</td></tr>
-              </tbody>
-            </table>
-          </div>
-
-          <div class="a-table-wrap">
-            <table class="a-table sheet">
-              <thead><tr><th>Rates</th><th>Front</th><th>Rear</th></tr></thead>
-              <tbody>
-                <tr><td>Ride frequency</td><td>2.98 Hz</td><td>3.31 Hz</td></tr>
-                <tr><td>Motion ratio</td><td>1.21</td><td>1.18</td></tr>
-                <tr><td>Spring rate*</td><td>150 lbf/in</td><td>175 lbf/in</td></tr>
-                <tr><td>Wheel rate</td><td>102.5 lbf/in</td><td>125.7 lbf/in</td></tr>
-                <tr><td>Tire rate</td><td>743 lbf/in</td><td>743 lbf/in</td></tr>
-                <tr><td>Roll center height</td><td>2.90 in</td><td>3.79 in</td></tr>
-                <tr><td>Roll stiffness from springs</td><td>144 ft-lbf/deg</td><td>177 ft-lbf/deg</td></tr>
-                <tr><td>ARB motion ratio</td><td>0.114</td><td>0.157</td></tr>
-                <tr><td>ARB rate, softest to stiffest</td><td>79 to 137 ft-lbf/deg</td><td>86 to 149 ft-lbf/deg</td></tr>
-              </tbody>
-            </table>
-          </div>
-          <p class="a-table-fn">* ARG26 was designed to 150 lbf/in front and 175 lbf/in rear. On the car we had to change to 200 lbf/in front and 175 lbf/in rear to keep the aero platform from crashing. The other values in this table use the designed springs.</p>
-
-          <div class="a-table-wrap">
-            <table class="a-table sheet">
-              <thead><tr><th>Gradients and balance</th><th>ARG26</th></tr></thead>
-              <tbody>
-                <tr><td>Target roll gradient</td><td>0.55 to 0.70 deg/g</td></tr>
-                <tr><td>Roll gradient from springs only</td><td>0.76 deg/g</td></tr>
-                <tr><td>LLTD</td><td>48% front</td></tr>
-                <tr><td>Pitch gradient, braking</td><td>0.52 deg/g</td></tr>
-                <tr><td>Pitch gradient, acceleration</td><td>0.56 deg/g</td></tr>
-                <tr><td>Anti-dive</td><td>25%</td></tr>
-                <tr><td>Anti-squat</td><td>15%</td></tr>
-                <tr><td>Damping ratio</td><td>Not calculated</td></tr>
-              </tbody>
-            </table>
-          </div>
-
-          <div class="a-table-wrap">
-            <table class="a-table sheet">
-              <thead><tr><th>Design load cases</th><th>Lateral</th><th>Longitudinal</th></tr></thead>
-              <tbody>
-                <tr><td>Cornering</td><td>2.3 g</td><td>0 g</td></tr>
-                <tr><td>Acceleration</td><td>0 g</td><td>1.5 g</td></tr>
-                <tr><td>Braking</td><td>0 g</td><td>&minus;1.9 g</td></tr>
-                <tr><td>Bump</td><td colspan="2">3.5 g vertical</td></tr>
-              </tbody>
-            </table>
-          </div>
-
-          <p class="a-note"><span class="mono">Note</span><span>The ride frequencies do not include aero or the tire in series with the springs. The CG height is the measured ARG25 value, and the 48% LLTD is an estimate.</span></p>
-        </section>
-
-        <section class="a-section">
-          <h2 id="spring-and-motion-ratio"><span class="a-num">2</span>Spring and Motion Ratio</h2>
+          <h2 id="spring-and-motion-ratio"><span class="a-num">1</span>Spring and Motion Ratio</h2>
           <!-- EDIT: spring and motion ratio -->
 
-          <h3 id="process"><span class="a-num">2.1</span>Process</h3>
+          <h3 id="methodology"><span class="a-num">1.1</span>Methodology</h3>
           <ol>
-            <li>Get the vehicle design constants.</li>
-            <li>Get the driving cases and the aero load in each case.</li>
-            <li>Solve the steady-state load transfer to estimate the load on each tire.</li>
-            <li>Guess a front and rear spring, motion ratio and preload.</li>
+            <li>Get the vehicle design constants and the aerodynamic downforce vs speed lookup table.</li>
+            <li>Set the driving cases to examine (g's and speed).</li>
+            <li>Calculate the steady-state load transfer and look up the downforce to estimate the load on each tire for each driving case.</li>
+            <li>Input initial front and rear spring rates, motion ratio, spring preload and damper offset.</li>
             <li>Check damper compression (bottoming out or drooping out) and ride height change.</li>
-            <li>Iterate on the spring and motion ratio until the checks below pass.</li>
+            <li>Iterate the spring rates, motion ratio, spring preload and damper offset.</li>
           </ol>
 
-          <h3 id="evaluating-a-choice"><span class="a-num">2.2</span>Evaluating a Choice</h3>
-          <ul>
-            <li>Ride frequency around 3 to 3.3 Hz, the range used on ARG25 and ARG26.</li>
-            <li>Ride frequency difference between front and rear.</li>
-            <li>Aero clearance. With front wing suspension, the front wing mounting point must not hit the ground, and the rear of the car must not bottom out in an acceleration run.</li>
-          </ul>
+          <figure class="a-fig a-fig--wide">
+            <img src="../assets/img/rates/02-arg27-design-constants.webp" alt="ARG27 design constants spreadsheet: weights, weight bias, wheelbase, CG height, track widths, anti-dive, anti-squat, tire vertical rate and static ride height" width="1208" height="558" loading="lazy" />
+            <figcaption><span class="mono">Figure 1</span> ARG27 design constants.</figcaption>
+          </figure>
 
-          <h3 id="minimum-wheel-rate-for-aero-clearance"><span class="a-num">2.3</span>Minimum Wheel Rate for Aero Clearance</h3>
-          <!-- EDIT: minimum wheel rate for aero clearance -->
-          <p>In progress.</p>
-
-          <h3 id="aero-sensitivity"><span class="a-num">2.4</span>Aero Sensitivity</h3>
-          <ul>
-            <li>Pitch: the car pitches between &minus;1° and 1°, which changes downforce very little (to be confirmed with CFD).</li>
-            <li>Roll: with front wing suspension the front wing is assumed to have no roll sensitivity, and the rear wing changes little. The undertray is only sensitive when roll brings it close to the ground, where it can shed vortices.</li>
-          </ul>
-          <p>Estimated change in C<sub>L</sub>A with roll:</p>
-          <p class="eq">ΔC<sub>L</sub>A = &minus;0.026 per degree</p>
-          <p class="eq">ΔF = 0.5 × ρ × v<sup>2</sup> × ΔC<sub>L</sub>A × roll angle</p>
-          <p>At 20 m/s and 2° of roll:</p>
-          <p class="eq">ΔF = 0.5 × 1.225 × 20<sup>2</sup> × (&minus;0.026) × 2 = &minus;12.7 N</p>
-          <p>That is about 1% of the 957 N of downforce at 20 m/s, so roll sensitivity is small.</p>
-        </section>
-
-        <section class="a-section">
-          <h2 id="arg27-inputs"><span class="a-num">3</span>ARG27 Inputs</h2>
-          <!-- EDIT: ARG27 inputs; remove class="a-hl" once a value is confirmed -->
-          <p>These are the inputs the ARG27 rates are calculated from. Values highlighted in yellow are working assumptions and will be updated.</p>
-          <div class="a-table-wrap">
-            <table class="a-table sheet">
-              <thead><tr><th>Vehicle</th><th>ARG26</th><th>ARG27</th></tr></thead>
-              <tbody>
-                <tr><td>Car weight without driver</td><td>420 lb</td><td><span class="a-hl">400 lb</span></td></tr>
-                <tr><td>Damper stroke (Öhlins TTX25 MKII)</td><td>57 mm (2.24 in)</td><td>57 mm (2.24 in)</td></tr>
-              </tbody>
-            </table>
-          </div>
+          <figure class="a-fig a-fig--wide">
+            <img src="../assets/img/rates/03-arg26-aero-speed-sweep.webp" alt="Aero lookup table from 0 to 35 m/s: downforce, drag, L/D, front and rear downforce, front balance, CLA and CDA" width="1224" height="670" loading="lazy" />
+            <figcaption><span class="mono">Figure 2</span> Aero downforce vs speed lookup table, from ARG26 CFD simulations run on a neutral case.</figcaption>
+          </figure>
         </section>
 
         <section class="a-section" id="appendix">
           <h2><span class="a-num">A</span>Appendix: ARG26 Parameters Spreadsheet</h2>
-          <p>The baseline values come from the <a class="a-link" href="../assets/docs/SU26_Parameters_and_Analysis.xlsx" download>ARG26 suspension parameters spreadsheet (Excel)</a>.</p>
+          <p>The ARG26 values come from the <a class="a-link" href="../assets/docs/SU26_Parameters_and_Analysis.xlsx" download>ARG26 suspension parameters spreadsheet (Excel)</a>.</p>
         </section>
 
         <section class="a-section" id="appendix-dampers">
@@ -278,7 +129,7 @@
           <p>These are the <a class="a-link" href="https://www.hypercoils.com/shop/coilover-springs?refinementList%5BinsideDiameter_standard%5D%5B0%5D=1.45&amp;page=1&amp;configure%5Bfilters%5D=category%3A%22Coilover%20Springs%20Standard%22&amp;configure%5BhitsPerPage%5D=1000&amp;configure%5Bdistinct%5D=1" target="_blank" rel="noopener">Hyperco standard coilover springs</a> with a 1.45 in inside diameter and 4.4 in free length, the size used on the TTX25. The spring sweep in the methodology uses these rates.</p>
           <figure class="a-fig a-fig--wide">
             <img src="../assets/img/rates/01-hyperco-springs.webp" alt="Hyperco online catalog listing the standard coilover springs with a 1.45 in inside diameter, rates 150 to 400 lbf/in" width="2000" height="1032" loading="lazy" />
-            <figcaption><span class="mono">Figure 1</span> Hyperco standard coilover springs, 1.45 in inside diameter.</figcaption>
+            <figcaption><span class="mono">Figure 3</span> Hyperco standard coilover springs, 1.45 in inside diameter.</figcaption>
           </figure>
           <div class="a-table-wrap">
             <table class="a-table sheet">
