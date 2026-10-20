@@ -8,7 +8,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;500&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="../assets/css/style.css?v=dabb6651" />
+  <link rel="stylesheet" href="../assets/css/style.css?v=e0220dcc" />
 </head>
 <body>
   <!-- EDIT: site notice banner; delete this div to remove it -->
@@ -62,7 +62,13 @@
           <li><a href="#introduction"><span class="toc-num mono">0</span><span>Introduction</span></a></li>
           <li><a href="#spring-and-motion-ratio"><span class="toc-num mono">1</span><span>Spring and Motion Ratio</span></a>
             <ol class="toc-sub">
-              <li><a href="#methodology"><span class="toc-num mono">1.1</span><span>Methodology</span></a></li>
+              <li><a href="#methodology"><span class="toc-num mono">1.0</span><span>Methodology</span></a></li>
+              <li><a href="#design-constants"><span class="toc-num mono">1.1</span><span>Design Constants and Aero Lookup</span></a></li>
+              <li><a href="#driving-cases"><span class="toc-num mono">1.2</span><span>Driving Cases</span></a></li>
+              <li><a href="#tire-loads"><span class="toc-num mono">1.3</span><span>Tire Loads</span></a></li>
+              <li><a href="#spring-and-motion-ratio-selection"><span class="toc-num mono">1.4</span><span>Spring Rate and Motion Ratio</span></a></li>
+              <li><a href="#compression-and-ride-height-check"><span class="toc-num mono">1.5</span><span>Compression and Ride Height Check</span></a></li>
+              <li><a href="#chosen-combination"><span class="toc-num mono">1.6</span><span>Chosen Combination</span></a></li>
             </ol>
           </li>
           <li><a href="#appendix"><span class="toc-num mono">A</span><span>Appendix: ARG26 Parameters Spreadsheet</span></a></li>
@@ -83,7 +89,7 @@
           <h2 id="spring-and-motion-ratio"><span class="a-num">1</span>Spring and Motion Ratio</h2>
           <!-- EDIT: spring and motion ratio -->
 
-          <h3 id="methodology"><span class="a-num">1.1</span>Methodology</h3>
+          <h3 id="methodology"><span class="a-num">1.0</span>Methodology</h3>
           <ol>
             <li>Get the vehicle design constants and the aerodynamic downforce vs speed lookup table.</li>
             <li>Set the driving cases to examine (g's and speed).</li>
@@ -92,6 +98,8 @@
             <li>Check damper compression (bottoming out or drooping out) and ride height change.</li>
             <li>Iterate the spring rates, motion ratio, spring preload and damper offset.</li>
           </ol>
+
+          <h3 id="design-constants"><span class="a-num">1.1</span>Design Constants and Aero Lookup</h3>
 
           <figure class="a-fig a-fig--wide">
             <img src="../assets/img/rates/02-arg27-design-constants.webp" alt="ARG27 design constants spreadsheet: weights, weight bias, wheelbase, CG height, track widths, anti-dive, anti-squat, tire vertical rate and static ride height" width="1208" height="558" loading="lazy" />
@@ -103,6 +111,8 @@
             <figcaption><span class="mono">Figure 2</span> Aero downforce vs speed lookup table, from ARG26 CFD simulations run on a neutral case.</figcaption>
           </figure>
 
+          <h3 id="driving-cases"><span class="a-num">1.2</span>Driving Cases</h3>
+
           <figure class="a-fig">
             <img src="../assets/img/rates/04-arg27-accel-cases.webp" alt="ARG27 acceleration cases: max braking 1.9 g, max acceleration 1.6 g, max cornering 2.4 g, acceleration plus cornering 1.35 g, braking plus cornering 1.5 g" width="668" height="196" loading="lazy" />
             <figcaption><span class="mono">Figure 3</span> ARG27 acceleration cases.</figcaption>
@@ -113,6 +123,204 @@
             <figcaption><span class="mono">Figure 4</span> ARG27 speed cases.</figcaption>
           </figure>
           <p class="a-note"><span class="mono">Note</span><span>The speed cases are derived from ARG26 competition data. See the <a class="a-link" href="useful-data.html#race-data-analysis">Race Data Analysis</a> section of the Useful Data page.</span></p>
+
+          <h3 id="tire-loads"><span class="a-num">1.3</span>Tire Loads</h3>
+
+          <figure class="a-fig a-fig--wide">
+            <img src="../assets/img/rates/06-arg27-weight-transfer.webp" alt="ARG27 weight transfer and tire loads for max braking, max acceleration, max cornering, acceleration plus cornering and braking plus cornering, each without and with aero" width="930" height="934" loading="lazy" />
+            <figcaption><span class="mono">Figure 5</span> ARG27 weight transfer and tire loads for each case, without and with aero.</figcaption>
+          </figure>
+
+          <p>For each case, the steady-state longitudinal and lateral load transfer is added to the static load on each tire, and the axle downforce at the design speed is split evenly between the two tires on that axle. This gives the tire loads in Figure 5, which the springs and dampers have to carry.</p>
+          <p>The static loads on the front and rear axle, W<sub>F</sub> and W<sub>R</sub>, come from the total weight with driver, W, and the rear weight bias, b.</p>
+          <p class="eq">W<sub>F</sub> = W(1 &minus; b) &nbsp;&nbsp;&nbsp; W<sub>R</sub> = bW</p>
+          <p>The longitudinal load transfer, ΔW<sub>X</sub>, depends on the longitudinal acceleration of the case in g, A<sub>X</sub>, the CG height, h, and the wheelbase, L.</p>
+          <p class="eq">ΔW<sub>X</sub> = <span class="frac"><span>W A<sub>X</sub> h</span><span>L</span></span></p>
+          <p>ΔW<sub>X</sub> is added to the front axle and taken from the rear in braking, and the reverse in acceleration. This gives the axle loads after longitudinal transfer, W&prime;<sub>F</sub> and W&prime;<sub>R</sub>.</p>
+          <p class="eq">W&prime;<sub>F</sub> = W<sub>F</sub> ± ΔW<sub>X</sub> &nbsp;&nbsp;&nbsp; W&prime;<sub>R</sub> = W<sub>R</sub> ∓ ΔW<sub>X</sub></p>
+          <p>The lateral load transfer on the front and rear axle, ΔW<sub>YF</sub> and ΔW<sub>YR</sub>, uses that axle's load after longitudinal transfer, the lateral acceleration of the case in g, A<sub>Y</sub>, and the front and rear track widths, t<sub>F</sub> and t<sub>R</sub>. In the combined cases A<sub>X</sub> and A<sub>Y</sub> both use the combined g value.</p>
+          <p class="eq">ΔW<sub>YF</sub> = <span class="frac"><span>W&prime;<sub>F</sub> A<sub>Y</sub> h</span><span>t<sub>F</sub></span></span> &nbsp;&nbsp;&nbsp; ΔW<sub>YR</sub> = <span class="frac"><span>W&prime;<sub>R</sub> A<sub>Y</sub> h</span><span>t<sub>R</sub></span></span></p>
+          <p>The vertical load on a front or rear tire, F<sub>ZF</sub> or F<sub>ZR</sub>, is half the axle load, plus the lateral transfer on the outside tire or minus it on the inside tire, plus half the axle downforce, DF<sub>F</sub> or DF<sub>R</sub>. The downforce is read from Figure 2 at the design speed in Figure 5, and the no aero loads leave it out.</p>
+          <p class="eq">F<sub>ZF</sub> = <span class="frac"><span>W&prime;<sub>F</sub></span><span>2</span></span> ± ΔW<sub>YF</sub> + <span class="frac"><span>DF<sub>F</sub></span><span>2</span></span></p>
+          <p class="eq">F<sub>ZR</sub> = <span class="frac"><span>W&prime;<sub>R</sub></span><span>2</span></span> ± ΔW<sub>YR</sub> + <span class="frac"><span>DF<sub>R</sub></span><span>2</span></span></p>
+
+          <figure class="a-fig a-fig--wide">
+            <img src="../assets/img/rates/07-arg27-tire-load-map.webp" alt="Color-coded map of front and rear, left and right tire loads for each case without and with aero, with the change from static corner load beside each" width="1400" height="840" loading="lazy" />
+            <figcaption><span class="mono">Figure 6</span> ARG27 tire load map. Rows from top: max braking, max acceleration, max cornering, acceleration plus cornering, braking plus cornering.</figcaption>
+          </figure>
+
+          <p>Figure 6 shows the tire loads from Figure 5 by corner, with the left tire on the outside of a right-hand turn. The right two tables show the change from the static corner load of 137.5 lbf. Sanity checks:</p>
+          <ul>
+            <li>The most loaded tire is the expected one: fronts in braking, rears in acceleration, outside tires in cornering.</li>
+            <li>Without aero the deltas in each case add up to zero. With aero they add up to the total downforce.</li>
+            <li>Without aero, max cornering gives &minus;11.9 lbf on the inside tires, so the inside wheels would lift. The 2.4 g case only works with downforce.</li>
+            <li>The highest load is 371.0 lbf, on the front outside tire in braking plus cornering with aero.</li>
+          </ul>
+
+          <h3 id="spring-and-motion-ratio-selection"><span class="a-num">1.4</span>Spring Rate and Motion Ratio</h3>
+
+          <p>With a rocker, the spring does not act directly at the wheel. <strong>We define the motion ratio, MR, as wheel travel over spring travel</strong>, so an MR above 1 means the wheel moves more than the spring.</p>
+          <p class="eq">MR = <span class="frac"><span>wheel travel</span><span>spring travel</span></span></p>
+          <p>The spring rate, K<sub>S</sub>, is then felt at the wheel as the wheel rate, K<sub>W</sub>.</p>
+          <p class="eq">K<sub>W</sub> = <span class="frac"><span>K<sub>S</sub></span><span>MR<sup>2</sup></span></span></p>
+          <p>So the metric we care about is the wheel rate, not the spring rate, and the same wheel rate can come from different spring and motion ratio pairs. Figure 7 is a lookup table of wheel rate for each spring rate and for motion ratios from 1.00 to 1.60 in steps of 0.05. The spring rates are the Hyperco springs that fit the Öhlins TTX25 dampers, listed in <a class="a-link" href="#appendix-springs">Appendix C</a>.</p>
+
+          <figure class="a-fig a-fig--wide">
+            <img src="../assets/img/rates/08-wheel-rate-lookup.webp" alt="Wheel rate lookup table for spring rates 150 to 375 lbf/in and motion ratios 1.00 to 1.60" width="938" height="368" loading="lazy" />
+            <figcaption><span class="mono">Figure 7</span> Wheel rate lookup table, in lbf/in, for each spring rate (columns) and motion ratio (rows).</figcaption>
+          </figure>
+
+          <p>Using Figure 7, we pick an initial front and rear spring rate and motion ratio, along with the spring preload and damper offset (step 4). From these inputs the spreadsheet calculates how the car sits at rest and how much travel it has left, shown in Figure 8 for the current choice.</p>
+
+          <figure class="a-fig a-fig--wide">
+            <img src="../assets/img/rates/09-chosen-springs.webp" alt="Chosen springs: 175 lbf/in front and 200 lbf/in rear, motion ratios 1.00 and 1.04, with the resulting wheel rates, ride rates, ride frequencies, static sag and travel available" width="842" height="600" loading="lazy" />
+            <figcaption><span class="mono">Figure 8</span> Chosen springs and the resulting metrics. Blue values are inputs.</figcaption>
+          </figure>
+
+          <figure class="a-fig a-fig--wide a-diagram">
+            <div class="dg-pair">
+              <svg viewBox="0 0 360 346" role="img" aria-label="Soft spring, 150 lbf/in: front view of the car at full extension and at static ride height, and the damper stroke split into rebound and compression travel available">
+                <defs>
+                  <marker id="sag-soft-arw" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" class="dg-arrowhead" /></marker>
+                  <marker id="sag-soft-acc" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" class="dg-arrowhead-acc" /></marker>
+                </defs>
+                <text x="180.0" y="26" text-anchor="middle" class="dg-acc">Soft spring, 150 lbf/in*</text>
+                <rect x="10" y="192" width="340" height="8" class="dg-floor" />
+                <line x1="10" y1="192" x2="350" y2="192" class="dg-ground" />
+                <rect x="20" y="108" width="36" height="84" rx="8" class="dg-tire" />
+                <rect x="304" y="108" width="36" height="84" rx="8" class="dg-tire" />
+                <rect x="90" y="54" width="180" height="50" rx="6" class="dg-dash" fill="none" />
+                <text x="180.0" y="46" text-anchor="middle" class="dg-muted">full extension</text>
+                <rect x="90" y="103.3" width="180" height="50" rx="6" class="dg-body" />
+                <line x1="56" y1="130" x2="90" y2="115.3" class="dg-body" />
+                <line x1="56" y1="170" x2="90" y2="145.3" class="dg-body" />
+                <line x1="304" y1="130" x2="270" y2="115.3" class="dg-body" />
+                <line x1="304" y1="170" x2="270" y2="145.3" class="dg-body" />
+                <line x1="128" y1="104" x2="128" y2="153.3" class="dg-dim-arrow" marker-end="url(#sag-soft-acc)" />
+                <text x="136" y="132.7" class="dg-acc-sm">sag 0.62 in</text>
+                <line x1="232" y1="153.3" x2="232" y2="192" class="dg-dimline" marker-start="url(#sag-soft-arw)" marker-end="url(#sag-soft-arw)" />
+                <text x="226" y="176.7" text-anchor="end">ride height</text>
+                <text x="180.0" y="228" text-anchor="middle" class="dg-muted">damper stroke, 2.24 in</text>
+                <text x="91.0" y="248" text-anchor="middle" class="dg-acc-sm">rebound</text>
+                <text x="91.0" y="261" text-anchor="middle" class="dg-acc-sm">0.82 in</text>
+                <text x="231.0" y="248" text-anchor="middle" class="dg-acc-sm">compression</text>
+                <text x="231.0" y="261" text-anchor="middle" class="dg-acc-sm">1.42 in</text>
+                <line x1="40" y1="272" x2="141.1" y2="272" class="dg-dim-arrow" marker-start="url(#sag-soft-acc)" marker-end="url(#sag-soft-acc)" />
+                <line x1="143.1" y1="272" x2="320" y2="272" class="dg-dim-arrow" marker-start="url(#sag-soft-acc)" marker-end="url(#sag-soft-acc)" />
+                <rect x="40" y="280" width="77.1" height="14" class="dg-fill-acc" />
+                <rect x="117.1" y="280" width="25.0" height="14" class="dg-fill-dim" />
+                <rect x="40" y="280" width="280" height="14" class="dg-body" fill="none" />
+                <line x1="142.1" y1="277" x2="142.1" y2="297" class="dg-dim" />
+                <text x="78.5" y="310" text-anchor="middle">sag</text>
+                <text x="146.1" y="310">static</text>
+                <text x="129.6" y="324" text-anchor="middle" class="dg-muted">offset</text>
+                <text x="40" y="340" class="dg-muted">full extension</text>
+                <text x="320" y="340" text-anchor="end" class="dg-muted">full bump</text>
+              </svg>
+              <svg viewBox="0 0 360 346" role="img" aria-label="Stiff spring, 300 lbf/in: front view of the car at full extension and at static ride height, and the damper stroke split into rebound and compression travel available">
+                <defs>
+                  <marker id="sag-stiff-arw" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" class="dg-arrowhead" /></marker>
+                  <marker id="sag-stiff-acc" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" class="dg-arrowhead-acc" /></marker>
+                </defs>
+                <text x="180.0" y="26" text-anchor="middle" class="dg-acc">Stiff spring, 300 lbf/in*</text>
+                <rect x="10" y="192" width="340" height="8" class="dg-floor" />
+                <line x1="10" y1="192" x2="350" y2="192" class="dg-ground" />
+                <rect x="20" y="108" width="36" height="84" rx="8" class="dg-tire" />
+                <rect x="304" y="108" width="36" height="84" rx="8" class="dg-tire" />
+                <rect x="90" y="54" width="180" height="50" rx="6" class="dg-dash" fill="none" />
+                <text x="180.0" y="46" text-anchor="middle" class="dg-muted">full extension</text>
+                <rect x="90" y="74.7" width="180" height="50" rx="6" class="dg-body" />
+                <line x1="56" y1="130" x2="90" y2="86.7" class="dg-body" />
+                <line x1="56" y1="170" x2="90" y2="116.7" class="dg-body" />
+                <line x1="304" y1="130" x2="270" y2="86.7" class="dg-body" />
+                <line x1="304" y1="170" x2="270" y2="116.7" class="dg-body" />
+                <line x1="128" y1="104" x2="128" y2="124.7" class="dg-dim-arrow" marker-end="url(#sag-stiff-acc)" />
+                <text x="136" y="118.3" class="dg-acc-sm">sag 0.26 in</text>
+                <line x1="232" y1="124.7" x2="232" y2="192" class="dg-dimline" marker-start="url(#sag-stiff-arw)" marker-end="url(#sag-stiff-arw)" />
+                <text x="226" y="162.3" text-anchor="end">ride height</text>
+                <text x="180.0" y="228" text-anchor="middle" class="dg-muted">damper stroke, 2.24 in</text>
+                <text x="68.6" y="248" text-anchor="middle" class="dg-acc-sm">rebound</text>
+                <text x="68.6" y="261" text-anchor="middle" class="dg-acc-sm">0.46 in</text>
+                <text x="208.6" y="248" text-anchor="middle" class="dg-acc-sm">compression</text>
+                <text x="208.6" y="261" text-anchor="middle" class="dg-acc-sm">1.78 in</text>
+                <line x1="40" y1="272" x2="96.3" y2="272" class="dg-dim-arrow" marker-start="url(#sag-stiff-acc)" marker-end="url(#sag-stiff-acc)" />
+                <line x1="98.3" y1="272" x2="320" y2="272" class="dg-dim-arrow" marker-start="url(#sag-stiff-acc)" marker-end="url(#sag-stiff-acc)" />
+                <rect x="40" y="280" width="32.3" height="14" class="dg-fill-acc" />
+                <rect x="72.3" y="280" width="25.0" height="14" class="dg-fill-dim" />
+                <rect x="40" y="280" width="280" height="14" class="dg-body" fill="none" />
+                <line x1="97.3" y1="277" x2="97.3" y2="297" class="dg-dim" />
+                <text x="56.1" y="310" text-anchor="middle">sag</text>
+                <text x="101.3" y="310">static</text>
+                <text x="84.8" y="324" text-anchor="middle" class="dg-muted">offset</text>
+                <text x="40" y="340" class="dg-muted">full extension</text>
+                <text x="320" y="340" text-anchor="end" class="dg-muted">full bump</text>
+              </svg>
+            </div>
+            <figcaption><span class="mono">Figure 9</span> Front corner with a soft and a stiff spring, both at MR 1.0 with 0.1 in preload and 0.2 in damper offset. Top: chassis at full extension (dashed) and at rest (solid), not to scale. Bottom: damper stroke split into rebound and compression travel available, to scale.</figcaption>
+          </figure>
+          <p class="a-note"><span class="mono">Note</span><span>* Arbitrary values chosen to show the difference, not the chosen ARG27 springs.</span></p>
+
+          <p>At rest each spring carries its corner's sprung weight, W<sub>S</sub>, which is the axle load over two minus the unsprung weight of that corner. The spring compresses until it holds that load, less the preload, x<sub>P</sub>, it already had at full extension. This is the static shock compression, x<sub>S</sub>, and as a fraction of the damper stroke, s, it is the static sag.</p>
+          <p class="eq">x<sub>S</sub> = <span class="frac"><span>W<sub>S</sub> MR</span><span>K<sub>S</sub></span></span> &minus; x<sub>P</sub> &nbsp;&nbsp;&nbsp; sag = <span class="frac"><span>x<sub>S</sub></span><span>s</span></span></p>
+          <p>As Figure 9 shows, a softer spring sags more and the car sits lower. The damper offset, x<sub>O</sub>, is extra static compression added on top of the sag. Together they set where the damper sits in its stroke, which splits the stroke into rebound travel available (to full extension) and compression travel available (to full bump).</p>
+          <p class="eq">rebound = x<sub>S</sub> + x<sub>O</sub> &nbsp;&nbsp;&nbsp; compression = s &minus; x<sub>S</sub> &minus; x<sub>O</sub></p>
+          <p>The soft spring leaves only 1.42 in of compression travel for downforce and bumps, so it is closer to bottoming out. The stiff spring leaves 1.78 in of compression travel but only 0.46 in of rebound, so an unloaded tire, like the inside tire in a corner, is closer to drooping out. The total wheel travel is the damper stroke times the motion ratio.</p>
+          <p class="eq">wheel travel = s × MR</p>
+          <p>Figure 10 moves the compression and rebound travel available from the shock to the wheel by multiplying by the motion ratio. This table is important at the system level: it sets the full droop and full bump positions of the wheel in CAD, which inform the dynamic CAD.</p>
+
+          <figure class="a-fig a-fig--wide">
+            <img src="../assets/img/rates/10-travel-available.webp" alt="Compression and rebound travel available, front and rear, at the shock and at the wheel" width="632" height="156" loading="lazy" />
+            <figcaption><span class="mono">Figure 10</span> Compression and rebound travel available at the shock and at the wheel, for full bump and full droop.</figcaption>
+          </figure>
+          <p>The ride rate, K<sub>R</sub>, is the wheel rate in series with the tire vertical rate, K<sub>T</sub>. The ride frequency, f, follows from the ride rate and the sprung corner weight, with g = 386.1 in/s<sup>2</sup>.</p>
+          <p class="eq">K<sub>R</sub> = <span class="frac"><span>K<sub>W</sub> K<sub>T</sub></span><span>K<sub>W</sub> + K<sub>T</sub></span></span> &nbsp;&nbsp;&nbsp; f = <span class="frac"><span>1</span><span>2&pi;</span></span><span class="big">(</span><span class="frac"><span>K<sub>R</sub> g</span><span>W<sub>S</sub></span></span><span class="big">)</span><sup>1/2</sup></p>
+
+          <h3 id="compression-and-ride-height-check"><span class="a-num">1.5</span>Compression and Ride Height Check</h3>
+
+          <p>With the springs set, we can check how far the tires, shocks and chassis move in each driving case. Figure 11 shows the change from static for each corner with aero.</p>
+
+          <figure class="a-fig a-fig--wide">
+            <img src="../assets/img/rates/11-compression-ride-height.webp" alt="Tire compression, shock compression and ride height change from static, with aero, for each case and corner" width="1292" height="696" loading="lazy" />
+            <figcaption><span class="mono">Figure 11</span> Tire compression, shock compression and ride height change from static, with aero. Positive is compression toward bump and negative is rebound toward full extension.</figcaption>
+          </figure>
+
+          <p>The change in load on a tire, ΔF<sub>Z</sub>, is its load with aero from Figure 5 minus its static corner load, which is half the static axle load.</p>
+          <p class="eq">ΔF<sub>ZF</sub> = F<sub>ZF</sub> &minus; <span class="frac"><span>W<sub>F</sub></span><span>2</span></span> &nbsp;&nbsp;&nbsp; ΔF<sub>ZR</sub> = F<sub>ZR</sub> &minus; <span class="frac"><span>W<sub>R</sub></span><span>2</span></span></p>
+          <p>The tire compression, Δz<sub>T</sub>, is that load change over the tire vertical rate, K<sub>T</sub>.</p>
+          <p class="eq">Δz<sub>T</sub> = <span class="frac"><span>ΔF<sub>Z</sub></span><span>K<sub>T</sub></span></span></p>
+          <p>The spring sees the load change multiplied by the motion ratio, MR, so the shock compression, Δx, is that force over the spring rate, K<sub>S</sub>.</p>
+          <p class="eq">Δx = <span class="frac"><span>ΔF<sub>Z</sub> MR</span><span>K<sub>S</sub></span></span></p>
+          <p>The ride height change, Δh, is the shock compression moved to the wheel plus the tire compression.</p>
+          <p class="eq">Δh = Δx MR + Δz<sub>T</sub></p>
+          <p>A shock value is green when it stays within the travel available in Figure 10. A ride height change is green when it stays below the 1.5 in static ride height, and red when the chassis would reach the ground. Three cases are red: the outside tires in max cornering and the front outside tire in braking plus cornering.</p>
+
+          <h3 id="chosen-combination"><span class="a-num">1.6</span>Chosen Combination</h3>
+
+          <p>Figure 12 reformats the work above so all the inputs and outputs for one spring combination are in one place. On the left are the springs, motion ratios, preload, offset and the resulting metrics from Figure 8. On the right, the largest shock change and ride height change in each case are checked against a fail limit: the travel available in Figure 10 for the shock, and the 1.5 in static ride height for the ride height. The margin to fail is the limit minus the value, and N/A means the check does not apply because rebound moves the chassis away from the ground. The far right columns give the same shock changes at the wheel.</p>
+          <p>Copying this sheet lets us run and compare multiple combinations. Combination 1 is the one chosen for the ARG27 suspension.</p>
+
+          <figure class="a-fig a-fig--wide">
+            <img src="../assets/img/rates/12-combination-1.webp" alt="Combination 1 summary: chosen springs and metrics on the left, max shock change and max ride height change checks with fail limits, margins and pass or fail on the right" width="1766" height="626" loading="lazy" />
+            <figcaption><span class="mono">Figure 12</span> Combination 1, the chosen ARG27 springs and motion ratios, with every check in one place.</figcaption>
+          </figure>
+
+          <p>Combination 1 fails two ride height checks: cornering compression by 0.045 in and braking plus cornering compression by 0.148 in. We accept these because they are ride height checks with a very small margin to fail, the calculations are conservative, and the ride height can be raised if needed.</p>
+          <p>Combinations 2 to 4 (Figures 13 to 15) run stiffer springs, up to 250 lbf/in front and 300 lbf/in rear, and pass every check. This shows we can move to stiffer springs if needed.</p>
+
+          <figure class="a-fig a-fig--wide">
+            <img src="../assets/img/rates/13-combination-2.webp" alt="Combination 2 summary: 200 lbf/in front and 225 lbf/in rear springs, all shock and ride height checks pass" width="1768" height="632" loading="lazy" />
+            <figcaption><span class="mono">Figure 13</span> Combination 2, 200 lbf/in front and 225 lbf/in rear.</figcaption>
+          </figure>
+
+          <figure class="a-fig a-fig--wide">
+            <img src="../assets/img/rates/14-combination-3.webp" alt="Combination 3 summary: 225 lbf/in front and 250 lbf/in rear springs, all shock and ride height checks pass" width="1810" height="624" loading="lazy" />
+            <figcaption><span class="mono">Figure 14</span> Combination 3, 225 lbf/in front and 250 lbf/in rear.</figcaption>
+          </figure>
+
+          <figure class="a-fig a-fig--wide">
+            <img src="../assets/img/rates/15-combination-4.webp" alt="Combination 4 summary: 250 lbf/in front and 300 lbf/in rear springs, all shock and ride height checks pass" width="1754" height="626" loading="lazy" />
+            <figcaption><span class="mono">Figure 15</span> Combination 4, 250 lbf/in front and 300 lbf/in rear.</figcaption>
+          </figure>
         </section>
 
         <section class="a-section" id="appendix">
@@ -140,7 +348,7 @@
           <p>These are the <a class="a-link" href="https://www.hypercoils.com/shop/coilover-springs?refinementList%5BinsideDiameter_standard%5D%5B0%5D=1.45&amp;page=1&amp;configure%5Bfilters%5D=category%3A%22Coilover%20Springs%20Standard%22&amp;configure%5BhitsPerPage%5D=1000&amp;configure%5Bdistinct%5D=1" target="_blank" rel="noopener">Hyperco standard coilover springs</a> with a 1.45 in inside diameter and 4.4 in free length, the size used on the TTX25. The spring sweep in the methodology uses these rates.</p>
           <figure class="a-fig a-fig--wide">
             <img src="../assets/img/rates/01-hyperco-springs.webp" alt="Hyperco online catalog listing the standard coilover springs with a 1.45 in inside diameter, rates 150 to 400 lbf/in" width="2000" height="1032" loading="lazy" />
-            <figcaption><span class="mono">Figure 5</span> Hyperco standard coilover springs, 1.45 in inside diameter.</figcaption>
+            <figcaption><span class="mono">Figure 16</span> Hyperco standard coilover springs, 1.45 in inside diameter.</figcaption>
           </figure>
           <div class="a-table-wrap">
             <table class="a-table sheet">
@@ -176,6 +384,6 @@
       <a href="mailto:dr653@cornell.edu">dr653@cornell.edu</a>
     </div>
   </footer>
-  <script src="../assets/js/main.js?v=dabb6651"></script>
+  <script src="../assets/js/main.js?v=e0220dcc"></script>
 </body>
 </html>

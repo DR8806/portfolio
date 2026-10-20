@@ -1275,6 +1275,21 @@ html.in-preview .topbar {
 .dg-arrowhead-acc { fill: var(--accent); }
 .dg-cg-open { fill: var(--bg); stroke: var(--accent); stroke-width: 1.6; }
 .dg-cg-x { stroke: var(--accent); stroke-width: 1.4; }
+.a-diagram .dg-muted { fill: var(--muted); }
+.a-diagram .dg-acc-sm { fill: var(--accent); }
+.dg-fill-acc { fill: var(--accent); fill-opacity: 0.25; }
+.dg-fill-dim { fill: var(--dim); fill-opacity: 0.6; }
+
+/* Two diagram panels side by side, stacked on narrow screens */
+.dg-pair {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 12px;
+}
+
+.a-diagram .dg-pair svg {
+  max-width: none;
+}
 
 /* Printing a procedure: drop site chrome */
 
@@ -1893,8 +1908,16 @@ html.in-preview .topbar {
 }
 
 .sqrt > span {
+  display: inline-block;
+  vertical-align: middle;
   border-top: 1px solid currentColor;
   padding: 2px 2px 0;
+}
+
+.sqrt::before {
+  display: inline-block;
+  vertical-align: middle;
+  font-size: 1.6em;
 }
 
 .big {
