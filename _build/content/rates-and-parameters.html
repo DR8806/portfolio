@@ -245,6 +245,165 @@
           </figure>
         </section>
 
+        <section class="a-section">
+          <h2 id="roll-rates"><span class="a-num">2</span>Roll Rates</h2>
+          <!-- EDIT: roll rates -->
+          <p>With the spring rates and motion ratios chosen, we know the wheel rates. From the wheel rates we can calculate how much the car rolls in a corner, and so what anti-roll bar stiffnesses we need.</p>
+          <p>The equations in this section follow Milliken, Race Car Vehicle Dynamics, Chapter 18, and use its variable names. Figure 16 shows the geometry they refer to.</p>
+
+          <figure class="a-fig a-fig--wide">
+            <img src="../assets/img/rates/16-milliken-lateral-load-transfer.webp" alt="Side view of the car showing the front and rear roll centers at heights z_RF and z_RR joined by the neutral roll axis, the total weight W at height h and vertical distance H above the axis, the sprung weight W_s at height h_s and perpendicular distance h_2 from the axis, the front and rear unsprung weights at heights z_WF and z_WR, and the distances a, b, a_s and wheelbase l" width="1220" height="915" loading="lazy" />
+            <figcaption><span class="mono">Figure 16</span> Lateral load transfer geometry. From Milliken, Race Car Vehicle Dynamics, Figure 18.9, p. 681.</figcaption>
+          </figure>
+
+          <p>The car rolls about the neutral roll axis (NRA), the line joining the front and rear roll centers (p. 680). Only the sprung weight, W<sub>s</sub>, rolls on the springs. The unsprung weights, W<sub>uF</sub> and W<sub>uR</sub>, sit at the wheel centers and do not roll.</p>
+
+          <h3 id="roll-design-constants"><span class="a-num">2.1</span>Design Constants</h3>
+
+          <figure class="a-fig">
+            <img src="../assets/img/rates/17-arg27-roll-design-constants.webp" alt="ARG27 design constants for roll: total, driver, unsprung and sprung weights, front weight bias, CG height, track widths, front and rear roll center heights, roll axis height at the CG, roll moment arm, unsprung and sprung CG heights, and front and rear ARB motion ratios" width="710" height="476" loading="lazy" />
+            <figcaption><span class="mono">Figure 17</span> ARG27 design constants for roll. Blue values are inputs.</figcaption>
+          </figure>
+
+          <p>The weights, weight bias, CG height and track widths carry over from Figure 1. The blue values are new inputs: the front and rear roll center heights, z<sub>RF</sub> and z<sub>RR</sub>, come from the kinematics in OptimumKinematics, the unsprung CG heights, z<sub>WF</sub> and z<sub>WR</sub>, are taken at the wheel center, and the ARB motion ratios carry over from ARG26. The rest are calculated.</p>
+          <p>The sprung weight is the total weight with driver, W, minus the four unsprung corner weights (p. 671). W<sub>uF</sub> and W<sub>uR</sub> are the totals for both sides of each axle (p. 672), so each is twice the corner weight in Figure 17.</p>
+          <p class="eq">W<sub>s</sub> = W &minus; W<sub>uF</sub> &minus; W<sub>uR</sub></p>
+          <p>The height of the NRA under the CG, z<sub>RCG</sub>, is found by moving along the axis from the front roll center to the CG, which sits a distance a behind the front axle on a wheelbase &#8467;. This is the same interpolation Milliken uses for the wheel center height at the CG (p. 670). With equal front and rear weight, a/&#8467; = 0.5.</p>
+          <p class="eq">z<sub>RCG</sub> = z<sub>RF</sub> + <span class="frac"><span>a</span><span>&#8467;</span></span>(z<sub>RR</sub> &minus; z<sub>RF</sub>)</p>
+          <p>The roll moment arm, H, is the vertical distance from the NRA up to the total vehicle CG at height h (Figure 16, p. 681). In a corner the lateral force acts at the CG, so the longer this arm, the more the car rolls.</p>
+          <p class="eq">H = h &minus; z<sub>RCG</sub></p>
+          <p>The sprung CG height, h<sub>s</sub>, is found by taking moments about the ground and removing the unsprung weight (p. 672). Milliken writes the unsprung heights as the loaded radii, R<sub>LF</sub> and R<sub>LR</sub>, which are the wheel center heights z<sub>WF</sub> and z<sub>WR</sub> in Figure 16.</p>
+          <p class="eq">h<sub>s</sub> = <span class="frac"><span>W</span><span>W<sub>s</sub></span></span>h &minus; <span class="frac"><span>W<sub>uF</sub></span><span>W<sub>s</sub></span></span>z<sub>WF</sub> &minus; <span class="frac"><span>W<sub>uR</sub></span><span>W<sub>s</sub></span></span>z<sub>WR</sub></p>
+          <p>The sprung CG sits above the overall CG because the unsprung weight is low, at the wheel centers. Its perpendicular distance from the NRA, h<sub>2</sub>, is the sprung weight's roll moment arm (Figure 16, p. 681). For a nearly level roll axis it is close to the vertical distance.</p>
+          <p class="eq">h<sub>2</sub> &asymp; h<sub>s</sub> &minus; z<sub>RCG</sub></p>
+
+          <h3 id="tire-roll-stiffness"><span class="a-num">2.2</span>Tire Roll Stiffness</h3>
+
+          <p>The tires are springs too, so they add some roll on their own before the suspension does anything. Milliken includes the tire deflection in the front and rear roll rates (p. 680). Figure 18 finds how much the tires contribute.</p>
+
+          <figure class="a-fig">
+            <img src="../assets/img/rates/18-arg27-tire-roll-stiffness.webp" alt="Tire roll contribution: tire rate 743 lbf/in, front and rear axle tire rates 1486 lbf/in, front and rear axle tire roll stiffness 1418 N·m per degree, total 2837 N·m per degree, tire roll gradient in degrees per g" width="834" height="216" loading="lazy" />
+            <figcaption><span class="mono">Figure 18</span> ARG27 tire roll stiffness and roll gradient from the tires alone.</figcaption>
+          </figure>
+
+          <p>Each axle has two tires, each with the tire vertical rate K<sub>T</sub>, so the axle tire rate is twice the tire rate.</p>
+          <p class="eq">K<sub>T,axle</sub> = 2K<sub>T</sub></p>
+          <p>When the car rolls 1&deg;, the outside tire compresses and the inside tire extends by half the track width times tan(1&deg;). Each tire pushes back with K<sub>T</sub> times that distance, acting half a track width from the center of the car. Adding the two tires gives the axle tire roll stiffness, K<sub>F,tire</sub> or K<sub>R,tire</sub>, the moment needed to roll the axle 1&deg;. Milliken covers roll rates in Chapter 16 (p. 680).</p>
+          <p class="eq">K<sub>F,tire</sub> = <span class="frac"><span>t<sub>F</sub><sup>2</sup> tan(1&deg;) K<sub>T</sub></span><span>2</span></span> &nbsp;&nbsp;&nbsp; K<sub>R,tire</sub> = <span class="frac"><span>t<sub>R</sub><sup>2</sup> tan(1&deg;) K<sub>T</sub></span><span>2</span></span></p>
+          <p>With the track in in and K<sub>T</sub> in lbf/in, this is in lbf&middot;in per degree. Dividing by 12 and multiplying by 1.3558 gives N&middot;m per degree. The front and rear axles resist roll together, so the total is their sum.</p>
+          <p class="eq">K<sub>tire,total</sub> = K<sub>F,tire</sub> + K<sub>R,tire</sub></p>
+          <p>The roll gradient, or roll sensitivity, is how many degrees the car rolls per g of lateral acceleration, A<sub>Y</sub>. Milliken sets the sprung weight's roll moment equal to the roll stiffness moment, with K<sub>F</sub> and K<sub>R</sub> the front and rear roll rates (p. 682).</p>
+          <p class="eq"><span class="frac"><span>&phi;</span><span>A<sub>Y</sub></span></span> = <span class="frac"><span>&minus;W<sub>s</sub>h<sub>2</sub></span><span>K<sub>F</sub> + K<sub>R</sub> &minus; W<sub>s</sub>h<sub>2</sub></span></span></p>
+          <p>The W<sub>s</sub>h<sub>2</sub> term in the denominator is gravity acting on the rolled sprung mass and can be neglected for small roll angles (p. 681). Using the total vehicle CG and its height above the NRA, H, simplifies this to (p. 683):</p>
+          <p class="eq"><span class="frac"><span>&phi;</span><span>A<sub>Y</sub></span></span> = <span class="frac"><span>&minus;WH</span><span>K<sub>F</sub> + K<sub>R</sub></span></span></p>
+          <p>The minus sign means the car rolls to the outside of the turn, so we quote the magnitude. Milliken's roll rates are per radian, which gives the roll gradient in radians per g (p. 683). With the roll rates per degree, as in Figure 18, it comes out in degrees per g. The spreadsheet uses the simplified form with the sprung weight in place of W, since only the sprung weight rolls on the springs. For the tires alone, K<sub>F</sub> and K<sub>R</sub> are K<sub>F,tire</sub> and K<sub>R,tire</sub>.</p>
+          <p class="eq"><span class="frac"><span>&phi;</span><span>A<sub>Y</sub></span></span> = <span class="frac"><span>W<sub>s</sub>H</span><span>K<sub>F,tire</sub> + K<sub>R,tire</sub></span></span></p>
+
+          <h3 id="spring-roll-stiffness"><span class="a-num">2.3</span>Spring Roll Stiffness</h3>
+
+          <p>Next we take the spring rates and motion ratios chosen in Section 1 and find how much roll the springs resist on their own. Figure 19 uses Combination 1.</p>
+
+          <figure class="a-fig">
+            <div class="a-table-wrap">
+              <table class="a-table sheet">
+                <thead><tr><th>Spring and motion ratio, Combination 1</th><th>Units</th><th>Value</th></tr></thead>
+                <tbody>
+                  <tr><td>Front spring rate</td><td>lbf/in</td><td>175</td></tr>
+                  <tr><td>Rear spring rate</td><td>lbf/in</td><td>200</td></tr>
+                  <tr><td>Front motion ratio</td><td>wheel/spring</td><td>1.00</td></tr>
+                  <tr><td>Rear motion ratio</td><td>wheel/spring</td><td>1.04</td></tr>
+                  <tr><td>Front wheel rate</td><td>lbf/in</td><td>175.0</td></tr>
+                  <tr><td>Rear wheel rate</td><td>lbf/in</td><td>184.9</td></tr>
+                  <tr><td>Front axle wheel rate</td><td>lbf/in</td><td>350.0</td></tr>
+                  <tr><td>Rear axle wheel rate</td><td>lbf/in</td><td>369.8</td></tr>
+                  <tr><td>Front axle spring roll stiffness, K<sub>F,spring</sub></td><td>N&middot;m/deg</td><td>334</td></tr>
+                  <tr><td>Rear axle spring roll stiffness, K<sub>R,spring</sub></td><td>N&middot;m/deg</td><td>353</td></tr>
+                  <tr><td>Total spring roll stiffness</td><td>N&middot;m/deg</td><td>687</td></tr>
+                  <tr><td>Spring roll gradient (springs only)</td><td>deg/g</td><td>0.581</td></tr>
+                </tbody>
+              </table>
+            </div>
+            <figcaption><span class="mono">Figure 19</span> ARG27 spring roll stiffness and roll gradient from the springs alone, for Combination 1.</figcaption>
+          </figure>
+
+          <p>The front and rear wheel rates, K<sub>WF</sub> and K<sub>WR</sub>, come from Section 1.4, with each spring rate, K<sub>S</sub>, moved to the wheel by that axle&#8217;s motion ratio.</p>
+          <p class="eq">K<sub>W</sub> = <span class="frac"><span>K<sub>S</sub></span><span>MR<sup>2</sup></span></span></p>
+          <p>As with the tires, each axle has two wheels, so the axle wheel rate is twice the wheel rate.</p>
+          <p class="eq">K<sub>WF,axle</sub> = 2K<sub>WF</sub> &nbsp;&nbsp;&nbsp; K<sub>WR,axle</sub> = 2K<sub>WR</sub></p>
+          <p>The springs resist roll the same way the tires do, so the axle spring roll stiffness uses the same equation as Section 2.2 with the wheel rate in place of the tire rate.</p>
+          <p class="eq">K<sub>F,spring</sub> = <span class="frac"><span>t<sub>F</sub><sup>2</sup> tan(1&deg;) K<sub>WF</sub></span><span>2</span></span> &nbsp;&nbsp;&nbsp; K<sub>R,spring</sub> = <span class="frac"><span>t<sub>R</sub><sup>2</sup> tan(1&deg;) K<sub>WR</sub></span><span>2</span></span></p>
+          <p class="eq">K<sub>spring,total</sub> = K<sub>F,spring</sub> + K<sub>R,spring</sub></p>
+          <p>The roll gradient from the springs alone uses the same equation as the tires, with K<sub>F,spring</sub> and K<sub>R,spring</sub> as the roll rates.</p>
+          <p class="eq"><span class="frac"><span>&phi;</span><span>A<sub>Y</sub></span></span> = <span class="frac"><span>W<sub>s</sub>H</span><span>K<sub>F,spring</sub> + K<sub>R,spring</sub></span></span></p>
+
+          <h3 id="arb-sizing"><span class="a-num">2.4</span>ARB Sizing</h3>
+
+          <p>Now we size the anti-roll bars (ARBs). We do not know the roll gradient we want yet, so we start with a sweep of desired total roll gradients from 0.25 to 1.00 deg/g and find the ARB rates each one needs. The other input is a target front lateral load transfer distribution (LLTD) of 48%, which sets how the ARB rate is split front to rear.</p>
+
+          <figure class="a-fig a-fig--wide">
+            <img src="../assets/img/rates/20-arg27-arb-sweep.webp" alt="ARB sizing for Combination 1 across desired total roll gradients from 0.25 to 1.00 deg/g: desired roll rate, target front LLTD of 48%, front roll stiffness fraction of 49.1%, total, front and rear ARB roll rates needed, front and rear ARB rates in bar twist, and the resulting front and rear axle roll stiffness" width="1986" height="320" loading="lazy" />
+            <figcaption><span class="mono">Figure 20</span> ARB sizing sweep for Combination 1. Blue values are inputs.</figcaption>
+          </figure>
+
+          <p>For each roll gradient, the total roll rate the car needs, K<sub>F</sub> + K<sub>R</sub>, comes from rearranging the roll sensitivity equation in Section 2.2 (p. 683, with W<sub>s</sub> in place of W).</p>
+          <p class="eq">K<sub>F</sub> + K<sub>R</sub> = <span class="frac"><span>W<sub>s</sub>H</span><span>&phi;/A<sub>Y</sub></span></span></p>
+          <p>The springs and ARBs act side by side, so their roll rates add. The tires are in series with both of them, since the roll moment passes through the suspension and then the tires. Lumping the whole car together:</p>
+          <p class="eq"><span class="frac"><span>1</span><span>K<sub>F</sub> + K<sub>R</sub></span></span> = <span class="frac"><span>1</span><span>K<sub>tire,total</sub></span></span> + <span class="frac"><span>1</span><span>K<sub>spring,total</sub> + K<sub>ARB</sub></span></span></p>
+          <p>Solving for the total ARB roll rate needed, K<sub>ARB</sub>:</p>
+          <p class="eq">K<sub>ARB</sub> = <span class="frac"><span>(K<sub>F</sub> + K<sub>R</sub>) K<sub>tire,total</sub></span><span>K<sub>tire,total</sub> &minus; (K<sub>F</sub> + K<sub>R</sub>)</span></span> &minus; K<sub>spring,total</sub></p>
+          <p>The ARB rate is split front to rear by the front roll stiffness fraction, x, sometimes called the magic number. It is the share of the total roll rate carried by the front axle, and it is found from the target front LLTD (derived in Section 2.5). Here b/&#8467; is the front weight fraction, 0.5.</p>
+          <p class="eq">x = <span class="frac"><span>K<sub>F</sub></span><span>K<sub>F</sub> + K<sub>R</sub></span></span> = <span class="frac"><span>LLTD<sub>F</sub> h &minus; (b/&#8467;) z<sub>RF</sub></span><span>H</span></span></p>
+          <p class="eq">K<sub>F,ARB</sub> = x K<sub>ARB</sub> &nbsp;&nbsp;&nbsp; K<sub>R,ARB</sub> = K<sub>ARB</sub> &minus; K<sub>F,ARB</sub></p>
+          <p>These are roll rates at the wheels. The bar itself twists less than the car rolls. The ARB motion ratio in Figure 17, MR<sub>ARB</sub>, is the roll angle over the bar twist angle. Setting the work done in roll equal to the work done twisting the bar gives the torsional rate the bar needs, in N&middot;m per degree of twist.</p>
+          <p class="eq">K<sub>F,bar</sub> = K<sub>F,ARB</sub> MR<sub>ARB,F</sub><sup>2</sup> &nbsp;&nbsp;&nbsp; K<sub>R,bar</sub> = K<sub>R,ARB</sub> MR<sub>ARB,R</sub><sup>2</sup></p>
+          <p>Finally, each axle's roll rate is its spring and ARB rates in series with its tires.</p>
+          <p class="eq">K<sub>F</sub> = <span class="frac"><span>(K<sub>F,spring</sub> + K<sub>F,ARB</sub>) K<sub>F,tire</sub></span><span>K<sub>F,spring</sub> + K<sub>F,ARB</sub> + K<sub>F,tire</sub></span></span> &nbsp;&nbsp;&nbsp; K<sub>R</sub> = <span class="frac"><span>(K<sub>R,spring</sub> + K<sub>R,ARB</sub>) K<sub>R,tire</sub></span><span>K<sub>R,spring</sub> + K<sub>R,ARB</sub> + K<sub>R,tire</sub></span></span></p>
+          <p>As a check, K<sub>F</sub> + K<sub>R</sub> comes back to the desired roll rate: at 0.25 deg/g, K<sub>F</sub> + K<sub>R</sub> = 1595.3 N&middot;m/deg against the desired 1595.5. Past 0.70 deg/g the ARB rates turn negative, which means the springs and tires alone already hold the car to that roll gradient and no ARB is needed.</p>
+
+          <h3 id="lltd-range"><span class="a-num">2.5</span>LLTD Range</h3>
+
+          <p>The ARBs will be adjustable, so instead of one roll gradient we pick a range we want to be able to tune across. We input a minimum and maximum roll gradient, 0.55 and 0.70 deg/g, and look up the front and rear axle roll rates at each from Figure 20.</p>
+
+          <figure class="a-fig">
+            <img src="../assets/img/rates/21-arg27-lltd-lookup.webp" alt="LLTD inputs for Combination 1: minimum roll gradient 0.55 deg/g and maximum 0.70 deg/g, with front axle roll stiffness of 356 and 279 N·m per degree and rear axle roll stiffness of 369 and 291 N·m per degree at those gradients" width="512" height="200" loading="lazy" />
+            <figcaption><span class="mono">Figure 21</span> Front and rear axle roll rates at the minimum and maximum roll gradient, looked up from Figure 20.</figcaption>
+          </figure>
+
+          <p>The front LLTD is the share of the total lateral load transfer that happens at the front axle. Milliken calls it the total lateral load transfer distribution, TLLTD (p. 679). The softest front with the stiffest rear gives the lowest front LLTD, and the stiffest front with the softest rear gives the highest. Figure 22 shows the two ends of the range.</p>
+
+          <figure class="a-fig">
+            <img src="../assets/img/rates/22-arg27-lltd-range.webp" alt="Front LLTD at the two ends of the range: minimum front with maximum rear roll stiffness gives 44.2%, maximum front with minimum rear gives 52.5%" width="266" height="78" loading="lazy" />
+            <figcaption><span class="mono">Figure 22</span> Front LLTD range for Combination 1.</figcaption>
+          </figure>
+
+          <p>The front LLTD is found from Milliken's front lateral load transfer equation (p. 682) divided by the total lateral load transfer (p. 679), with x = K<sub>F</sub> / (K<sub>F</sub> + K<sub>R</sub>) and b<sub>s</sub> the distance from the sprung CG to the rear axle (p. 672).</p>
+          <p class="eq">LLTD<sub>F</sub> = <span class="frac"><span>W<sub>s</sub> [ h<sub>2</sub> x + (b<sub>s</sub>/&#8467;) z<sub>RF</sub> ] + W<sub>uF</sub> z<sub>WF</sub></span><span>W h</span></span></p>
+          <p>For ARG27 the sprung CG is at the middle of the wheelbase, so b<sub>s</sub>/&#8467; = 0.5 and the NRA height under the sprung CG is the average of the two roll center heights. This is the form the spreadsheet uses.</p>
+          <p class="eq">LLTD<sub>F</sub> = <span class="frac"><span>W<sub>s</sub> [ (h<sub>s</sub> &minus; &frac12;(z<sub>RF</sub> + z<sub>RR</sub>)) x + &frac12;z<sub>RF</sub> ] + W<sub>uF</sub> z<sub>WF</sub></span><span>W h</span></span></p>
+
+          <details class="a-details">
+            <summary>Show derivation</summary>
+            <div class="a-details-body">
+              <p>Milliken gives the front and rear lateral load transfer per g of lateral acceleration (p. 682), with K<sub>F</sub> and K<sub>R</sub> the front and rear roll rates and a<sub>s</sub> the distance from the front axle to the sprung CG:</p>
+              <p class="eq"><span class="frac"><span>&Delta;W<sub>F</sub></span><span>A<sub>Y</sub></span></span> = <span class="frac"><span>W<sub>s</sub></span><span>t<sub>F</sub></span></span>[ <span class="frac"><span>h<sub>2</sub>K<sub>F&prime;</sub></span><span>K<sub>F</sub> + K<sub>R</sub> &minus; W<sub>s</sub>h<sub>2</sub></span></span> + <span class="frac"><span>&#8467; &minus; a<sub>s</sub></span><span>&#8467;</span></span>z<sub>RF</sub> ] + <span class="frac"><span>W<sub>uF</sub></span><span>t<sub>F</sub></span></span>z<sub>WF</sub></p>
+              <p class="eq"><span class="frac"><span>&Delta;W<sub>R</sub></span><span>A<sub>Y</sub></span></span> = <span class="frac"><span>W<sub>s</sub></span><span>t<sub>R</sub></span></span>[ <span class="frac"><span>h<sub>2</sub>K<sub>R&prime;</sub></span><span>K<sub>F</sub> + K<sub>R</sub> &minus; W<sub>s</sub>h<sub>2</sub></span></span> + <span class="frac"><span>a<sub>s</sub></span><span>&#8467;</span></span>z<sub>RR</sub> ] + <span class="frac"><span>W<sub>uR</sub></span><span>t<sub>R</sub></span></span>z<sub>WR</sub></p>
+              <p>where K<sub>F&prime;</sub> = K<sub>F</sub> &minus; (&#8467; &minus; a<sub>s</sub>)W<sub>s</sub>h<sub>2</sub>/&#8467; and K<sub>R&prime;</sub> = K<sub>R</sub> &minus; a<sub>s</sub>W<sub>s</sub>h<sub>2</sub>/&#8467;. The W<sub>s</sub>h<sub>2</sub> terms are the gravity term from the rolled sprung mass, which can be neglected (p. 682). Then K<sub>F&prime;</sub> &asymp; K<sub>F</sub>, K<sub>R&prime;</sub> &asymp; K<sub>R</sub>, and the first term in each bracket becomes h<sub>2</sub>x for the front and h<sub>2</sub>(1 &minus; x) for the rear. With &#8467; &minus; a<sub>s</sub> = b<sub>s</sub> (p. 672):</p>
+              <p class="eq"><span class="frac"><span>&Delta;W<sub>F</sub></span><span>A<sub>Y</sub></span></span> = <span class="frac"><span>W<sub>s</sub></span><span>t<sub>F</sub></span></span>[ h<sub>2</sub>x + <span class="frac"><span>b<sub>s</sub></span><span>&#8467;</span></span>z<sub>RF</sub> ] + <span class="frac"><span>W<sub>uF</sub></span><span>t<sub>F</sub></span></span>z<sub>WF</sub></p>
+              <p>The total lateral load transfer, from moments about the outside tire contact patch, is (p. 679):</p>
+              <p class="eq"><span class="frac"><span>&Delta;W</span><span>A<sub>Y</sub></span></span> = <span class="frac"><span>W h</span><span>t</span></span></p>
+              <p>This matches the sum of &Delta;W<sub>F</sub> and &Delta;W<sub>R</sub> when the tracks are equal: the h<sub>2</sub> terms add to W<sub>s</sub>h<sub>2</sub>, the roll center terms add to W<sub>s</sub> times the NRA height under the sprung CG, which together give W<sub>s</sub>h<sub>s</sub>, and W<sub>s</sub>h<sub>s</sub> + W<sub>uF</sub>z<sub>WF</sub> + W<sub>uR</sub>z<sub>WR</sub> = W h by the sprung CG height equation (p. 672).</p>
+              <p>The front LLTD is the front load transfer over the total. ARG27 has equal tracks, t<sub>F</sub> = t<sub>R</sub> = t, so t cancels:</p>
+              <p class="eq">LLTD<sub>F</sub> = <span class="frac"><span>&Delta;W<sub>F</sub></span><span>&Delta;W</span></span> = <span class="frac"><span>W<sub>s</sub> [ h<sub>2</sub> x + (b<sub>s</sub>/&#8467;) z<sub>RF</sub> ] + W<sub>uF</sub> z<sub>WF</sub></span><span>W h</span></span></p>
+              <p>For the magic number in Section 2.4, Milliken's simplified single mass form is used instead (p. 683), with W<sub>uF</sub> &asymp; W<sub>uR</sub> &asymp; 0, W<sub>s</sub> &asymp; W, h<sub>2</sub> &asymp; H and a<sub>s</sub> &asymp; a:</p>
+              <p class="eq"><span class="frac"><span>&Delta;W<sub>F</sub></span><span>A<sub>Y</sub></span></span> = <span class="frac"><span>W</span><span>t<sub>F</sub></span></span>[ <span class="frac"><span>HK<sub>F</sub></span><span>K<sub>F</sub> + K<sub>R</sub></span></span> + <span class="frac"><span>b</span><span>&#8467;</span></span>z<sub>RF</sub> ]</p>
+              <p>Dividing by W h/t gives LLTD<sub>F</sub> = [Hx + (b/&#8467;)z<sub>RF</sub>] / h, and solving for x:</p>
+              <p class="eq">x = <span class="frac"><span>LLTD<sub>F</sub> h &minus; (b/&#8467;) z<sub>RF</sub></span><span>H</span></span></p>
+            </div>
+          </details>
+
+          <p>With the roll gradient tuned between 0.55 and 0.70 deg/g, the front LLTD can be set anywhere from 44.2% to 52.5%, which brackets the 48% target.</p>
+        </section>
+
         <section class="a-section" id="appendix">
           <h2><span class="a-num">A</span>Appendix: ARG26 Parameters Spreadsheet</h2>
           <p>The ARG26 values come from the <a class="a-link" href="../assets/docs/SU26_Parameters_and_Analysis.xlsx" download>ARG26 suspension parameters spreadsheet (Excel)</a>.</p>
@@ -270,7 +429,7 @@
           <p>These are the <a class="a-link" href="https://www.hypercoils.com/shop/coilover-springs?refinementList%5BinsideDiameter_standard%5D%5B0%5D=1.45&amp;page=1&amp;configure%5Bfilters%5D=category%3A%22Coilover%20Springs%20Standard%22&amp;configure%5BhitsPerPage%5D=1000&amp;configure%5Bdistinct%5D=1" target="_blank" rel="noopener">Hyperco standard coilover springs</a> with a 1.45 in inside diameter and 4.4 in free length, the size used on the TTX25. The spring sweep in the methodology uses these rates.</p>
           <figure class="a-fig a-fig--wide">
             <img src="../assets/img/rates/01-hyperco-springs.webp" alt="Hyperco online catalog listing the standard coilover springs with a 1.45 in inside diameter, rates 150 to 400 lbf/in" width="2000" height="1032" loading="lazy" />
-            <figcaption><span class="mono">Figure 16</span> Hyperco standard coilover springs, 1.45 in inside diameter.</figcaption>
+            <figcaption><span class="mono">Figure 23</span> Hyperco standard coilover springs, 1.45 in inside diameter.</figcaption>
           </figure>
           <div class="a-table-wrap">
             <table class="a-table sheet">
