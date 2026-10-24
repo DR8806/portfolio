@@ -1,0 +1,136 @@
+
+    <article class="article">
+      <div class="wrap">
+
+        <section class="a-section">
+          <h2><span class="a-num">1</span>Data</h2>
+          <!-- EDIT: CFD data explanation -->
+          <p>This is CFD data from a speed sweep of the car from 10 to 35 m/s, with the car at 0&deg; yaw, 0&deg; roll and 0&deg; pitch. The first ten columns come from the CFD. The last six are calculated from them for the suspension work, using the equations in Section 2.</p>
+          <div class="a-table-wrap">
+            <table class="a-table sheet">
+              <thead><tr><th>Speed (m/s)</th><th>Speed (km/h)</th><th>Downforce (N)</th><th>Drag (N)</th><th>L/D</th><th>Front downforce (N)</th><th>Rear downforce (N)</th><th>Front balance (%)</th><th>C<sub>L</sub>A (m&sup2;)</th><th>C<sub>D</sub>A (m&sup2;)</th><th>Front C<sub>L</sub>A (m&sup2;)</th><th>Rear C<sub>L</sub>A (m&sup2;)</th><th>Front C<sub>L</sub> (lbf/mph&sup2;)</th><th>Rear C<sub>L</sub> (lbf/mph&sup2;)</th><th>Front DF, sprung (N)</th><th>Front DF, unsprung (N)</th></tr></thead>
+              <tbody>
+                <tr><td>0</td><td>0.0</td><td>0.00</td><td>0.00</td><td>0.000</td><td>0.00</td><td>0.00</td><td>0.00</td><td>0.0000</td><td>0.0000</td><td>0.0000</td><td>0.0000</td><td>0.00000</td><td>0.00000</td><td>0.00</td><td>0.00</td></tr>
+                <tr><td>10</td><td>36.0</td><td>227.38</td><td>87.43</td><td>2.601</td><td>102.72</td><td>124.66</td><td>45.18</td><td>3.7123</td><td>1.4275</td><td>1.6772</td><td>2.0351</td><td>0.04616</td><td>0.05601</td><td>76.01</td><td>26.71</td></tr>
+                <tr><td>11</td><td>39.6</td><td>277.38</td><td>109.20</td><td>2.540</td><td>124.45</td><td>152.92</td><td>44.87</td><td>3.7426</td><td>1.4734</td><td>1.6793</td><td>2.0633</td><td>0.04621</td><td>0.05678</td><td>92.09</td><td>32.36</td></tr>
+                <tr><td>12</td><td>43.2</td><td>331.18</td><td>130.38</td><td>2.540</td><td>148.59</td><td>182.59</td><td>44.87</td><td>3.7549</td><td>1.4782</td><td>1.6848</td><td>2.0701</td><td>0.04637</td><td>0.05697</td><td>109.96</td><td>38.63</td></tr>
+                <tr><td>13</td><td>46.8</td><td>386.08</td><td>152.51</td><td>2.531</td><td>176.81</td><td>209.27</td><td>45.80</td><td>3.7298</td><td>1.4734</td><td>1.7082</td><td>2.0216</td><td>0.04701</td><td>0.05563</td><td>130.84</td><td>45.97</td></tr>
+                <tr><td>14</td><td>50.4</td><td>450.97</td><td>181.37</td><td>2.486</td><td>201.72</td><td>249.26</td><td>44.73</td><td>3.7565</td><td>1.5108</td><td>1.6803</td><td>2.0762</td><td>0.04624</td><td>0.05714</td><td>149.27</td><td>52.45</td></tr>
+                <tr><td>15</td><td>54.0</td><td>521.71</td><td>203.84</td><td>2.559</td><td>240.16</td><td>281.55</td><td>46.03</td><td>3.7856</td><td>1.4791</td><td>1.7425</td><td>2.0431</td><td>0.04795</td><td>0.05623</td><td>177.72</td><td>62.44</td></tr>
+                <tr><td>16</td><td>57.6</td><td>594.91</td><td>235.67</td><td>2.524</td><td>269.78</td><td>325.13</td><td>45.35</td><td>3.7941</td><td>1.5030</td><td>1.7206</td><td>2.0735</td><td>0.04735</td><td>0.05706</td><td>199.64</td><td>70.14</td></tr>
+                <tr><td>17</td><td>61.2</td><td>675.56</td><td>264.17</td><td>2.557</td><td>309.17</td><td>366.38</td><td>45.77</td><td>3.8164</td><td>1.4924</td><td>1.7468</td><td>2.0696</td><td>0.04807</td><td>0.05696</td><td>228.79</td><td>80.38</td></tr>
+                <tr><td>18</td><td>64.8</td><td>756.41</td><td>292.93</td><td>2.582</td><td>348.70</td><td>407.71</td><td>46.10</td><td>3.8116</td><td>1.4761</td><td>1.7571</td><td>2.0545</td><td>0.04836</td><td>0.05654</td><td>258.04</td><td>90.66</td></tr>
+                <tr><td>19</td><td>68.4</td><td>855.14</td><td>337.50</td><td>2.534</td><td>382.61</td><td>472.53</td><td>44.74</td><td>3.8675</td><td>1.5264</td><td>1.7303</td><td>2.1372</td><td>0.04762</td><td>0.05882</td><td>283.13</td><td>99.48</td></tr>
+                <tr><td>20</td><td>72.0</td><td>956.77</td><td>379.60</td><td>2.520</td><td>422.13</td><td>534.64</td><td>44.12</td><td>3.9052</td><td>1.5494</td><td>1.7230</td><td>2.1822</td><td>0.04742</td><td>0.06005</td><td>312.38</td><td>109.75</td></tr>
+                <tr><td>20</td><td>72.0</td><td>963.91</td><td>363.56</td><td>2.651</td><td>439.28</td><td>524.63</td><td>45.57</td><td>3.9343</td><td>1.4839</td><td>1.7929</td><td>2.1414</td><td>0.04934</td><td>0.05893</td><td>325.07</td><td>114.21</td></tr>
+                <tr><td>23</td><td>82.8</td><td>1293.02</td><td>482.50</td><td>2.680</td><td>587.61</td><td>705.41</td><td>45.45</td><td>3.9906</td><td>1.4892</td><td>1.8137</td><td>2.1769</td><td>0.04991</td><td>0.05991</td><td>434.83</td><td>152.78</td></tr>
+                <tr><td>25</td><td>90.0</td><td>1469.48</td><td>577.99</td><td>2.542</td><td>656.58</td><td>812.90</td><td>44.68</td><td>3.8386</td><td>1.5099</td><td>1.7151</td><td>2.1235</td><td>0.04720</td><td>0.05844</td><td>485.87</td><td>170.71</td></tr>
+                <tr><td>27</td><td>97.2</td><td>1796.88</td><td>692.60</td><td>2.594</td><td>809.68</td><td>987.19</td><td>45.06</td><td>4.0242</td><td>1.5511</td><td>1.8133</td><td>2.2109</td><td>0.04990</td><td>0.06084</td><td>599.16</td><td>210.52</td></tr>
+                <tr><td>29</td><td>104.4</td><td>2005.41</td><td>774.84</td><td>2.588</td><td>921.76</td><td>1083.66</td><td>45.96</td><td>3.8932</td><td>1.5042</td><td>1.7893</td><td>2.1039</td><td>0.04924</td><td>0.05790</td><td>682.10</td><td>239.66</td></tr>
+                <tr><td>31</td><td>111.6</td><td>2297.81</td><td>900.43</td><td>2.552</td><td>1046.57</td><td>1251.24</td><td>45.55</td><td>3.9038</td><td>1.5297</td><td>1.7782</td><td>2.1256</td><td>0.04894</td><td>0.05850</td><td>774.46</td><td>272.11</td></tr>
+                <tr><td>33</td><td>118.8</td><td>2605.48</td><td>1017.17</td><td>2.562</td><td>1187.32</td><td>1418.16</td><td>45.57</td><td>3.9062</td><td>1.5250</td><td>1.7801</td><td>2.1261</td><td>0.04899</td><td>0.05851</td><td>878.62</td><td>308.70</td></tr>
+                <tr><td>35</td><td>126.0</td><td>2928.16</td><td>1163.08</td><td>2.518</td><td>1327.02</td><td>1601.15</td><td>45.32</td><td>3.9026</td><td>1.5501</td><td>1.7687</td><td>2.1339</td><td>0.04867</td><td>0.05873</td><td>981.99</td><td>345.03</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <section class="a-section">
+          <h2><span class="a-num">2</span>Calculated Values</h2>
+          <p>The CFD gives the total downforce, DF, drag, D, and front and rear downforce, DF<sub>F</sub> and DF<sub>R</sub>, at each speed, V. The coefficients follow from these with the air density &rho; = 1.225 kg/m&sup3;.</p>
+          <p class="eq">C<sub>L</sub>A = <span class="frac"><span>2DF</span><span>&rho;V<sup>2</sup></span></span> &nbsp;&nbsp;&nbsp; C<sub>D</sub>A = <span class="frac"><span>2D</span><span>&rho;V<sup>2</sup></span></span> &nbsp;&nbsp;&nbsp; L/D = <span class="frac"><span>DF</span><span>D</span></span> &nbsp;&nbsp;&nbsp; front balance = <span class="frac"><span>DF<sub>F</sub></span><span>DF</span></span></p>
+          <p>The front and rear C<sub>L</sub>A split the total by the front balance, b<sub>F</sub>.</p>
+          <p class="eq">C<sub>L</sub>A<sub>F</sub> = C<sub>L</sub>A &times; b<sub>F</sub> &nbsp;&nbsp;&nbsp; C<sub>L</sub>A<sub>R</sub> = C<sub>L</sub>A &times; (1 &minus; b<sub>F</sub>)</p>
+          <p>The front and rear C<sub>L</sub> in lbf/mph&sup2; fold &frac12;&rho; into C<sub>L</sub>A, so the axle downforce in lbf is this value times the speed in mph squared. Converting &frac12;&rho; to these units:</p>
+          <p class="eq">&frac12;&rho; = &frac12; &times; 1.225 &times; 0.44704<sup>2</sup> / 4.448 = 0.02752 lbf/(mph&sup2;&middot;m&sup2;)</p>
+          <p class="eq">C<sub>L,F</sub> = 0.02752 C<sub>L</sub>A<sub>F</sub> &nbsp;&nbsp;&nbsp; C<sub>L,R</sub> = 0.02752 C<sub>L</sub>A<sub>R</sub> &nbsp;&nbsp;&nbsp; DF<sub>F</sub> = C<sub>L,F</sub>V<sub>mph</sub><sup>2</sup></p>
+          <p>Part of the front downforce goes straight into the unsprung mass and never passes through the springs. We take this as 26%, so the front downforce splits into a sprung and an unsprung part.</p>
+          <p class="eq">DF<sub>F,sprung</sub> = 0.74 DF<sub>F</sub> &nbsp;&nbsp;&nbsp; DF<sub>F,unsprung</sub> = 0.26 DF<sub>F</sub></p>
+        </section>
+
+        <section class="a-section">
+          <h2><span class="a-num">3</span>Plots</h2>
+          <p>Downforce grows with the square of speed, from 227 N at 10 m/s to 2928 N at 35 m/s. The rear carries slightly more than the front at every speed.</p>
+          <figure class="a-fig a-fig--chart">
+            <img src="../assets/img/cfd/03-downforce-vs-speed.webp" alt="Total, front and rear downforce plotted against speed from 10 to 35 m/s" width="791" height="655" loading="lazy" />
+            <figcaption><span class="mono">Figure 1</span><span>Total, front and rear downforce vs speed, CFD data.</span></figcaption>
+          </figure>
+          <details class="a-details">
+            <summary>Show MATLAB code</summary>
+            <div class="a-details-body">
+              <pre class="a-code"><code>V    = [10 11 12 13 14 15 16 17 18 19 20 20 23 25 27 29 31 33 35];
+DF   = [227.38 277.38 331.18 386.08 450.97 521.71 594.91 675.56 756.41 855.14 956.77 963.91 1293.02 1469.48 1796.88 2005.41 2297.81 2605.48 2928.16];
+DF_F = [102.72 124.45 148.59 176.81 201.72 240.16 269.78 309.17 348.70 382.61 422.13 439.28 587.61 656.58 809.68 921.76 1046.57 1187.32 1327.02];
+DF_R = [124.66 152.92 182.59 209.27 249.26 281.55 325.13 366.38 407.71 472.53 534.64 524.63 705.41 812.90 987.19 1083.66 1251.24 1418.16 1601.15];
+
+figure
+plot(V, DF, '-o', V, DF_F, '-o', V, DF_R, '-o', 'LineWidth', 2)
+grid on
+xlabel('Speed (m/s)')
+ylabel('Downforce (N)')
+legend('Total', 'Front', 'Rear', 'Location', 'northwest')</code></pre>
+            </div>
+          </details>
+          <p>Because downforce grows with speed squared, C<sub>L</sub>A stays almost constant, between 3.71 and 4.02 m&sup2; across the sweep.</p>
+          <figure class="a-fig a-fig--chart">
+            <img src="../assets/img/cfd/04-cla-vs-speed.webp" alt="CLA plotted against speed from 10 to 35 m/s, nearly flat between 3.7 and 4.0 square meters" width="782" height="655" loading="lazy" />
+            <figcaption><span class="mono">Figure 2</span><span>C<sub>L</sub>A vs speed, CFD data.</span></figcaption>
+          </figure>
+          <details class="a-details">
+            <summary>Show MATLAB code</summary>
+            <div class="a-details-body">
+              <pre class="a-code"><code>V    = [10 11 12 13 14 15 16 17 18 19 20 20 23 25 27 29 31 33 35];
+CLA  = [3.7123 3.7426 3.7549 3.7298 3.7565 3.7856 3.7941 3.8164 3.8116 3.8675 3.9052 3.9343 3.9906 3.8386 4.0242 3.8932 3.9038 3.9062 3.9026];
+
+figure
+plot(V, CLA, '-o', 'LineWidth', 2)
+grid on
+xlabel('Speed (m/s)')
+ylabel('C_LA (m^2)')
+ylim([0 4.5])</code></pre>
+            </div>
+          </details>
+        </section>
+
+        <section class="a-section">
+          <h2><span class="a-num">4</span>Center of Pressure</h2>
+          <!-- EDIT: COP migration -->
+          <p>The center of pressure (COP) is the point along the car where the total downforce acts. Taking moments about the front axle, with the wheelbase &#8467; = 61 in and the front balance b<sub>F</sub>, its distance behind the front axle is:</p>
+          <p class="eq">x<sub>COP</sub> = <span class="frac"><span>DF<sub>R</sub></span><span>DF</span></span>&#8467; = (1 &minus; b<sub>F</sub>)&#8467;</p>
+          <p>The CG sits at the middle of the wheelbase, 30.5 in behind the front axle, so the COP&#8217;s distance behind the CG is:</p>
+          <p class="eq">&Delta;x = x<sub>COP</sub> &minus; <span class="frac"><span>&#8467;</span><span>2</span></span></p>
+          <p>Across the sweep the COP stays between 32.9 and 34.1 in behind the front axle, 2.4 to 3.6 in behind the CG. It moves by 1.2 in from 10 to 35 m/s, with no clear trend with speed, so the aero balance stays nearly the same as the car speeds up.</p>
+          <figure class="a-fig a-fig--chart">
+            <img src="../assets/img/cfd/05-cop-vs-speed.webp" alt="COP distance behind the front axle plotted against speed from 10 to 35 m/s, staying between 32.9 and 34.1 in, with the CG marked at 30.5 in" width="768" height="655" loading="lazy" />
+            <figcaption><span class="mono">Figure 3</span><span>COP position vs speed, with the CG at mid-wheelbase.</span></figcaption>
+          </figure>
+          <details class="a-details">
+            <summary>Show MATLAB code</summary>
+            <div class="a-details-body">
+              <pre class="a-code"><code>V  = [10 11 12 13 14 15 16 17 18 19 20 20 23 25 27 29 31 33 35];          % m/s
+bF = [45.18 44.87 44.87 45.80 44.73 46.03 45.35 45.77 46.10 44.74 ...
+      44.12 45.57 45.45 44.68 45.06 45.96 45.55 45.57 45.32]/100;       % front balance
+L  = 61;                                                                % wheelbase, in
+
+xCOP = (1 - bF)*L;      % COP distance behind the front axle, in
+
+plot(V, xCOP, '-o', 'LineWidth', 2)
+hold on
+yline(L/2, '--', 'CG')
+hold off
+grid on
+xlabel('Speed (m/s)')
+ylabel('COP behind front axle (in)')
+ylim([28 36])</code></pre>
+            </div>
+          </details>
+        </section>
+
+        <section class="a-section">
+          <h2><span class="a-num">5</span>Aero Map</h2>
+          <!-- EDIT: aero map for front and rear ride height -->
+          <p>Downforce and balance across front and rear ride height. To be added.</p>
+        </section>
+
+      </div>
+    </article>

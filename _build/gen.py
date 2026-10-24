@@ -38,8 +38,6 @@ def item(title, slug, blurb, body, status, year):
 
 # old page -> where its write-up lives now, so old links still work
 MOVED = {
-    "tire-analysis": "useful-data",
-    "race-data-analysis": "useful-data",
     "ackermann-selection-methodology": "kinematics",
     "cg-height-test": "physical-tests",
     "cg-shift": "miscellaneous",
@@ -82,12 +80,10 @@ SECTIONS = [
             item("Physical Tests", "physical-tests", "Tests run on the car to measure its real properties.", parts(
                 ("CG Height Test", "cg-height-test", "Test procedure for measuring the CG height of ARG26 with two methods: a side tilt test and a front lift test."),
             ), "complete", "2026"),
-            item("Useful Data", "useful-data", "Race data, load cases, tire data and CFD data used across the suspension work.", parts(
-                ("Race Data Analysis", "race-data-analysis", "Lateral acceleration, speed and corner radius from ARG26's autocross and endurance runs at competition."),
-                ("Load Cases", "load-cases", "ARG26 and ARG27 load cases from IMU data, with a year over year comparison."),
-                ("Tires", "tire-analysis", "Lateral force plots from TTC tire data, comparing Hoosier tire candidates."),
-                ("CFD Data", "cfd-data", "Downforce and drag from a CFD speed sweep at 0° yaw, roll and pitch."),
-            ), "live", "2026"),
+            item("Race Data Analysis", "race-data-analysis", "Lateral acceleration, speed and corner radius from ARG26's autocross and endurance runs at competition.", article("race-data-analysis"), "complete", "2026"),
+            item("Load Cases", "load-cases", "ARG26 and ARG27 load cases from IMU data, with a year over year comparison.", article("load-cases"), "live", "2026"),
+            item("Tire Analysis", "tire-analysis", "Lateral force plots from TTC tire data, comparing Hoosier tire candidates.", article("tire-analysis"), "live", "2026"),
+            item("Aero Analysis", "aero-analysis", "Downforce and drag from a CFD speed sweep at 0° yaw, roll and pitch, and the aero values used in the suspension work.", article("aero-analysis"), "live", "2026"),
             item("Miscellaneous", "miscellaneous", "Other calculations done for the suspension.", parts(
                 ("Longitudinal CG Shift Calculation", "cg-shift", "A preliminary calculation of how far the longitudinal CG moves on ARG27 as the accumulator and inverter change, and what that means for a 50/50 weight distribution."),
             ), "complete", "2026"),
@@ -529,6 +525,24 @@ for old, new in MOVED.items():
 </head>
 <body>
   <p>This page moved to <a href="{new}.html#{old}">{new}.html</a>.</p>
+</body>
+</html>
+""")
+
+# the old Useful Data page was split into one page per write-up; send its section links to the new pages
+USEFUL_DATA = {"race-data-analysis": "race-data-analysis", "load-cases": "load-cases", "tire-analysis": "tire-analysis", "cfd-data": "aero-analysis"}
+write("projects/useful-data.html", f"""<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Moved</title>
+  <script>
+    var to = {{{", ".join(f'"{k}": "{v}"' for k, v in USEFUL_DATA.items())}}};
+    location.replace((to[location.hash.slice(1)] || "race-data-analysis") + ".html");
+  </script>
+</head>
+<body>
+  <p>This page was split up. Start at <a href="race-data-analysis.html">Race Data Analysis</a>.</p>
 </body>
 </html>
 """)

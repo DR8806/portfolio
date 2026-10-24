@@ -83,6 +83,8 @@
           <li><a href="#appendix"><span class="toc-num mono">A</span><span>Appendix: ARG26 Parameters Spreadsheet</span></a></li>
           <li><a href="#appendix-dampers"><span class="toc-num mono">B</span><span>Appendix: Öhlins TTX25 MKII Dampers</span></a></li>
           <li><a href="#appendix-springs"><span class="toc-num mono">C</span><span>Appendix: Available Hyperco Springs</span></a></li>
+          <li><a href="#appendix-optimumg-springs-dampers"><span class="toc-num mono">D</span><span>Appendix: OptimumG Springs and Dampers Tech Tip</span></a></li>
+          <li><a href="#appendix-optimumg-load-transfer"><span class="toc-num mono">E</span><span>Appendix: OptimumG Geometric and Elastic Load Transfer</span></a></li>
           </ol>
         </nav>
         <div class="a-doc-body">
@@ -131,7 +133,7 @@
             <img src="../assets/img/rates/05-arg27-speed-cases.webp" alt="ARG27 speed cases: braking 75 km/h, acceleration 55 km/h, cornering 80 km/h, acceleration plus cornering 50 km/h, braking plus cornering 55 km/h" width="710" height="198" loading="lazy" />
             <figcaption><span class="mono">Figure 4</span> ARG27 speed cases.</figcaption>
           </figure>
-          <p class="a-note"><span class="mono">Note</span><span>The speed cases are derived from ARG26 competition data. See the <a class="a-link" href="useful-data.html#race-data-analysis">Race Data Analysis</a> section of the Useful Data page.</span></p>
+          <p class="a-note"><span class="mono">Note</span><span>The speed cases are derived from ARG26 competition data. See the <a class="a-link" href="race-data-analysis.html">Race Data Analysis</a> page.</span></p>
 
           <h3 id="tire-loads"><span class="a-num">1.3</span>Tire Loads</h3>
 
@@ -548,6 +550,24 @@ legend('Softest front, stiffest rear', 'Stiffest front, softest rear')</code></p
               </tbody>
             </table>
           </div>
+        </section>
+
+        <section class="a-section" id="appendix-optimumg-springs-dampers">
+          <h2><span class="a-num">D</span>Appendix: OptimumG Springs and Dampers Tech Tip</h2>
+          <p>From the <a class="a-link" href="https://optimumg.com/wp-content/uploads/2020/01/SpringsDampers_Tech_Tip_1.pdf" target="_blank" rel="noopener">OptimumG Springs and Dampers Tech Tip (PDF)</a>. With a higher rear ride frequency, the rear catches up to the front after a bump, so the two ends move together and the car pitches less.</p>
+          <figure class="a-fig a-fig--wide">
+            <img src="../assets/img/rates/25-optimumg-ride-frequency.webp" alt="Front and rear ride height against time after a bump: the rear, at a higher ride frequency, starts behind the front and catches up to it" width="1294" height="378" loading="lazy" />
+            <figcaption><span class="mono">Figure 25</span> Higher rear ride frequency. From OptimumG, Springs and Dampers Tech Tip, Figure 2.</figcaption>
+          </figure>
+        </section>
+
+        <section class="a-section" id="appendix-optimumg-load-transfer">
+          <h2><span class="a-num">E</span>Appendix: OptimumG Geometric and Elastic Load Transfer</h2>
+          <p>From the <a class="a-link" href="https://optimumg.com/wp-content/uploads/2021/10/OptimumG-Septepmber-2021.pdf" target="_blank" rel="noopener">OptimumG September 2021 newsletter (PDF)</a>. The sprung mass load transfer splits into a geometric part, which acts through the roll center and does not roll the car, and an elastic part, which acts through the distance from the roll center up to the sprung CG and goes through the springs and ARBs.</p>
+          <figure class="a-fig a-fig--wide">
+            <img src="../assets/img/rates/26-optimumg-geometric-elastic.webp" alt="Front view of a car showing the non-suspended, geometric and elastic sprung load transfer, with geometric weight transfer equal to sprung mass times lateral acceleration times roll center height over track, and elastic weight transfer equal to sprung mass times lateral acceleration times the distance from roll center to sprung CG over track" width="1536" height="1092" loading="lazy" />
+            <figcaption><span class="mono">Figure 26</span> Geometric and elastic sprung mass load transfer. From OptimumG, September 2021, Figure 4.</figcaption>
+          </figure>
         </section>
         </div>
       </div>
