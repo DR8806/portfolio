@@ -2022,3 +2022,12 @@ html.in-preview .topbar {
   margin: 12px 0 0;
   font-size: 16px;
 }
+
+/* Code listing inside a collapsible block */
+
+.a-code {
+  margin: 12px 0 0;
+  overflow-x: auto;
+  font-size: 12.5px;
+  line-height: 1.55;
+}

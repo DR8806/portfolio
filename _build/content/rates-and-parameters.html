@@ -384,6 +384,39 @@
           </details>
 
           <p>With the roll gradient tuned between 0.55 and 0.70 deg/g, the front LLTD can be set anywhere from 44.2% to 52.5%, which brackets the 48% target.</p>
+
+
+          <p>Figure 23 shows why we want a difference between the front and rear roll center heights. Holding the average roll center height and the springs and ARBs fixed, raising the rear roll center above the front lowers the front LLTD by about 2% per inch, and lowering it does the reverse. The width of the range does not change. So the roll center difference sets where the LLTD range sits, and the ARBs tune within it.</p>
+
+          <figure class="a-fig">
+            <img src="../assets/img/rates/23-lltd-rc-difference.webp" alt="Front LLTD against rear minus front roll center height from minus 2 to plus 2 in, for the softest front with stiffest rear and the stiffest front with softest rear: both lines fall about 2 percent per inch and stay about 6 percent apart" width="763" height="656" loading="lazy" />
+            <figcaption><span class="mono">Figure 23</span> Front LLTD range against the roll center height difference, z<sub>RR</sub> &minus; z<sub>RF</sub>, using the ARG27 constants.</figcaption>
+          </figure>
+
+          <details class="a-details">
+            <summary>Show MATLAB code</summary>
+            <div class="a-details-body">
+              <pre class="a-code"><code>% Front LLTD range vs roll center height difference, ARG27 constants
+W   = 550;  Ws  = 430;          % total and sprung weight, lbf
+WuF = 60;   zWF = 8;            % front unsprung weight (both sides) and height, in
+h   = 9.96; hs  = 10.51;        % CG and sprung CG height, in
+zAvg = (2.896 + 3.641)/2;       % average roll center height, held constant, in
+
+xMin = 0.437;  xMax = 0.548;    % front roll stiffness fraction K_F/(K_F+K_R), softest and stiffest front
+
+dz  = linspace(-2, 2, 41);      % z_RR - z_RF, in
+zRF = zAvg - dz/2;
+zRR = zAvg + dz/2;
+
+LLTD = @(x) 100*(Ws*((hs - (zRF + zRR)/2)*x + zRF/2) + WuF*zWF)/(W*h);
+
+plot(dz, LLTD(xMin), dz, LLTD(xMax), 'LineWidth', 2)
+grid on
+xlabel('z_{RR} - z_{RF} (in)')
+ylabel('Front LLTD (%)')
+legend('Softest front, stiffest rear', 'Stiffest front, softest rear')</code></pre>
+            </div>
+          </details>
         </section>
 
         <section class="a-section" id="appendix">
@@ -411,7 +444,7 @@
           <p>These are the <a class="a-link" href="https://www.hypercoils.com/shop/coilover-springs?refinementList%5BinsideDiameter_standard%5D%5B0%5D=1.45&amp;page=1&amp;configure%5Bfilters%5D=category%3A%22Coilover%20Springs%20Standard%22&amp;configure%5BhitsPerPage%5D=1000&amp;configure%5Bdistinct%5D=1" target="_blank" rel="noopener">Hyperco standard coilover springs</a> with a 1.45 in inside diameter and 4.4 in free length, the size used on the TTX25. The spring sweep in the methodology uses these rates.</p>
           <figure class="a-fig a-fig--wide">
             <img src="../assets/img/rates/01-hyperco-springs.webp" alt="Hyperco online catalog listing the standard coilover springs with a 1.45 in inside diameter, rates 150 to 400 lbf/in" width="2000" height="1032" loading="lazy" />
-            <figcaption><span class="mono">Figure 23</span> Hyperco standard coilover springs, 1.45 in inside diameter.</figcaption>
+            <figcaption><span class="mono">Figure 24</span> Hyperco standard coilover springs, 1.45 in inside diameter.</figcaption>
           </figure>
           <div class="a-table-wrap">
             <table class="a-table sheet">
