@@ -131,6 +131,14 @@
               <li><a href="#ackermann-appendix-peak-slip-angle-and-ackermann"><span class="toc-num mono">B</span><span>Appendix: Peak Slip Angle and Ackermann</span></a></li>
             </ol>
           </li>
+          <li class="toc-part"><a href="#steering-torque">Steering Torque</a>
+            <ol>
+              <li><a href="#steering-torque-introduction"><span class="toc-num mono">0</span><span>Introduction</span></a></li>
+              <li><a href="#steering-torque-steering-wheel-torque"><span class="toc-num mono">1</span><span>Steering Wheel Torque</span></a></li>
+              <li><a href="#steering-torque-rack-force"><span class="toc-num mono">2</span><span>Rack Force</span></a></li>
+              <li><a href="#appendix-narrco-rack"><span class="toc-num mono">A</span><span>Appendix: NARRco Rack</span></a></li>
+            </ol>
+          </li>
           </ol>
         </nav>
         <div class="a-doc-body">
@@ -792,6 +800,53 @@
           </div>
         </section>
         </section>
+        <section class="a-part" id="steering-torque">
+          <header class="a-part-head">
+            <h2 class="display a-part-title">Steering Torque</h2>
+            <p class="a-part-desc">The torque at the steering wheel and the force on the rack for ARG27&#x27;s NARRco rack.</p>
+          </header>
+
+
+        <section class="a-section">
+          <h2 id="steering-torque-introduction"><span class="a-num">0</span>Introduction</h2>
+          <p>To size the steering, we need the torque the driver feels at the steering wheel and the force the rack has to carry. We first estimate the steering wheel torque from the tire forces, then turn it into a force on the rack.</p>
+        </section>
+
+        <section class="a-section">
+          <h2 id="steering-torque-steering-wheel-torque"><span class="a-num">1</span>Steering Wheel Torque</h2>
+          <p>In a corner the front tires make a lateral force behind the steering axis. The distance it acts behind the axis is the kinematic (mechanical) trail from the geometry plus the pneumatic trail from the tire, so it makes a torque about the steering axis that tries to straighten the wheels. Dividing by the steering ratio moves that torque to the steering wheel:</p>
+          <p class="eq">T = <span class="frac"><span>m<sub>V</sub> (r<sub>T</sub> + R<sub>P</sub>) a<sub>y</sub></span><span>i<sub>S</sub></span></span></p>
+          <ul>
+            <li>T: torque at the steering wheel (N&middot;m)</li>
+            <li>m<sub>V</sub>: vehicle mass (kg)</li>
+            <li>r<sub>T</sub>: kinematic trail, also called mechanical trail (m)</li>
+            <li>R<sub>P</sub>: pneumatic trail (m)</li>
+            <li>a<sub>y</sub>: lateral acceleration (m/s&sup2;)</li>
+            <li>i<sub>S</sub>: kinematic steering ratio, steering wheel angle over road wheel angle</li>
+          </ul>
+        </section>
+
+        <section class="a-section">
+          <h2 id="steering-torque-rack-force"><span class="a-num">2</span>Rack Force</h2>
+          <p>The steering wheel torque, T, turns the pinion, which moves the rack. The force on the rack, F, comes from the rack travel per full turn of the steering wheel, c. ARG27 uses a NARRco rack with c = 4.0 in/rev = 0.1016 m/rev (<a class="a-link" href="#appendix-narrco-rack">Appendix A</a>).</p>
+          <p class="eq">F = <span class="frac"><span>2&pi;T</span><span>c</span></span></p>
+          <p>This comes from setting the work in equal to the work out. One full turn of the steering wheel puts in T &times; 2&pi;, and the rack moving its travel for one turn puts out F &times; c:</p>
+          <p class="eq">2&pi;T = Fc</p>
+          <p>The rack&#8217;s c is its own steering ratio, so it is already in this equation. The overall steering ratio, i<sub>S</sub>, is only used in Section 1, to move the torque from the steering axis to the steering wheel.</p>
+          <p>With a steering wheel torque of 7 N&middot;m:</p>
+          <p class="eq">F = <span class="frac"><span>2&pi; &times; 7</span><span>0.1016</span></span> = 433 N</p>
+          <p>This ignores friction in the rack and the joints, so anything that has to drive the rack, such as an actuator, should be sized larger than this.</p>
+        </section>
+
+        <section class="a-section" id="appendix-narrco-rack">
+          <h2><span class="a-num">A</span>Appendix: NARRco Rack</h2>
+          <p>ARG27 uses the <a class="a-link" href="https://fsaeparts.com/products/narrco-racks?variant=39779967729798" target="_blank" rel="noopener">NARRco rack from FSAE Parts</a>, with a rack speed of 4.0 in/rev and an 11.4 in eye to eye length.</p>
+          <figure class="a-fig a-fig--wide">
+            <img src="../assets/img/kinematics/narrco-rack.webp" alt="FSAE Parts product page for the NARRco rack, with a 4.0 rack speed and 11.4 eye to eye length selected" width="2000" height="1038" loading="lazy" />
+            <figcaption><span class="mono">Figure 1</span> NARRco rack on FSAE Parts.</figcaption>
+          </figure>
+        </section>
+        </section>
         </div>
       </div>
     </article>
@@ -799,7 +854,7 @@
     <nav class="p-nav">
       <div class="wrap">
         <a class="prev" href="../index.html#work"><span class="mono">&larr; Back</span><span class="display">Index</span></a>
-        <a class="next" href="rates-and-parameters.html"><span class="mono">Next &rarr;</span><span class="display">Suspension Rates and Parameter Selection</span></a>
+        <a class="next" href="rates-and-parameters.html"><span class="mono">Next &rarr;</span><span class="display">Suspension Rates</span></a>
       </div>
     </nav>
   </main>

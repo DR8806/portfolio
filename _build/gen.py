@@ -75,8 +75,9 @@ SECTIONS = [
             item("Suspension Kinematics Design", "kinematics", "Suspension kinematics design done in OptimumK, along with the Ackermann selection that goes into it.", parts(
                 ("Kinematics", "kinematics", "Suspension kinematics design for the ARG26 car, done in OptimumK."),
                 ("Ackermann", "ackermann-selection-methodology", "The methodology used on ARG27 to determine what Ackermann geometry to design the car to."),
+                ("Steering Torque", "steering-torque", "The torque at the steering wheel and the force on the rack for ARG27's NARRco rack."),
             ), "live", "2026"),
-            item("Suspension Rates and Parameter Selection", "rates-and-parameters", "Selection of the suspension rates and parameters for ARG27. More will be added here as the work continues.", article("rates-and-parameters"), "live", "2026"),
+            item("Suspension Rates", "rates-and-parameters", "Selection of the suspension rates and parameters for ARG27. More will be added here as the work continues.", article("rates-and-parameters"), "live", "2026"),
             item("Physical Tests", "physical-tests", "Tests run on the car to measure its real properties.", parts(
                 ("CG Height Test", "cg-height-test", "Test procedure for measuring the CG height of ARG26 with two methods: a side tilt test and a front lift test."),
             ), "complete", "2026"),

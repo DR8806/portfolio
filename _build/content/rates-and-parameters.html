@@ -196,6 +196,7 @@
           </figure>
           <p>The ride rate, K<sub>R</sub>, is the wheel rate in series with the tire vertical rate, K<sub>T</sub>. The ride frequency, f, follows from the ride rate and the sprung corner weight, with g = 386.1 in/s<sup>2</sup>.</p>
           <p class="eq">K<sub>R</sub> = <span class="frac"><span>K<sub>W</sub> K<sub>T</sub></span><span>K<sub>W</sub> + K<sub>T</sub></span></span> &nbsp;&nbsp;&nbsp; f = <span class="frac"><span>1</span><span>2&pi;</span></span><span class="big">(</span><span class="frac"><span>K<sub>R</sub> g</span><span>W<sub>S</sub></span></span><span class="big">)</span><sup>1/2</sup></p>
+          <p>We want the front and rear ride frequencies to be different. The <a class="a-link" href="#appendix-optimumg-springs-dampers">OptimumG tech tip in Appendix D</a> runs the rear higher, so after a bump the rear catches up to the front and the car pitches less. Milliken lists the front higher (<a class="a-link" href="#appendix-milliken-suggested-numbers">Appendix F</a>, p. 605), so the two sources disagree on which end. Both should also fall within Milliken&#8217;s suggested range for aero cars, 3.0 to 5.0 Hz (p. 605). Combination 1 gives 3.59 Hz front and 3.67 Hz rear, with the rear higher and both inside the range.</p>
 
           <h3 id="compression-and-ride-height-check"><span class="a-num">1.5</span>Compression and Ride Height Check</h3>
 
@@ -419,6 +420,13 @@ legend('Softest front, stiffest rear', 'Stiffest front, softest rear')</code></p
           </details>
         </section>
 
+        <section class="a-section">
+          <h2 id="understeer-and-oversteer"><span class="a-num">3</span>Understeer and Oversteer</h2>
+          <!-- EDIT: understeer and oversteer -->
+          <p>Understeer is when the front tires reach their grip limit first and the car turns less than the driver asks. Oversteer is when the rear tires reach it first and the car turns more. Moving more of the lateral load transfer to the front axle takes grip away from the front tires and pushes the car toward understeer.</p>
+          <p>Milliken suggests a front TLLTD 5% above the front weight distribution to make sure of initial understeer (<a class="a-link" href="#appendix-milliken-suggested-numbers">Appendix F</a>, p. 605). With ARG27&#8217;s 50% front weight, that is a front TLLTD of 55%.</p>
+        </section>
+
         <section class="a-section" id="appendix">
           <h2><span class="a-num">A</span>Appendix: ARG26 Parameters Spreadsheet</h2>
           <p>The ARG26 values come from the <a class="a-link" href="../assets/docs/SU26_Parameters_and_Analysis.xlsx" download>ARG26 suspension parameters spreadsheet (Excel)</a>.</p>
@@ -478,6 +486,15 @@ legend('Softest front, stiffest rear', 'Stiffest front, softest rear')</code></p
           <figure class="a-fig a-fig--wide">
             <img src="../assets/img/rates/26-optimumg-geometric-elastic.webp" alt="Front view of a car showing the non-suspended, geometric and elastic sprung load transfer, with geometric weight transfer equal to sprung mass times lateral acceleration times roll center height over track, and elastic weight transfer equal to sprung mass times lateral acceleration times the distance from roll center to sprung CG over track" width="1536" height="1092" loading="lazy" />
             <figcaption><span class="mono">Figure 26</span> Geometric and elastic sprung mass load transfer. From OptimumG, September 2021, Figure 4.</figcaption>
+          </figure>
+        </section>
+
+        <section class="a-section" id="appendix-milliken-suggested-numbers">
+          <h2><span class="a-num">F</span>Appendix: Milliken Suggested Numbers</h2>
+          <p>Milliken&#8217;s suggested ride frequencies, roll gradients and TLLTD for the simplified method of picking suspension rates.</p>
+          <figure class="a-fig">
+            <img src="../assets/img/rates/27-milliken-suggested-numbers.webp" alt="Suggested numbers: ride frequencies of 1.6 to 2.0 Hz for non-aero sedans and 3.0 to 5.0 Hz for aero cars, both with the front higher; roll gradients of 1.0 to 1.8 deg/g for sedans and 0.25 to 0.5 deg/g for aero cars; and a front TLLTD 5% more than the front weight distribution to ensure initial understeer" width="1248" height="854" loading="lazy" />
+            <figcaption><span class="mono">Figure 27</span> Suggested numbers for the simplified method. From Milliken, Race Car Vehicle Dynamics, Table 16.5, p. 605.</figcaption>
           </figure>
         </section>
 
