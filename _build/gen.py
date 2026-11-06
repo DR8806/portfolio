@@ -87,6 +87,7 @@ SECTIONS = [
             item("Aero Analysis", "aero-analysis", "Downforce and drag from a CFD speed sweep at 0° yaw, roll and pitch, and the aero values used in the suspension work.", article("aero-analysis"), "live", "2026"),
             item("Miscellaneous", "miscellaneous", "Other calculations done for the suspension.", parts(
                 ("Longitudinal CG Shift Calculation", "cg-shift", "A preliminary calculation of how far the longitudinal CG moves on ARG27 as the accumulator and inverter change, and what that means for a 50/50 weight distribution."),
+                ("Bolt Preload", "bolt-preload", "How we pick bolt torques and what preload they give."),
             ), "complete", "2026"),
         ]),
         ("Suspension Engineer", [
