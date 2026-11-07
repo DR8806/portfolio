@@ -88,6 +88,7 @@ SECTIONS = [
             item("Miscellaneous", "miscellaneous", "Other calculations done for the suspension.", parts(
                 ("Longitudinal CG Shift Calculation", "cg-shift", "A preliminary calculation of how far the longitudinal CG moves on ARG27 as the accumulator and inverter change, and what that means for a 50/50 weight distribution."),
                 ("Bolt Preload", "bolt-preload", "How we pick bolt torques and what preload they give."),
+                ("HiLoks on the Rear Anti-Roll Bar Mounts", "hiloks", "Why the rear anti-roll bar mounts use HiLoks, and which one we chose."),
             ), "complete", "2026"),
         ]),
         ("Suspension Engineer", [
